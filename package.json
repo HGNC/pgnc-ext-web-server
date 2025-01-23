@@ -1,14 +1,14 @@
 {
-  "name": "essentials",
+  "name": "pgnc",
   "version": "0.0.0",
   "main": "src/main.ts",
   "scripts": {
     "ng": "ng",
     "start": "ng serve --watch --configuration development",
-    "build": "ng build",
+    "build": "ng build --configuration production",
     "watch": "ng build --watch --configuration development",
     "test": "ng test",
-    "serve:ssr:essentials": "node dist/essentials/server/server.mjs"
+    "serve:ssr:pgnc": "node dist/pgnc/server/server.mjs"
   },
   "private": true,
   "dependencies": {

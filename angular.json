@@ -3,7 +3,7 @@
   "version": 1,
   "newProjectRoot": "projects",
   "projects": {
-    "essentials": {
+    "pgnc": {
       "projectType": "application",
       "schematics": {},
       "root": "",
@@ -13,7 +13,7 @@
         "build": {
           "builder": "@angular-devkit/build-angular:application",
           "options": {
-            "outputPath": "dist/essentials",
+            "outputPath": "dist/pgnc",
             "index": "src/index.html",
             "browser": "src/main.ts",
             "polyfills": [
@@ -30,7 +30,7 @@
             ],
             "styles": [
               "node_modules/bootstrap/dist/css/bootstrap.min.css",
-              "src/styles.css"
+              "src/pgnc-styles.css"
             ],
             "scripts": [],
             "server": "src/main.server.ts",
@@ -44,15 +44,23 @@
               "budgets": [
                 {
                   "type": "initial",
-                  "maximumWarning": "500kb",
+                  "maximumWarning": "900kb",
                   "maximumError": "1mb"
                 },
                 {
                   "type": "anyComponentStyle",
-                  "maximumWarning": "2kb",
+                  "maximumWarning": "3kb",
                   "maximumError": "4kb"
                 }
               ],
+              "optimization": {
+                "scripts": true,
+                "styles": {
+                    "minify": true,
+                    "inlineCritical": false
+                },
+                "fonts": true
+              },
               "outputHashing": "all"
             },
             "development": {
@@ -73,10 +81,10 @@
           "builder": "@angular-devkit/build-angular:dev-server",
           "configurations": {
             "production": {
-              "buildTarget": "essentials:build:production"
+              "buildTarget": "pgnc:build:production"
             },
             "development": {
-              "buildTarget": "essentials:build:development"
+              "buildTarget": "pgnc:build:development"
             }
           },
           "options": {
@@ -87,7 +95,7 @@
         "extract-i18n": {
           "builder": "@ngx-env/builder:extract-i18n",
           "options": {
-            "buildTarget": "essentials:build"
+            "buildTarget": "pgnc:build"
           }
         },
         "test": {
@@ -107,7 +115,7 @@
               }
             ],
             "styles": [
-              "src/styles.css"
+              "src/pgnc-styles.css"
             ],
             "scripts": [],
             "builderMode": "browser"
