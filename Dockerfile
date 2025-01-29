@@ -1,22 +1,43 @@
-FROM node:alpine as angular-build
+FROM node:20-alpine as builder
 WORKDIR /app
 
+# Set memory limit and environment
+ENV NODE_OPTIONS="--max_old_space_size=8192"
+ENV NODE_ENV=development
+
+# Update npm and install CLI tools first
+RUN npm install -g npm@latest && \
+    npm install -g @angular/cli@19.1.3
+
+# Copy only package files first to leverage layer caching
+COPY package*.json ./
+RUN npm ci
+
+# Copy source files
 COPY . .
-RUN npm i --silent && npm run build
 
-RUN npm i -g @angular/cli --silent
-RUN npm i --silent
-RUN ng build --configuration production
+# Build the application
+RUN ng build --configuration production \
+    --output-path=dist/pgnc \
+    --progress false \
+    --aot true \
+    --optimization true \
+    --output-hashing all
 
-FROM node:alpine
-LABEL author="Kristian Gray"
+# Production stage
+FROM node:20-alpine
 WORKDIR /app
-COPY --from=angular-build /app/dist/pgnc .
-RUN npm i pm2 -g
-# ENV PM2_PUBLIC_KEY=ssu8tbni55y0ky0
-# ENV PM2_SECRET_KEY=***REMOVED_SECRET***
+
+# Set production environment
+ENV NODE_ENV=production
+
+# Copy built application
+COPY --from=builder /app/dist/pgnc ./dist/pgnc
+
+# Install production deps
+COPY package*.json ./
+RUN npm ci --omit=dev
+
 EXPOSE 4000
 
-CMD ["node", "/app/server/server.mjs"]
-
-
+CMD ["node", "dist/pgnc/server/server.mjs"]
