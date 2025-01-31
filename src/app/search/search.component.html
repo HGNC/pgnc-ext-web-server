@@ -1,0 +1,14 @@
+<app-header />
+
+<div class="container">
+    <h1>Search Results</h1>
+    @if (isFetching() && !error()) {
+    <p class="fallback">Fetching results...</p>
+    } @if (error()) {
+    <p class="error">{{ error() }}</p>
+    } @if (searchResult()) {
+    <code>
+        {{ searchResult() }}
+    </code>
+    } @else if (!searchResult()) { Nothing found }
+</div>
