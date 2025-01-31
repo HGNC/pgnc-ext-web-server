@@ -4,9 +4,6 @@ import { faQuestionCircle } from '@fortawesome/free-solid-svg-icons';
 import { HeaderComponent } from '../../header/header.component';
 import { GeneReportService } from './gene-symbol-report.service';
 import { GeneSymbolReport } from './gene-symbol-report.model';
-import { GeneSymbol } from './gene-symbol.model';
-import { GeneName } from './gene-name.model';
-import { GeneLocation } from './gene-location.model';
 import { Xref } from './xref-resources/xref-resources.model';
 import { XrefComponent } from './xref-resources/xref-resources.component';
 import { PgncDataComponent } from './pgnc-data/pgnc-data.component';
@@ -23,7 +20,7 @@ export class GeneSymbolReportComponent implements OnInit {
     @Input({required: true}) id!: string;
 
     faQuestionCircle = faQuestionCircle;
-    
+
     report = signal<GeneSymbolReport | undefined>(undefined);
     isFetching = signal(false);
     error = signal<string | undefined>(undefined);
@@ -36,7 +33,7 @@ export class GeneSymbolReportComponent implements OnInit {
 
     ngOnInit() {
         this.isFetching.set(true);
-        
+
         const subscription = this.geneSymbolReportService
             .getReportById(this.id)
             .subscribe({
@@ -50,7 +47,7 @@ export class GeneSymbolReportComponent implements OnInit {
                             }
                         )?.symbol.symbol || '';
                     }
-                },  
+                },
                 error: (err: Error) => {
                     this.error.set(err.message);
                 },
