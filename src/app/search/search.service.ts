@@ -11,7 +11,7 @@ export class SearchService {
 
     public searchSolr(query: string): Observable<any> {
         let result$: Observable<any> = this.httpClient
-            .get<any>(`http://solr-client:3000/browse?q=${query}`)
+            .get<any>(`/ses/browse?q=${query}&start=0&rows=10`)
             .pipe(
                 map((resp) => {
                     this.result = resp;
