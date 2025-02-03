@@ -1,16 +1,27 @@
-import { Component, DestroyRef, inject, Input, OnInit, signal } from '@angular/core';
-import { HeaderComponent } from '../header/header.component';
+import {
+    Component,
+    DestroyRef,
+    inject,
+    Input,
+    OnChanges,
+    OnInit,
+    signal,
+    SimpleChanges,
+} from '@angular/core';
 import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
 
+import { HeaderComponent } from '../header/header.component';
+import { NotFoundComponent } from './not-found/not-found.component';
+import { ResultsComponent } from './results/results.component';
 import { SearchService } from './search.service';
 
 @Component({
     selector: 'app-search',
-    imports: [FontAwesomeModule, HeaderComponent],
+    imports: [FontAwesomeModule, HeaderComponent, NotFoundComponent, ResultsComponent],
     templateUrl: './search.component.html',
     styleUrl: './search.component.css',
 })
-export class SearchComponent implements OnInit {
+export class SearchComponent implements OnInit, OnChanges {
     @Input({ required: true }) query!: string;
 
     searchResult = signal<any | undefined>(undefined);
@@ -20,9 +31,19 @@ export class SearchComponent implements OnInit {
     private destroyRef = inject(DestroyRef);
 
     ngOnInit() {
+        this.performSearch();
+    }
+
+    ngOnChanges(changes: SimpleChanges) {
+        if (changes['query']) {
+            this.performSearch();
+        }
+    }
+
+    private performSearch() {
         this.isFetching.set(true);
         const subscription = this.searchService.searchSolr(this.query).subscribe({
-            next: (result) => {
+            next: result => {
                 this.searchResult.set(result);
             },
             error: (err: Error) => {

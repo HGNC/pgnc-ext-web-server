@@ -2,18 +2,18 @@
     <div class="query-group">
         <input
             type="text"
+            [(ngModel)]="query"
             id="q"
             class="form-control"
             name="query"
-            placeholder="Search symbols, keywords or IDs"
-        />
+            placeholder="Search symbols, keywords or IDs" />
         <div class="input-group-addon help">
             <a class="help" title="Help">
                 <fa-icon [icon]="faQuestionCircle" class="help"></fa-icon>
             </a>
         </div>
         <div class="input-group-btn search">
-            <button class="btn btn-default" name="submit">
+            <button class="btn btn-default" name="submit" (click)="search()">
                 <fa-icon [icon]="faSearch" class="submit"></fa-icon>
             </button>
         </div>

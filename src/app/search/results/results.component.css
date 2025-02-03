@@ -1,0 +1,46 @@
+.search-result {
+    padding-left: 5px;
+    margin-bottom: 20px;
+    overflow: hidden;
+}
+a {
+    background-color: transparent;
+    color: #337ab7;
+    text-decoration: none;
+}
+.search-result .title {
+    font-size: 20px;
+    color: #800;
+}
+
+.search-result .search-info, .search-result .search-matches {
+    font-size: 16px;
+    color: #3d3d3d;
+    clear: both;
+}
+
+.search-result .search-info div {
+    margin-right: 10px;
+}
+
+.search-result .key {
+    font-weight: 700;
+    color: #7f9ed3;
+    margin-right: 5px;
+}
+
+.search-result .search-matches .key {
+    float: left;
+    margin-right: 5px;
+}
+
+.search-result th {
+    white-space: nowrap;
+    vertical-align: top;
+    padding-right: .5em;
+}
+
+.match_td em {
+    color: #c00;
+    font-weight: 700;
+}
