@@ -12,8 +12,8 @@
 }
 
 .key-val-pairs {
-  display: grid;
-  grid-template-columns: auto;
+    display: grid;
+    grid-template-columns: auto;
     row-gap: 0;
 }
 
@@ -35,11 +35,11 @@
         column-gap: 2ch;
         row-gap: 1ch;
     }
-    
+
     .key {
         justify-self: end;
     }
-    
+
     .val {
         justify-self: start;
         margin: 0;

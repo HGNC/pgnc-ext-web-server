@@ -1,5 +1,5 @@
 import { HttpClient } from '@angular/common/http';
-import { inject, Injectable, signal } from '@angular/core';
+import { inject, Injectable } from '@angular/core';
 import { catchError, map, Observable, throwError } from 'rxjs';
 
 @Injectable({
@@ -13,11 +13,12 @@ export class SearchService {
         let result$: Observable<any> = this.httpClient
             .get<any>(`/ses/browse?q=${query}&start=0&rows=10`)
             .pipe(
-                map((resp) => {
+                map(resp => {
                     this.result = resp;
+                    console.log('result', this.result);
                     return this.result;
                 }),
-                catchError((error) => {
+                catchError(error => {
                     return throwError(() => new Error(error.message));
                 })
             );

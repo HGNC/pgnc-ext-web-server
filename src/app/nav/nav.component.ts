@@ -5,10 +5,10 @@ import { faEnvelope, faHome } from '@fortawesome/free-solid-svg-icons';
 import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 
 @Component({
-  selector: 'app-nav',
-  imports: [FontAwesomeModule, NgbModule, RouterLink],
-  templateUrl: './nav.component.html',
-  styleUrl: './nav.component.css'
+    selector: 'app-nav',
+    imports: [FontAwesomeModule, NgbModule, RouterLink],
+    templateUrl: './nav.component.html',
+    styleUrl: './nav.component.css',
 })
 export class NavComponent {
     faEnvelope = faEnvelope;

@@ -18,7 +18,7 @@
 }
 
 .val ul {
-    list-style-type:none;
+    list-style-type: none;
     margin: 0;
     padding: 0;
 }
@@ -30,11 +30,11 @@
         column-gap: 2ch;
         row-gap: 1ch;
     }
-    
+
     .key {
         justify-self: end;
     }
-    
+
     .val {
         justify-self: start;
         margin: 0;

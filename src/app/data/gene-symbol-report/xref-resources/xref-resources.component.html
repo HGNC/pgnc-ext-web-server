@@ -2,29 +2,32 @@
     <h3 class="card-header">External resources for {{ symbol }}</h3>
     <div class="card-body">
         <div class="key-val-pairs">
-            @for (res of ['NCBI Gene', 'Ensembl Gene', 'UniProt', 'PubMed',
-            'Phytozome']; track res) { @if ((isValidResourceName(res) &&
-            classifiedXrefs && classifiedXrefs[res])) {
-            <span class="key">
-                {{ res }}
-                <a class="clickable help" title="Help">
-                    <fa-icon [icon]="faQuestionCircle"></fa-icon>
-                </a>
-            </span>
-            <span class="val">
-                <ul>
-                    @for (xref of classifiedXrefs[res]; track xref) {
-                    <li>
-                        <a
-                            href="{{ xrefURLS[res] + xref.xref.displayId }}"
-                            target="_blank"
-                            >{{ xref.xref.displayId }}</a
-                        >
-                    </li>
-                    }
-                </ul>
-            </span>
-            }}
+            @for (
+                res of ['NCBI Gene', 'Ensembl Gene', 'UniProt', 'PubMed', 'Phytozome'];
+                track res
+            ) {
+                @if (isValidResourceName(res) && classifiedXrefs && classifiedXrefs[res]) {
+                    <span class="key">
+                        {{ res }}
+                        <a class="clickable help" title="Help">
+                            <fa-icon [icon]="faQuestionCircle"></fa-icon>
+                        </a>
+                    </span>
+                    <span class="val">
+                        <ul>
+                            @for (xref of classifiedXrefs[res]; track xref) {
+                                <li>
+                                    <a
+                                        href="{{ xrefURLS[res] + xref.xref.displayId }}"
+                                        target="_blank"
+                                        >{{ xref.xref.displayId }}</a
+                                    >
+                                </li>
+                            }
+                        </ul>
+                    </span>
+                }
+            }
         </div>
     </div>
 </div>

@@ -2,10 +2,7 @@
     <div class="container">
         <nav class="navbar navbar-expand-md">
             <a class="navbar-brand" [routerLink]="'/'">
-                <img
-                    alt="HGNC"
-                    src="/img/pgnc/pgnc-logo-dark-bckgrnd-small.svg"
-                />
+                <img alt="HGNC" src="/img/pgnc/pgnc-logo-dark-bckgrnd-small.svg" />
             </a>
             <button
                 class="navbar-toggler"
@@ -14,19 +11,13 @@
             >
                 <fa-icon [icon]="faBars"></fa-icon>
             </button>
-            <div
-                [ngbCollapse]="isMenuCollapsed"
-                class="collapse navbar-collapse search-bar-comp"
-            >
+            <div [ngbCollapse]="isMenuCollapsed" class="collapse navbar-collapse search-bar-comp">
                 <div class="navbar-form navbar-right search-bar" role="search">
                     <app-search-bar></app-search-bar>
                 </div>
             </div>
 
-            <div
-                [ngbCollapse]="isMenuCollapsed"
-                class="collapse navbar-collapse nav-comp"
-            >
+            <div [ngbCollapse]="isMenuCollapsed" class="collapse navbar-collapse nav-comp">
                 <app-nav></app-nav>
             </div>
         </nav>

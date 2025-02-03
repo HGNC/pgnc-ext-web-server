@@ -46,7 +46,10 @@ img.footerlogosimage {
     .footer-logo-block {
         width: 465px;
     }
-    .doe-block, .cbi-block, .uoc-block, .hgnc-block {
+    .doe-block,
+    .cbi-block,
+    .uoc-block,
+    .hgnc-block {
         display: inline-block;
     }
     .uoc-block {
@@ -80,7 +83,7 @@ img.footerlogosimage {
     .footer-logo-block {
         width: 1090px;
     }
-    
+
     .doe-block,
     .cbi-block,
     .uoc-block,
@@ -94,7 +97,7 @@ img.footerlogosimage {
     .footer-logo-block {
         width: 100%;
     }
-    
+
     .doe-block,
     .cbi-block,
     .uoc-block,
@@ -110,6 +113,4 @@ img.footerlogosimage {
     .hgnc-block {
         margin-right: 0px;
     }
-
-    
 }

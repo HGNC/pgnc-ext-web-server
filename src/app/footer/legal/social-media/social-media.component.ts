@@ -4,16 +4,16 @@ import { faXTwitter, faGithub, faYoutube, faBluesky } from '@fortawesome/free-br
 import { faBlog, faComment } from '@fortawesome/free-solid-svg-icons';
 
 @Component({
-  selector: 'app-social-media',
-  imports: [FontAwesomeModule],
-  templateUrl: './social-media.component.html',
-  styleUrl: './social-media.component.css'
+    selector: 'app-social-media',
+    imports: [FontAwesomeModule],
+    templateUrl: './social-media.component.html',
+    styleUrl: './social-media.component.css',
 })
 export class SocialMediaComponent {
-  faXTwitter = faXTwitter;
-  faGithub = faGithub;
-  faYoutube = faYoutube;
-  faBlog = faBlog;
-  faComment = faComment;
-  faBluesky = faBluesky;
+    faXTwitter = faXTwitter;
+    faGithub = faGithub;
+    faYoutube = faYoutube;
+    faBlog = faBlog;
+    faComment = faComment;
+    faBluesky = faBluesky;
 }

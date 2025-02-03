@@ -32,7 +32,6 @@ fa-icon {
 }
 
 @media (min-width: 768px) {
-    
     .navbar-expand-md {
         padding-bottom: 0;
     }
@@ -46,14 +45,13 @@ fa-icon {
     }
 
     .search-bar-comp {
-        flex-basis: 56%
+        flex-basis: 56%;
     }
     .nav-comp {
-        flex-basis: 100%
+        flex-basis: 100%;
     }
 
     app-nav {
         width: 100%;
     }
 }
-

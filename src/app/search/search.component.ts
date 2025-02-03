@@ -1,11 +1,4 @@
-import {
-    Component,
-    DestroyRef,
-    inject,
-    Input,
-    OnInit,
-    signal,
-} from '@angular/core';
+import { Component, DestroyRef, inject, Input, OnInit, signal } from '@angular/core';
 import { HeaderComponent } from '../header/header.component';
 import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
 
@@ -28,19 +21,17 @@ export class SearchComponent implements OnInit {
 
     ngOnInit() {
         this.isFetching.set(true);
-        const subscription = this.searchService
-            .searchSolr(this.query)
-            .subscribe({
-                next: (result) => {
-                    this.searchResult.set(result);
-                },
-                error: (err: Error) => {
-                    this.error.set(err.message);
-                },
-                complete: () => {
-                    this.isFetching.set(false);
-                },
-            });
+        const subscription = this.searchService.searchSolr(this.query).subscribe({
+            next: (result) => {
+                this.searchResult.set(result);
+            },
+            error: (err: Error) => {
+                this.error.set(err.message);
+            },
+            complete: () => {
+                this.isFetching.set(false);
+            },
+        });
         this.destroyRef.onDestroy(() => {
             subscription.unsubscribe();
         });

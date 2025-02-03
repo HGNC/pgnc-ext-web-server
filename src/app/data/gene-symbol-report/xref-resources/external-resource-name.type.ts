@@ -1,1 +1,6 @@
-export type ExternalResourceName = 'NCBI Gene' | 'Ensembl Gene' | 'UniProt' | 'PubMed' | 'Phytozome';
+export type ExternalResourceName =
+    | 'NCBI Gene'
+    | 'Ensembl Gene'
+    | 'UniProt'
+    | 'PubMed'
+    | 'Phytozome';

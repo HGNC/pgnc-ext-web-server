@@ -7,16 +7,10 @@ import { faBars } from '@fortawesome/free-solid-svg-icons';
 import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 
 @Component({
-  selector: 'app-header',
-  imports: [
-    FontAwesomeModule,
-    NavComponent,
-    SearchBarComponent,
-    NgbModule,
-    RouterLink
-],
-  templateUrl: './header.component.html',
-  styleUrl: './header.component.css'
+    selector: 'app-header',
+    imports: [FontAwesomeModule, NavComponent, SearchBarComponent, NgbModule, RouterLink],
+    templateUrl: './header.component.html',
+    styleUrl: './header.component.css',
 })
 export class HeaderComponent {
     faBars = faBars;

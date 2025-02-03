@@ -8,22 +8,22 @@ import { SearchComponent } from './search/search.component';
 export const routes: Routes = [
     {
         path: 'about',
-        component: AboutComponent
+        component: AboutComponent,
     },
     {
         path: 'contact',
-        component: ContactComponent
+        component: ContactComponent,
     },
     {
         path: 'data/gene-symbol-report/:type/:id',
-        component: GeneSymbolReportComponent
+        component: GeneSymbolReportComponent,
     },
     {
         path: 'search',
-        component: SearchComponent
+        component: SearchComponent,
     },
     {
         path: '',
-        component: HomeComponent
-    }
+        component: HomeComponent,
+    },
 ];

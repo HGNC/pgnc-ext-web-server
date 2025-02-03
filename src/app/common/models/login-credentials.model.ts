@@ -1,7 +1,7 @@
 export interface LoginCredentials {
     data: {
-        accessToken: string,
-        refreshToken: string,
-    },
-    apiVersion: string
+        accessToken: string;
+        refreshToken: string;
+    };
+    apiVersion: string;
 }

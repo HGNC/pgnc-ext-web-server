@@ -1,127 +1,127 @@
 {
-  "$schema": "./node_modules/@angular/cli/lib/config/schema.json",
-  "version": 1,
-  "newProjectRoot": "projects",
-  "projects": {
-    "pgnc": {
-      "projectType": "application",
-      "schematics": {},
-      "root": "",
-      "sourceRoot": "src",
-      "prefix": "app",
-      "architect": {
-        "build": {
-          "builder": "@angular-devkit/build-angular:application",
-          "options": {
-            "outputPath": "dist/pgnc",
-            "index": "src/index.html",
-            "browser": "src/main.ts",
-            "polyfills": [
-              "zone.js",
-              "@angular/localize/init"
-            ],
-            "tsConfig": "tsconfig.app.json",
-            "assets": [
-              "src/favicon.ico",
-              {
-                "glob": "**/*",
-                "input": "src/assets/"
-              }
-            ],
-            "styles": [
-              "node_modules/bootstrap/dist/css/bootstrap.min.css",
-              "src/pgnc-styles.css"
-            ],
-            "scripts": [],
-            "server": "src/main.server.ts",
-            "prerender": true,
-            "ssr": {
-              "entry": "src/server.ts"
-            }
-          },
-          "configurations": {
-            "production": {
-              "budgets": [
-                {
-                  "type": "initial",
-                  "maximumWarning": "900kb",
-                  "maximumError": "1mb"
+    "$schema": "./node_modules/@angular/cli/lib/config/schema.json",
+    "version": 1,
+    "newProjectRoot": "projects",
+    "projects": {
+        "pgnc": {
+            "projectType": "application",
+            "schematics": {},
+            "root": "",
+            "sourceRoot": "src",
+            "prefix": "app",
+            "architect": {
+                "build": {
+                    "builder": "@angular-devkit/build-angular:application",
+                    "options": {
+                        "outputPath": "dist/pgnc",
+                        "index": "src/index.html",
+                        "browser": "src/main.ts",
+                        "polyfills": ["zone.js", "@angular/localize/init"],
+                        "tsConfig": "tsconfig.app.json",
+                        "assets": [
+                            "src/favicon.ico",
+                            {
+                                "glob": "**/*",
+                                "input": "src/assets/"
+                            }
+                        ],
+                        "styles": [
+                            "node_modules/bootstrap/dist/css/bootstrap.min.css",
+                            "src/pgnc-styles.css"
+                        ],
+                        "scripts": [],
+                        "server": "src/main.server.ts",
+                        "prerender": true,
+                        "ssr": {
+                            "entry": "src/server.ts"
+                        }
+                    },
+                    "configurations": {
+                        "production": {
+                            "budgets": [
+                                {
+                                    "type": "initial",
+                                    "maximumWarning": "900kb",
+                                    "maximumError": "1mb"
+                                },
+                                {
+                                    "type": "anyComponentStyle",
+                                    "maximumWarning": "3kb",
+                                    "maximumError": "4kb"
+                                }
+                            ],
+                            "optimization": {
+                                "scripts": true,
+                                "styles": {
+                                    "minify": true,
+                                    "inlineCritical": false
+                                },
+                                "fonts": true
+                            },
+                            "outputHashing": "all"
+                        },
+                        "development": {
+                            "optimization": false,
+                            "extractLicenses": false,
+                            "sourceMap": true,
+                            "fileReplacements": [
+                                {
+                                    "replace": "src/environments/environment.ts",
+                                    "with": "src/environments/environment.development.ts"
+                                }
+                            ]
+                        }
+                    },
+                    "defaultConfiguration": "production"
                 },
-                {
-                  "type": "anyComponentStyle",
-                  "maximumWarning": "3kb",
-                  "maximumError": "4kb"
-                }
-              ],
-              "optimization": {
-                "scripts": true,
-                "styles": {
-                    "minify": true,
-                    "inlineCritical": false
+                "serve": {
+                    "builder": "@angular-devkit/build-angular:dev-server",
+                    "configurations": {
+                        "production": {
+                            "buildTarget": "pgnc:build:production"
+                        },
+                        "development": {
+                            "buildTarget": "pgnc:build:development"
+                        }
+                    },
+                    "options": {
+                        "proxyConfig": "proxy.conf.json"
+                    },
+                    "defaultConfiguration": "development"
                 },
-                "fonts": true
-              },
-              "outputHashing": "all"
-            },
-            "development": {
-              "optimization": false,
-              "extractLicenses": false,
-              "sourceMap": true,
-              "fileReplacements": [
-                {
-                  "replace": "src/environments/environment.ts",
-                  "with": "src/environments/environment.development.ts"
+                "extract-i18n": {
+                    "builder": "@ngx-env/builder:extract-i18n",
+                    "options": {
+                        "buildTarget": "pgnc:build"
+                    }
+                },
+                "test": {
+                    "builder": "@ngx-env/builder:karma",
+                    "options": {
+                        "polyfills": ["zone.js", "zone.js/testing", "@angular/localize/init"],
+                        "tsConfig": "tsconfig.spec.json",
+                        "assets": [
+                            "src/favicon.ico",
+                            {
+                                "glob": "**/*",
+                                "input": "src/assets/"
+                            }
+                        ],
+                        "styles": ["src/pgnc-styles.css"],
+                        "scripts": [],
+                        "builderMode": "browser"
+                    }
+                },
+                "lint": {
+                    "builder": "@angular-eslint/builder:lint",
+                    "options": {
+                        "lintFilePatterns": ["src/**/*.ts", "src/**/*.html"]
+                    }
                 }
-              ]
             }
-          },
-          "defaultConfiguration": "production"
-        },
-        "serve": {
-          "builder": "@angular-devkit/build-angular:dev-server",
-          "configurations": {
-            "production": {
-              "buildTarget": "pgnc:build:production"
-            },
-            "development": {
-              "buildTarget": "pgnc:build:development"
-            }
-          },
-          "options": {
-            "proxyConfig": "proxy.conf.json"
-          },
-          "defaultConfiguration": "development"
-        },
-        "extract-i18n": {
-          "builder": "@ngx-env/builder:extract-i18n",
-          "options": {
-            "buildTarget": "pgnc:build"
-          }
-        },
-        "test": {
-          "builder": "@ngx-env/builder:karma",
-          "options": {
-            "polyfills": [
-              "zone.js",
-              "zone.js/testing",
-              "@angular/localize/init"
-            ],
-            "tsConfig": "tsconfig.spec.json",
-            "assets": [
-              "src/favicon.ico",
-              {
-                "glob": "**/*",
-                "input": "src/assets/"
-              }
-            ],
-            "styles": [
-              "src/pgnc-styles.css"
-            ],
-            "scripts": [],
-            "builderMode": "browser"
-          }
         }
-      }
+    },
+    "cli": {
+        "schematicCollections": ["angular-eslint"]
     }
-  }
 }

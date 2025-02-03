@@ -20,7 +20,7 @@ fa-icon {
 }
 
 .navbar > .container-fluid {
-   justify-content: flex-end;
+    justify-content: flex-end;
 }
 
 .navbar-collapse {
@@ -50,5 +50,4 @@ fa-icon {
         padding: 0;
         border: 0;
     }
-    
 }
