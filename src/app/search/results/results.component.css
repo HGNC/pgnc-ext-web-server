@@ -19,6 +19,8 @@ a {
     clear: both;
 }
 
+
+
 .search-result .search-info div {
     margin-right: 10px;
 }
@@ -40,7 +42,8 @@ a {
     padding-right: .5em;
 }
 
-.match_td em {
+.match_td {
     color: #c00;
+    font-style: normal;
     font-weight: 700;
 }
