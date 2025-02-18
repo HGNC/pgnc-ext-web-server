@@ -95,23 +95,6 @@
                         "buildTarget": "pgnc:build"
                     }
                 },
-                "test": {
-                    "builder": "@ngx-env/builder:karma",
-                    "options": {
-                        "polyfills": ["zone.js", "zone.js/testing", "@angular/localize/init"],
-                        "tsConfig": "tsconfig.spec.json",
-                        "assets": [
-                            "src/favicon.ico",
-                            {
-                                "glob": "**/*",
-                                "input": "src/assets/"
-                            }
-                        ],
-                        "styles": ["src/pgnc-styles.css"],
-                        "scripts": [],
-                        "builderMode": "browser"
-                    }
-                },
                 "lint": {
                     "builder": "@angular-eslint/builder:lint",
                     "options": {
