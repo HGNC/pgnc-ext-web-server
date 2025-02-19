@@ -8,28 +8,28 @@ import { catchError, map, Observable, share, shareReplay, throwError } from 'rxj
     providedIn: 'root',
 })
 export class AuthService {
-    private userName: string = environment.apiUser;
-    private password: string = environment.apiPassword;
+    private userName: string = environment.apiUser || '';
+    private password: string = environment.apiPassword || '';
     private jwtResult: LoginCredentials | undefined;
 
     private httpClient = inject(HttpClient);
-    error = signal<string | undefined>(undefined);
+    error = signal<string>('');
 
     getJwt() {
         if (!this.jwtResult) {
             return this.signIn().pipe(
-                map((resp) => {
+                map(resp => {
                     this.jwtResult = resp;
                     return this.jwtResult;
                 }),
-                catchError((error) => {
+                catchError(error => {
                     this.jwtResult = undefined;
                     return throwError(() => new Error('Problem found when signing in.'));
                 }),
-                shareReplay(1),
+                shareReplay(1)
             );
         } else {
-            return new Observable<LoginCredentials>((observer) => {
+            return new Observable<LoginCredentials>(observer => {
                 observer.next(this.jwtResult);
                 observer.complete();
             });
@@ -42,18 +42,18 @@ export class AuthService {
                 refreshToken: this.jwtResult?.data.refreshToken,
             })
             .pipe(
-                map((resp) => {
+                map(resp => {
                     this.jwtResult = resp;
                     return this.jwtResult;
                 }),
-                catchError((error) => {
+                catchError(error => {
                     this.jwtResult = undefined;
                     return throwError(
                         () =>
-                            new Error('Problem found when refreshing token. Please sign in again.'),
+                            new Error('Problem found when refreshing token. Please sign in again.')
                     );
                 }),
-                shareReplay(1),
+                shareReplay(1)
             );
     }
 
