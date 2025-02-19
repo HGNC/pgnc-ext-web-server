@@ -9,9 +9,9 @@ export class SearchService {
     private httpClient = inject(HttpClient);
     private result: string | undefined;
 
-    public searchSolr(query: string): Observable<string | undefined> {
-        const result$: Observable<string | undefined> = this.httpClient
-            .get<string | undefined>(`/ses/browse?q=${query}&start=0&rows=10`)
+    public searchSolr(query: string): Observable<any> {
+        let result$: Observable<any> = this.httpClient
+            .get<any>(`/ses/browse?q=${query}&start=0&rows=10`)
             .pipe(
                 map(resp => {
                     this.result = resp;
