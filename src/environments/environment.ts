@@ -1,6 +1,6 @@
 export const environment = {
-    production: true,
-    apiUser: 'webserver@email.com',
-    apiPassword: '@uRqHu*jEtJ8EREM',
-    jwt: '***REMOVED_SECRET***',
+    production: false,
+    apiUser: process.env['API_USER'],
+    apiPassword: process.env['API_PASSWORD'],
+    jwt: process.env['JWT'],
 };
