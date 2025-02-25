@@ -21,7 +21,7 @@ export class SearchBarComponent {
     search() {
         if (this.query) {
             this.router.navigate(['/search'], {
-                queryParams: { query: this.query },
+                queryParams: { q: this.query },
             });
         }
     }

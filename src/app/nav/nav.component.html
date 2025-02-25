@@ -3,7 +3,7 @@
         <a class="nav-link" [routerLink]="['/']"><fa-icon [icon]="faHome" /></a>
     </div>
     <div class="nav-item">
-        <a class="nav-link deactivated">Gene data</a>
+        <a class="nav-link" [routerLink]="['/search']" [queryParams]="{ q: '*' }">Gene data</a>
     </div>
     <div class="nav-item">
         <a class="nav-link deactivated">Downloads</a>

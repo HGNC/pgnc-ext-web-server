@@ -1,20 +1,122 @@
+<!-- search.component.html -->
 <app-header />
-
+<!-- <div class="search-container">
+    <input
+        type="text"
+        [(ngModel)]="searchQuery"
+        placeholder="Enter search query..."
+        (keyup.enter)="onSearch()" />
+    <button (click)="onSearch()">Search</button>
+</div> -->
 <div class="container">
-    <div class="row">
-        <div class="col-sm-12 title-bar">
-            <h1 class="title">Search Results</h1>
+    @if (loading$ | async) {
+        <div class="loading-indicator">
+            <div class="spinner"></div>
+            Loading results...
         </div>
-    </div>
-    @if (isFetching() && !error()) {
-        <p class="fallback">Fetching results...</p>
     }
-    @if (error()) {
-        <p class="error">{{ error() }}</p>
+
+    @if (error) {
+        <span>ERROR</span>
+        <div class="error-message">Error loading results: {{ error }}</div>
     }
-    @if (searchResult() && searchResult().length > 0) {
-        <app-search-results [results]="searchResult()"></app-search-results>
-    } @else {
-        <app-not-found [query]="query"></app-not-found>
+
+    @if (results) {
+        <div class="results-container">
+            @if (totalPages > 1) {
+                <div class="pagination-controls">
+                    <button
+                        (click)="previousPage()"
+                        [disabled]="currentPage === 1 || (loading$ | async)">
+                        Previous
+                    </button>
+
+                    <span class="page-info">
+                        Page {{ currentPage }}
+                        @if (totalResults) {
+                            <span>of {{ totalPages }}</span>
+                        }
+                    </span>
+
+                    <button
+                        (click)="nextPage()"
+                        [disabled]="currentPage === totalPages || (loading$ | async)">
+                        Next
+                    </button>
+
+                    <div class="page-size-selector">
+                        <label for="pageSizeSelect">Results per page:</label>
+                        <select
+                            id="pageSizeSelect"
+                            [(ngModel)]="pageSize"
+                            (change)="onPageSizeChange()">
+                            <option value="10">10</option>
+                            <option value="20">20</option>
+                            <option value="50">50</option>
+                        </select>
+                    </div>
+                </div>
+            }
+
+            @if (totalResults) {
+                <div class="result-stats">
+                    Showing {{ startIndex }} - {{ endIndex }} of {{ totalResults }} results
+                </div>
+            }
+
+            <div class="results-list">
+                @for (item of results; track $index) {
+                    <div class="result-item">
+                        <a [routerLink]="item.url">
+                            <h3 class="title">
+                                <strong>{{ item.symbol }}</strong
+                                >: {{ item.name }}
+                            </h3>
+                            @for (display of item.display; track $index) {
+                                @if (display.label === 'Matches') {
+                                    <div class="display-field">
+                                        <span class="label">{{ display.label }}</span>
+                                        <table>
+                                            @for (key of objectKeys(display.value); track key) {
+                                                <tr>
+                                                    <td>
+                                                        <strong>{{ key }}:</strong>
+                                                    </td>
+                                                    <td
+                                                        [innerHTML]="
+                                                            getDisplayValue(display.value, key)
+                                                                | safeHtml
+                                                        "></td>
+                                                </tr>
+                                            }
+                                        </table>
+                                    </div>
+                                } @else {
+                                    <div class="display-inline-field">
+                                        <span class="label">{{ display.label }}&nbsp;</span>
+                                        <span class="value">{{ display.value | safeValue }}</span>
+                                    </div>
+                                }
+                            }
+                        </a>
+                    </div>
+                }
+            </div>
+            @if (totalPages > 1) {
+                <div class="pagination-controls bottom">
+                    <button
+                        (click)="previousPage()"
+                        [disabled]="currentPage === 1 || (loading$ | async)">
+                        Previous
+                    </button>
+                    <span class="page-info">Page {{ currentPage }}</span>
+                    <button
+                        (click)="nextPage()"
+                        [disabled]="currentPage === totalPages || (loading$ | async)">
+                        Next
+                    </button>
+                </div>
+            }
+        </div>
     }
 </div>
