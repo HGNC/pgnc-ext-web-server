@@ -6,7 +6,12 @@
                 res of ['NCBI Gene', 'Ensembl Gene', 'UniProt', 'PubMed', 'Phytozome'];
                 track res
             ) {
-                @if (isValidResourceName(res) && classifiedXrefs && classifiedXrefs[res]) {
+                @if (
+                    isValidResourceName(res) &&
+                    classifiedXrefs &&
+                    classifiedXrefs[res] &&
+                    classifiedXrefs[res].length > 0
+                ) {
                     <span class="key">
                         {{ res }}
                         <a class="clickable help" title="Help">

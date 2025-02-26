@@ -1,12 +1,22 @@
-html,
-body {
-    margin: 0;
+body,
+div.page,
+html {
     height: 100%;
+    padding: 0;
+    margin: 0;
+    background-color: #fff;
+    box-sizing: border-box;
 }
+
 
 h1 {
     color: #800;
     font-size: 30px;
+}
+
+a {
+    color: #337ab7;
+    text-decoration: none;
 }
 
 em.match {
@@ -18,16 +28,6 @@ em.match {
 body {
     font-family: Arial, Helvetica, sans-serif;
     font-size: 14px;
-}
-
-body,
-div.page,
-html {
-    height: 100%;
-    padding: 0;
-    margin: 0;
-    background-color: #fff;
-    box-sizing: border-box;
 }
 
 .navbar-nav .nav-link.deactivated,
