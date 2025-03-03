@@ -1,0 +1,38 @@
+<div class="container">
+    <h1>Help index</h1>
+
+    <h2><a [routerLink]="['faq']">Frequently asked questions</a></h2>
+    <p>Please view the FAQs page to find answers to commonly asked questions.</p>
+
+    <h2><a [routerLink]="['browser']">Browser help</a></h2>
+    <p>
+        Since there are many different browsers and versions of browser being used across the world,
+        here are some helpful tips to which browsers to use and how to enable javascript on your
+        browser to make sure your user experience of our site is a good one.
+    </p>
+
+    <h2><a [routerLink]="['search']">Search help</a></h2>
+    <p>
+        Our search options allow users to search all of our active gene symbol reports quickly and
+        with ease. The search server utilises Apache Solr which offers a powerful full-text search
+        and hit highlighting. The search form can be found within the mast head of each page. Enter
+        a search term within the search input box and click on the spy glass icon. Visit the
+        <a [routerLink]="['search']">search help</a> page for more information.
+    </p>
+
+    <h2>
+        <a [routerLink]="['gene-symbol-report']">Symbol report help</a>
+    </h2>
+    <p>
+        Each gene with an approved PGNC symbol has its own Symbol Report that contains our manually
+        curated data and links to other external bioresources. The HGNC "core data" is displayed at
+        the top of the page in a separate box and presents the approved nomenclature, the unique
+        PGNC ID number, synonyms, previous nomenclature, locus type, chromosomal location, and a
+        primary ID for the main resource for gene in the species. The table below the PGNC "core
+        data" provides links to external resources such as NCBI Gene, UniProt, Phytozome among
+        others.
+    </p>
+
+    <!-- <h2><a [routerLink]="['useful-links']">Useful links</a></h2>
+    <p>A collection of useful links to biological databases and resources.</p> -->
+</div>

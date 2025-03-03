@@ -1,80 +1,56 @@
 <div class="container">
-    <div class="row">
-        <div class="col-sm-3">
+    <div class="row f-menu-container">
+        <div class="col-sm-12">
             <a [routerLink]="['/']" class="home-link" target="_blank">
                 <img src="img/pgnc/pgnc-logo-light-bckgrnd.svg" alt="Home" />
                 <fa-icon [icon]="faHome" size="2x"></fa-icon>
             </a>
+        </div>
+        <div class="f-menu col-sm-6 col-md-3">
             <h3>Gene data</h3>
             <ul id="data-list">
                 <li>
-                    <a class="deactivated" target="_self">Gene symbol reports</a>
+                    <a [routerLink]="['/search?q=*']" target="_self">Gene symbol reports</a>
                 </li>
             </ul>
         </div>
-        <div class="col-sm-3">
-            <h3>About</h3>
-            <ul id="about-list">
+        <div class="f-menu col-sm-6 col-md-3">
+            <h3>More</h3>
+            <ul id="misc-list">
                 <li>
                     <a [routerLink]="['/about']" target="_self">About the PGNC</a>
                 </li>
-                <li>
-                    <a class="deactivated" target="_self">Instructions to authors</a>
-                </li>
-                <li><a class="deactivated" target="_self">License</a></li>
-                <li>
-                    <a class="deactivated" target="_self">Species list</a>
-                </li>
-                <li>
-                    <a class="deactivated" target="_self">Privacy notice</a>
-                </li>
-                <li>
-                    <a class="deactivated" target="_self">Publications</a>
-                </li>
-                <!-- <li><a href="/about/sab" target="_self">Scientific Advisory Board</a></li> -->
-                <!-- <li><a href="/about/specialist-advisors" target="_self">Specialist advisors</a></li> -->
+                <li><a [routerLink]="['/license']" target="_self">License</a></li>
+                <li><a [routerLink]="['/help']" target="_self">Help pages</a></li>
             </ul>
         </div>
-        <div class="col-sm-3">
-            <h3>Tools</h3>
-            <ul id="tools-list">
-                <li>
-                    <a class="deactivated" target="_self">Search</a>
-                </li>
-            </ul>
+        <div class="f-menu col-sm-6 col-md-3">
             <h3>Downloads</h3>
-            <ul id="downloads-list">
-                <li>
-                    <a class="deactivated" target="_self">REST service</a>
-                </li>
-                <li>
-                    <a class="deactivated" target="_self">Statistics &amp; download files</a>
-                </li>
-            </ul>
-        </div>
-        <div class="col-sm-3">
-            <h3>Help</h3>
             <ul id="help-list">
                 <li>
-                    <a class="deactivated" target="_self">Help index</a>
+                    <a
+                        href="https://github.com/PGNC-Plant-Gene-Nomenclature-Committee/Downloads"
+                        target="_self"
+                        >Download files</a
+                    >
                 </li>
             </ul>
-            <!-- <h3 ng-click="vm.newsListIsCollapsed = !vm.newsListIsCollapsed">News</h3>
-                <ul id="news-list" ng-hide="vm.newsListIsCollapsed" class="ng-hide">
-                  <li><a href="https://blog.genenames.org/" target="_self">Genenames blog</a></li>
-                </ul> -->
+        </div>
+        <div class="f-menu col-sm-6 col-md-3">
             <h3>Contact us</h3>
             <ul id="contact-list">
                 <li>
                     <a [routerLink]="['/contact']" target="_self">Contact details</a>
                 </li>
-                <li>
+                <li style="display: none">
                     <a class="deactivated" target="_self">Feedback</a>
                 </li>
-                <li>
+                <li style="display: none">
                     <a class="deactivated" target="_self">Request symbol</a>
                 </li>
             </ul>
         </div>
     </div>
+    <app-social-media />
+    <app-cpright />
 </div>

@@ -3,4 +3,5 @@ export type ExternalResourceName =
     | 'Ensembl Gene'
     | 'UniProt'
     | 'PubMed'
-    | 'Phytozome';
+    | 'Phytozome'
+    | 'CBI sequence viewer';

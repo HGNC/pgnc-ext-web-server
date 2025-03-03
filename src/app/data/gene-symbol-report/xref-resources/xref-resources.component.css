@@ -9,6 +9,7 @@
 .key {
     font-weight: bold;
     justify-self: start;
+    min-width: 160px;
 }
 
 .val {

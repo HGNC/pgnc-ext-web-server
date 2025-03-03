@@ -1,6 +1,6 @@
-import { GeneSymbol } from './gene-symbol.model';
-import { GeneName } from './gene-name.model';
 import { GeneLocation } from './gene-location.model';
+import { GeneName } from './gene-name.model';
+import { GeneSymbol } from './gene-symbol.model';
 import { Xref } from './xref-resources/xref-resources.model';
 
 export interface GeneSymbolReport {
@@ -61,6 +61,8 @@ export interface GeneSymbolReport {
             | null;
         geneXrefs: Xref[] | undefined;
         geneLocations: [GeneLocation] | null;
+        primaryId: string | null;
+        primaryIdSource: string | null;
     } | null;
     apiVersion: string;
 }

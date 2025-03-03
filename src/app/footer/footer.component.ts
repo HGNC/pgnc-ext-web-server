@@ -1,7 +1,8 @@
 import { Component } from '@angular/core';
-import { MenuComponent } from './menu/menu.component';
-import { LegalComponent } from './legal/legal.component';
+
 import { GrantNoticeComponent } from './grant-notice/grant-notice.component';
+import { LegalComponent } from './legal/legal.component';
+import { MenuComponent } from './menu/menu.component';
 
 @Component({
     selector: 'app-footer',

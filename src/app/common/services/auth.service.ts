@@ -1,8 +1,9 @@
-import { DestroyRef, Injectable, inject, signal } from '@angular/core';
-import { environment } from '../../../environments/environment';
 import { HttpClient } from '@angular/common/http';
+import { inject, Injectable, signal } from '@angular/core';
+import { catchError, map, Observable, shareReplay, throwError } from 'rxjs';
+
+import { environment } from '../../../environments/environment';
 import { LoginCredentials } from '../models/login-credentials.model';
-import { catchError, map, Observable, share, shareReplay, throwError } from 'rxjs';
 
 @Injectable({
     providedIn: 'root',
@@ -24,7 +25,7 @@ export class AuthService {
                 }),
                 catchError(error => {
                     this.jwtResult = undefined;
-                    return throwError(() => new Error('Problem found when signing in.'));
+                    return throwError(() => new Error(`Problem found when signing in. ${error}`));
                 }),
                 shareReplay(1)
             );
@@ -50,7 +51,9 @@ export class AuthService {
                     this.jwtResult = undefined;
                     return throwError(
                         () =>
-                            new Error('Problem found when refreshing token. Please sign in again.')
+                            new Error(
+                                `Problem found when refreshing token. Please sign in again. ${error}`
+                            )
                     );
                 }),
                 shareReplay(1)

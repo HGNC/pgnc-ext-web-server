@@ -1,10 +1,11 @@
 import { Component } from '@angular/core';
 import { RouterLink } from '@angular/router';
-import { NavComponent } from '../nav/nav.component';
-import { SearchBarComponent } from './search-bar/search-bar.component';
 import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
 import { faBars } from '@fortawesome/free-solid-svg-icons';
 import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
+
+import { NavComponent } from '../nav/nav.component';
+import { SearchBarComponent } from './search-bar/search-bar.component';
 
 @Component({
     selector: 'app-header',

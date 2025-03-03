@@ -1,6 +1,6 @@
 import { Component } from '@angular/core';
 import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
-import { faXTwitter, faGithub, faYoutube, faBluesky } from '@fortawesome/free-brands-svg-icons';
+import { faBluesky, faGithub, faXTwitter, faYoutube } from '@fortawesome/free-brands-svg-icons';
 import { faBlog, faComment } from '@fortawesome/free-solid-svg-icons';
 
 @Component({

@@ -1,4 +1,12 @@
-<div class="page">
+@if (currentRoute !== '/') {
+    <div class="page">
+        <app-header class="default-header" />
+        <main class="default-main">
+            <router-outlet />
+        </main>
+        <app-footer class="default-footer" />
+    </div>
+} @else {
     <router-outlet />
     <app-footer />
-</div>
+}

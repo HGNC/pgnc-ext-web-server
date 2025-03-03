@@ -1,0 +1,202 @@
+<div class="container">
+    <h1>Search help</h1>
+
+    <h2>Table of Contents</h2>
+    <ol>
+        <li><a href="/help/search#basic_search">Basic search</a></li>
+        <li>
+            <a href="/help/search#adv_search">Advanced search</a>
+            <ol>
+                <li><a href="/help/search#wildcard_search">Wildcard search</a></li>
+                <li><a href="/help/search#logic_op">Logic operators</a></li>
+                <li><a href="/help/search#phases">Phrases</a></li>
+                <li><a href="/help/search#ind_fields">Indexed fields</a></li>
+            </ol>
+        </li>
+        <li><a href="/help/search#ind_list">List of indexes</a></li>
+    </ol>
+
+    <p>
+        Our search allows users to search all of our active gene symbol reports with ease. The
+        search server utilises Apache Solr which offers a powerful full-text search and hit
+        highlighting.
+    </p>
+    <p>
+        The search form can be found within the mast head of each page. Enter a search term within
+        the search input box and click on the spy glass icon or press enter when the focus is on the
+        input box.
+    </p>
+
+    <h2 id="basic_search">Basic search</h2>
+    <p>
+        The simplest way to search is to type a query word/ID into the input box within the mast
+        head and click on the spy glass. The default option is a full-text search over all the
+        indexes and fields. If reports are found containing the keyword/ID they are displayed in
+        order of relevance (for more information see indexed fields for each search type). Users can
+        change the default number of results per page from 10 up to 50.
+    </p>
+    <p>
+        The results display specific fields from within the search index. The first line of each
+        result contains the
+        <strong>gene symbol</strong> and the <strong>gene name</strong>. The second row will show
+        some of the important fields to help identify the hit. The third row reports the field the
+        keyword/ID matches, so if the keyword matched an approved symbol within a gene symbol report
+        the third row would say "<strong>Matches: Gene symbol etc</strong>" as seen below in figure
+        1.
+    </p>
+    <figure>
+        <img
+            src="/img/screenshots/basic-search-result.png"
+            alt="Search example"
+            class="img-responsive center-block" />
+        <figcaption class="text-center">
+            Figure 1: Example of a basic search showing paging and summarised information.
+        </figcaption>
+    </figure>
+
+    <h2 id="adv_search">Advanced search</h2>
+    <p>
+        The search application allows users to make advanced queries using the search box. In this
+        section we describe how to use wildcards, logic operators and specify indexed fields.
+    </p>
+
+    <h3 id="wildcard_search">Wildcard search</h3>
+    <p>
+        Sometimes it may be useful to match records based on a query pattern rather than a keyword
+        or ID. Our search allows users to use wildcard operators with an asterisk (<code
+            style="font-weight: bold"
+            >*</code
+        >) to stand in place for one or more characters and a question mark (<code
+            style="font-weight: bold"
+            >?</code
+        >) to stand in place for a single character substitution. Multple wildcards can be used in
+        the same query, for instance searching for
+        <code style="font-weight: bold">CYP?1*</code> will find the symbols
+        <code style="font-weight: bold">CYP51G1</code>,
+        <code style="font-weight: bold">CYP51G5</code>,
+        <code style="font-weight: bold">CYP71AN1</code> etc.
+    </p>
+
+    <h3 id="logic_op">Logic operators</h3>
+    <p>
+        By default the search application uses the logical operator
+        <code style="font-weight: bold">OR</code>, so inputing
+        <code style="font-weight: bold">CDC4* LFY</code> into the search box actually equates to
+        <code style="font-weight: bold">CDC4* OR LFY</code> so one result will contain CDC4* and one
+        will contain LFY. Sometime however this isn't what a user wants to search. Lets say a user
+        wants to find reports that contain both CYP* and PGNC:634 in the same report. By changing
+        the search query to <code style="font-weight: bold">CYP* AND PGNC:634</code> the results
+        returned are more pertinent. Alternatively asking for reports that do not contain a
+        keyword/ID may be preferable therefore users may use
+        <code style="font-weight: bold">NOT</code> or
+        <code style="font-weight: bold">-</code> within term such as
+        <code style="font-weight: bold">CYP* NOT PGNC:634</code> or
+        <code style="font-weight: bold">CYP* -PGNC:634</code>.
+    </p>
+
+    <h3 id="phases">Phrases</h3>
+    <p>
+        As discussed above the default operator is <code style="font-weight: bold">OR</code>, so if
+        a search using the term
+        <code style="font-weight: bold">cytochrome P450 family 51 subfamily G member 5</code> was
+        used the actual search term will be
+        <code style="font-weight: bold"
+            >cytochrome OR P450 OR family OR 51 OR subfamily OR G OR member OR 5</code
+        >. This can be addressed by simply quoting the query so that the search knows to treat the
+        quoted block as one term like
+        <code style="font-weight: bold">"cytochrome P450 family 51 subfamily G member 5"</code>.
+    </p>
+
+    <h3 id="ind_fields">Indexed fields</h3>
+    <p>
+        Users may search within a specific indexed field by using the information seen in the
+        indexed fields section below using a very basic notation. To specify an index the user need
+        only to type in to the search field the indexed field key followed immediately with a colon
+        (:) and then the query eg
+        <a href="/search/?q=ncbi_gene_id:7454686"><code>ncbi_gene_id:7454686</code></a
+        >. If the query is not an ID or a keyword "<a href="#phases">phrases</a>" can be used after
+        the colon eg
+        <a href="/search?q=gene_name:%22cell division cycle 45%22"
+            ><code>gene_name:"cell division cycle 45"</code></a
+        >.
+    </p>
+
+    <h2 id="ind_list">List of indexes</h2>
+    <dl>
+        <dt>alias_gene_name</dt>
+        <dd>
+            Other names used to refer to a gene as seen in the "Alias names" field in the gene
+            symbol report
+        </dd>
+
+        <dt>alias_gene_symbol</dt>
+        <dd>
+            Other symbols used to refer to a gene as seen in the "Alias symbols" field in the gene
+            symbol report
+        </dd>
+
+        <dt>chromosome</dt>
+        <dd>Chromosome location of the gene</dd>
+
+        <dt>ensembl_gene_id</dt>
+        <dd><a href="https://www.ensembl.org">Ensembl</a> gene ID.</dd>
+
+        <dt>gene_name</dt>
+        <dd>
+            PGNC approved name for the gene. Equates to the "Approved name" field within the gene
+            symbol report
+        </dd>
+
+        <dt>gene_symbol</dt>
+        <dd>
+            The PGNC approved gene symbol. Equates to the "Approved symbol" field within the gene
+            symbol report
+        </dd>
+
+        <dt>locus_type</dt>
+        <dd>The locus type (a.k.a biotype) as set by the PGNC</dd>
+
+        <dt>primary_id</dt>
+        <dd>
+            The ID of the gene from the primary resource in which we used as a starting point for
+            naming the gene
+        </dd>
+
+        <dt>ncbi_gene_id</dt>
+        <dd><a href="https://www.ncbi.nlm.nih.gov/gene">NCBI gene</a> ID for the gene</dd>
+
+        <dt>pgnc_id</dt>
+        <dd>PGNC ID. A unique ID created by the PGNC for every approved symbol</dd>
+
+        <dt>phytozome_id</dt>
+        <dd>
+            Phytozome is a plant comparative genomics portal, integrating plant genome sequences and
+            annotation data. Currently in the database all of the Phytozome IDs begin with "Potri"
+            as we currently only display Populus trichocarpa genes
+        </dd>
+
+        <dt>prev_gene_name</dt>
+        <dd>
+            Gene names previously approved by the HGNC for a gene. Equates to the "Previous names"
+            field within the gene symbol report
+        </dd>
+
+        <dt>prev_gene_symbol</dt>
+        <dd>
+            Gene symbols previously approved by the HGNC for this gene. Equates to the "Previous
+            symbols" field within the gene symbol report
+        </dd>
+
+        <dt>status</dt>
+        <dd>Status of the symbol report, which can be either "Approved" or "Entry Withdrawn"</dd>
+
+        <dt>taxon_id</dt>
+        <dd>
+            The <a href="https://www.ncbi.nlm.nih.gov/taxonomy">NCBI taxonomy</a> ID of the species
+            of interest
+        </dd>
+
+        <dt>uniprot_id</dt>
+        <dd>UniProt protein accessions for the protein products of the gene</dd>
+    </dl>
+</div>

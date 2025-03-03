@@ -30,17 +30,51 @@ const commonEngine = new CommonEngine();
  * Serve static files from /browser
  */
 app.get(
-    '**',
+    '**/*.js',
     express.static(browserDistFolder, {
         maxAge: '1y',
-        index: 'index.html',
+    })
+);
+
+app.get(
+    '**/*.css',
+    express.static(browserDistFolder, {
+        maxAge: '1y',
+    })
+);
+
+app.get(
+    '**/*.png',
+    express.static(browserDistFolder, {
+        maxAge: '1y',
+    })
+);
+
+app.get(
+    '**/*.svg',
+    express.static(browserDistFolder, {
+        maxAge: '1y',
+    })
+);
+
+app.get(
+    '**/*.jpg',
+    express.static(browserDistFolder, {
+        maxAge: '1y',
+    })
+);
+
+app.get(
+    '**/*.ico',
+    express.static(browserDistFolder, {
+        maxAge: '1y',
     })
 );
 
 /**
  * Handle all other requests by rendering the Angular application.
  */
-app.get('**', (req, res, next) => {
+app.get('**', (req, res) => {
     const { protocol, originalUrl, baseUrl, headers } = req;
 
     commonEngine
@@ -51,13 +85,23 @@ app.get('**', (req, res, next) => {
             publicPath: browserDistFolder,
             providers: [{ provide: APP_BASE_HREF, useValue: baseUrl }],
         })
-        .then(html => res.send(html))
-        .catch(err => next(err));
+        .then(html => {
+            // Here you can check if the rendered content is a 404 page
+            // This logic assumes your Angular app uses a specific structure
+            // to determine if a page was found. Adjust as necessary.
+            if (html.includes('404 - Page Not Found')) {
+                res.status(404); // Set 404 status code
+            }
+            res.send(html); // Send the rendered HTML
+        })
+        .catch(err => {
+            console.error(err); // Log the error for debugging
+            res.status(500).send('Internal Server Error');
+        });
 });
 
 /**
  * Start the server if this module is the main entry point.
- * The server listens on the port defined by the `PORT` environment variable, or defaults to 4000.
  */
 if (isMainModule(import.meta.url)) {
     const port = process.env['PORT'] || 4000;

@@ -1,12 +1,12 @@
 import { Component } from '@angular/core';
 import { FormsModule } from '@angular/forms';
-import { Router } from '@angular/router';
+import { Router, RouterLink } from '@angular/router';
 import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
 import { faQuestionCircle, faSearch } from '@fortawesome/free-solid-svg-icons';
 
 @Component({
     selector: 'app-search-bar',
-    imports: [FontAwesomeModule, FormsModule],
+    imports: [FontAwesomeModule, FormsModule, RouterLink],
     templateUrl: './search-bar.component.html',
     styleUrl: './search-bar.component.css',
 })

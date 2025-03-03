@@ -1,15 +1,17 @@
-<p>
-    We could not find your search term "<span class="orange" ng-bind="$ctrl.query"></span>" within
-    our database. Maybe try using wildcards such as <span class="orange">{{ query }}*</span> or
-    <span class="orange">*{{ query }}</span
-    >.
-</p>
 <div>
-    <p ng-switch-when="all">
-        You can search our site by a specific field as mentioned in the
-        <a href="/help/search#Search_everything_fields">search help</a>
-        (eg.
-        <a href="/tools/search/#!/?query=gene_symbol%3ABRAF">gene_symbol:BRAF</a>).
+    <p>
+        We could not find your search term "<code class="orange">{{ query }}</code
+        >" within our database. Maybe try using wildcards such as
+        <code class="orange">{{ query }}*</code> or <code class="orange">*{{ query }}</code
+        >.
     </p>
+
+    <p>
+        You can search our site by a specific field as mentioned in the
+        <a [routerLink]="['/help/search']" fragment="ind_fields">search help</a>
+        (eg.
+        <a href="/search?q=gene_symbol%3ACYP*">gene_symbol:CYP*</a>).
+    </p>
+
+    <p>View our search <a href="/help/search">help</a> page to find out more.</p>
 </div>
-<p>View our search <a href="/help/search">help</a> page to find out more.</p>

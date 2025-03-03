@@ -1,9 +1,13 @@
-<app-header />
 <div class="container">
     @if (isFetching() && !error()) {
         <h1>
             Gene symbol report
-            <a class="clickable help" title="Help"><fa-icon [icon]="faQuestionCircle"></fa-icon></a>
+            <a
+                [routerLink]="['/help/gene-symbol-report']"
+                class="clickable help"
+                title="Symbol report help"
+                ><fa-icon [icon]="faQuestionCircle"></fa-icon
+            ></a>
         </h1>
         <p class="fallback">Fetching report...</p>
     }
@@ -13,7 +17,12 @@
     @if (report()) {
         <h1>
             Gene symbol report for {{ appSymbol }}
-            <a class="clickable help" title="Help"><fa-icon [icon]="faQuestionCircle"></fa-icon></a>
+            <a
+                class="clickable help"
+                title="Symbol report help"
+                [routerLink]="['/help/gene-symbol-report']"
+                ><fa-icon [icon]="faQuestionCircle"></fa-icon
+            ></a>
         </h1>
         <app-pgnc-data [result]="result" [symbol]="appSymbol"></app-pgnc-data>
         <app-xref-resources [result]="result" [symbol]="appSymbol"></app-xref-resources>

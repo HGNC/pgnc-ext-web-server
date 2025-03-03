@@ -1,0 +1,157 @@
+<div class="container">
+    <h1>Symbol report help</h1>
+    <h2>Table of Contents</h2>
+    <ul>
+        <li>
+            <a href="/help/gene-symbol-report#core">Core data fields</a>
+            <ul>
+                <li><a href="/help/gene-symbol-report#species">Species</a></li>
+                <li><a href="/help/gene-symbol-report#app_sym">Approved symbol</a></li>
+                <li><a href="/help/gene-symbol-report#app_name">Approved name</a></li>
+                <li><a href="/help/gene-symbol-report#loc_type">Locus type</a></li>
+                <li><a href="/help/gene-symbol-report#pgnc_id">PGNC ID</a></li>
+                <li><a href="/help/gene-symbol-report#status">Symbol status</a></li>
+                <li><a href="/help/gene-symbol-report#alias_sym">Alias symbols</a></li>
+                <li><a href="/help/gene-symbol-report#alias_name">Alias names</a></li>
+                <li><a href="/help/gene-symbol-report#prev_sym">Previous symbols</a></li>
+                <li><a href="/help/gene-symbol-report#prev_name">Previous names</a></li>
+                <li><a href="/help/gene-symbol-report#chr">Chromosomal location</a></li>
+                <li><a href="/help/gene-symbol-report#1_id">Primary ID</a></li>
+            </ul>
+        </li>
+        <li>
+            <a href="/help/gene-symbol-report#ext_res">External resources</a>
+            <ul>
+                <li><a href="/help/gene-symbol-report#ncbi_g">NCBI Gene</a></li>
+                <li><a href="/help/gene-symbol-report#unip">UniProt</a></li>
+                <li><a href="/help/gene-symbol-report#phytoz">Phytozome</a></li>
+                <li><a href="/help/gene-symbol-report#ens_g">Ensembl Gene</a></li>
+                <li><a href="/help/gene-symbol-report#pubmed">PubMed</a></li>
+                <li><a href="/help/gene-symbol-report#cbi_v">CBI sequence viewer</a></li>
+            </ul>
+        </li>
+    </ul>
+
+    <h2 id="core">Core data fields</h2>
+
+    <h3 id="species">Species</h3>
+    <p>
+        The Genbank common name for the species this gene belongs to as assigned by the
+        <a href="http://www.ncbi.nlm.nih.gov/Taxonomy/taxonomyhome.html">NCBI</a>.
+    </p>
+
+    <h3 id="app_sym">Approved symbol</h3>
+    <p>
+        The official gene symbol approved by the VGNC, which is typically a short form of the gene
+        name.
+    </p>
+
+    <h3 id="app_name">Approved name</h3>
+    <p>The full gene name approved by the PGNC; corresponds to the approved symbol above.</p>
+
+    <h3 id="loc_type">Locus type</h3>
+    <p>Specifies the genetic class of each gene entry. All PGNC locus types are listed below:</p>
+    <ul>
+        <li>
+            gene with protein product - protein-coding genes (the protein may be predicted and of
+            unknown function) (<a
+                href="http://www.sequenceontology.org/browser/current_svn/term/SO:0001217"
+                >SO:0001217</a
+            >)
+        </li>
+    </ul>
+    <p>Currently we only have the locus type above but more will appear soon.</p>
+
+    <h3 id="pgnc_id">PGNC ID</h3>
+    <p>
+        A unique ID provided by the PGNC for each gene with an approved symbol. IDs are of the
+        format PGNC:n, where n is a unique number. PGNC IDs remain stable even if a name or symbol
+        changes.
+    </p>
+
+    <h3 id="status">Symbol status</h3>
+    <p>
+        Status of the symbol report, which can be either "Approved" or "Entry Withdrawn". Currently
+        we have no "Entry Withdrawn" records.
+    </p>
+
+    <h3 id="alias_sym">Alias symbols</h3>
+    <p>
+        Alternative symbols that have been used to refer to the gene. Aliases may be from
+        literature, from other databases or may be added to represent membership of a gene group.
+    </p>
+
+    <h3 id="alias_name">Alias names</h3>
+    <p>
+        Alternative names for the gene. Aliases may be from literature, from other databases or may
+        be added to represent membership of a gene group.
+    </p>
+
+    <h3 id="prev_sym">Previous symbols</h3>
+    <p>This field displays any symbols that were previously PGNC-approved nomenclature.</p>
+
+    <h3 id="prev_name">Previous names</h3>
+    <p>This field displays any names that were previously PGNC-approved nomenclature.</p>
+
+    <h3 id="chr">Chromosomal location</h3>
+    <p>The chromosome in which the gene can be found.</p>
+
+    <h3 id="1_id">Primary ID</h3>
+    <p>The ID of the gene from the primary resource:</p>
+    <dl>
+        <dt><em>Populus trichocarpa</em></dt>
+        <dd>
+            For this species the primary ID is the Phytozome gene ID (i.e. Potri ID). The Phytozome
+            gene ID is a unique identifier for each gene in the Phytozome database.
+        </dd>
+    </dl>
+
+    <h2 id="ext_res">External resources</h2>
+
+    <h3 id="ncbi_g">NCBI Gene</h3>
+    <p>
+        The <a href="https://www.ncbi.nlm.nih.gov/gene/">NCBI Gene</a> resource at the NCBI provides
+        curated sequence and descriptive information about genetic loci including official
+        nomenclature, aliases, sequence accessions, phenotypes, EC numbers, MIM numbers, UniGene
+        clusters, homology, map locations, and related web sites. We show the NCBI Gene ID and link
+        to the NCBI Gene page for the gene.
+    </p>
+
+    <h3 id="unip">UniProt</h3>
+    <p>
+        The <a href="http://www.uniprot.org/">UniProt</a> Protein Knowledgebase is a curated protein
+        sequence database that provides a high level of annotation, a minimal level of redundancy
+        and high level of integration with other databases. We do not map to TrEMBL entries within
+        UniProt, only to Swiss-Prot entries as these are manually annotated and reviewed. We show
+        the UniProt ID and link to the UniProt page for the gene.
+    </p>
+
+    <h3 id="phytoz">Phytozome</h3>
+    <p>
+        <a href="https://phytozome.jgi.doe.gov/">Phytozome</a> is a plant comparative genomics
+        portal, integrating plant genome sequences and annotation data. We show the Phytozome ID and
+        link to the Phytozome page for the gene.
+    </p>
+
+    <h3 id="ens_g">Ensembl Gene</h3>
+    <p>
+        The <a href="https://www.ensembl.org/">Ensembl</a> Gene View displays data associated at the
+        gene level such as orthologs, paralogs, regulatory regions and splice variants. We show the
+        Ensembl Gene ID and link to the Ensembl Gene page for the gene.
+    </p>
+
+    <h3 id="pubmed">PubMed</h3>
+    <p>
+        <a href="https://pubmed.ncbi.nlm.nih.gov/">PubMed</a> comprises more than 35 million
+        citations for biomedical literature from MEDLINE, life science journals, and online books.
+        Citations may include links to full text content from PubMed Central and publisher web
+        sites. We provide the PubMed ID which links to relevant publications that aided the
+        curator(s) to assign the gene symbol and name.
+    </p>
+
+    <h3 id="cbi_v">CBI sequence viewer</h3>
+    <p>
+        Links to a jBrowser hosted by the <a href="https://cbi.ornl.gov">CBI</a> which aligns the
+        gene to the assemblies.
+    </p>
+</div>

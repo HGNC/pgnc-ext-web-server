@@ -3,7 +3,14 @@
     <div class="card-body">
         <div class="key-val-pairs">
             @for (
-                res of ['NCBI Gene', 'Ensembl Gene', 'UniProt', 'PubMed', 'Phytozome'];
+                res of [
+                    'NCBI Gene',
+                    'Ensembl Gene',
+                    'UniProt',
+                    'PubMed',
+                    'Phytozome',
+                    'CBI sequence viewer',
+                ];
                 track res
             ) {
                 @if (
@@ -14,7 +21,11 @@
                 ) {
                     <span class="key">
                         {{ res }}
-                        <a class="clickable help" title="Help">
+                        <a
+                            class="clickable help"
+                            [routerLink]="['/help/gene-symbol-report']"
+                            fragment="{{ xrefFrags[res] }}"
+                            title="Help">
                             <fa-icon [icon]="faQuestionCircle"></fa-icon>
                         </a>
                     </span>
@@ -22,17 +33,36 @@
                         <ul>
                             @for (xref of classifiedXrefs[res]; track xref) {
                                 <li>
-                                    <a
-                                        href="{{ xrefURLS[res] + xref.xref.displayId }}"
-                                        target="_blank"
-                                        >{{ xref.xref.displayId }}</a
-                                    >
+                                    @if (typeof xref === 'string') {
+                                        {{ xref }}
+                                    } @else if (isXrefObject(xref)) {
+                                        <a
+                                            href="{{ xrefURLS[res] + xref.xref.displayId }}"
+                                            target="_blank"
+                                            >{{ xref.xref.displayId }}</a
+                                        >
+                                    }
                                 </li>
                             }
                         </ul>
                     </span>
                 }
             }
+            <!-- <span class="key"
+                >CBI sequence viewer
+                <a
+                    class="clickable help"
+                    [routerLink]="['/help/gene-symbol-report']"
+                    fragment="cbi_v"
+                    title="Help">
+                    <fa-icon [icon]="faQuestionCircle"></fa-icon> </a
+            ></span>
+            <span class="val"
+                ><a
+                    href="https://fair.ornl.gov/ThridParty/jbrowse2/?PGNCID={{ result.data?.id }}"
+                    >{{ appSymbol?.symbol?.symbol }}</a
+                ></span
+            > -->
         </div>
     </div>
 </div>

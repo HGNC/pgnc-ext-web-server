@@ -1,5 +1,4 @@
 body,
-div.page,
 html {
     height: 100%;
     padding: 0;
@@ -8,10 +7,48 @@ html {
     box-sizing: border-box;
 }
 
+.page {
+    display: flex;
+    flex-direction: column;
+    height: 100%;
+}
 
-h1 {
-    color: #800;
-    font-size: 30px;
+.default-header, .default-footer {
+    width: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.default-main {
+    flex: 1;
+}
+
+.default-header header {
+    width: 100%;
+    display: flex;
+}
+
+.default-footer footer {
+    width: 100%;
+}
+
+main {
+    h1, h2, h3, h4  {
+        color: #800;
+    }
+    h1 {
+        font-size: 30px;
+    }
+    h2 {
+        font-size: 22px;
+    }
+    h3 {
+        font-size: 18px;
+    }
+    h4 {
+        font-size: 14px;
+    }
 }
 
 a {
@@ -35,3 +72,13 @@ body {
 a.deactivated {
     color: grey !important;
 }
+.footer-top {
+    border-top: 6px solid #c0c3c6;
+}
+
+.footer-bottom {
+    border-top: 1px solid #ebedee;
+    background-color: #d0d3d6;
+}
+
+/* :not(main#homepage) {} */

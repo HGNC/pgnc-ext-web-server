@@ -1,3 +1,25 @@
 .home-link img {
     height: 45px;
 }
+
+@media (max-width: 575px) {
+    .f-menu-container {
+        display: flex;
+        justify-content: center;
+        flex-direction: column;
+    }
+    h3 {
+        margin-left: 20vw;
+    }
+    .f-menu {
+        width: 100%;
+        flex-direction: column;
+        display: flex;
+
+        ul {
+            margin-left: auto;
+            margin-right: auto;
+        }
+    }
+
+}
