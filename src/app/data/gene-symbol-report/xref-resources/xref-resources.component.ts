@@ -37,7 +37,7 @@ export class XrefComponent implements OnInit {
         UniProt: 'https://www.uniprot.org/uniprotkb/',
         PubMed: 'https://pubmed.ncbi.nlm.nih.gov/',
         Phytozome: 'https://phytozome-next.jgi.doe.gov/report/gene/Ptrichocarpa_v4_1/',
-        'CBI sequence viewer': 'https://fair.ornl.gov/ThridParty/jbrowse2/?PGNCID=',
+        'CBI sequence viewer': 'https://fair.ornl.gov/ThirdParty/jbrowse2/?PGNCID=',
     };
 
     xrefFrags: Record<ExternalResourceName, string> = {
