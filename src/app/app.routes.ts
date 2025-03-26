@@ -52,7 +52,7 @@ export const routes: Routes = [
         component: UsefulLinksComponent,
     },
     {
-        path: 'help/license',
+        path: '/license',
         component: LicenseComponent,
     },
     {
