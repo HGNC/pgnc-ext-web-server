@@ -1,45 +1,48 @@
 @for (doc of results; track doc) {
-    <div class="search-result">
-        <a [href]="doc.url">
-            <span class="title">
-                <strong>{{ doc.symbol }}</strong
-                >:
-                <span>{{ doc.name }}</span>
-            </span>
-            <div class="search-info">
-                <div class="pgnc-id">
-                    <span class="key">{{ doc.display[0].label }}</span>
-                    <span class="value">{{ doc.display[0].value }}</span>
-                </div>
-                <div class="locus-type">
-                    <span class="key">{{ doc.display[1].label }}</span>
-                    <span class="value">{{ doc.display[1].value }}</span>
-                </div>
-                <div class="status">
-                    <span class="key">{{ doc.display[2].label }}</span>
-                    <span class="value">{{ doc.display[2].value }}</span>
-                </div>
+<div class="search-result">
+    <a [href]="doc.url">
+        <span class="title">
+            <strong>{{ doc.symbol }}</strong>:
+            <span>{{ doc.name }}</span>
+        </span>
+        <div class="search-info">
+            @if (doc.display && doc.display[0]) {
+            <div class="pgnc-id">
+                <span class="key">{{ doc.display[0].label }}</span>
+                <span class="value">{{ doc.display[0].value }}</span>
             </div>
-            @if (doc.display[doc.display.length - 1].label === 'Matches') {
-                <div class="search-matches">
-                    <span class="key">Matches</span>
-                    <table class="match_table">
-                        @for (
-                            entry of doc.display[doc.display.length - 1].value | keyvalue;
-                            track entry.key
-                        ) {
-                            <tr>
-                                <th
-                                    class="match_thead match_key"
-                                    [rowSpan]="$any(entry.value).length">
-                                    {{ entry.key }}
-                                </th>
-                                <td class="match_td" [innerHTML]="$any(entry.value)"></td>
-                            </tr>
-                        }
-                    </table>
-                </div>
             }
-        </a>
-    </div>
+            @if (doc.display && doc.display[1]) {
+            <div class="locus-type">
+                <span class="key">{{ doc.display[1].label }}</span>
+                <span class="value">{{ doc.display[1].value }}</span>
+            </div>
+            }
+            @if (doc.display && doc.display[2]) {
+            <div class="status">
+                <span class="key">{{ doc.display[2].label }}</span>
+                <span class="value">{{ doc.display[2].value }}</span>
+            </div>
+            }
+        </div>
+        @if (doc.display && doc.display.length > 0 && doc.display[doc.display.length - 1]?.label === 'Matches') {
+        <div class="search-matches">
+            <span class="key">Matches</span>
+            <table class="match_table">
+                @for (
+                entry of doc.display[doc.display.length - 1].value | keyvalue;
+                track entry.key
+                ) {
+                <tr>
+                    <th class="match_thead match_key" [rowSpan]="$any(entry.value).length">
+                        {{ entry.key }}
+                    </th>
+                    <td class="match_td" [innerHTML]="$any(entry.value)"></td>
+                </tr>
+                }
+            </table>
+        </div>
+        }
+    </a>
+</div>
 }

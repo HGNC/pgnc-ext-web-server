@@ -9,11 +9,16 @@ import { FragmentJumpService } from '../../common/services/fragment-jump.service
     styleUrl: './gene-symbol-report.component.css',
 })
 export class GeneSymbolReportHelpComponent implements OnInit {
-    constructor(private fragJumpService: FragmentJumpService) {}
+    constructor(private fragJumpService: FragmentJumpService) { }
 
     ngOnInit() {
-        this.fragJumpService.subscribeToFragmentChanges().subscribe((frag: string | null) => {
-            if (frag) this.fragJumpService.jumpToSection(frag);
-        });
+        try {
+            this.fragJumpService.subscribeToFragmentChanges().subscribe((frag: string | null) => {
+                if (frag) this.fragJumpService.jumpToSection(frag);
+            });
+        } catch (error) {
+            // Gracefully handle fragment service errors
+            console.warn('Fragment service error:', error);
+        }
     }
 }

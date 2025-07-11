@@ -3,8 +3,8 @@ import { RouterLink } from '@angular/router';
 import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
 import { faQuestionCircle } from '@fortawesome/free-solid-svg-icons';
 
-import { GeneSymbol } from '../gene-symbol.model';
 import { GeneSymbolReport } from '../gene-symbol-report.model';
+import { GeneSymbol } from '../gene-symbol.model';
 import { ExternalResourceName } from './external-resource-name.type';
 import { Xref } from './xref-resources.model';
 
@@ -50,15 +50,15 @@ export class XrefComponent implements OnInit {
     };
 
     ngOnInit() {
-        const geneXrefs = this.result.data?.geneXrefs ?? [];
+        const geneXrefs = this.result?.data?.geneXrefs ?? [];
         Object.keys(this.xrefURLS).forEach(key => {
             if (this.isValidResourceName(key)) {
                 this.classifiedXrefs[key] = geneXrefs.filter(
-                    xref => xref.xref.externalResource.name === key
+                    xref => xref?.xref?.externalResource?.name === key
                 );
             }
         });
-        this.appSymbol = this.result.data?.geneSymbols?.find(geneSymbol => {
+        this.appSymbol = this.result?.data?.geneSymbols?.find(geneSymbol => {
             return geneSymbol.type === 'approved';
         });
     }

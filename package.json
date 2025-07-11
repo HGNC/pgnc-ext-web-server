@@ -21,6 +21,7 @@
     "scripts": {
         "ng": "ng",
         "start": "ng serve --watch --configuration production",
+        "prebuild": "jest --passWithNoTests ",
         "build": "ng build --configuration production",
         "watch": "ng build --watch --configuration production",
         "test": "jest",

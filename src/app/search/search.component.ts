@@ -1,7 +1,6 @@
 // search.component.ts
 import { CommonModule } from '@angular/common';
-import { Component, OnDestroy, OnInit } from '@angular/core';
-import { Pipe, PipeTransform } from '@angular/core';
+import { Component, OnDestroy, OnInit, Pipe, PipeTransform } from '@angular/core';
 import { FormsModule } from '@angular/forms';
 import { DomSanitizer, SafeHtml } from '@angular/platform-browser';
 import { ActivatedRoute, Router, RouterModule } from '@angular/router';
@@ -21,9 +20,12 @@ export interface DisplayItem {
     pure: true,
 })
 export class SafeHtmlPipe implements PipeTransform {
-    constructor(private sanitizer: DomSanitizer) {}
+    constructor(private sanitizer: DomSanitizer) { }
 
     transform(value: string): SafeHtml {
+        // First, handle <em> tags with existing classes by adding "match" class
+        value = value.replace(/<em\s+class="([^"]*)">/g, '<em class="$1 match">');
+        // Then, replace plain <em> tags (without classes) with <em class="match">
         value = value.replace(/<em>/g, '<em class="match">');
         return this.sanitizer.bypassSecurityTrustHtml(value);
     }
@@ -84,7 +86,7 @@ export class SearchComponent implements OnInit, OnDestroy {
         public searchService: SearchService,
         private router: Router,
         private route: ActivatedRoute
-    ) {}
+    ) { }
 
     ngOnInit() {
         // Subscribe to route query params changes
