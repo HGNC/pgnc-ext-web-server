@@ -6,11 +6,7 @@
         <a class="nav-link" [routerLink]="['/search']" [queryParams]="{ q: '*' }">Gene data</a>
     </div>
     <div class="nav-item">
-        <a
-            href="https://github.com/PGNC-Plant-Gene-Nomenclature-Committee/Downloads"
-            class="nav-link"
-            >Downloads</a
-        >
+        <a href="https://github.com/PGNC-Plant-Gene-Nomenclature-Committee/Downloads" class="nav-link">Downloads</a>
     </div>
     <div class="nav-item">
         <a class="nav-link" [routerLink]="['/contact']">Contact us</a>
@@ -20,14 +16,14 @@
         <div ngbDropdownMenu>
             <button ngbDropdownItem [routerLink]="['/about']">About the PGNC</button>
             <button ngbDropdownItem [routerLink]="['/license']">License</button>
+            <button ngbDropdownItem [routerLink]="['/publications']">Publications</button>
             <button ngbDropdownItem [routerLink]="['/help']">Help pages</button>
             <!-- <div class="dropdown-divider"></div>
             <button ngbDropdownItem class="deactivated">Separated link</button> -->
         </div>
     </div>
     <div class="nav-item">
-        <a style="visibility: hidden" class="nav-link deactivated"
-            >Request symbol <fa-icon [icon]="faEnvelope"></fa-icon
-        ></a>
+        <a style="visibility: hidden" class="nav-link deactivated">Request symbol <fa-icon
+                [icon]="faEnvelope"></fa-icon></a>
     </div>
 </div>

@@ -2,205 +2,133 @@
     <h3 class="card-header">PGNC data for {{ appSymbol?.symbol?.symbol }}</h3>
     <div class="card-body">
         <div class="key-val-pairs">
-            <span class="key"
-                >Species
-                <a
-                    class="clickable help"
-                    [routerLink]="['/help/gene-symbol-report']"
-                    fragment="species"
-                    title="Species help"
-                    ><fa-icon [icon]="faQuestionCircle" /></a
-            ></span>
-            <span class="val"
-                >{{ result.data?.species?.scientificName }} ({{
-                    result.data?.species?.commonName
-                }})</span
-            >
+            <span class="key">Species
+                <a class="clickable help" [routerLink]="['/help/gene-symbol-report']" fragment="species"
+                    title="Species help"><fa-icon [icon]="faQuestionCircle" /></a></span>
+            <span class="val">{{ result.data?.species?.scientificName }} ({{
+                result.data?.species?.commonName
+                }})</span>
 
-            <span class="key"
-                >Approved symbol
-                <a
-                    class="clickable help"
-                    title="Approved symbol help"
-                    [routerLink]="['/help/gene-symbol-report']"
-                    fragment="app_sym"
-                    ><fa-icon [icon]="faQuestionCircle" /></a
-            ></span>
+            <span class="key">Approved symbol
+                <a class="clickable help" title="Approved symbol help" [routerLink]="['/help/gene-symbol-report']"
+                    fragment="app_sym"><fa-icon [icon]="faQuestionCircle" /></a></span>
             <span class="val">{{ appSymbol?.symbol?.symbol }}</span>
 
-            <span class="key"
-                >Approved name
-                <a
-                    class="clickable help"
-                    title="Approved name help"
-                    [routerLink]="['/help/gene-symbol-report']"
-                    fragment="app_name"
-                    ><fa-icon [icon]="faQuestionCircle"
-                /></a>
+            <span class="key">Approved name
+                <a class="clickable help" title="Approved name help" [routerLink]="['/help/gene-symbol-report']"
+                    fragment="app_name"><fa-icon [icon]="faQuestionCircle" /></a>
             </span>
             <span class="val">{{ appName?.name?.name }}</span>
 
-            <span class="key"
-                >Locus type
-                <a
-                    class="clickable help"
-                    title="Locus type help"
-                    [routerLink]="['/help/gene-symbol-report']"
-                    fragment="loc_type"
-                    ><fa-icon [icon]="faQuestionCircle" /></a
-            ></span>
+            <span class="key">Locus type
+                <a class="clickable help" title="Locus type help" [routerLink]="['/help/gene-symbol-report']"
+                    fragment="loc_type"><fa-icon [icon]="faQuestionCircle" /></a></span>
             <span class="val">
                 @for (
-                    geneLocusType of result.data?.geneLocusTypes;
-                    track geneLocusType.locusType.name;
-                    let last = $last
+                geneLocusType of result.data?.geneLocusTypes;
+                track geneLocusType.locusType.name;
+                let last = $last
                 ) {
-                    {{ geneLocusType.locusType.name }}
-                    @if (!last) {
-                        ,
-                    }
+                {{ geneLocusType.locusType.name }}
+                @if (!last) {
+                ,
+                }
                 }
             </span>
 
-            <span class="key"
-                >PGNC ID
-                <a
-                    class="clickable help"
-                    title="PGNC ID help"
-                    [routerLink]="['/help/gene-symbol-report']"
-                    fragment="pgnc_id"
-                    ><fa-icon [icon]="faQuestionCircle" /></a
-            ></span>
+            <span class="key">PGNC ID
+                <a class="clickable help" title="PGNC ID help" [routerLink]="['/help/gene-symbol-report']"
+                    fragment="pgnc_id"><fa-icon [icon]="faQuestionCircle" /></a></span>
             <span class="val">PGNC:{{ result.data?.id }}</span>
 
-            <span class="key"
-                >Symbol status
-                <a
-                    class="clickable help"
-                    title="Symbol status help"
-                    [routerLink]="['/help/gene-symbol-report']"
-                    fragment="status"
-                    ><fa-icon [icon]="faQuestionCircle" /></a
-            ></span>
+            <span class="key">Symbol status
+                <a class="clickable help" title="Symbol status help" [routerLink]="['/help/gene-symbol-report']"
+                    fragment="status"><fa-icon [icon]="faQuestionCircle" /></a></span>
             <span class="val">{{ result.data?.status }}</span>
 
             @if (prevSymbols && prevSymbols.length > 0) {
-                <span class="key"
-                    >Previous symbols
-                    <a
-                        class="clickable help"
-                        title="Previous symbols help"
-                        [routerLink]="['/help/gene-symbol-report']"
-                        fragment="prev_sym"
-                        ><fa-icon [icon]="faQuestionCircle" /></a
-                ></span>
-                <span class="val">
-                    @for (prevSymbol of prevSymbols; track prevSymbol.symbol; let last = $last) {
-                        {{ prevSymbol.symbol.symbol }}
-                        @if (!last) {
-                            ,
-                        }
-                    }
-                </span>
+            <span class="key">Previous symbols
+                <a class="clickable help" title="Previous symbols help" [routerLink]="['/help/gene-symbol-report']"
+                    fragment="prev_sym"><fa-icon [icon]="faQuestionCircle" /></a></span>
+            <span class="val">
+                @for (prevSymbol of prevSymbols; track prevSymbol.symbol; let last = $last) {
+                {{ prevSymbol.symbol.symbol }}
+                @if (!last) {
+                ,
+                }
+                }
+            </span>
             }
             @if (prevNames && prevNames.length > 0) {
-                <span class="key"
-                    >Previous names
-                    <a
-                        class="clickable help"
-                        title="Previous names help"
-                        [routerLink]="['/help/gene-symbol-report']"
-                        fragment="prev_name"
-                        ><fa-icon [icon]="faQuestionCircle" /></a
-                ></span>
-                <span class="val">
-                    @for (prevName of prevNames; track prevName.name; let last = $last) {
-                        {{ prevName.name.name }}
-                        @if (!last) {
-                            ,
-                        }
-                    }
-                </span>
+            <span class="key">Previous names
+                <a class="clickable help" title="Previous names help" [routerLink]="['/help/gene-symbol-report']"
+                    fragment="prev_name"><fa-icon [icon]="faQuestionCircle" /></a></span>
+            <span class="val">
+                @for (prevName of prevNames; track prevName.name; let last = $last) {
+                {{ prevName.name.name }}
+                @if (!last) {
+                ,
+                }
+                }
+            </span>
             }
             @if (aliasSymbols && aliasSymbols.length > 0) {
-                <span class="key"
-                    >Alias symbols
-                    <a
-                        class="clickable help"
-                        title="Alias symbol help"
-                        [routerLink]="['/help/gene-symbol-report']"
-                        fragment="alias_sym"
-                        ><fa-icon [icon]="faQuestionCircle" /></a
-                ></span>
-                <span class="val">
-                    @for (aliasSymbol of aliasSymbols; track aliasSymbol.symbol; let last = $last) {
-                        {{ aliasSymbol.symbol.symbol }}
-                        @if (!last) {
-                            ,
-                        }
-                    }
-                </span>
+            <span class="key">Alias symbols
+                <a class="clickable help" title="Alias symbol help" [routerLink]="['/help/gene-symbol-report']"
+                    fragment="alias_sym"><fa-icon [icon]="faQuestionCircle" /></a></span>
+            <span class="val">
+                @for (aliasSymbol of aliasSymbols; track aliasSymbol.symbol; let last = $last) {
+                {{ aliasSymbol.symbol.symbol }}
+                @if (!last) {
+                ,
+                }
+                }
+            </span>
             }
             @if (aliasNames && aliasNames.length > 0) {
-                <span class="key"
-                    >Alias names
-                    <a
-                        class="clickable help"
-                        title="Alias names help"
-                        [routerLink]="['/help/gene-symbol-report']"
-                        fragment="alias_name"
-                        ><fa-icon [icon]="faQuestionCircle" /></a
-                ></span>
-                <span class="val">
-                    @for (aliasName of aliasNames; track aliasName.name; let last = $last) {
-                        {{ aliasName.name.name }}
-                        @if (!last) {
-                            ,
-                        }
-                    }
-                </span>
-            }
-
-            <span class="key"
-                >Chromosomal location
-                <a
-                    class="clickable help"
-                    title="Chromosomal location help"
-                    [routerLink]="['/help/gene-symbol-report']"
-                    fragment="chr"
-                    ><fa-icon [icon]="faQuestionCircle" /></a
-            ></span>
-            @if (location) {
-                <span class="val">{{ location.location.name }}</span>
-            } @else {
-                <span class="val">Not available</span>
-            }
-
-            <span class="key"
-                >Primary ID
-                <a
-                    class="clickable help"
-                    title="Primary ID help"
-                    [routerLink]="['/help/gene-symbol-report']"
-                    fragment="1_id"
-                    ><fa-icon [icon]="faQuestionCircle" /></a
-            ></span>
-            @if (result.data?.primaryId) {
-                @if (result.data?.primaryIdSource === 'phytozome') {
-                    <span class="val"
-                        ><a
-                            href="https://phytozome-next.jgi.doe.gov/report/gene/Ptrichocarpa_v4_1/{{
-                                result.data?.primaryId
-                            }}"
-                            >{{ result.data?.primaryId }}</a
-                        ></span
-                    >
-                } @else {
-                    <span class="val">{{ result.data?.primaryId }}</span>
+            <span class="key">Alias names
+                <a class="clickable help" title="Alias names help" [routerLink]="['/help/gene-symbol-report']"
+                    fragment="alias_name"><fa-icon [icon]="faQuestionCircle" /></a></span>
+            <span class="val">
+                @for (aliasName of aliasNames; track aliasName.name; let last = $last) {
+                {{ aliasName.name.name }}
+                @if (!last) {
+                ,
                 }
-            } @else {
-                <span class="val">Not assigned</span>
+                }
+            </span>
             }
+
+            <span class="key">Chromosomal location
+                <a class="clickable help" title="Chromosomal location help" [routerLink]="['/help/gene-symbol-report']"
+                    fragment="chr"><fa-icon [icon]="faQuestionCircle" /></a></span>
+            @if (location) {
+            <span class="val">{{ location.location.name }}</span>
+            } @else {
+            <span class="val">Not available</span>
+            }
+
+            <span class="key">Primary ID
+                <a class="clickable help" title="Primary ID help" [routerLink]="['/help/gene-symbol-report']"
+                    fragment="1_id"><fa-icon [icon]="faQuestionCircle" /></a></span>
+            @if (result.data?.primaryIdSource?.startsWith('phytozome')) {
+            <span class="val"><a href="https://phytozome-next.jgi.doe.gov/report/gene/Ptrichocarpa_{{ getPhytozomeVersion() }}/{{
+                                result.data?.primaryId
+                            }}">{{ result.data?.primaryId }}</a></span>
+            } @else if (result.data?.primaryIdSource?.startsWith('ncbi gene')) {
+            <span class="val">
+                <a href="https://www.ncbi.nlm.nih.gov/gene/{{result.data?.primaryId}}">
+                    {{ result.data?.primaryId }}
+                </a>
+            </span>
+            } @else {
+            <span class="val">Not assigned</span>
+            }
+
+            <span class="key">Primary ID source
+                <a class="clickable help" title="Primary ID source help" [routerLink]="['/help/gene-symbol-report']"
+                    fragment="1_id_src"><fa-icon [icon]="faQuestionCircle" /></a></span>
+            <span class="val">{{ result.data?.primaryIdSource }}</span>
         </div>
     </div>
 </div>

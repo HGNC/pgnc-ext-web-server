@@ -60,4 +60,12 @@ export class PgncDataComponent implements OnInit {
             );
         });
     }
+
+    getPhytozomeVersion(): string {
+        if (!this.result.data?.primaryIdSource) {
+            return 'v4_1';
+        }
+        const parts = this.result.data.primaryIdSource.split(' ');
+        return parts.length > 1 ? parts[1] : 'v4_1';
+    }
 }

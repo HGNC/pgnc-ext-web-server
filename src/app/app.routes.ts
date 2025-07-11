@@ -12,6 +12,7 @@ import { SearchHelpComponent } from './help/search/search.component';
 import { UsefulLinksComponent } from './help/useful-links/useful-links.component';
 import { HomeComponent } from './home/home.component';
 import { LicenseComponent } from './license/license.component';
+import { PublicationsComponent } from './publications/publications.component';
 import { SearchComponent } from './search/search.component';
 
 export const routes: Routes = [
@@ -52,8 +53,12 @@ export const routes: Routes = [
         component: UsefulLinksComponent,
     },
     {
-        path: '/license',
+        path: 'license',
         component: LicenseComponent,
+    },
+    {
+        path: 'publications',
+        component: PublicationsComponent
     },
     {
         path: 'search',
