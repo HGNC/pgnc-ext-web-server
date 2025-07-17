@@ -2,51 +2,74 @@
     <h3 class="card-header">External resources for {{ symbol }}</h3>
     <div class="card-body">
         <div class="key-val-pairs">
+
             @for (
-                res of [
-                    'NCBI Gene',
-                    'Ensembl Gene',
-                    'UniProt',
-                    'PubMed',
-                    'Phytozome',
-                    'CBI sequence viewer',
-                ];
-                track res
+            res of [
+            'NCBI Gene',
+            'Ensembl Gene',
+            'UniProt',
+            'PubMed',
+            'CBI sequence viewer',
+            ];
+            track res
             ) {
-                @if (
-                    isValidResourceName(res) &&
-                    classifiedXrefs &&
-                    classifiedXrefs[res] &&
-                    classifiedXrefs[res].length > 0
-                ) {
-                    <span class="key">
-                        {{ res }}
-                        <a
-                            class="clickable help"
-                            [routerLink]="['/help/gene-symbol-report']"
-                            fragment="{{ xrefFrags[res] }}"
-                            title="Help">
-                            <fa-icon [icon]="faQuestionCircle"></fa-icon>
-                        </a>
-                    </span>
-                    <span class="val">
-                        <ul>
-                            @for (xref of classifiedXrefs[res]; track xref) {
-                                <li>
-                                    @if (typeof xref === 'string') {
-                                        {{ xref }}
-                                    } @else if (isXrefObject(xref)) {
-                                        <a
-                                            href="{{ xrefURLS[res] + xref.xref.displayId }}"
-                                            target="_blank"
-                                            >{{ xref.xref.displayId }}</a
-                                        >
-                                    }
-                                </li>
-                            }
-                        </ul>
-                    </span>
-                }
+            @if (
+            isValidResourceName(res) &&
+            classifiedXrefs &&
+            classifiedXrefs[res] &&
+            classifiedXrefs[res].length > 0
+            ) {
+            <span class="key">
+                {{ res }}
+
+                <a class="clickable help" [routerLink]="['/help/gene-symbol-report']" fragment="{{ xrefFrags[res] }}"
+                    title="Help">
+                    <fa-icon [icon]="faQuestionCircle"></fa-icon>
+                </a>
+            </span>
+            <span class="val">
+                <ul>
+                    @for (xref of classifiedXrefs[res]; track xref) {
+                    <li>
+                        @if (typeof xref === 'string') {
+                        {{ xref }}
+                        } @else if (isXrefObject(xref)) {
+                        <a href="{{ xrefURLS[res] + xref.xref.displayId }}" target="_blank">{{ xref.xref.displayId
+                            }}</a>
+                        }
+                    </li>
+                    }
+                </ul>
+            </span>
+            }
+            }
+
+            <!-- Display preferred Phytozome version -->
+            @if (getPreferredPhytozomeVersion()) {
+            @let preferredPhytozome = getPreferredPhytozomeVersion()!;
+            <span class="key">
+                {{ preferredPhytozome }}
+
+                <a class="clickable help" [routerLink]="['/help/gene-symbol-report']"
+                    fragment="{{ xrefFrags[preferredPhytozome] }}" title="Help">
+                    <fa-icon [icon]="faQuestionCircle"></fa-icon>
+                </a>
+            </span>
+            <span class="val">
+                <ul>
+                    @for (xref of classifiedXrefs[preferredPhytozome]; track xref) {
+                    <li>
+                        @if (typeof xref === 'string') {
+                        {{ xref }}
+                        } @else if (isXrefObject(xref)) {
+                        <a href="{{ xrefURLS[preferredPhytozome] + xref.xref.displayId }}" target="_blank">{{
+                            xref.xref.displayId
+                            }}</a>
+                        }
+                    </li>
+                    }
+                </ul>
+            </span>
             }
             <!-- <span class="key"
                 >CBI sequence viewer

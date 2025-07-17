@@ -22,9 +22,14 @@ describe('ExternalResourceName Type', () => {
             expect(resourceName).toBe('PubMed');
         });
 
-        it('should accept Phytozome', () => {
-            const resourceName: ExternalResourceName = 'Phytozome';
-            expect(resourceName).toBe('Phytozome');
+        it('should accept Phytozome v4_1', () => {
+            const resourceName: ExternalResourceName = 'Phytozome v4_1';
+            expect(resourceName).toBe('Phytozome v4_1');
+        });
+
+        it('should accept Phytozome v3_1', () => {
+            const resourceName: ExternalResourceName = 'Phytozome v3_1';
+            expect(resourceName).toBe('Phytozome v3_1');
         });
 
         it('should accept CBI sequence viewer', () => {
@@ -40,29 +45,32 @@ describe('ExternalResourceName Type', () => {
                 'Ensembl Gene',
                 'UniProt',
                 'PubMed',
-                'Phytozome',
+                'Phytozome v4_1',
+                'Phytozome v3_1',
                 'CBI sequence viewer'
             ];
 
-            expect(resourceNames).toHaveLength(6);
+            expect(resourceNames).toHaveLength(7);
             expect(resourceNames[0]).toBe('NCBI Gene');
             expect(resourceNames[1]).toBe('Ensembl Gene');
             expect(resourceNames[2]).toBe('UniProt');
             expect(resourceNames[3]).toBe('PubMed');
-            expect(resourceNames[4]).toBe('Phytozome');
-            expect(resourceNames[5]).toBe('CBI sequence viewer');
+            expect(resourceNames[4]).toBe('Phytozome v4_1');
+            expect(resourceNames[5]).toBe('Phytozome v3_1');
+            expect(resourceNames[6]).toBe('CBI sequence viewer');
         });
 
         it('should work in type guards', () => {
             function isValidResourceName(name: string): name is ExternalResourceName {
-                return ['NCBI Gene', 'Ensembl Gene', 'UniProt', 'PubMed', 'Phytozome', 'CBI sequence viewer'].includes(name as ExternalResourceName);
+                return ['NCBI Gene', 'Ensembl Gene', 'UniProt', 'PubMed', 'Phytozome v4_1', 'Phytozome v3_1', 'CBI sequence viewer'].includes(name as ExternalResourceName);
             }
 
             expect(isValidResourceName('NCBI Gene')).toBe(true);
             expect(isValidResourceName('Ensembl Gene')).toBe(true);
             expect(isValidResourceName('UniProt')).toBe(true);
             expect(isValidResourceName('PubMed')).toBe(true);
-            expect(isValidResourceName('Phytozome')).toBe(true);
+            expect(isValidResourceName('Phytozome v4_1')).toBe(true);
+            expect(isValidResourceName('Phytozome v3_1')).toBe(true);
             expect(isValidResourceName('CBI sequence viewer')).toBe(true);
             expect(isValidResourceName('Invalid Resource')).toBe(false);
             expect(isValidResourceName('')).toBe(false);
@@ -77,7 +85,8 @@ describe('ExternalResourceName Type', () => {
             expect(processResource('Ensembl Gene')).toBe('Processing Ensembl Gene');
             expect(processResource('UniProt')).toBe('Processing UniProt');
             expect(processResource('PubMed')).toBe('Processing PubMed');
-            expect(processResource('Phytozome')).toBe('Processing Phytozome');
+            expect(processResource('Phytozome v4_1')).toBe('Processing Phytozome v4_1');
+            expect(processResource('Phytozome v3_1')).toBe('Processing Phytozome v3_1');
             expect(processResource('CBI sequence viewer')).toBe('Processing CBI sequence viewer');
         });
 
@@ -87,16 +96,18 @@ describe('ExternalResourceName Type', () => {
                 'Ensembl Gene': 'https://plants.ensembl.org/',
                 'UniProt': 'https://www.uniprot.org/',
                 'PubMed': 'https://pubmed.ncbi.nlm.nih.gov/',
-                'Phytozome': 'https://phytozome-next.jgi.doe.gov/',
+                'Phytozome v4_1': 'https://phytozome-next.jgi.doe.gov/v4_1/',
+                'Phytozome v3_1': 'https://phytozome-next.jgi.doe.gov/v3_1/',
                 'CBI sequence viewer': 'https://fair.ornl.gov/'
             };
 
-            expect(Object.keys(resourceConfig)).toHaveLength(6);
+            expect(Object.keys(resourceConfig)).toHaveLength(7);
             expect(resourceConfig['NCBI Gene']).toBe('https://www.ncbi.nlm.nih.gov/gene/');
             expect(resourceConfig['Ensembl Gene']).toBe('https://plants.ensembl.org/');
             expect(resourceConfig['UniProt']).toBe('https://www.uniprot.org/');
             expect(resourceConfig['PubMed']).toBe('https://pubmed.ncbi.nlm.nih.gov/');
-            expect(resourceConfig['Phytozome']).toBe('https://phytozome-next.jgi.doe.gov/');
+            expect(resourceConfig['Phytozome v4_1']).toBe('https://phytozome-next.jgi.doe.gov/v4_1/');
+            expect(resourceConfig['Phytozome v3_1']).toBe('https://phytozome-next.jgi.doe.gov/v3_1/');
             expect(resourceConfig['CBI sequence viewer']).toBe('https://fair.ornl.gov/');
         });
     });

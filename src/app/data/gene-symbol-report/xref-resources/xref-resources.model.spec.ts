@@ -256,7 +256,7 @@ describe('Xref Model', () => {
         it('should properly embed XrefData', () => {
             const xrefData: XrefData = {
                 displayId: 'EMBEDDED:123',
-                externalResource: { name: 'Phytozome' }
+                externalResource: { name: 'Phytozome v4_1' }
             };
 
             const xref: Xref = {
@@ -271,7 +271,7 @@ describe('Xref Model', () => {
 
             expect(xref.xref).toBe(xrefData);
             expect(xref.xref.displayId).toBe('EMBEDDED:123');
-            expect(xref.xref.externalResource.name).toBe('Phytozome');
+            expect(xref.xref.externalResource.name).toBe('Phytozome v4_1');
         });
 
         it('should work with all external resource types', () => {
@@ -280,7 +280,7 @@ describe('Xref Model', () => {
                 'Ensembl Gene',
                 'UniProt',
                 'PubMed',
-                'Phytozome',
+                'Phytozome v4_1',
                 'CBI sequence viewer'
             ] as const;
 

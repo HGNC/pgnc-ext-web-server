@@ -78,7 +78,7 @@ describe('XrefComponent', () => {
             xref: {
                 displayId: 'PHY123',
                 externalResource: {
-                    name: 'Phytozome'
+                    name: 'Phytozome v4_1'
                 }
             }
         }
@@ -172,7 +172,8 @@ describe('XrefComponent', () => {
             expect(component.classifiedXrefs['Ensembl Gene']).toEqual([]);
             expect(component.classifiedXrefs['UniProt']).toEqual([]);
             expect(component.classifiedXrefs['PubMed']).toEqual([]);
-            expect(component.classifiedXrefs['Phytozome']).toEqual([]);
+            expect(component.classifiedXrefs['Phytozome v4_1']).toEqual([]);
+            expect(component.classifiedXrefs['Phytozome v3_1']).toEqual([]);
             expect(component.classifiedXrefs['CBI sequence viewer']).toBe('');
         });
 
@@ -181,7 +182,8 @@ describe('XrefComponent', () => {
             expect(component.xrefURLS['Ensembl Gene']).toBe('https://plants.ensembl.org/Populus_trichocarpa/Gene/Summary?db=core;g=');
             expect(component.xrefURLS['UniProt']).toBe('https://www.uniprot.org/uniprotkb/');
             expect(component.xrefURLS['PubMed']).toBe('https://pubmed.ncbi.nlm.nih.gov/');
-            expect(component.xrefURLS['Phytozome']).toBe('https://phytozome-next.jgi.doe.gov/report/gene/Ptrichocarpa_v4_1/');
+            expect(component.xrefURLS['Phytozome v4_1']).toBe('https://phytozome-next.jgi.doe.gov/report/gene/Ptrichocarpa_v4_1/');
+            expect(component.xrefURLS['Phytozome v3_1']).toBe('https://phytozome-next.jgi.doe.gov/report/gene/Ptrichocarpa_v3_1/');
             expect(component.xrefURLS['CBI sequence viewer']).toBe('https://fair.ornl.gov/ThirdParty/jbrowse2/?PGNCID=');
         });
 
@@ -190,7 +192,8 @@ describe('XrefComponent', () => {
             expect(component.xrefFrags['Ensembl Gene']).toBe('ens_g');
             expect(component.xrefFrags['UniProt']).toBe('unip');
             expect(component.xrefFrags['PubMed']).toBe('pubmed');
-            expect(component.xrefFrags['Phytozome']).toBe('phytoz');
+            expect(component.xrefFrags['Phytozome v4_1']).toBe('phytoz');
+            expect(component.xrefFrags['Phytozome v3_1']).toBe('phytoz');
             expect(component.xrefFrags['CBI sequence viewer']).toBe('cbi_v');
         });
     });
@@ -203,7 +206,7 @@ describe('XrefComponent', () => {
             expect(component.classifiedXrefs['Ensembl Gene']).toHaveLength(1);
             expect(component.classifiedXrefs['UniProt']).toHaveLength(1);
             expect(component.classifiedXrefs['PubMed']).toHaveLength(1);
-            expect(component.classifiedXrefs['Phytozome']).toHaveLength(1);
+            expect(component.classifiedXrefs['Phytozome v4_1']).toHaveLength(1);
             expect(component.classifiedXrefs['CBI sequence viewer']).toEqual([]);
         });
 
@@ -231,7 +234,8 @@ describe('XrefComponent', () => {
             expect(component.classifiedXrefs['Ensembl Gene']).toEqual([]);
             expect(component.classifiedXrefs['UniProt']).toEqual([]);
             expect(component.classifiedXrefs['PubMed']).toEqual([]);
-            expect(component.classifiedXrefs['Phytozome']).toEqual([]);
+            expect(component.classifiedXrefs['Phytozome v4_1']).toEqual([]);
+            expect(component.classifiedXrefs['Phytozome v3_1']).toEqual([]);
         });
 
         it('should handle undefined geneXrefs', () => {
@@ -250,7 +254,8 @@ describe('XrefComponent', () => {
             expect(component.classifiedXrefs['Ensembl Gene']).toEqual([]);
             expect(component.classifiedXrefs['UniProt']).toEqual([]);
             expect(component.classifiedXrefs['PubMed']).toEqual([]);
-            expect(component.classifiedXrefs['Phytozome']).toEqual([]);
+            expect(component.classifiedXrefs['Phytozome v4_1']).toEqual([]);
+            expect(component.classifiedXrefs['Phytozome v3_1']).toEqual([]);
         });
 
         it('should handle null data', () => {
@@ -271,7 +276,8 @@ describe('XrefComponent', () => {
             expect(component.isValidResourceName('Ensembl Gene')).toBe(true);
             expect(component.isValidResourceName('UniProt')).toBe(true);
             expect(component.isValidResourceName('PubMed')).toBe(true);
-            expect(component.isValidResourceName('Phytozome')).toBe(true);
+            expect(component.isValidResourceName('Phytozome v4_1')).toBe(true);
+            expect(component.isValidResourceName('Phytozome v3_1')).toBe(true);
             expect(component.isValidResourceName('CBI sequence viewer')).toBe(true);
         });
 
@@ -280,6 +286,7 @@ describe('XrefComponent', () => {
             expect(component.isValidResourceName('')).toBe(false);
             expect(component.isValidResourceName('NCBI')).toBe(false);
             expect(component.isValidResourceName('Ensembl')).toBe(false);
+            expect(component.isValidResourceName('Phytozome')).toBe(false); // Old name should be false
         });
     });
 
@@ -419,7 +426,7 @@ describe('XrefComponent', () => {
             const ensemblXrefs = component.classifiedXrefs['Ensembl Gene'] as Xref[];
             const uniprotXrefs = component.classifiedXrefs['UniProt'] as Xref[];
             const pubmedXrefs = component.classifiedXrefs['PubMed'] as Xref[];
-            const phytozomeXrefs = component.classifiedXrefs['Phytozome'] as Xref[];
+            const phytozomeXrefs = component.classifiedXrefs['Phytozome v4_1'] as Xref[];
 
             expect(ncbiXrefs[0].xref.displayId).toBe('NCBI123');
             expect(ensemblXrefs[0].xref.displayId).toBe('ENS123');
@@ -523,6 +530,64 @@ describe('XrefComponent', () => {
         it('should handle null result gracefully', () => {
             component.result = null as any;
             expect(() => component.ngOnInit()).not.toThrow();
+        });
+    });
+
+    describe('getPreferredPhytozomeVersion', () => {
+        it('should return null when no Phytozome data is available', () => {
+            component.classifiedXrefs = {
+                'NCBI Gene': [],
+                'Ensembl Gene': [],
+                'UniProt': [],
+                'PubMed': [],
+                'Phytozome v4_1': [],
+                'Phytozome v3_1': [],
+                'CBI sequence viewer': '',
+            };
+
+            expect(component.getPreferredPhytozomeVersion()).toBeNull();
+        });
+
+        it('should return the highest version with data', () => {
+            component.classifiedXrefs = {
+                'NCBI Gene': [],
+                'Ensembl Gene': [],
+                'UniProt': [],
+                'PubMed': [],
+                'Phytozome v4_1': [mockXrefs[4]], // Has data
+                'Phytozome v3_1': [mockXrefs[4]], // Also has data
+                'CBI sequence viewer': '',
+            };
+
+            expect(component.getPreferredPhytozomeVersion()).toBe('Phytozome v4_1');
+        });
+
+        it('should return lower version when higher version has no data', () => {
+            component.classifiedXrefs = {
+                'NCBI Gene': [],
+                'Ensembl Gene': [],
+                'UniProt': [],
+                'PubMed': [],
+                'Phytozome v4_1': [], // No data
+                'Phytozome v3_1': [mockXrefs[4]], // Has data
+                'CBI sequence viewer': '',
+            };
+
+            expect(component.getPreferredPhytozomeVersion()).toBe('Phytozome v3_1');
+        });
+    });
+
+    describe('extractVersionNumber', () => {
+        it('should extract version numbers correctly', () => {
+            expect(component['extractVersionNumber']('Phytozome v4_1')).toBe(4.1);
+            expect(component['extractVersionNumber']('Phytozome v3_1')).toBe(3.1);
+            expect(component['extractVersionNumber']('Phytozome v10_2')).toBe(10.2);
+        });
+
+        it('should return 0 for invalid format', () => {
+            expect(component['extractVersionNumber']('Invalid Format')).toBe(0);
+            expect(component['extractVersionNumber']('Phytozome')).toBe(0);
+            expect(component['extractVersionNumber']('Phytozome v')).toBe(0);
         });
     });
 });

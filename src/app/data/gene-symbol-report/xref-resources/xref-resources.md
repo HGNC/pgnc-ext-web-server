@@ -2,7 +2,9 @@
 
 ## Overview
 
-The `xref-resources` directory contains the Angular component and related models responsible for displaying external cross-references (xrefs) for gene symbols in the Plant Gene Nomenclature Committee (PGNC) application. This system provides seamless integration with multiple external databases including NCBI Gene, Ensembl, UniProt, PubMed, Phytozome, and CBI sequence viewer, enabling users to access comprehensive gene information across scientific resources.
+The `xref-resources` directory contains the Angular component and related models responsible for displaying external cross-references (xrefs) for gene symbols in the Plant Gene Nomenclature Committee (PGNC) application. This system provides seamless integration with multiple external databases including NCBI Gene, Ensembl, UniProt, PubMed, versioned Phytozome databases, and CBI sequence viewer, enabling users to access comprehensive gene information across scientific resources.
+
+The component features dynamic Phytozome version detection and selection, automatically displaying the highest available version with data while maintaining backward compatibility.
 
 ## Directory Structure
 
@@ -19,7 +21,8 @@ xref-resources/
 ├── external-resource.model.ts          # ExternalResource interface
 ├── external-resource.model.spec.ts     # ExternalResource model tests
 ├── external-resource-name.type.ts      # Type union for supported databases
-└── external-resource-name.type.spec.ts # Type validation tests
+├── external-resource-name.type.spec.ts # Type validation tests
+└── version-sorting-demo.md             # Documentation for Phytozome version handling
 ```
 
 ## Component Details
@@ -30,9 +33,11 @@ xref-resources/
 
 **Key Features**:
 - **Standalone Component**: Uses Angular's standalone architecture for modular design
-- **Multi-Database Integration**: Supports six major biological databases
+- **Multi-Database Integration**: Supports six major biological databases plus versioned Phytozome systems
+- **Dynamic Phytozome Version Selection**: Automatically detects and displays the highest available Phytozome version with data
 - **Dynamic URL Generation**: Creates database-specific URLs with proper identifiers
 - **Type-Safe Resource Management**: Uses TypeScript unions for database name validation
+- **Future-Proof Architecture**: Easy addition of new Phytozome versions without code changes
 - **Contextual Help Integration**: Links to specific help documentation sections
 
 ```typescript
@@ -53,24 +58,30 @@ export class XrefComponent implements OnInit
 
 #### Database Configuration
 ```typescript
+// To add new Phytozome versions, simply add entries here following the pattern:
+// 'Phytozome v{major}_{minor}': []
+// The version detection logic will automatically handle them
 classifiedXrefs: Record<ExternalResourceName, Xref[] | string> = {
     'NCBI Gene': [],
     'Ensembl Gene': [],
     'UniProt': [],
     'PubMed': [],
-    'Phytozome': [],
+    'Phytozome v4_1': [],
+    'Phytozome v3_1': [],
     'CBI sequence viewer': '',
 };
 ```
 
 #### URL Templates
 ```typescript
+// To add new Phytozome versions, add the corresponding URL here:
 xrefURLS: Record<ExternalResourceName, string> = {
     'NCBI Gene': 'https://www.ncbi.nlm.nih.gov/gene/',
     'Ensembl Gene': 'https://plants.ensembl.org/Populus_trichocarpa/Gene/Summary?db=core;g=',
     'UniProt': 'https://www.uniprot.org/uniprotkb/',
     'PubMed': 'https://pubmed.ncbi.nlm.nih.gov/',
-    'Phytozome': 'https://phytozome-next.jgi.doe.gov/report/gene/Ptrichocarpa_v4_1/',
+    'Phytozome v4_1': 'https://phytozome-next.jgi.doe.gov/report/gene/Ptrichocarpa_v4_1/',
+    'Phytozome v3_1': 'https://phytozome-next.jgi.doe.gov/report/gene/Ptrichocarpa_v3_1/',
     'CBI sequence viewer': 'https://fair.ornl.gov/ThirdParty/jbrowse2/?PGNCID=',
 };
 ```
@@ -82,7 +93,8 @@ xrefFrags: Record<ExternalResourceName, string> = {
     'Ensembl Gene': 'ens_g',
     'UniProt': 'unip',
     'PubMed': 'pubmed',
-    'Phytozome': 'phytoz',
+    'Phytozome v4_1': 'phytoz',
+    'Phytozome v3_1': 'phytoz',
     'CBI sequence viewer': 'cbi_v',
 };
 ```
@@ -144,6 +156,68 @@ isValidResourceName(name: string): name is ExternalResourceName {
 - **Type Discrimination**: Differentiates between different xref value types
 - **Runtime Validation**: Prevents template rendering errors
 
+#### getPreferredPhytozomeVersion()
+**Purpose**: Determines which Phytozome version to display based on data availability
+
+**Functionality**:
+- **Automatic Detection**: Finds all resources starting with "Phytozome v"
+- **Version Sorting**: Sorts by version number (highest first) using `extractVersionNumber()`
+- **Data-Driven Selection**: Returns the highest version that has actual data
+- **Fallback Handling**: Returns null if no Phytozome data exists for any version
+
+```typescript
+getPreferredPhytozomeVersion(): ExternalResourceName | null {
+    const phytozomeVersions = Object.keys(this.classifiedXrefs)
+        .filter(key => key.startsWith('Phytozome v'))
+        .filter(key => this.isValidResourceName(key)) as ExternalResourceName[];
+
+    if (phytozomeVersions.length === 0) {
+        return null;
+    }
+
+    const sortedVersions = phytozomeVersions.sort((a, b) => {
+        const versionA = this.extractVersionNumber(a);
+        const versionB = this.extractVersionNumber(b);
+        return versionB - versionA; // Descending order (highest first)
+    });
+
+    // Find the highest version that has data
+    for (const version of sortedVersions) {
+        const data = this.classifiedXrefs[version];
+        if (Array.isArray(data) && data.length > 0) {
+            return version;
+        }
+    }
+
+    return null;
+}
+```
+
+#### extractVersionNumber()
+**Purpose**: Extracts comparable version numbers from Phytozome version strings
+
+**Version Conversion Examples**:
+- `"Phytozome v4_1"` → `4.1`
+- `"Phytozome v3_1"` → `3.1` 
+- `"Phytozome v10_2"` → `10.2` (future version example)
+
+**Implementation**:
+- **Pattern Matching**: Uses regex to extract major and minor version numbers
+- **Decimal Conversion**: Converts to decimal format for easy numeric comparison
+- **Error Handling**: Returns 0 for invalid formats to ensure consistent sorting
+
+```typescript
+private extractVersionNumber(versionString: string): number {
+    const match = versionString.match(/Phytozome v(\d+)_(\d+)/);
+    if (match) {
+        const major = parseInt(match[1], 10);
+        const minor = parseInt(match[2], 10);
+        return major + (minor / 10); // Convert to decimal (e.g., 4.1, 3.1)
+    }
+    return 0; // Fallback for invalid format
+}
+```
+
 ### xref-resources.component.html
 
 **Purpose**: Dynamic template for displaying external database cross-references with contextual links
@@ -166,7 +240,6 @@ Professional card-based layout with dynamic gene symbol in header
         'Ensembl Gene', 
         'UniProt',
         'PubMed',
-        'Phytozome',
         'CBI sequence viewer',
     ];
     track res
@@ -174,9 +247,46 @@ Professional card-based layout with dynamic gene symbol in header
 ```
 
 **Resource Processing**:
-- **Ordered Display**: Resources shown in priority order
+- **Ordered Display**: Static resources shown in priority order
 - **Conditional Rendering**: Only displays resources with available data
 - **Track Function**: Optimized list rendering performance
+- **Phytozome Exclusion**: Phytozome versions handled separately via dynamic selection
+
+#### Dynamic Phytozome Version Display
+```html
+<!-- Display preferred Phytozome version -->
+@if (getPreferredPhytozomeVersion()) {
+@let preferredPhytozome = getPreferredPhytozomeVersion()!;
+<span class="key">
+    {{ preferredPhytozome }}
+    <a class="clickable help" [routerLink]="['/help/gene-symbol-report']"
+        fragment="{{ xrefFrags[preferredPhytozome] }}" title="Help">
+        <fa-icon [icon]="faQuestionCircle"></fa-icon>
+    </a>
+</span>
+<span class="val">
+    <ul>
+        @for (xref of classifiedXrefs[preferredPhytozome]; track xref) {
+        <li>
+            @if (typeof xref === 'string') {
+            {{ xref }}
+            } @else if (isXrefObject(xref)) {
+            <a href="{{ xrefURLS[preferredPhytozome] + xref.xref.displayId }}" target="_blank">{{
+                xref.xref.displayId
+                }}</a>
+            }
+        </li>
+        }
+    </ul>
+</span>
+}
+```
+
+**Dynamic Version Features**:
+- **Version Detection**: Automatically finds highest available Phytozome version with data
+- **Fallback Logic**: Only displays if data is available for any version
+- **Future-Proof**: Automatically handles new Phytozome versions without template changes
+- **Consistent Styling**: Uses same layout patterns as static resources
 
 #### Conditional Content Display
 ```html
@@ -262,10 +372,14 @@ Professional card-based layout with dynamic gene symbol in header
 - **Use Case**: Scientific literature references
 - **Data Format**: PubMed publication identifiers
 
-#### Phytozome
-- **URL Pattern**: `https://phytozome-next.jgi.doe.gov/report/gene/Ptrichocarpa_v4_1/[ID]`
+#### Phytozome (Versioned System)
+- **URL Patterns**: 
+  - `https://phytozome-next.jgi.doe.gov/report/gene/Ptrichocarpa_v4_1/[ID]`
+  - `https://phytozome-next.jgi.doe.gov/report/gene/Ptrichocarpa_v3_1/[ID]`
 - **Use Case**: Plant comparative genomics and gene families
 - **Data Format**: Phytozome gene identifiers
+- **Version Selection**: Automatically displays highest available version with data
+- **Future Versions**: Easily extensible for new versions (v5_0, v5_1, etc.)
 
 #### CBI Sequence Viewer
 - **URL Pattern**: `https://fair.ornl.gov/ThirdParty/jbrowse2/?PGNCID=[ID]`
@@ -384,19 +498,58 @@ describe('ngOnInit', () => {
 describe('isValidResourceName', () => {
     it('should return true for valid resource names', () => {
         expect(component.isValidResourceName('NCBI Gene')).toBe(true);
-        expect(component.isValidResourceName('UniProt')).toBe(true);
+        expect(component.isValidResourceName('Phytozome v4_1')).toBe(true);
+        expect(component.isValidResourceName('Phytozome v3_1')).toBe(true);
     });
 
     it('should return false for invalid resource names', () => {
         expect(component.isValidResourceName('Invalid Resource')).toBe(false);
+        expect(component.isValidResourceName('Phytozome')).toBe(false); // Old name
     });
 });
 ```
 
 **Type Guard Validation**:
-- **Valid Names**: Confirms recognition of all supported database names
-- **Invalid Names**: Ensures rejection of unsupported resource names
+- **Valid Names**: Confirms recognition of all supported database names including versioned Phytozome
+- **Invalid Names**: Ensures rejection of unsupported resource names and deprecated formats
 - **Edge Cases**: Tests empty strings and malformed names
+
+#### Phytozome Version Management Tests
+```typescript
+describe('getPreferredPhytozomeVersion', () => {
+    it('should return the highest version with data', () => {
+        component.classifiedXrefs = {
+            'Phytozome v4_1': [mockXrefs[4]], // Has data
+            'Phytozome v3_1': [mockXrefs[4]], // Also has data
+            // ... other resources
+        };
+        expect(component.getPreferredPhytozomeVersion()).toBe('Phytozome v4_1');
+    });
+
+    it('should return null when no Phytozome data is available', () => {
+        // Test with empty arrays
+        expect(component.getPreferredPhytozomeVersion()).toBeNull();
+    });
+});
+
+describe('extractVersionNumber', () => {
+    it('should extract version numbers correctly', () => {
+        expect(component['extractVersionNumber']('Phytozome v4_1')).toBe(4.1);
+        expect(component['extractVersionNumber']('Phytozome v3_1')).toBe(3.1);
+        expect(component['extractVersionNumber']('Phytozome v10_2')).toBe(10.2);
+    });
+
+    it('should return 0 for invalid format', () => {
+        expect(component['extractVersionNumber']('Invalid Format')).toBe(0);
+    });
+});
+```
+
+**Version Management Coverage**:
+- **Version Selection**: Tests priority logic for multiple available versions
+- **Data Requirements**: Validates that only versions with data are selected
+- **Version Parsing**: Confirms correct extraction of version numbers
+- **Error Handling**: Tests behavior with invalid version strings
 
 #### Object Type Discrimination Tests
 ```typescript
@@ -497,12 +650,16 @@ export interface ExternalResource {
 **Purpose**: Type union defining all supported external database names
 
 ```typescript
+// To add new Phytozome versions, add them to this type following the pattern:
+// | 'Phytozome v{major}_{minor}'
+// The component will automatically detect and handle version sorting
 export type ExternalResourceName =
     | 'NCBI Gene'
     | 'Ensembl Gene'
     | 'UniProt'
     | 'PubMed'
-    | 'Phytozome'
+    | 'Phytozome v4_1'
+    | 'Phytozome v3_1'
     | 'CBI sequence viewer';
 ```
 
@@ -517,13 +674,19 @@ export type ExternalResourceName =
 ### Primary Features
 
 #### Multi-Database Integration
-The component provides seamless integration with six major biological databases:
+The component provides seamless integration with six major biological databases plus versioned Phytozome systems:
 - **NCBI Gene**: Comprehensive gene information and genomic data
 - **Ensembl Gene**: Plant genome browser and comparative genomics
 - **UniProt**: Protein sequence and functional annotation
 - **PubMed**: Scientific literature and publication references
-- **Phytozome**: Plant comparative genomics and gene families
+- **Phytozome (Versioned)**: Plant comparative genomics with automatic version selection
 - **CBI sequence viewer**: Detailed genome sequence visualization
+
+#### Dynamic Phytozome Version Management
+- **Automatic Detection**: Scans for all available Phytozome versions in data
+- **Version Prioritization**: Displays highest version number with available data
+- **Future-Proof Architecture**: New versions automatically detected without code changes
+- **Fallback Logic**: Graceful handling when no Phytozome data is available
 
 #### Dynamic Link Generation
 - **URL Construction**: Automatic concatenation of base URLs with identifiers
@@ -693,6 +856,35 @@ The component provides seamless integration with six major biological databases:
 - **URL Configuration**: Adding base URLs and fragment identifiers
 - **Template Updates**: Including new databases in display iteration
 - **Help Documentation**: Creating help content for new databases
+
+#### New Phytozome Version Integration
+- **Type Addition**: Add new version to ExternalResourceName type (e.g., `| 'Phytozome v5_2'`)
+- **URL Configuration**: Add corresponding URL in xrefURLS object
+- **Data Structure**: Add entry in classifiedXrefs initialization
+- **Automatic Detection**: Component automatically detects and sorts new versions
+- **Zero Code Changes**: Template and logic require no modifications
+
+**Example for adding Phytozome v5_2**:
+```typescript
+// 1. Update type definition
+export type ExternalResourceName = 
+    // ... existing types
+    | 'Phytozome v5_2'
+
+// 2. Add URL configuration
+xrefURLS: Record<ExternalResourceName, string> = {
+    // ... existing URLs
+    'Phytozome v5_2': 'https://phytozome-next.jgi.doe.gov/report/gene/Ptrichocarpa_v5_2/',
+}
+
+// 3. Initialize data structure
+classifiedXrefs: Record<ExternalResourceName, Xref[] | string> = {
+    // ... existing entries
+    'Phytozome v5_2': [],
+}
+```
+
+See `version-sorting-demo.md` for detailed examples and architecture explanation.
 
 ### Technical Maintenance
 

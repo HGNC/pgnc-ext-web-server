@@ -18,7 +18,8 @@ describe('ExternalResource Model', () => {
                 'Ensembl Gene',
                 'UniProt',
                 'PubMed',
-                'Phytozome',
+                'Phytozome v4_1',
+                'Phytozome v3_1',
                 'CBI sequence viewer'
             ];
 
@@ -107,18 +108,26 @@ describe('ExternalResource Model', () => {
         });
     });
 
-    describe('Phytozome Resource', () => {
-        it('should create Phytozome resource', () => {
+    describe('Phytozome Resources', () => {
+        it('should create Phytozome v4_1 resource', () => {
             const resource: ExternalResource = {
-                name: 'Phytozome'
+                name: 'Phytozome v4_1'
             };
 
-            expect(resource.name).toBe('Phytozome');
+            expect(resource.name).toBe('Phytozome v4_1');
         });
 
-        it('should be type-safe for Phytozome', () => {
+        it('should create Phytozome v3_1 resource', () => {
             const resource: ExternalResource = {
-                name: 'Phytozome'
+                name: 'Phytozome v3_1'
+            };
+
+            expect(resource.name).toBe('Phytozome v3_1');
+        });
+
+        it('should be type-safe for Phytozome versions', () => {
+            const resource: ExternalResource = {
+                name: 'Phytozome v4_1'
             };
 
             expect(typeof resource.name).toBe('string');
@@ -186,7 +195,7 @@ describe('ExternalResource Model', () => {
             expect(found).toBeDefined();
             expect(found?.name).toBe('UniProt');
 
-            const notFound = resources.find(r => r.name === 'Phytozome');
+            const notFound = resources.find(r => r.name === 'Phytozome v4_1');
             expect(notFound).toBeUndefined();
         });
     });
@@ -238,7 +247,7 @@ describe('ExternalResource Model', () => {
         it('should validate resource existence', () => {
             function isValidResource(resource: ExternalResource): boolean {
                 const validNames: ExternalResourceName[] = [
-                    'NCBI Gene', 'Ensembl Gene', 'UniProt', 'PubMed', 'Phytozome', 'CBI sequence viewer'
+                    'NCBI Gene', 'Ensembl Gene', 'UniProt', 'PubMed', 'Phytozome v4_1', 'Phytozome v3_1', 'CBI sequence viewer'
                 ];
                 return validNames.includes(resource.name);
             }
