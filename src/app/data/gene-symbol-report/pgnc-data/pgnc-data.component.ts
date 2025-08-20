@@ -66,6 +66,9 @@ export class PgncDataComponent implements OnInit {
             return 'v4_1';
         }
         const parts = this.result.data.primaryIdSource.split(' ');
+        if (parts.length > 1) {
+            parts[1] = parts[1].charAt(0).toLowerCase() + parts[1].slice(1);
+        }
         return parts.length > 1 ? parts[1] : 'v4_1';
     }
 }
