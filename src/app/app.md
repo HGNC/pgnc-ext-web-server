@@ -7,12 +7,14 @@ The App directory serves as the root application module for the PGNC (Plant Gene
 ## Application Architecture
 
 ### Core Application Structure
+
 - **AppComponent** (`app.component.ts`): Root application component with layout management
 - **App Configuration** (`app.config.ts`): Application-wide configuration and provider setup
 - **Routing System** (`app.routes.ts`): Complete application routing configuration
 - **Server Configuration** (`app.config.server.ts`): Server-side rendering configuration
 
 ### Directory Structure
+
 ```
 app/
 ├── app.component.ts                        # Root application component
@@ -43,21 +45,27 @@ app/
 ### Core Application Features
 
 #### [About Module](./about/about.md)
+
 Information about the Plant Gene Nomenclature Committee, its mission, and organizational structure.
+
 - Committee overview and history
 - Mission statement and objectives
 - Team member information
 - Organizational partnerships
 
 #### [Common Module](./common/common.md)
+
 Shared utilities, models, services, and components used throughout the application.
+
 - Shared data models and interfaces
 - Common utility functions
 - Reusable service implementations
 - Cross-module helper components
 
 #### [Contact Module](./contact/contact.md)
+
 Contact information and communication channels for user support and collaboration.
+
 - Contact form functionality
 - Team contact information
 - Support channels and resources
@@ -66,13 +74,17 @@ Contact information and communication channels for user support and collaboratio
 ### Data Presentation Features
 
 #### [Data Module](./data/gene-symbol-report/gene-symbol-report.md)
+
 Gene data presentation and visualization with comprehensive information display.
+
 - **[Gene Symbol Report](./data/gene-symbol-report/gene-symbol-report.md)**: Main gene information container
 - **[PGNC Data](./data/gene-symbol-report/pgnc-data/pgnc-data.md)**: Core gene nomenclature data presentation
 - **[Cross-Reference Resources](./data/gene-symbol-report/xref-resources/xref-resources.md)**: External database integration
 
 #### [Search Module](./search/search.md)
+
 Advanced search functionality with pagination, filtering, and result highlighting.
+
 - Query processing and URL synchronization
 - Real-time search with loading indicators
 - Pagination with configurable page sizes
@@ -81,21 +93,27 @@ Advanced search functionality with pagination, filtering, and result highlightin
 ### Navigation and Layout Features
 
 #### [Header Module](./header/header.md)
+
 Application header with search functionality and responsive design.
+
 - Search bar integration
 - Responsive navigation layout
 - Brand identity presentation
 - Mobile-optimized design
 
 #### [Footer Module](./footer/footer.md)
+
 Complex footer system with multiple child components and comprehensive information.
+
 - Grant notice and funding acknowledgment
 - Legal information and licensing
 - Navigation menu with organized links
 - Institutional affiliations
 
 #### [Navigation Module](./nav/nav.md)
+
 Primary navigation component with dropdown menus and external resource links.
+
 - Main navigation items (Home, Gene data, Downloads, Contact)
 - Secondary navigation dropdown (About, License, Publications, Help)
 - External GitHub downloads integration
@@ -104,7 +122,9 @@ Primary navigation component with dropdown menus and external resource links.
 ### Information and Support Features
 
 #### [Help Module](./help/help.md)
+
 Comprehensive help system with multiple specialized guides and documentation.
+
 - FAQ section with common questions
 - Search help with field-specific guidance
 - Browser compatibility information
@@ -112,21 +132,27 @@ Comprehensive help system with multiple specialized guides and documentation.
 - Useful external links and resources
 
 #### [Home Module](./home/home.md)
+
 Landing page with specialized layout and jumbotron design.
+
 - Specialized header and search components
 - Jumbotron hero section with mission statement
 - Featured content and quick access links
 - Mobile-optimized landing experience
 
 #### [License Module](./license/license.md)
+
 Legal information and CC0 licensing details for open data usage.
+
 - Creative Commons CC0 license information
 - Academic citation guidelines
 - Data usage terms and conditions
 - Legal compliance documentation
 
 #### [Publications Module](./publications/publications.md)
+
 Academic publications and research papers supporting PGNC standards.
+
 - Scholarly publication listings with proper citations
 - DOI integration for direct research access
 - Academic formatting and citation standards
@@ -135,7 +161,9 @@ Academic publications and research papers supporting PGNC standards.
 ### Error Handling Features
 
 #### [Error Module](./error/error.md)
+
 Comprehensive error handling with 404 pages and user guidance.
+
 - NotFoundComponent for unmatched routes
 - User-friendly error messaging
 - Navigation assistance and suggestions
@@ -146,6 +174,7 @@ Comprehensive error handling with 404 pages and user guidance.
 ### Core Application Component
 
 #### Root Component Structure
+
 ```typescript
 @Component({
     selector: 'app-root',
@@ -167,12 +196,14 @@ export class AppComponent implements OnInit {
 ```
 
 **Component Features**:
+
 - **Route Awareness**: Dynamic layout based on current route
 - **Conditional Layouts**: Homepage vs. standard page layouts
 - **Router Integration**: Navigation event subscription and URL tracking
 - **Standalone Architecture**: Modern Angular standalone component pattern
 
 #### Conditional Layout System
+
 ```html
 @if (currentRoute !== '/') {
     <div class="page">
@@ -189,6 +220,7 @@ export class AppComponent implements OnInit {
 ```
 
 **Layout Features**:
+
 - **Homepage Layout**: Specialized layout without standard header
 - **Standard Layout**: Header, main content area, and footer structure
 - **Responsive Design**: Adaptive layouts for different screen sizes
@@ -197,6 +229,7 @@ export class AppComponent implements OnInit {
 ### Application Configuration
 
 #### Provider Setup
+
 ```typescript
 export const appConfig: ApplicationConfig = {
     providers: [
@@ -208,6 +241,7 @@ export const appConfig: ApplicationConfig = {
 ```
 
 **Configuration Features**:
+
 - **Router Configuration**: Component input binding for modern routing
 - **HTTP Client**: Fetch API integration for improved performance
 - **SSR Support**: Client hydration with event replay for server-side rendering
@@ -216,6 +250,7 @@ export const appConfig: ApplicationConfig = {
 ### Routing Configuration
 
 #### Complete Route Structure
+
 ```typescript
 export const routes: Routes = [
     { path: 'about', component: AboutComponent },
@@ -236,6 +271,7 @@ export const routes: Routes = [
 ```
 
 **Routing Features**:
+
 - **Hierarchical Structure**: Organized route hierarchy with logical groupings
 - **Parameterized Routes**: Dynamic gene symbol report routes with type and ID parameters
 - **Help System**: Comprehensive help routing with multiple specialized pages
@@ -243,6 +279,7 @@ export const routes: Routes = [
 - **Root Route**: Homepage component for root path
 
 #### Route Organization
+
 - **Information Routes**: About, Contact, License, Publications
 - **Data Routes**: Gene symbol reports with dynamic parameters
 - **Help Routes**: FAQ, Search Help, Browser Help, Gene Symbol Report Help, Useful Links
@@ -254,12 +291,14 @@ export const routes: Routes = [
 ### Standalone Component System
 
 #### Modern Angular Architecture
+
 - **Component Independence**: Self-contained components with explicit imports
 - **Reduced Bundle Size**: Tree-shakable imports for optimal performance
 - **Type Safety**: Strong TypeScript typing throughout the application
 - **Modern Features**: Latest Angular features and best practices
 
 #### Dependency Management
+
 - **Explicit Imports**: Clear dependency declarations in each component
 - **Lazy Loading**: Potential for lazy-loaded routes and components
 - **Service Integration**: Centralized services with dependency injection
@@ -268,12 +307,14 @@ export const routes: Routes = [
 ### State Management
 
 #### Router-Based State
+
 - **URL State**: Route parameters and query strings for application state
 - **Navigation State**: Current route tracking and conditional rendering
 - **History Management**: Browser history integration for back/forward navigation
 - **Deep Linking**: Bookmarkable URLs for all application features
 
 #### Component Communication
+
 - **Parent-Child**: Input/output properties for component hierarchy
 - **Service Communication**: Shared services for cross-component data
 - **Event Handling**: Angular event system for user interactions
@@ -282,12 +323,14 @@ export const routes: Routes = [
 ### Performance Optimization
 
 #### Loading Strategies
+
 - **Component Optimization**: Efficient component lifecycle management
 - **HTTP Optimization**: Fetch API integration and request optimization
 - **Bundle Optimization**: Tree-shaking and code splitting strategies
 - **Caching Strategies**: Service-level caching for improved performance
 
 #### Rendering Optimization
+
 - **Server-Side Rendering**: SSR support with client hydration
 - **Change Detection**: Optimized change detection strategies
 - **Event Replay**: Enhanced hydration with event replay
@@ -298,12 +341,14 @@ export const routes: Routes = [
 ### Responsive Design
 
 #### Multi-Device Support
+
 - **Mobile-First**: Optimized for mobile devices with progressive enhancement
 - **Tablet Compatibility**: Intermediate screen size optimization
 - **Desktop Experience**: Full-featured desktop interface
 - **Cross-Browser**: Support for modern browsers with fallbacks
 
 #### Adaptive Layouts
+
 - **Conditional Rendering**: Route-based layout variations
 - **Component Responsiveness**: Individual component responsive design
 - **Navigation Adaptation**: Mobile navigation patterns and behaviors
@@ -312,12 +357,14 @@ export const routes: Routes = [
 ### Accessibility Excellence
 
 #### Universal Design
+
 - **Screen Reader Support**: Comprehensive assistive technology support
 - **Keyboard Navigation**: Complete keyboard accessibility
 - **Color Contrast**: WCAG-compliant color schemes and contrast ratios
 - **Focus Management**: Clear focus indicators and logical tab order
 
 #### Semantic Structure
+
 - **HTML Semantics**: Proper HTML5 semantic elements throughout
 - **ARIA Integration**: Comprehensive ARIA labels and roles
 - **Heading Hierarchy**: Logical heading structure for content organization
@@ -326,12 +373,14 @@ export const routes: Routes = [
 ### Navigation Excellence
 
 #### Intuitive Navigation
+
 - **Clear Hierarchy**: Logical information architecture
 - **Consistent Patterns**: Uniform navigation patterns throughout
 - **Breadcrumb Support**: Contextual navigation assistance
 - **Search Integration**: Global search functionality access
 
 #### User Guidance
+
 - **Help Integration**: Comprehensive help system with contextual guidance
 - **Error Recovery**: Clear error messages and recovery suggestions
 - **Progress Indicators**: Loading states and progress feedback
@@ -342,12 +391,14 @@ export const routes: Routes = [
 ### External Service Integration
 
 #### Research Database Integration
+
 - **DOI Links**: Direct integration with academic publishers
 - **GitHub Resources**: PGNC downloads repository integration
 - **Cross-Reference Databases**: External gene database linking
 - **Academic Platforms**: Scholar and research platform connections
 
 #### Search Service Integration
+
 - **Search API**: RESTful search endpoint integration
 - **Real-Time Results**: Dynamic search result processing
 - **Caching Layer**: Intelligent result caching for performance
@@ -356,12 +407,14 @@ export const routes: Routes = [
 ### Component Integration
 
 #### Layout Integration
+
 - **Header/Footer**: Consistent layout components across routes
 - **Navigation**: Global navigation with route awareness
 - **Content Areas**: Flexible content areas for different page types
 - **Responsive Containers**: Adaptive container layouts
 
 #### Data Flow Integration
+
 - **Service Layer**: Centralized data services for component communication
 - **State Synchronization**: Consistent state management across components
 - **Event Propagation**: Proper event handling and propagation
@@ -372,12 +425,14 @@ export const routes: Routes = [
 ### Component Testing
 
 #### Comprehensive Test Coverage
+
 - **Unit Testing**: Individual component testing with Jest
 - **Integration Testing**: Component interaction and data flow testing
 - **E2E Testing**: End-to-end user workflow testing
 - **Accessibility Testing**: Automated and manual accessibility validation
 
 #### Testing Patterns
+
 - **Mock Services**: Service mocking for isolated component testing
 - **Router Testing**: Navigation and routing functionality testing
 - **Form Testing**: User input and form submission testing
@@ -386,12 +441,14 @@ export const routes: Routes = [
 ### Application Testing
 
 #### System Integration
+
 - **Route Testing**: Complete routing configuration validation
 - **Service Integration**: Cross-service communication testing
 - **API Testing**: External API integration and error handling
 - **Performance Testing**: Application performance and optimization validation
 
 #### User Experience Testing
+
 - **Usability Testing**: User interface and experience validation
 - **Cross-Browser Testing**: Multi-browser compatibility testing
 - **Responsive Testing**: Multi-device and screen size testing
@@ -402,12 +459,14 @@ export const routes: Routes = [
 ### Build Configuration
 
 #### Production Optimization
+
 - **AOT Compilation**: Ahead-of-time compilation for performance
 - **Tree Shaking**: Dead code elimination for smaller bundles
 - **Minification**: Code minification and compression
 - **Bundle Analysis**: Bundle size analysis and optimization
 
 #### Environment Configuration
+
 - **Development**: Development-optimized configuration
 - **Production**: Production-ready optimization and security
 - **Testing**: Test-specific configuration and mocking
@@ -416,12 +475,14 @@ export const routes: Routes = [
 ### Server Configuration
 
 #### Server-Side Rendering
+
 - **SSR Setup**: Server-side rendering configuration
 - **Hydration**: Client-side hydration with event replay
 - **SEO Optimization**: Search engine optimization through SSR
 - **Performance**: Server-side performance optimization
 
 #### Deployment Strategies
+
 - **Static Hosting**: Static site generation and hosting
 - **CDN Integration**: Content delivery network optimization
 - **Caching Strategies**: Browser and server caching configuration
@@ -432,12 +493,14 @@ export const routes: Routes = [
 ### Code Maintenance
 
 #### Framework Updates
+
 - **Angular Updates**: Framework version management and migration
 - **Dependency Management**: Third-party library updates and compatibility
 - **Security Updates**: Security patch management and vulnerability assessment
 - **Performance Monitoring**: Continuous performance monitoring and optimization
 
 #### Code Quality
+
 - **Linting**: Code style and quality enforcement
 - **Type Safety**: TypeScript strict mode and type checking
 - **Code Reviews**: Peer review processes and quality assurance
@@ -446,12 +509,14 @@ export const routes: Routes = [
 ### Content Management
 
 #### Information Updates
+
 - **Gene Data**: Gene nomenclature data updates and synchronization
 - **Publication Updates**: New research publication additions
 - **Help Content**: Help documentation updates and improvements
 - **Legal Information**: License and legal content maintenance
 
 #### Feature Evolution
+
 - **New Features**: Feature development and integration processes
 - **User Feedback**: User feedback collection and implementation
 - **Analytics Integration**: User behavior analysis and optimization
@@ -462,12 +527,14 @@ export const routes: Routes = [
 ### Planned Features
 
 #### Enhanced Functionality
+
 - **Advanced Search**: Boolean search operators and complex queries
 - **User Accounts**: User registration and personalization features
 - **Data Export**: Multiple format data export capabilities
 - **Offline Support**: Progressive web app features and offline functionality
 
 #### User Experience Improvements
+
 - **Personalization**: User preference settings and customization
 - **Advanced Filtering**: Multi-faceted search and filtering options
 - **Interactive Visualizations**: Gene data visualization and exploration tools
@@ -476,12 +543,14 @@ export const routes: Routes = [
 ### Technical Improvements
 
 #### Performance Optimization
+
 - **Lazy Loading**: Route-based lazy loading implementation
 - **Service Workers**: Advanced caching and offline capabilities
 - **Code Splitting**: Advanced bundle optimization and splitting
 - **Performance Monitoring**: Real-time performance monitoring and alerts
 
 #### Architecture Evolution
+
 - **Micro-Frontend**: Potential micro-frontend architecture adoption
 - **State Management**: Advanced state management library integration
 - **Testing Enhancement**: Advanced testing strategies and automation
@@ -492,12 +561,14 @@ export const routes: Routes = [
 ### Common Issues
 
 #### Application Problems
+
 - **Routing Issues**: Route resolution and navigation problems
 - **Component Loading**: Component initialization and loading failures
 - **Service Integration**: Service communication and data flow issues
 - **Performance Problems**: Application performance and optimization challenges
 
 #### Development Issues
+
 - **Build Errors**: Compilation and build process problems
 - **Dependency Conflicts**: Library version and compatibility issues
 - **Type Errors**: TypeScript type checking and validation problems
@@ -506,12 +577,14 @@ export const routes: Routes = [
 ### Debugging Strategies
 
 #### Development Tools
+
 - **Angular DevTools**: Component inspection and debugging
 - **Browser DevTools**: Network, performance, and console debugging
 - **Source Maps**: Source code debugging in production builds
 - **Performance Profiling**: Application performance analysis and optimization
 
 #### Error Handling
+
 - **Error Boundaries**: Global error handling and recovery
 - **Logging Strategies**: Comprehensive logging and monitoring
 - **User Feedback**: Error reporting and user feedback collection
@@ -522,12 +595,14 @@ export const routes: Routes = [
 ### Application Security
 
 #### Input Validation
+
 - **XSS Prevention**: Cross-site scripting prevention strategies
 - **Input Sanitization**: User input sanitization and validation
 - **CSRF Protection**: Cross-site request forgery protection
 - **Content Security Policy**: CSP implementation and enforcement
 
 #### Data Protection
+
 - **Secure Communication**: HTTPS enforcement and secure data transmission
 - **Authentication**: User authentication and authorization frameworks
 - **Data Privacy**: User data protection and privacy compliance
@@ -536,6 +611,7 @@ export const routes: Routes = [
 ### Dependency Security
 
 #### Library Management
+
 - **Vulnerability Scanning**: Regular dependency vulnerability assessment
 - **Update Management**: Security update management and deployment
 - **License Compliance**: Open source license compliance and management

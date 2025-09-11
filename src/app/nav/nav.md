@@ -7,9 +7,11 @@ The Nav directory contains the NavComponent responsible for providing primary na
 ## Component Architecture
 
 ### Core Component
+
 - **NavComponent** (`nav.component.ts`): Primary navigation component with routing and dropdown functionality
 
 ### Directory Structure
+
 ```
 nav/
 ├── nav.component.ts                        # Main navigation component with routing logic
@@ -23,9 +25,11 @@ nav/
 ### Navigation Component
 
 #### Purpose
+
 The NavComponent provides comprehensive navigation functionality throughout the PGNC application, offering users intuitive access to all major application sections through a clean, responsive navigation interface.
 
 #### Key Features
+
 - **Primary Navigation**: Direct links to essential application sections
 - **Dropdown Menus**: Organized secondary navigation through "More" dropdown
 - **Icon Integration**: FontAwesome icons for visual enhancement and user recognition
@@ -34,6 +38,7 @@ The NavComponent provides comprehensive navigation functionality throughout the 
 - **Router Integration**: Seamless Angular Router integration for SPA navigation
 
 #### Implementation
+
 ```typescript
 @Component({
     selector: 'app-nav',
@@ -48,6 +53,7 @@ export class NavComponent {
 ```
 
 **Component Properties**:
+
 - **FontAwesome Icons**: Home and envelope icons for visual navigation elements
 - **Standalone Component**: Modern Angular standalone architecture
 - **NgBootstrap Integration**: Dropdown functionality using NgBootstrap components
@@ -58,6 +64,7 @@ export class NavComponent {
 ### Primary Navigation Items
 
 #### Home Navigation
+
 ```html
 <div class="nav-item">
     <a class="nav-link" [routerLink]="['/']"><fa-icon [icon]="faHome" /></a>
@@ -65,11 +72,13 @@ export class NavComponent {
 ```
 
 **Features**:
+
 - **Icon-Only Design**: Home icon for space-efficient navigation
 - **Router Integration**: Angular RouterLink for homepage navigation
 - **Visual Recognition**: FontAwesome home icon for universal recognition
 
 #### Gene Data Access
+
 ```html
 <div class="nav-item">
     <a class="nav-link" [routerLink]="['/search']" [queryParams]="{ q: '*' }">Gene data</a>
@@ -77,11 +86,13 @@ export class NavComponent {
 ```
 
 **Features**:
+
 - **Search Integration**: Direct link to search page with wildcard query
 - **Data Discovery**: Facilitates immediate access to all gene data
 - **Query Parameters**: Pre-populated search for browsing all genes
 
 #### External Downloads
+
 ```html
 <div class="nav-item">
     <a href="https://github.com/PGNC-Plant-Gene-Nomenclature-Committee/Downloads" class="nav-link">Downloads</a>
@@ -89,11 +100,13 @@ export class NavComponent {
 ```
 
 **Features**:
+
 - **External Link**: Direct link to GitHub downloads repository
 - **Resource Access**: Immediate access to downloadable PGNC resources
 - **Community Integration**: Links to PGNC GitHub organization
 
 #### Contact Information
+
 ```html
 <div class="nav-item">
     <a class="nav-link" [routerLink]="['/contact']">Contact us</a>
@@ -101,6 +114,7 @@ export class NavComponent {
 ```
 
 **Features**:
+
 - **Support Access**: Direct access to contact information
 - **User Support**: Facilitates communication with PGNC team
 - **Internal Navigation**: Angular Router integration
@@ -108,6 +122,7 @@ export class NavComponent {
 ### Secondary Navigation (More Dropdown)
 
 #### Dropdown Structure
+
 ```html
 <div ngbDropdown class="nav-item" role="presentation">
     <button type="button" class="nav-link" ngbDropdownToggle>More</button>
@@ -121,12 +136,14 @@ export class NavComponent {
 ```
 
 **Dropdown Features**:
+
 - **NgBootstrap Dropdown**: Professional dropdown functionality
 - **Accessibility**: Proper ARIA roles and keyboard navigation
 - **Organized Content**: Logical grouping of secondary navigation items
 - **Router Integration**: All items use Angular RouterLink
 
 #### Secondary Navigation Items
+
 - **About the PGNC**: Information about the committee and its mission
 - **License**: Legal information and usage terms
 - **Publications**: Academic publications and research references
@@ -135,6 +152,7 @@ export class NavComponent {
 ### Future Navigation Items
 
 #### Request Symbol (Currently Hidden)
+
 ```html
 <div class="nav-item">
     <a style="visibility: hidden" class="nav-link deactivated">Request symbol <fa-icon [icon]="faEnvelope"></fa-icon></a>
@@ -142,6 +160,7 @@ export class NavComponent {
 ```
 
 **Features**:
+
 - **Future Functionality**: Placeholder for symbol request feature
 - **Visual Styling**: Currently hidden but maintaining layout space
 - **Icon Integration**: Envelope icon for communication context
@@ -151,6 +170,7 @@ export class NavComponent {
 ### Component Dependencies
 
 #### External Libraries
+
 ```typescript
 import { FontAwesome Module } from '@fortawesome/angular-fontawesome';
 import { faEnvelope, faHome } from '@fortawesome/free-solid-svg-icons';
@@ -159,18 +179,21 @@ import { RouterLink } from '@angular/router';
 ```
 
 **Dependencies**:
+
 - **FontAwesome**: Icon system for visual navigation elements
 - **NgBootstrap**: Dropdown functionality and UI components
 - **Angular Router**: Navigation and routing services
 - **Angular Core**: Basic component functionality
 
 #### Icon Management
+
 ```typescript
 faEnvelope = faEnvelope;
 faHome = faHome;
 ```
 
 **Icon Features**:
+
 - **Component Properties**: Icon assignment for template usage
 - **FontAwesome Integration**: Professional icon library
 - **Consistent Styling**: Standardized iconography throughout navigation
@@ -178,6 +201,7 @@ faHome = faHome;
 ### Template Architecture
 
 #### Bootstrap Navigation Structure
+
 ```html
 <div class="navbar-nav">
     <div class="nav-item">
@@ -187,6 +211,7 @@ faHome = faHome;
 ```
 
 **Template Features**:
+
 - **Bootstrap Classes**: Standard Bootstrap navigation structure
 - **Semantic HTML**: Proper navigation markup for accessibility
 - **Consistent Structure**: Uniform nav-item containers for all links
@@ -195,12 +220,14 @@ faHome = faHome;
 ### Router Integration
 
 #### Internal Navigation
+
 - **RouterLink Directives**: Angular RouterLink for all internal navigation
 - **Query Parameters**: Pre-configured search parameters for gene data access
 - **SPA Behavior**: Maintains single-page application navigation patterns
 - **Route Configuration**: Compatible with application routing structure
 
 #### External Navigation
+
 - **Standard Links**: HTML anchor tags for external resources
 - **GitHub Integration**: Direct links to PGNC GitHub organization
 - **Target Handling**: Appropriate target attributes for external links
@@ -210,6 +237,7 @@ faHome = faHome;
 ### Navigation Styling
 
 #### Color Scheme
+
 ```css
 .navbar-nav .nav-link {
     color: white;
@@ -221,12 +249,14 @@ faHome = faHome;
 ```
 
 **Design Features**:
+
 - **White Text**: High contrast white text for readability
 - **Accent Color**: Gold (#ffc21b) for last navigation item emphasis
 - **Brand Consistency**: Colors match PGNC brand guidelines
 - **Visual Hierarchy**: Color distinction for different navigation elements
 
 #### Responsive Layout
+
 ```css
 @media (min-width: 768px) {
     .nav-item:last-child {
@@ -236,6 +266,7 @@ faHome = faHome;
 ```
 
 **Responsive Features**:
+
 - **Desktop Layout**: Last item pushed to right side of navigation
 - **Mobile Compatibility**: Standard stacked layout for mobile devices
 - **Breakpoint Management**: 768px breakpoint for responsive behavior
@@ -244,12 +275,14 @@ faHome = faHome;
 ### Visual Design
 
 #### Navigation Appearance
+
 - **Clean Design**: Minimal, professional appearance
 - **Clear Typography**: Readable navigation link text
 - **Icon Integration**: Tasteful use of icons for enhanced usability
 - **Hover States**: Interactive feedback for user engagement
 
 #### Accessibility Features
+
 - **Color Contrast**: Sufficient contrast for text readability
 - **Semantic Markup**: Proper HTML structure for screen readers
 - **Keyboard Navigation**: Full keyboard accessibility support
@@ -260,6 +293,7 @@ faHome = faHome;
 ### Component Testing Approach
 
 #### Test Configuration
+
 ```typescript
 beforeEach(async () => {
     await TestBed.configureTestingModule({
@@ -284,6 +318,7 @@ beforeEach(async () => {
 ```
 
 **Testing Areas**:
+
 - **Component Creation**: Basic component instantiation and definition
 - **Navigation Functionality**: Router integration and link validation
 - **Dropdown Behavior**: NgBootstrap dropdown functionality testing
@@ -293,12 +328,14 @@ beforeEach(async () => {
 ### Navigation Testing
 
 #### Link Validation
+
 - **Internal Links**: RouterLink functionality and route resolution
 - **External Links**: External URL validation and target behavior
 - **Query Parameters**: Search link parameter passing validation
 - **Dropdown Items**: Dropdown navigation item functionality
 
 #### User Interaction Testing
+
 - **Click Events**: Navigation item click event handling
 - **Dropdown Interaction**: Dropdown open/close functionality
 - **Keyboard Navigation**: Tab order and keyboard accessibility
@@ -307,6 +344,7 @@ beforeEach(async () => {
 ### Integration Testing
 
 #### Router Integration
+
 - **Navigation Flow**: Complete navigation workflow testing
 - **Route Resolution**: Proper route resolution and component loading
 - **Parameter Passing**: Query parameter handling and processing
@@ -317,11 +355,13 @@ beforeEach(async () => {
 ### Application Integration
 
 #### Header Components
+
 - **Main Header**: Integration with main application header component
 - **Home Header**: Specialized integration with homepage header
 - **Responsive Headers**: Consistent navigation across different header contexts
 
 #### Navigation Context
+
 - **Global Navigation**: Available throughout entire application
 - **Route Awareness**: Context-aware navigation state management
 - **Active States**: Visual indication of current page/section
@@ -330,12 +370,14 @@ beforeEach(async () => {
 ### External Service Integration
 
 #### GitHub Integration
+
 - **Downloads Repository**: Direct integration with PGNC GitHub downloads
 - **Version Control**: Access to version-controlled resource files
 - **Community Access**: Connection to broader PGNC development community
 - **Documentation Links**: Access to external documentation and resources
 
 #### Search Integration
+
 - **Search Parameters**: Pre-configured search functionality
 - **Data Discovery**: Facilitates exploration of gene nomenclature data
 - **Query Management**: Proper handling of search query parameters
@@ -346,12 +388,14 @@ beforeEach(async () => {
 ### Navigation Efficiency
 
 #### Quick Access
+
 - **Essential Links**: Direct access to most important application sections
 - **One-Click Access**: Immediate navigation to key functionality
 - **Visual Recognition**: Icons and clear labels for instant recognition
 - **Logical Organization**: Intuitive grouping of navigation items
 
 #### Progressive Disclosure
+
 - **Primary Items**: Most important links immediately visible
 - **Secondary Items**: Additional options available through dropdown
 - **Hidden Features**: Future functionality prepared but not yet exposed
@@ -360,12 +404,14 @@ beforeEach(async () => {
 ### Accessibility Excellence
 
 #### Screen Reader Support
+
 - **Semantic HTML**: Proper navigation markup for assistive technology
 - **ARIA Labels**: Appropriate labeling for dropdown and interactive elements
 - **Role Attributes**: Correct roles for navigation elements
 - **Content Structure**: Logical content organization for screen readers
 
 #### Keyboard Navigation
+
 - **Tab Order**: Logical keyboard navigation sequence
 - **Dropdown Access**: Keyboard-accessible dropdown functionality
 - **Focus Management**: Clear focus indicators and management
@@ -374,6 +420,7 @@ beforeEach(async () => {
 ### Mobile Experience
 
 #### Responsive Design
+
 - **Collapsible Menu**: Mobile-friendly navigation structure
 - **Touch Targets**: Appropriately sized touch targets for mobile devices
 - **Gesture Support**: Support for mobile navigation gestures
@@ -384,12 +431,14 @@ beforeEach(async () => {
 ### Component Performance
 
 #### Loading Optimization
+
 - **Minimal Dependencies**: Lightweight component with focused dependencies
 - **Icon Efficiency**: Efficient FontAwesome icon loading and rendering
 - **Template Optimization**: Clean, optimized template structure
 - **Style Efficiency**: Minimal CSS for fast loading and rendering
 
 #### Runtime Performance
+
 - **Static Navigation**: No complex state management for optimal performance
 - **Router Efficiency**: Efficient Angular Router integration
 - **Event Handling**: Optimized event handling for user interactions
@@ -398,6 +447,7 @@ beforeEach(async () => {
 ### Navigation Performance
 
 #### Route Resolution
+
 - **Fast Navigation**: Quick route resolution and component loading
 - **Preloading**: Potential for route preloading optimization
 - **Caching**: Browser caching of navigation assets
@@ -408,12 +458,14 @@ beforeEach(async () => {
 ### Content Management
 
 #### Navigation Updates
+
 - **Link Management**: Process for adding, removing, or modifying navigation links
 - **Route Configuration**: Coordination with application routing updates
 - **External Link Validation**: Regular validation of external resource links
 - **Content Organization**: Maintaining logical navigation structure
 
 #### Feature Evolution
+
 - **New Sections**: Process for adding new application sections
 - **Dropdown Management**: Adding or reorganizing dropdown items
 - **Icon Updates**: FontAwesome icon updates and management
@@ -422,12 +474,14 @@ beforeEach(async () => {
 ### Technical Maintenance
 
 #### Framework Updates
+
 - **Angular Updates**: Compatibility with Angular framework evolution
 - **Dependency Management**: NgBootstrap and FontAwesome version management
 - **Router Changes**: Adaptation to Angular Router updates
 - **Testing Updates**: Maintaining comprehensive test coverage
 
 #### Performance Monitoring
+
 - **Navigation Speed**: Monitoring navigation performance and optimization
 - **User Analytics**: Navigation usage patterns and optimization opportunities
 - **Error Tracking**: Monitoring navigation errors and broken links
@@ -438,18 +492,21 @@ beforeEach(async () => {
 ### Planned Improvements
 
 #### Enhanced Navigation
+
 - **Active State Indicators**: Visual indication of current page/section
 - **Breadcrumb Integration**: Enhanced navigation context and hierarchy
 - **Search Integration**: Navigation-embedded search functionality
 - **Keyboard Shortcuts**: Power user keyboard navigation shortcuts
 
 #### User Experience Enhancements
+
 - **Animation**: Smooth transitions and micro-interactions
 - **Personalization**: User-customizable navigation preferences
 - **Quick Actions**: Frequently used action shortcuts
 - **Context Menu**: Right-click context menu functionality
 
 #### Accessibility Improvements
+
 - **Screen Reader Optimization**: Enhanced screen reader support
 - **High Contrast Mode**: High contrast navigation theme
 - **Font Scaling**: User-controllable navigation font sizing
@@ -458,12 +515,14 @@ beforeEach(async () => {
 ### Technical Improvements
 
 #### Performance Optimization
+
 - **Lazy Loading**: Navigation component lazy loading optimization
 - **Preloading**: Strategic preloading of navigation targets
 - **Caching**: Advanced caching strategies for navigation assets
 - **Bundle Splitting**: Optimized code splitting for navigation components
 
 #### Advanced Features
+
 - **Multi-Level Dropdowns**: Hierarchical navigation structure
 - **Mega Menu**: Rich content navigation menus
 - **Search Suggestions**: Navigation-integrated search suggestions
@@ -474,12 +533,14 @@ beforeEach(async () => {
 ### Common Issues
 
 #### Navigation Problems
+
 - **Broken Links**: Internal or external link resolution failures
 - **Router Issues**: Angular Router configuration problems
 - **Dropdown Malfunction**: NgBootstrap dropdown functionality issues
 - **Mobile Navigation**: Responsive navigation problems on mobile devices
 
 #### Styling Issues
+
 - **Color Problems**: Navigation color scheme or contrast issues
 - **Layout Issues**: Responsive layout problems across devices
 - **Icon Display**: FontAwesome icon loading or display problems
@@ -488,12 +549,14 @@ beforeEach(async () => {
 ### Debugging Strategies
 
 #### Development Tools
+
 - **Angular DevTools**: Component inspection and router debugging
 - **Browser Inspector**: CSS debugging and layout inspection
 - **Network Analysis**: Asset loading and performance analysis
 - **Accessibility Testing**: Screen reader and accessibility validation
 
 #### Performance Debugging
+
 - **Route Analysis**: Navigation performance and route resolution
 - **Bundle Analysis**: Navigation component bundle size and optimization
 - **Memory Profiling**: Component memory usage and leak detection
@@ -502,12 +565,14 @@ beforeEach(async () => {
 ### Error Handling
 
 #### Graceful Degradation
+
 - **Link Failures**: Fallback behavior for broken navigation links
 - **Script Failures**: Navigation functionality with JavaScript disabled
 - **Network Issues**: Offline navigation behavior and feedback
 - **Browser Compatibility**: Cross-browser navigation compatibility
 
 #### User Support
+
 - **Error Communication**: Clear error messages for navigation issues
 - **Alternative Navigation**: Backup navigation methods when primary fails
 - **Help Integration**: Easy access to navigation help and documentation

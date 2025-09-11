@@ -21,6 +21,7 @@ about/
 **Purpose**: Defines the AboutComponent class and its configuration
 
 **Key Features**:
+
 - **Standalone Component**: Uses Angular's standalone component architecture
 - **Minimal Logic**: Simple presentation component with no complex functionality
 - **TypeScript**: Strongly typed component definition
@@ -38,6 +39,7 @@ export class AboutComponent { }
 ```
 
 **Component Properties**:
+
 - `selector`: 'app-about' - Used to embed the component in templates
 - `standalone`: true - Indicates this is a standalone component (Angular 14+)
 - `templateUrl`: Points to the HTML template file
@@ -48,6 +50,7 @@ export class AboutComponent { }
 **Purpose**: Contains the template markup for the about page
 
 **Content Structure**:
+
 - **Main Container**: Bootstrap-style container div for layout
 - **Page Title**: H1 heading "About the PGNC"
 - **Organization Description**: Information about the Plant Gene Nomenclature Committee
@@ -55,6 +58,7 @@ export class AboutComponent { }
 - **Current Focus**: Information about Populus trichocarpa gene naming
 
 **Key Elements**:
+
 ```html
 <div class="container">
     <h1>About the PGNC</h1>
@@ -66,19 +70,22 @@ export class AboutComponent { }
 ```
 
 **External Links**:
-- Oak Ridge Center for Bioenergy Innovation (https://cbi.ornl.gov/)
-- HUGO Gene Nomenclature Committee (https://www.genenames.org)
+
+- Oak Ridge Center for Bioenergy Innovation (<https://cbi.ornl.gov/>)
+- HUGO Gene Nomenclature Committee (<https://www.genenames.org>)
 
 ### about.component.css
 
 **Purpose**: Component-specific styling (currently empty)
 
-**Current State**: 
+**Current State**:
+
 - File exists but contains no styles
 - Uses global application styles from parent containers
 - Ready for custom styling if needed
 
 **Potential Enhancements**:
+
 - Custom typography for the about page
 - Specific layout adjustments
 - Component-specific color schemes
@@ -91,22 +98,26 @@ export class AboutComponent { }
 **Test Categories**:
 
 #### 1. Component Creation Tests
+
 - **Component Creation**: Verifies component instantiates successfully
 - **Component Definition**: Ensures component is properly defined
 - **Instance Verification**: Confirms component is correct type
 
 #### 2. Template Rendering Tests
+
 - **Container Rendering**: Verifies main container element exists
 - **Heading Rendering**: Checks H1 element displays correct text
 - **Element Count**: Ensures exactly one H1 element exists
 - **Content Verification**: Validates text content matches expected values
 
 #### 3. Link Testing
+
 - **External Links**: Verifies external links are properly rendered
 - **Link Attributes**: Checks href attributes point to correct URLs
 - **Link Accessibility**: Ensures links are accessible and functional
 
 **Test Structure**:
+
 ```typescript
 describe('AboutComponent', () => {
     let component: AboutComponent;
@@ -133,13 +144,16 @@ describe('AboutComponent', () => {
 ## Functionality
 
 ### User Experience
+
 The About component provides users with:
+
 - **Organization Background**: Information about PGNC's establishment and mission
 - **Partnership Information**: Details about collaborating organizations
 - **Current Projects**: Information about ongoing gene naming efforts
 - **External Resources**: Links to partner organization websites
 
 ### Navigation Integration
+
 - **Route Path**: Typically accessed via `/about` route
 - **Navigation Menu**: Linked from main application navigation
 - **Breadcrumbs**: May be included in site breadcrumb navigation
@@ -147,16 +161,19 @@ The About component provides users with:
 ## Technical Specifications
 
 ### Dependencies
+
 - **Angular Core**: Required for component functionality
 - **Angular Testing**: Required for unit tests
 - **TypeScript**: Component written in TypeScript
 
 ### Browser Compatibility
+
 - **Modern Browsers**: Supports all modern browsers (Chrome, Firefox, Safari, Edge)
 - **Responsive Design**: Adapts to different screen sizes
 - **Accessibility**: Follows web accessibility guidelines
 
 ### Performance Characteristics
+
 - **Lightweight**: Minimal JavaScript footprint
 - **Fast Loading**: Static content loads quickly
 - **SEO Friendly**: Semantic HTML structure for search engines
@@ -164,16 +181,19 @@ The About component provides users with:
 ## Development Guidelines
 
 ### Code Style
+
 - **TypeScript Strict Mode**: Uses strict TypeScript compilation
 - **Angular Style Guide**: Follows official Angular style guidelines
 - **Semantic HTML**: Uses proper HTML5 semantic elements
 
 ### Testing Standards
+
 - **Unit Test Coverage**: Comprehensive test coverage for all functionality
 - **Test Organization**: Tests grouped by functionality
 - **Assertion Quality**: Meaningful assertions for reliable testing
 
 ### Accessibility Considerations
+
 - **Semantic Markup**: Proper heading hierarchy (H1 for page title)
 - **Link Accessibility**: External links are clearly marked
 - **Screen Reader Support**: Content is accessible to screen readers
@@ -181,16 +201,19 @@ The About component provides users with:
 ## Maintenance and Updates
 
 ### Content Updates
+
 - **Organization Information**: May need updates as PGNC evolves
 - **Partnership Details**: Links and partnership information may change
 - **Project Status**: Current project information should be kept up-to-date
 
 ### Technical Maintenance
+
 - **Angular Updates**: Component should be updated with Angular framework updates
 - **Dependency Management**: Keep dependencies current for security
 - **Test Maintenance**: Update tests when functionality changes
 
 ### Future Enhancements
+
 - **Rich Content**: Consider adding images, videos, or interactive elements
 - **Multilingual Support**: Add internationalization if needed
 - **Dynamic Content**: Consider making content editable through admin interface
@@ -199,11 +222,13 @@ The About component provides users with:
 ## Integration Points
 
 ### Application Integration
+
 - **Routing**: Integrated with Angular Router for navigation
 - **Layout**: Uses application-wide layout and styling
 - **Navigation**: Appears in main site navigation menu
 
 ### Content Management
+
 - **Static Content**: Currently uses static HTML content
 - **Version Control**: Content changes tracked through Git
 - **Deployment**: Updated through standard application deployment process
@@ -211,11 +236,13 @@ The About component provides users with:
 ## Troubleshooting
 
 ### Common Issues
+
 - **Link Validation**: Ensure external links remain functional
 - **Content Accuracy**: Verify information remains current and accurate
 - **Responsive Display**: Test display across different device sizes
 
 ### Testing Issues
+
 - **Test Failures**: Most likely due to content changes requiring test updates
 - **Component Loading**: Ensure standalone component imports are correct
 - **DOM Queries**: Verify CSS selectors match template structure

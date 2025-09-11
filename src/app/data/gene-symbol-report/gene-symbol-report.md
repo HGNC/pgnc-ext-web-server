@@ -58,6 +58,7 @@ For detailed information about the specialized components within this module, pl
 **Purpose**: Orchestrates the gene symbol report display by managing data fetching, state management, and coordinating child components
 
 **Key Features**:
+
 - **Standalone Component**: Uses Angular's modern standalone architecture
 - **Signal-Based State Management**: Reactive state management with Angular signals
 - **Error Handling**: Comprehensive error handling with user feedback
@@ -75,10 +76,12 @@ export class GeneSymbolReportComponent implements OnInit
 ```
 
 **Input Properties**:
+
 - `@Input({ required: true }) type!: string` - Report type identifier (typically 'gene')
 - `@Input({ required: true }) id!: string` - PGNC identifier for the gene symbol
 
 **State Management Properties**:
+
 - `report = signal<GeneSymbolReport | undefined>(undefined)` - Main report data signal
 - `isFetching = signal(false)` - Loading state indicator
 - `error = signal<string | undefined>(undefined)` - Error state management
@@ -87,9 +90,11 @@ export class GeneSymbolReportComponent implements OnInit
 **Core Functionality**:
 
 #### ngOnInit()
+
 **Purpose**: Initializes component by fetching gene symbol report data and managing subscription lifecycle
 
 **Data Flow**:
+
 1. **Service Invocation**: Calls GeneReportService with provided gene ID
 2. **State Updates**: Updates loading, error, and data signals based on response
 3. **Symbol Extraction**: Identifies approved gene symbol for child component coordination
@@ -130,6 +135,7 @@ ngOnInit() {
 **Template Architecture**:
 
 #### Loading State
+
 ```html
 @if (isFetching() && !error()) {
     <h1>
@@ -143,6 +149,7 @@ ngOnInit() {
 ```
 
 #### Error State
+
 ```html
 @if (error()) {
     <p>{{ error() }}</p>
@@ -150,6 +157,7 @@ ngOnInit() {
 ```
 
 #### Success State with Child Components
+
 ```html
 @if (report()) {
     <h1>
@@ -164,6 +172,7 @@ ngOnInit() {
 ```
 
 **Child Component Integration**:
+
 - **PgncDataComponent**: Displays core PGNC gene information (symbols, names, locations, classifications)
 - **XrefComponent**: Presents external database cross-references and links
 - **Shared Data**: Both components receive the same report data and approved symbol
@@ -173,6 +182,7 @@ ngOnInit() {
 **Purpose**: Manages secure data fetching from the PGNC API with JWT authentication and token renewal
 
 **Key Features**:
+
 - **JWT Authentication**: Secure API communication with bearer tokens
 - **Automatic Token Renewal**: Handles expired tokens transparently
 - **Error Handling**: Comprehensive error management with user-friendly messages
@@ -186,15 +196,18 @@ export class GeneReportService
 ```
 
 **Dependencies**:
+
 - `HttpClient` - HTTP communication with PGNC API
 - `AuthService` - JWT token management and renewal
 
 **Core Method**:
 
 #### getReportById()
+
 **Purpose**: Fetches gene symbol report data with authentication and error handling
 
 **Authentication Flow**:
+
 1. **ID Processing**: Removes 'PGNC:' prefix if present
 2. **Token Acquisition**: Retrieves current JWT from AuthService
 3. **API Request**: Makes authenticated request to `/api/gene/{id}`
@@ -215,6 +228,7 @@ public getReportById(pgncId: string): Observable<GeneSymbolReport> {
 ```
 
 **Error Handling Scenarios**:
+
 - **Expired Tokens**: Automatic token renewal and request retry
 - **Authentication Failures**: Clear messaging for token refresh issues
 - **Network Errors**: Generic error messaging for connectivity issues
@@ -328,18 +342,21 @@ GeneSymbolReportComponent (Container)
 ### Data Flow Patterns
 
 #### Input Processing
+
 1. **Route Parameters**: Component receives `type` and `id` from routing system
 2. **Service Invocation**: Service called with gene ID for data fetching
 3. **Authentication**: JWT tokens managed transparently by service layer
 4. **State Updates**: Signals updated based on API response state
 
 #### Child Component Coordination
+
 1. **Data Distribution**: Same `GeneSymbolReport` passed to both child components
 2. **Symbol Sharing**: Approved gene symbol extracted and shared
 3. **Independent Rendering**: Child components handle their respective data domains
 4. **Help Integration**: Centralized help system available to all components
 
 #### Error Handling Flow
+
 1. **Service Errors**: Caught and converted to user-friendly messages
 2. **Authentication Errors**: Token renewal attempted automatically
 3. **Network Errors**: Generic error messages prevent technical exposure
@@ -350,6 +367,7 @@ GeneSymbolReportComponent (Container)
 ### Component Testing
 
 **Test Coverage Areas**:
+
 - **Component Creation**: Basic instantiation and property initialization
 - **Data Fetching**: Service integration and response handling
 - **State Management**: Signal updates and reactive behavior
@@ -357,6 +375,7 @@ GeneSymbolReportComponent (Container)
 - **Child Component Integration**: Data passing and rendering coordination
 
 **Mock Strategy**:
+
 ```typescript
 const mockGeneSymbolReport: GeneSymbolReport = {
     data: {
@@ -374,12 +393,14 @@ const mockGeneSymbolReport: GeneSymbolReport = {
 ### Service Testing
 
 **Authentication Testing**:
+
 - **Valid Tokens**: Successful API requests with valid JWT
 - **Expired Tokens**: Automatic renewal and request retry
 - **Authentication Failures**: Error handling for renewal failures
 - **Network Issues**: Timeout and connectivity error handling
 
 **Data Processing Testing**:
+
 - **ID Formats**: Handling of both prefixed and raw PGNC identifiers
 - **Response Parsing**: Proper conversion to GeneSymbolReport interface
 - **Error Responses**: API error handling and user messaging
@@ -388,6 +409,7 @@ const mockGeneSymbolReport: GeneSymbolReport = {
 ### Integration Testing
 
 **End-to-End Scenarios**:
+
 - **Complete Report Loading**: Full data fetch and display cycle
 - **Child Component Communication**: Data passing and rendering verification
 - **Help System Integration**: Navigation and context verification

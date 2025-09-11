@@ -7,16 +7,19 @@ The Search directory contains the comprehensive search functionality for the PGN
 ## Component Architecture
 
 ### Core Components
+
 - **SearchComponent** (`search.component.ts`): Main search interface with query processing and result display
 - **NotFoundComponent** (`not-found/not-found.component.ts`): Search result not found handling with search suggestions
 - **ResultsComponent** (`results/results.component.ts`): Dedicated component for search result presentation
 
 ### Services and Utilities
+
 - **SearchService** (`search.service.ts`): Core search functionality with caching and API integration
 - **SafeHtmlPipe** (`search.component.ts`): HTML sanitization for search result highlighting
 - **SafeValuePipe** (`search.component.ts`): Value transformation for complex search result data
 
 ### Directory Structure
+
 ```
 search/
 ├── search.component.ts                     # Main search component with advanced functionality
@@ -44,9 +47,11 @@ search/
 ### Search Component
 
 #### Purpose
+
 The SearchComponent provides the primary search interface for the PGNC application, enabling users to query gene nomenclature data with advanced filtering, pagination, and result highlighting capabilities.
 
 #### Key Features
+
 - **Query Processing**: Advanced search query handling with URL synchronization
 - **Real-time Search**: Dynamic search results with loading indicators
 - **Pagination**: Configurable page size and navigation controls
@@ -56,6 +61,7 @@ The SearchComponent provides the primary search interface for the PGNC applicati
 - **Caching**: Intelligent result caching for improved performance
 
 #### Implementation
+
 ```typescript
 @Component({
     selector: 'app-search',
@@ -83,6 +89,7 @@ export class SearchComponent implements OnInit, OnDestroy {
 ```
 
 **Component Properties**:
+
 - **Search State**: Query string, results array, pagination parameters
 - **Loading Management**: Observable loading state with spinner integration
 - **Error Handling**: Error message display and recovery mechanisms
@@ -91,9 +98,11 @@ export class SearchComponent implements OnInit, OnDestroy {
 ### Search Service
 
 #### Purpose
+
 The SearchService manages all search-related API communications, implements intelligent caching strategies, and provides observable loading states for optimal user experience.
 
 #### Core Features
+
 ```typescript
 @Injectable({
     providedIn: 'root',
@@ -108,6 +117,7 @@ export class SearchService {
 ```
 
 **Service Capabilities**:
+
 - **API Integration**: RESTful search endpoint communication
 - **Request Caching**: Intelligent cache management for improved performance
 - **Loading States**: Observable loading indicators for UI feedback
@@ -115,6 +125,7 @@ export class SearchService {
 - **Error Recovery**: Comprehensive error handling and retry mechanisms
 
 #### Search API Integration
+
 ```typescript
 browse(q: string, start: number, rows: number): Observable<SearchResponse> {
     const cacheKey = this.generateCacheKey(q, start, rows);
@@ -135,6 +146,7 @@ browse(q: string, start: number, rows: number): Observable<SearchResponse> {
 ```
 
 **API Features**:
+
 - **Parameterized Queries**: Flexible query parameter handling
 - **Pagination Support**: Built-in pagination with configurable page sizes
 - **Cache Management**: Automatic cache invalidation and cleanup
@@ -143,6 +155,7 @@ browse(q: string, start: number, rows: number): Observable<SearchResponse> {
 ## Data Models
 
 ### Gene Interface
+
 ```typescript
 export interface Gene {
     symbol: string;
@@ -158,12 +171,14 @@ export interface Gene {
 ```
 
 **Gene Properties**:
+
 - **Symbol**: Primary gene identifier and symbol
 - **Name**: Full gene name and description
 - **URL**: Direct link to detailed gene information
 - **Display**: Structured metadata for search result presentation
 
 ### Search Response Interface
+
 ```typescript
 export interface SearchResponse {
     genes: Gene[] | undefined;
@@ -174,12 +189,14 @@ export interface SearchResponse {
 ```
 
 **Response Properties**:
+
 - **Genes**: Array of matching gene records
 - **Total**: Total number of matching results
 - **Start**: Current result set starting position
 - **Rows**: Number of results per page
 
 ### Display Item Interface
+
 ```typescript
 export interface DisplayItem {
     label: string;
@@ -188,6 +205,7 @@ export interface DisplayItem {
 ```
 
 **Display Features**:
+
 - **Label**: Human-readable field name
 - **Value**: Field content with support for complex data structures
 - **Flexibility**: Handles both simple strings and structured data
@@ -197,6 +215,7 @@ export interface DisplayItem {
 ### Query Processing
 
 #### Advanced Search Input
+
 ```html
 <div class="search-container">
     <input 
@@ -212,12 +231,14 @@ export interface DisplayItem {
 ```
 
 **Input Features**:
+
 - **Two-Way Binding**: Real-time query synchronization
 - **Enter Key Support**: Keyboard-triggered search functionality
 - **Loading State**: Disabled state during search processing
 - **Responsive Design**: Mobile-optimized input interface
 
 #### URL Synchronization
+
 ```typescript
 onSearch(): void {
     this.router.navigate([], {
@@ -232,6 +253,7 @@ onSearch(): void {
 ```
 
 **URL Features**:
+
 - **Bookmarkable Searches**: URL-based search query persistence
 - **Browser History**: Back/forward navigation support
 - **Deep Linking**: Direct access to specific search results
@@ -240,6 +262,7 @@ onSearch(): void {
 ### Result Display
 
 #### Result List Presentation
+
 ```html
 <div class="results-list">
     @for (item of results; track $index) {
@@ -275,6 +298,7 @@ onSearch(): void {
 ```
 
 **Display Features**:
+
 - **Gene Symbols**: Prominent display of gene symbols and names
 - **Metadata Fields**: Structured presentation of gene information
 - **Match Highlighting**: Visual emphasis of search term matches
@@ -282,6 +306,7 @@ onSearch(): void {
 - **Responsive Cards**: Mobile-friendly result card layout
 
 #### Search Term Highlighting
+
 ```typescript
 @Pipe({
     name: 'safeHtml',
@@ -297,6 +322,7 @@ export class SafeHtmlPipe implements PipeTransform {
 ```
 
 **Highlighting Features**:
+
 - **Match Emphasis**: Bold red highlighting for search term matches
 - **HTML Sanitization**: Secure HTML content processing
 - **Multiple Matches**: Support for multiple highlighted terms
@@ -305,6 +331,7 @@ export class SafeHtmlPipe implements PipeTransform {
 ### Pagination System
 
 #### Advanced Pagination Controls
+
 ```html
 <div class="pagination-controls">
     <button (click)="previousPage()" [disabled]="currentPage === 1 || (loading$ | async)">
@@ -334,6 +361,7 @@ export class SafeHtmlPipe implements PipeTransform {
 ```
 
 **Pagination Features**:
+
 - **Page Navigation**: Previous/next page controls with state management
 - **Page Information**: Current page and total page display
 - **Configurable Size**: User-selectable results per page (10, 20, 50)
@@ -341,6 +369,7 @@ export class SafeHtmlPipe implements PipeTransform {
 - **Result Statistics**: "Showing X - Y of Z results" display
 
 #### Calculated Properties
+
 ```typescript
 get totalPages(): number {
     return this.totalResults ? Math.ceil(this.totalResults / this.pageSize) : 0;
@@ -356,6 +385,7 @@ get endIndex(): number {
 ```
 
 **Calculation Features**:
+
 - **Dynamic Totals**: Real-time total page calculation
 - **Index Management**: Accurate start/end index calculation
 - **Boundary Handling**: Proper handling of final page boundaries
@@ -366,6 +396,7 @@ get endIndex(): number {
 ### Not Found Component
 
 #### Search Suggestions
+
 ```html
 <div>
     <p>
@@ -385,12 +416,14 @@ get endIndex(): number {
 ```
 
 **Suggestion Features**:
+
 - **Wildcard Suggestions**: Automatic wildcard query suggestions
 - **Field-Specific Search**: Guidance for targeted field searches
 - **Help Integration**: Direct links to search help documentation
 - **Example Queries**: Practical examples of successful search patterns
 
 #### Error Recovery
+
 ```typescript
 @Component({
     selector: 'app-not-found',
@@ -404,6 +437,7 @@ export class NotFoundComponent {
 ```
 
 **Recovery Features**:
+
 - **Query Context**: Display of original search query
 - **Alternative Strategies**: Multiple search improvement suggestions
 - **Educational Content**: Links to comprehensive search documentation
@@ -412,6 +446,7 @@ export class NotFoundComponent {
 ### Loading States
 
 #### Loading Indicator
+
 ```html
 @if (loading$ | async) {
     <div class="loading-indicator">
@@ -422,12 +457,14 @@ export class NotFoundComponent {
 ```
 
 **Loading Features**:
+
 - **Visual Spinner**: Animated loading spinner for user feedback
 - **Text Indication**: Clear loading status messaging
 - **Observable Integration**: Reactive loading state management
 - **Non-blocking UI**: Maintains interface responsiveness during searches
 
 #### Error Display
+
 ```html
 @if (error) {
     <span>ERROR</span>
@@ -436,6 +473,7 @@ export class NotFoundComponent {
 ```
 
 **Error Features**:
+
 - **Clear Messaging**: User-friendly error message display
 - **Error Context**: Specific error information for debugging
 - **Visual Distinction**: Prominent error styling for immediate recognition
@@ -446,6 +484,7 @@ export class NotFoundComponent {
 ### Search Interface Styling
 
 #### Modern Search Input
+
 ```css
 input[type="text"] {
     flex: 1;
@@ -464,12 +503,14 @@ input[type="text"]:focus {
 ```
 
 **Input Design**:
+
 - **Modern Styling**: Clean, contemporary input field design
 - **Focus States**: Clear visual feedback for active input
 - **Accessibility**: High-contrast borders and focus indicators
 - **Responsive**: Flexible layout adapting to screen sizes
 
 #### Button Styling
+
 ```css
 button {
     padding: 0.8rem 1.5rem;
@@ -494,6 +535,7 @@ button:disabled {
 ```
 
 **Button Features**:
+
 - **Brand Colors**: PGNC maroon color scheme
 - **Hover Effects**: Subtle animations for enhanced interactivity
 - **Disabled States**: Clear visual indication of disabled buttons
@@ -502,6 +544,7 @@ button:disabled {
 ### Result Card Design
 
 #### Modern Card Layout
+
 ```css
 .result-item {
     padding: 1.5rem;
@@ -517,12 +560,14 @@ button:disabled {
 ```
 
 **Card Features**:
+
 - **Clean Design**: Modern card-based result presentation
 - **Subtle Shadows**: Professional depth and visual hierarchy
 - **Hover Animation**: Interactive feedback for clickable results
 - **Responsive Layout**: Adaptive card sizing for different screen sizes
 
 #### Search Term Highlighting
+
 ```css
 .match {
     font-style: normal;
@@ -532,6 +577,7 @@ button:disabled {
 ```
 
 **Highlighting Features**:
+
 - **Visual Emphasis**: Bold red highlighting for matched terms
 - **Readability**: High contrast for easy identification
 - **Consistent Styling**: Uniform highlighting across all results
@@ -540,6 +586,7 @@ button:disabled {
 ### Responsive Design
 
 #### Mobile Optimization
+
 ```css
 @media (max-width: 768px) {
     .search-container {
@@ -558,6 +605,7 @@ button:disabled {
 ```
 
 **Responsive Features**:
+
 - **Mobile-First**: Optimized layout for mobile devices
 - **Stack Layout**: Vertical stacking of elements on small screens
 - **Touch-Friendly**: Appropriately sized touch targets
@@ -568,6 +616,7 @@ button:disabled {
 ### Component Testing Approach
 
 #### Comprehensive Test Setup
+
 ```typescript
 describe('SearchComponent', () => {
     let component: SearchComponent;
@@ -589,6 +638,7 @@ describe('SearchComponent', () => {
 ```
 
 **Testing Areas**:
+
 - **Component Lifecycle**: Initialization, destruction, and state management
 - **Search Functionality**: Query processing, result loading, and error handling
 - **Pagination**: Page navigation, size changes, and boundary conditions
@@ -598,6 +648,7 @@ describe('SearchComponent', () => {
 ### Mock Data and Service Testing
 
 #### Mock Search Response
+
 ```typescript
 const mockSearchResponse: SearchResponse = {
     genes: [
@@ -620,6 +671,7 @@ const mockSearchResponse: SearchResponse = {
 ```
 
 **Mock Features**:
+
 - **Realistic Data**: Representative gene data for comprehensive testing
 - **Edge Cases**: Various data structures and display formats
 - **Error Scenarios**: Network failures and empty result sets
@@ -628,12 +680,14 @@ const mockSearchResponse: SearchResponse = {
 ### Pipe Testing
 
 #### SafeHtml Pipe Validation
+
 - **HTML Sanitization**: Secure processing of search result HTML
 - **Match Highlighting**: Proper application of match classes
 - **Security Testing**: XSS prevention and content sanitization
 - **Performance**: Efficient pipe transformation and caching
 
 #### SafeValue Pipe Testing
+
 - **Data Type Handling**: String and object value processing
 - **Complex Structures**: Nested object value extraction
 - **Edge Cases**: Null, undefined, and empty value handling
@@ -644,6 +698,7 @@ const mockSearchResponse: SearchResponse = {
 ### Caching Strategy
 
 #### Intelligent Request Caching
+
 ```typescript
 private cache = new Map<string, any>();
 private ongoingRequests = new Map<string, Observable<any>>();
@@ -662,6 +717,7 @@ browse(q: string, start: number, rows: number): Observable<SearchResponse> {
 ```
 
 **Caching Features**:
+
 - **Result Caching**: Automatic caching of search results for improved performance
 - **Request Deduplication**: Prevention of duplicate concurrent requests
 - **Cache Invalidation**: Intelligent cache cleanup and management
@@ -670,6 +726,7 @@ browse(q: string, start: number, rows: number): Observable<SearchResponse> {
 ### Loading State Management
 
 #### Observable Loading States
+
 ```typescript
 private loadingSubject = new BehaviorSubject<boolean>(false);
 public loading$ = this.loadingSubject.asObservable();
@@ -681,6 +738,7 @@ private updateLoading(increment: boolean): void {
 ```
 
 **Loading Features**:
+
 - **Reactive States**: Observable loading states for real-time UI updates
 - **Counter Management**: Accurate loading state tracking for multiple requests
 - **UI Integration**: Seamless integration with loading indicators
@@ -689,6 +747,7 @@ private updateLoading(increment: boolean): void {
 ### Component Optimization
 
 #### Change Detection Optimization
+
 - **OnPush Strategy**: Potential OnPush change detection for improved performance
 - **TrackBy Functions**: Efficient list rendering with proper tracking
 - **Pure Pipes**: Performance-optimized pipe implementations
@@ -699,6 +758,7 @@ private updateLoading(increment: boolean): void {
 ### Router Integration
 
 #### URL Synchronization
+
 ```typescript
 ngOnInit() {
     this.routeSubscription = this.route.queryParams.subscribe(params => {
@@ -714,6 +774,7 @@ ngOnInit() {
 ```
 
 **Router Features**:
+
 - **Deep Linking**: Bookmarkable search URLs with query parameters
 - **Browser History**: Back/forward navigation support
 - **State Persistence**: Automatic search state restoration
@@ -722,6 +783,7 @@ ngOnInit() {
 ### API Integration
 
 #### RESTful Search Endpoint
+
 ```typescript
 this.http.get<SearchResponse>(`/ses/browse`, {
     params: {
@@ -733,6 +795,7 @@ this.http.get<SearchResponse>(`/ses/browse`, {
 ```
 
 **API Features**:
+
 - **RESTful Design**: Standard HTTP GET requests with query parameters
 - **Parameterization**: Flexible query, pagination, and filtering parameters
 - **Error Handling**: Comprehensive HTTP error processing and recovery
@@ -741,12 +804,14 @@ this.http.get<SearchResponse>(`/ses/browse`, {
 ### Application Integration
 
 #### Navigation Context
+
 - **Main Navigation**: Integration with primary application navigation
 - **Gene Data Access**: Direct navigation from nav component with wildcard queries
 - **Help Integration**: Seamless connection to search help documentation
 - **Result Navigation**: Direct links to detailed gene information pages
 
 #### Component Communication
+
 - **Parent-Child**: Props and event communication between search components
 - **Service Communication**: Centralized search service for cross-component data sharing
 - **State Management**: Reactive state management with observables
@@ -757,12 +822,14 @@ this.http.get<SearchResponse>(`/ses/browse`, {
 ### Search Efficiency
 
 #### Advanced Query Processing
+
 - **Wildcard Support**: Automatic wildcard suggestions for expanded results
 - **Field-Specific Search**: Targeted searches on specific gene data fields
 - **Real-Time Feedback**: Immediate loading indicators and result updates
 - **Error Recovery**: Clear guidance for improving unsuccessful searches
 
 #### Result Discovery
+
 - **Comprehensive Display**: Full gene metadata presentation in search results
 - **Match Highlighting**: Visual emphasis of search term matches in results
 - **Direct Navigation**: One-click access to detailed gene information
@@ -771,12 +838,14 @@ this.http.get<SearchResponse>(`/ses/browse`, {
 ### Accessibility Excellence
 
 #### Screen Reader Support
+
 - **Semantic HTML**: Proper markup for assistive technology
 - **ARIA Labels**: Comprehensive labeling for complex search interface elements
 - **Focus Management**: Logical tab order and keyboard navigation
 - **Content Structure**: Clear heading hierarchy and content organization
 
 #### Keyboard Navigation
+
 - **Enter Key Search**: Keyboard-triggered search functionality
 - **Tab Navigation**: Complete keyboard accessibility for all interactive elements
 - **Focus Indicators**: Clear visual feedback for keyboard navigation
@@ -785,6 +854,7 @@ this.http.get<SearchResponse>(`/ses/browse`, {
 ### Mobile Experience
 
 #### Responsive Search Interface
+
 - **Touch-Friendly**: Appropriately sized touch targets for mobile devices
 - **Optimized Layout**: Mobile-first responsive design principles
 - **Performance**: Optimized loading and rendering for mobile devices
@@ -795,6 +865,7 @@ this.http.get<SearchResponse>(`/ses/browse`, {
 ### Search Algorithm Updates
 
 #### Query Processing Enhancement
+
 - **Algorithm Improvements**: Enhanced search relevance and accuracy
 - **Performance Optimization**: Faster query processing and result retrieval
 - **Feature Expansion**: Additional search capabilities and filtering options
@@ -803,6 +874,7 @@ this.http.get<SearchResponse>(`/ses/browse`, {
 ### API Evolution
 
 #### Endpoint Management
+
 - **Version Compatibility**: Backward-compatible API version management
 - **Parameter Expansion**: New search parameters and filtering options
 - **Response Format**: Enhanced response structures and metadata
@@ -811,6 +883,7 @@ this.http.get<SearchResponse>(`/ses/browse`, {
 ### Cache Management
 
 #### Performance Monitoring
+
 - **Cache Efficiency**: Monitoring cache hit rates and performance impact
 - **Memory Usage**: Cache size monitoring and optimization
 - **Invalidation Strategy**: Intelligent cache invalidation for data freshness
@@ -821,12 +894,14 @@ this.http.get<SearchResponse>(`/ses/browse`, {
 ### Advanced Search Features
 
 #### Enhanced Query Capabilities
+
 - **Boolean Search**: AND, OR, NOT operators for complex queries
 - **Fuzzy Search**: Approximate matching for misspelled queries
 - **Search History**: User search history and saved searches
 - **Auto-Complete**: Real-time search suggestions and auto-completion
 
 #### Filtering and Sorting
+
 - **Advanced Filters**: Multi-faceted filtering options for refined results
 - **Sort Options**: Configurable result sorting by relevance, name, or date
 - **Faceted Search**: Category-based result filtering and navigation
@@ -835,12 +910,14 @@ this.http.get<SearchResponse>(`/ses/browse`, {
 ### User Experience Improvements
 
 #### Personalization
+
 - **Search Preferences**: User-configurable search settings and defaults
 - **Result Customization**: Personalized result display and metadata
 - **Recent Searches**: Quick access to recent search queries
 - **Favorites**: Bookmarking and favoriting of search results
 
 #### Advanced UI Features
+
 - **Infinite Scroll**: Alternative pagination with infinite scrolling
 - **Advanced Highlighting**: Multi-term highlighting with different colors
 - **Result Preview**: Hover previews of gene information
@@ -849,12 +926,14 @@ this.http.get<SearchResponse>(`/ses/browse`, {
 ### Technical Improvements
 
 #### Performance Optimization
+
 - **Lazy Loading**: Component and result lazy loading for improved performance
 - **Virtual Scrolling**: Efficient rendering of large result sets
 - **Service Workers**: Offline search capabilities and caching
 - **Bundle Optimization**: Code splitting and module optimization
 
 #### Advanced Analytics
+
 - **Search Analytics**: User search behavior analysis and optimization
 - **Performance Metrics**: Search performance monitoring and alerting
 - **A/B Testing**: Interface optimization through controlled testing
@@ -865,12 +944,14 @@ this.http.get<SearchResponse>(`/ses/browse`, {
 ### Common Search Issues
 
 #### Query Problems
+
 - **No Results**: Empty result sets and suggestion strategies
 - **Slow Search**: Performance issues and optimization techniques
 - **API Errors**: Network and server error handling
 - **Invalid Queries**: Malformed query handling and user guidance
 
 #### Interface Issues
+
 - **Loading Problems**: Loading indicator and state management issues
 - **Pagination Errors**: Page navigation and boundary condition problems
 - **Mobile Display**: Responsive layout issues and mobile compatibility
@@ -879,12 +960,14 @@ this.http.get<SearchResponse>(`/ses/browse`, {
 ### Debugging Strategies
 
 #### Development Tools
+
 - **Browser DevTools**: Network inspection and API debugging
 - **Angular DevTools**: Component state and change detection debugging
 - **Console Logging**: Strategic logging for search flow debugging
 - **Performance Profiling**: Search performance analysis and optimization
 
 #### Error Handling
+
 - **Network Errors**: API communication failure handling
 - **Data Validation**: Invalid response data processing
 - **User Input**: Invalid search query handling and sanitization
@@ -893,12 +976,14 @@ this.http.get<SearchResponse>(`/ses/browse`, {
 ### Performance Debugging
 
 #### Search Performance
+
 - **Query Analysis**: Search query performance profiling
 - **Cache Analysis**: Cache hit rates and efficiency measurement
 - **Network Analysis**: API response time and payload analysis
 - **Rendering Performance**: Component rendering and update optimization
 
 #### Memory Management
+
 - **Memory Leaks**: Subscription and cache memory leak detection
 - **Cache Optimization**: Cache size and cleanup strategy optimization
 - **Component Lifecycle**: Proper component destruction and cleanup
@@ -909,12 +994,14 @@ this.http.get<SearchResponse>(`/ses/browse`, {
 ### Graceful Degradation
 
 #### Network Failures
+
 - **Offline Support**: Basic offline functionality and user messaging
 - **Retry Mechanisms**: Automatic retry with exponential backoff
 - **Fallback Content**: Alternative content during service failures
 - **User Notification**: Clear communication of service status
 
 #### Data Issues
+
 - **Malformed Responses**: Robust handling of invalid API responses
 - **Empty Results**: Meaningful messaging for empty result sets
 - **Partial Failures**: Graceful handling of partial search failures
@@ -923,12 +1010,14 @@ this.http.get<SearchResponse>(`/ses/browse`, {
 ### User Support
 
 #### Help Integration
+
 - **Contextual Help**: Inline help and guidance for search features
 - **Error Documentation**: Comprehensive error explanation and resolution
 - **Search Tips**: Proactive search improvement suggestions
 - **Contact Support**: Easy access to technical support and assistance
 
 #### Recovery Strategies
+
 - **Alternative Searches**: Automatic suggestion of alternative search strategies
 - **Search Refinement**: Guidance for refining unsuccessful searches
 - **Help Resources**: Links to comprehensive search documentation

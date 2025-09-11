@@ -32,6 +32,7 @@ xref-resources/
 **Purpose**: Core component that manages and displays external database cross-references for gene symbols
 
 **Key Features**:
+
 - **Standalone Component**: Uses Angular's standalone architecture for modular design
 - **Multi-Database Integration**: Supports six major biological databases plus versioned Phytozome systems
 - **Dynamic Phytozome Version Selection**: Automatically detects and displays the highest available Phytozome version with data
@@ -51,12 +52,14 @@ export class XrefComponent implements OnInit
 ```
 
 **Input Properties**:
+
 - `@Input({ required: true }) result!: GeneSymbolReport` - Complete gene symbol report with xref data
 - `@Input({ required: true }) symbol!: string` - Current gene symbol being displayed
 
 **Component Properties**:
 
 #### Database Configuration
+
 ```typescript
 // To add new Phytozome versions, simply add entries here following the pattern:
 // 'Phytozome v{major}_{minor}': []
@@ -73,6 +76,7 @@ classifiedXrefs: Record<ExternalResourceName, Xref[] | string> = {
 ```
 
 #### URL Templates
+
 ```typescript
 // To add new Phytozome versions, add the corresponding URL here:
 xrefURLS: Record<ExternalResourceName, string> = {
@@ -87,6 +91,7 @@ xrefURLS: Record<ExternalResourceName, string> = {
 ```
 
 #### Help Documentation Fragments
+
 ```typescript
 xrefFrags: Record<ExternalResourceName, string> = {
     'NCBI Gene': 'ncbi_g',
@@ -102,9 +107,11 @@ xrefFrags: Record<ExternalResourceName, string> = {
 **Core Methods**:
 
 #### ngOnInit()
+
 **Purpose**: Initializes component by processing gene cross-references and categorizing them by database
 
 **Processing Logic**:
+
 - **Data Extraction**: Retrieves geneXrefs from gene symbol report
 - **Resource Classification**: Groups xrefs by external resource name
 - **Symbol Identification**: Finds approved gene symbol for display
@@ -127,9 +134,11 @@ ngOnInit() {
 ```
 
 #### isValidResourceName()
+
 **Purpose**: Type guard function ensuring database names are valid ExternalResourceName types
 
 **Type Safety**:
+
 - **Compile-time Safety**: Ensures only valid database names are processed
 - **Runtime Validation**: Prevents errors from invalid resource names
 - **IntelliSense Support**: Provides IDE autocomplete for database names
@@ -141,25 +150,31 @@ isValidResourceName(name: string): name is ExternalResourceName {
 ```
 
 #### xrefsByResourceName()
+
 **Purpose**: Filters cross-references by specific external resource name
 
 **Functionality**:
+
 - **Resource Filtering**: Returns xrefs matching specific database
 - **Array Safety**: Always returns array type for consistent handling
 - **Null Safety**: Handles undefined filter results gracefully
 
 #### isXrefObject()
+
 **Purpose**: Type guard distinguishing between Xref objects and string values
 
 **Use Cases**:
+
 - **Template Safety**: Ensures proper handling in Angular templates
 - **Type Discrimination**: Differentiates between different xref value types
 - **Runtime Validation**: Prevents template rendering errors
 
 #### getPreferredPhytozomeVersion()
+
 **Purpose**: Determines which Phytozome version to display based on data availability
 
 **Functionality**:
+
 - **Automatic Detection**: Finds all resources starting with "Phytozome v"
 - **Version Sorting**: Sorts by version number (highest first) using `extractVersionNumber()`
 - **Data-Driven Selection**: Returns the highest version that has actual data
@@ -194,14 +209,17 @@ getPreferredPhytozomeVersion(): ExternalResourceName | null {
 ```
 
 #### extractVersionNumber()
+
 **Purpose**: Extracts comparable version numbers from Phytozome version strings
 
 **Version Conversion Examples**:
+
 - `"Phytozome v4_1"` → `4.1`
-- `"Phytozome v3_1"` → `3.1` 
+- `"Phytozome v3_1"` → `3.1`
 - `"Phytozome v10_2"` → `10.2` (future version example)
 
 **Implementation**:
+
 - **Pattern Matching**: Uses regex to extract major and minor version numbers
 - **Decimal Conversion**: Converts to decimal format for easy numeric comparison
 - **Error Handling**: Returns 0 for invalid formats to ensure consistent sorting
@@ -225,14 +243,17 @@ private extractVersionNumber(versionString: string): number {
 **Template Structure**:
 
 #### Card Layout
+
 ```html
 <div class="card">
     <h3 class="card-header">External resources for {{ symbol }}</h3>
     <div class="card-body">
 ```
+
 Professional card-based layout with dynamic gene symbol in header
 
 #### Dynamic Resource Iteration
+
 ```html
 @for (
     res of [
@@ -247,12 +268,14 @@ Professional card-based layout with dynamic gene symbol in header
 ```
 
 **Resource Processing**:
+
 - **Ordered Display**: Static resources shown in priority order
 - **Conditional Rendering**: Only displays resources with available data
 - **Track Function**: Optimized list rendering performance
 - **Phytozome Exclusion**: Phytozome versions handled separately via dynamic selection
 
 #### Dynamic Phytozome Version Display
+
 ```html
 <!-- Display preferred Phytozome version -->
 @if (getPreferredPhytozomeVersion()) {
@@ -283,12 +306,14 @@ Professional card-based layout with dynamic gene symbol in header
 ```
 
 **Dynamic Version Features**:
+
 - **Version Detection**: Automatically finds highest available Phytozome version with data
 - **Fallback Logic**: Only displays if data is available for any version
 - **Future-Proof**: Automatically handles new Phytozome versions without template changes
 - **Consistent Styling**: Uses same layout patterns as static resources
 
 #### Conditional Content Display
+
 ```html
 @if (
     isValidResourceName(res) &&
@@ -299,11 +324,13 @@ Professional card-based layout with dynamic gene symbol in header
 ```
 
 **Validation Chain**:
+
 - **Type Validation**: Ensures resource name is valid
 - **Data Existence**: Checks for classified xrefs
 - **Content Availability**: Verifies non-empty xref arrays
 
 #### Help Integration
+
 ```html
 <span class="key">
     {{ res }}
@@ -318,12 +345,14 @@ Professional card-based layout with dynamic gene symbol in header
 ```
 
 **Help System Features**:
+
 - **Contextual Links**: Direct navigation to specific help sections
 - **Fragment Navigation**: Precise help content targeting
 - **Accessibility**: Descriptive title attributes for screen readers
 - **Visual Consistency**: FontAwesome icons for uniform appearance
 
 #### Dynamic External Links
+
 ```html
 <span class="val">
     <ul>
@@ -345,6 +374,7 @@ Professional card-based layout with dynamic gene symbol in header
 ```
 
 **Link Generation Features**:
+
 - **Type Discrimination**: Handles both string and object xref types
 - **Dynamic URLs**: Concatenates base URLs with specific identifiers
 - **External Navigation**: Opens links in new tabs for user convenience
@@ -353,27 +383,32 @@ Professional card-based layout with dynamic gene symbol in header
 **Supported Database Integrations**:
 
 #### NCBI Gene
+
 - **URL Pattern**: `https://www.ncbi.nlm.nih.gov/gene/[ID]`
 - **Use Case**: Gene information and genomic data
 - **Data Format**: Numeric gene identifiers
 
 #### Ensembl Gene
+
 - **URL Pattern**: `https://plants.ensembl.org/Populus_trichocarpa/Gene/Summary?db=core;g=[ID]`
 - **Use Case**: Plant genome browser and comparative genomics
 - **Data Format**: Ensembl gene identifiers
 
 #### UniProt
+
 - **URL Pattern**: `https://www.uniprot.org/uniprotkb/[ID]`
 - **Use Case**: Protein sequence and functional information
 - **Data Format**: UniProt accession numbers
 
 #### PubMed
+
 - **URL Pattern**: `https://pubmed.ncbi.nlm.nih.gov/[ID]`
 - **Use Case**: Scientific literature references
 - **Data Format**: PubMed publication identifiers
 
 #### Phytozome (Versioned System)
-- **URL Patterns**: 
+
+- **URL Patterns**:
   - `https://phytozome-next.jgi.doe.gov/report/gene/Ptrichocarpa_v4_1/[ID]`
   - `https://phytozome-next.jgi.doe.gov/report/gene/Ptrichocarpa_v3_1/[ID]`
 - **Use Case**: Plant comparative genomics and gene families
@@ -382,6 +417,7 @@ Professional card-based layout with dynamic gene symbol in header
 - **Future Versions**: Easily extensible for new versions (v5_0, v5_1, etc.)
 
 #### CBI Sequence Viewer
+
 - **URL Pattern**: `https://fair.ornl.gov/ThirdParty/jbrowse2/?PGNCID=[ID]`
 - **Use Case**: Genome browser for detailed sequence visualization
 - **Status**: Commented out in current implementation (future feature)
@@ -393,14 +429,17 @@ Professional card-based layout with dynamic gene symbol in header
 **Design Features**:
 
 #### Card Layout
+
 ```css
 .card {
     margin-bottom: 2ch;
 }
 ```
+
 Consistent spacing between components in the gene symbol report
 
 #### Responsive Grid System
+
 ```css
 .key-val-pairs {
     display: grid;
@@ -426,11 +465,13 @@ Consistent spacing between components in the gene symbol report
 ```
 
 **Responsive Behavior**:
+
 - **Mobile**: Single column layout for space efficiency
 - **Tablet (576px+)**: Two-column layout with fixed label width
 - **Desktop (768px+)**: Four-column layout for dense information display
 
 #### Typography and List Styling
+
 ```css
 .key {
     font-weight: bold;
@@ -446,6 +487,7 @@ Consistent spacing between components in the gene symbol report
 ```
 
 **Visual Design**:
+
 - **Bold Labels**: Clear distinction between resource names and values
 - **Clean Lists**: Removed default list styling for professional appearance
 - **Flexible Width**: Minimum width ensures label consistency
@@ -457,6 +499,7 @@ Consistent spacing between components in the gene symbol report
 **Test Categories**:
 
 #### Component Creation Tests
+
 ```typescript
 describe('Component Creation', () => {
     it('should create', () => {
@@ -471,11 +514,13 @@ describe('Component Creation', () => {
 ```
 
 **Creation Validation**:
+
 - **Component Instantiation**: Verifies successful component creation
 - **Input Requirements**: Ensures required inputs are properly defined
 - **Initial State**: Validates default property values and configurations
 
 #### Data Classification Tests
+
 ```typescript
 describe('ngOnInit', () => {
     it('should classify xrefs correctly', () => {
@@ -489,11 +534,13 @@ describe('ngOnInit', () => {
 ```
 
 **Classification Coverage**:
+
 - **Multi-Database Processing**: Tests xref categorization across all supported databases
 - **Empty Data Handling**: Validates behavior with missing or empty xref arrays
 - **Symbol Extraction**: Ensures approved gene symbol identification
 
 #### Type Safety Tests
+
 ```typescript
 describe('isValidResourceName', () => {
     it('should return true for valid resource names', () => {
@@ -510,11 +557,13 @@ describe('isValidResourceName', () => {
 ```
 
 **Type Guard Validation**:
+
 - **Valid Names**: Confirms recognition of all supported database names including versioned Phytozome
 - **Invalid Names**: Ensures rejection of unsupported resource names and deprecated formats
 - **Edge Cases**: Tests empty strings and malformed names
 
 #### Phytozome Version Management Tests
+
 ```typescript
 describe('getPreferredPhytozomeVersion', () => {
     it('should return the highest version with data', () => {
@@ -546,12 +595,14 @@ describe('extractVersionNumber', () => {
 ```
 
 **Version Management Coverage**:
+
 - **Version Selection**: Tests priority logic for multiple available versions
 - **Data Requirements**: Validates that only versions with data are selected
 - **Version Parsing**: Confirms correct extraction of version numbers
 - **Error Handling**: Tests behavior with invalid version strings
 
 #### Object Type Discrimination Tests
+
 ```typescript
 describe('isXrefObject', () => {
     it('should return true for valid Xref objects', () => {
@@ -566,11 +617,13 @@ describe('isXrefObject', () => {
 ```
 
 **Type Discrimination Coverage**:
+
 - **Valid Objects**: Validates Xref object recognition
 - **String Values**: Ensures proper string type handling
 - **Null Safety**: Tests null and undefined value handling
 
 #### Error Handling Tests
+
 ```typescript
 describe('Error Handling', () => {
     it('should handle malformed xref data gracefully', () => {
@@ -586,6 +639,7 @@ describe('Error Handling', () => {
 ```
 
 **Robustness Testing**:
+
 - **Malformed Data**: Tests behavior with invalid or incomplete xref structures
 - **Null Data**: Ensures graceful handling of null gene symbol reports
 - **Missing Properties**: Validates component stability with incomplete data
@@ -609,6 +663,7 @@ export interface Xref {
 ```
 
 **Property Descriptions**:
+
 - `geneId: number` - Internal gene identifier for relationship mapping
 - `xrefId: number` - Unique identifier for the cross-reference entry
 - `creationDate: Date` - Timestamp when cross-reference was established
@@ -629,6 +684,7 @@ export interface XrefData {
 ```
 
 **Property Descriptions**:
+
 - `displayId: string` - Human-readable identifier for external database entry
 - `externalResource: ExternalResource` - Resource metadata including database name
 
@@ -643,6 +699,7 @@ export interface ExternalResource {
 ```
 
 **Property Descriptions**:
+
 - `name: ExternalResourceName` - Type-safe database name from predefined union
 
 ### ExternalResourceName Type (external-resource-name.type.ts)
@@ -664,6 +721,7 @@ export type ExternalResourceName =
 ```
 
 **Type Safety Benefits**:
+
 - **Compile-time Validation**: Prevents typos in database names
 - **IDE Support**: Provides autocomplete for valid database names
 - **Refactoring Safety**: Ensures consistent naming across codebase
@@ -674,7 +732,9 @@ export type ExternalResourceName =
 ### Primary Features
 
 #### Multi-Database Integration
+
 The component provides seamless integration with six major biological databases plus versioned Phytozome systems:
+
 - **NCBI Gene**: Comprehensive gene information and genomic data
 - **Ensembl Gene**: Plant genome browser and comparative genomics
 - **UniProt**: Protein sequence and functional annotation
@@ -683,18 +743,21 @@ The component provides seamless integration with six major biological databases 
 - **CBI sequence viewer**: Detailed genome sequence visualization
 
 #### Dynamic Phytozome Version Management
+
 - **Automatic Detection**: Scans for all available Phytozome versions in data
 - **Version Prioritization**: Displays highest version number with available data
 - **Future-Proof Architecture**: New versions automatically detected without code changes
 - **Fallback Logic**: Graceful handling when no Phytozome data is available
 
 #### Dynamic Link Generation
+
 - **URL Construction**: Automatic concatenation of base URLs with identifiers
 - **Type-Safe Processing**: Validated database names prevent invalid links
 - **External Navigation**: Links open in new tabs for seamless user experience
 - **Fallback Handling**: Graceful degradation when identifiers are missing
 
 #### Data Classification
+
 - **Resource Grouping**: Automatic categorization of xrefs by database type
 - **Multiple Entries**: Support for multiple cross-references per database
 - **Status Awareness**: Handles active and withdrawn cross-references
@@ -703,18 +766,21 @@ The component provides seamless integration with six major biological databases 
 ### User Experience Features
 
 #### Contextual Help Integration
+
 - **Database-Specific Help**: Links to detailed documentation for each database
 - **Fragment Navigation**: Direct access to relevant help sections
 - **Visual Indicators**: Consistent help icons across all resource types
 - **Accessibility**: Screen reader friendly help descriptions
 
 #### Responsive Design
+
 - **Mobile Optimization**: Single-column layout for small screens
 - **Progressive Enhancement**: Multi-column layouts for larger screens
 - **Touch-Friendly**: Appropriate spacing and sizing for touch interfaces
 - **Performance**: Minimal CSS for fast rendering and smooth interactions
 
 #### Professional Presentation
+
 - **Card-Based Layout**: Consistent with other gene symbol report components
 - **Clean Lists**: Organized display of multiple cross-references
 - **Brand Consistency**: Aligned with PGNC visual design standards
@@ -725,15 +791,18 @@ The component provides seamless integration with six major biological databases 
 ### Dependencies
 
 #### Angular Framework
+
 - **@angular/core**: Component framework and lifecycle management
 - **@angular/router**: Router integration for help system navigation
 - **@angular/testing**: Testing utilities and mock data management
 
 #### External Libraries
+
 - **@fortawesome/angular-fontawesome**: Icon system for help indicators
 - **@fortawesome/free-solid-svg-icons**: Question circle icons for help links
 
 #### Internal Models
+
 - **GeneSymbolReport**: Primary data structure containing xref information
 - **GeneSymbol**: Gene symbol data for header display
 - **Xref Models**: Complete xref data model hierarchy
@@ -741,12 +810,14 @@ The component provides seamless integration with six major biological databases 
 ### Performance Characteristics
 
 #### Component Performance
+
 - **Efficient Filtering**: Optimized array operations for xref classification
 - **Lazy Processing**: Data processing only occurs during initialization
 - **Memory Management**: Minimal state retention and proper cleanup
 - **Type Guards**: Compile-time optimizations through type safety
 
 #### Rendering Performance
+
 - **Conditional Rendering**: Angular control flow for optimal DOM updates
 - **Track Functions**: Efficient list rendering with proper change detection
 - **CSS Grid**: Hardware-accelerated layout system
@@ -755,12 +826,14 @@ The component provides seamless integration with six major biological databases 
 ### Security Considerations
 
 #### Data Safety
+
 - **Type Safety**: Strong TypeScript typing prevents runtime errors
 - **Input Validation**: Required input decorators ensure data presence
 - **Null Safety**: Comprehensive null checking throughout component logic
 - **XSS Protection**: Angular's built-in sanitization for external links
 
 #### External Link Security
+
 - **HTTPS**: All external database URLs use secure protocols
 - **Target Validation**: External links open in new tabs for security
 - **URL Construction**: Safe concatenation prevents injection attacks
@@ -771,12 +844,14 @@ The component provides seamless integration with six major biological databases 
 ### Code Standards
 
 #### TypeScript Best Practices
+
 - **Strict Typing**: All properties and methods properly typed
 - **Type Guards**: Custom type validation functions for runtime safety
 - **Interface Compliance**: All data structures implement defined interfaces
 - **Generic Usage**: Appropriate use of TypeScript generics for flexibility
 
 #### Angular Best Practices
+
 - **Standalone Architecture**: Modern Angular component design
 - **Lifecycle Hooks**: Proper implementation of OnInit for data processing
 - **Template Syntax**: Modern Angular control flow (@if, @for)
@@ -785,12 +860,14 @@ The component provides seamless integration with six major biological databases 
 ### Data Handling
 
 #### Xref Processing
+
 - **Classification Logic**: Systematic categorization by database type
 - **Error Resilience**: Graceful handling of malformed or missing data
 - **Type Discrimination**: Safe handling of mixed data types
 - **Performance**: Efficient filtering and grouping operations
 
 #### External Integration
+
 - **URL Generation**: Dynamic construction of database-specific URLs
 - **Identifier Handling**: Safe processing of various identifier formats
 - **Link Validation**: Verification of link construction before rendering
@@ -799,12 +876,14 @@ The component provides seamless integration with six major biological databases 
 ### Testing Strategy
 
 #### Comprehensive Coverage
+
 - **Unit Testing**: Complete component and method testing
 - **Integration Testing**: Full data flow testing with mock data
 - **Error Scenario Testing**: Edge cases and error condition validation
 - **Type Safety Testing**: Validation of type guards and interface compliance
 
 #### Mock Data Strategy
+
 - **Realistic Mocks**: Mock data representing real-world scenarios
 - **Edge Cases**: Testing with null, undefined, and malformed data
 - **Multiple Databases**: Comprehensive coverage of all supported databases
@@ -815,12 +894,14 @@ The component provides seamless integration with six major biological databases 
 ### Application Integration
 
 #### Gene Symbol Report
+
 - **Component Hierarchy**: Child component within gene symbol report display
 - **Data Flow**: Receives processed gene symbol report data from parent
 - **Styling Consistency**: Matches visual design of other report components
 - **Help System**: Integrated with application-wide documentation
 
 #### PGNC Application Ecosystem
+
 - **Database Connectivity**: Links to external scientific databases
 - **User Navigation**: Maintains user context during external navigation
 - **Help Documentation**: Contextual links to application help system
@@ -829,6 +910,7 @@ The component provides seamless integration with six major biological databases 
 ### External System Integration
 
 #### Scientific Databases
+
 - **NCBI Integration**: Direct links to gene records and genomic data
 - **Ensembl Integration**: Plant genome browser navigation
 - **UniProt Integration**: Protein information and functional annotation
@@ -836,6 +918,7 @@ The component provides seamless integration with six major biological databases 
 - **Genomics Platforms**: Phytozome comparative genomics access
 
 #### Future Integrations
+
 - **CBI Sequence Viewer**: Planned genome browser integration
 - **Additional Databases**: Extensible architecture for new resources
 - **API Integration**: Potential for real-time data validation
@@ -846,18 +929,21 @@ The component provides seamless integration with six major biological databases 
 ### Database Management
 
 #### URL Maintenance
+
 - **Database URLs**: Regular verification of external database endpoints
 - **Version Updates**: Monitoring for database version changes
 - **Link Validation**: Automated testing of external link functionality
 - **Identifier Formats**: Adaptation to changing identifier schemes
 
 #### New Database Integration
+
 - **Type Extension**: Adding new databases to ExternalResourceName type
 - **URL Configuration**: Adding base URLs and fragment identifiers
 - **Template Updates**: Including new databases in display iteration
 - **Help Documentation**: Creating help content for new databases
 
 #### New Phytozome Version Integration
+
 - **Type Addition**: Add new version to ExternalResourceName type (e.g., `| 'Phytozome v5_2'`)
 - **URL Configuration**: Add corresponding URL in xrefURLS object
 - **Data Structure**: Add entry in classifiedXrefs initialization
@@ -865,6 +951,7 @@ The component provides seamless integration with six major biological databases 
 - **Zero Code Changes**: Template and logic require no modifications
 
 **Example for adding Phytozome v5_2**:
+
 ```typescript
 // 1. Update type definition
 export type ExternalResourceName = 
@@ -889,12 +976,14 @@ See `version-sorting-demo.md` for detailed examples and architecture explanation
 ### Technical Maintenance
 
 #### Angular Framework Updates
+
 - **Component Compatibility**: Maintaining compatibility with Angular updates
 - **Template Syntax**: Updating to latest Angular template features
 - **Dependency Management**: Regular updates of external libraries
 - **Performance Optimization**: Leveraging new Angular performance features
 
 #### Code Quality
+
 - **Testing Maintenance**: Keeping tests current with code changes
 - **Type Safety**: Maintaining strict TypeScript compliance
 - **Documentation**: Regular updates to inline and external documentation
@@ -905,18 +994,21 @@ See `version-sorting-demo.md` for detailed examples and architecture explanation
 ### Planned Features
 
 #### Enhanced Database Integration
+
 - **Real-time Validation**: Verification of external link availability
 - **Deep Linking**: Direct navigation to specific sections within databases
 - **Cross-Database Search**: Integrated search across multiple resources
 - **Data Synchronization**: Real-time updates from external databases
 
 #### User Experience Improvements
+
 - **Link Preview**: Hover previews of external database content
 - **Batch Operations**: Multiple link opening and management
 - **Bookmarking**: Save frequently accessed external resources
 - **Usage Analytics**: Tracking of most useful external resources
 
 #### Technical Enhancements
+
 - **Caching**: Client-side caching of external resource metadata
 - **Performance**: Enhanced loading and rendering performance
 - **Offline Support**: Cached information for offline access
@@ -925,12 +1017,14 @@ See `version-sorting-demo.md` for detailed examples and architecture explanation
 ### Extensibility Points
 
 #### Architecture Flexibility
+
 - **Plugin System**: Modular addition of new database integrations
 - **Configuration**: Runtime configuration of database URLs and settings
 - **Theming**: Customizable appearance for different deployment contexts
 - **API Integration**: Framework for real-time database communication
 
 #### Data Enhancement
+
 - **Metadata Enrichment**: Additional information about external resources
 - **Relationship Mapping**: Cross-database relationship visualization
 - **Quality Scoring**: Reliability metrics for external cross-references
@@ -941,18 +1035,21 @@ See `version-sorting-demo.md` for detailed examples and architecture explanation
 ### Common Issues
 
 #### Display Problems
+
 - **Missing Cross-references**: Check geneXrefs data in gene symbol report
 - **Broken Links**: Verify external database URL configurations
 - **Layout Issues**: Test responsive grid behavior across screen sizes
 - **Help Navigation**: Ensure router configuration includes help routes
 
 #### Data Processing Issues
+
 - **Classification Errors**: Verify external resource name matching
 - **Type Errors**: Check xref data structure compliance with interfaces
 - **Performance Issues**: Monitor large xref dataset processing
 - **Null Reference Errors**: Validate null safety in data processing logic
 
 #### External Integration Issues
+
 - **Database Connectivity**: Verify external database availability
 - **Identifier Formats**: Check compatibility with database identifier schemes
 - **URL Construction**: Validate dynamic URL generation logic
@@ -961,18 +1058,21 @@ See `version-sorting-demo.md` for detailed examples and architecture explanation
 ### Debugging Strategies
 
 #### Development Tools
+
 - **Angular DevTools**: Component state inspection and data debugging
 - **Browser Network Tab**: External link validation and request monitoring
 - **Console Logging**: Strategic logging for data flow debugging
 - **TypeScript Compiler**: Type checking and interface validation
 
 #### Testing Approaches
+
 - **Unit Testing**: Isolated component testing with mock xref data
 - **Integration Testing**: Full component testing with realistic data
 - **Manual Testing**: Cross-browser and device validation
 - **External Link Testing**: Verification of all database integrations
 
 #### Performance Monitoring
+
 - **Change Detection**: Monitoring Angular change detection cycles
 - **Memory Usage**: Component memory footprint analysis
 - **Rendering Performance**: Template rendering optimization
@@ -981,12 +1081,14 @@ See `version-sorting-demo.md` for detailed examples and architecture explanation
 ### Error Handling Patterns
 
 #### Data Resilience
+
 - **Null Safety**: Comprehensive null checking throughout data processing
 - **Type Validation**: Runtime type checking with type guards
 - **Graceful Degradation**: Fallback behavior for missing or invalid data
 - **Error Boundaries**: Isolation of errors to prevent component crashes
 
 #### User Experience
+
 - **Error Messaging**: Clear communication of data availability issues
 - **Progressive Loading**: Incremental display of available cross-references
 - **Fallback Content**: Meaningful defaults when external data is unavailable

@@ -7,11 +7,13 @@ The Home directory contains the landing page components for the PGNC (Plant Gene
 ## Component Architecture
 
 ### Core Components
+
 - **HomeComponent** (`home.component.ts`): Main homepage container and layout orchestrator
 - **HomeHeaderComponent** (`header/`): Specialized header with collapsible navigation for homepage
 - **HomeSearchBarComponent** (`search-bar/`): Prominent search interface optimized for homepage presentation
 
 ### Directory Structure
+
 ```
 home/
 ├── home.component.ts                       # Main homepage container component
@@ -35,9 +37,11 @@ home/
 ### Home Component
 
 #### Purpose
+
 The HomeComponent serves as the application's landing page, providing a visually striking introduction to PGNC with prominent branding, tagline, and immediate access to search functionality.
 
 #### Key Features
+
 - **Jumbotron Design**: Full-height maroon background with centered content
 - **Brand Presentation**: Large PGNC logo with descriptive tagline
 - **Search Integration**: Prominent search interface for immediate user engagement
@@ -45,6 +49,7 @@ The HomeComponent serves as the application's landing page, providing a visually
 - **Component Orchestration**: Coordinates header and search bar components
 
 #### Implementation
+
 ```typescript
 @Component({
     selector: 'app-home',
@@ -57,12 +62,14 @@ export class HomeComponent {}
 ```
 
 **Architecture Features**:
+
 - **Standalone Component**: Modern Angular standalone architecture
 - **Component Composition**: Integrates specialized header and search components
 - **No State Management**: Simple presentation component without complex logic
 - **Dependency Injection**: Clean separation of concerns with child components
 
 #### Template Structure
+
 ```html
 <div id="homepage" class="jumbotron">
     <app-home-header />
@@ -98,6 +105,7 @@ export class HomeComponent {}
 ```
 
 **Template Features**:
+
 - **Jumbotron Layout**: Bootstrap jumbotron for hero section presentation
 - **Logo Integration**: Large PGNC logo with proper alt text for accessibility
 - **Tagline Display**: Descriptive tagline explaining PGNC's purpose
@@ -107,15 +115,18 @@ export class HomeComponent {}
 ### Home Header Component
 
 #### Purpose
+
 Provides a specialized header for the homepage that integrates seamlessly with the jumbotron design while maintaining navigation functionality.
 
 #### Key Features
+
 - **Overlay Positioning**: Absolutely positioned header that overlays the jumbotron
 - **Collapsible Navigation**: Mobile-friendly hamburger menu integration
 - **Navigation Integration**: Reuses main navigation component
 - **Visual Consistency**: Maintains brand colors and styling
 
 #### Implementation
+
 ```typescript
 @Component({
     selector: 'app-home-header',
@@ -131,11 +142,13 @@ export class HomeHeaderComponent {
 ```
 
 **Component Properties**:
+
 - **FontAwesome Icons**: Hamburger menu and envelope icons
 - **Collapse State**: Boolean management for mobile menu visibility
 - **Navigation Reuse**: Integrates existing NavComponent for consistency
 
 #### Header Design Features
+
 ```html
 <header>
     <nav class="navbar navbar-expand-md">
@@ -153,6 +166,7 @@ export class HomeHeaderComponent {
 ```
 
 **Header Styling Approach**:
+
 - **Absolute Positioning**: Overlays the jumbotron without affecting layout
 - **High Z-Index**: Ensures header appears above background content
 - **Transparent Integration**: Blends with jumbotron background
@@ -161,9 +175,11 @@ export class HomeHeaderComponent {
 ### Home Search Bar Component
 
 #### Purpose
+
 Provides a specialized search interface optimized for the homepage experience with prominent positioning and visual integration.
 
 #### Key Features
+
 - **Router Navigation**: Programmatic navigation to search results
 - **Form Integration**: Two-way data binding with ngModel
 - **Help Integration**: Direct link to search help documentation
@@ -171,6 +187,7 @@ Provides a specialized search interface optimized for the homepage experience wi
 - **Visual Optimization**: Styling optimized for homepage presentation
 
 #### Implementation
+
 ```typescript
 @Component({
     selector: 'app-home-search-bar',
@@ -196,12 +213,14 @@ export class HomeSearchBarComponent {
 ```
 
 **Search Functionality**:
+
 - **Query Management**: String property for search query state
 - **Router Integration**: Angular Router for navigation to search results
 - **Parameter Passing**: Search query passed as URL query parameter
 - **Validation**: Only executes search when query is provided
 
 #### Search Form Structure
+
 ```html
 <form (ngSubmit)="search()" class="search-form" role="search">
     <div class="input-group">
@@ -225,6 +244,7 @@ export class HomeSearchBarComponent {
 ```
 
 **Form Features**:
+
 - **Two-Way Binding**: NgModel integration for reactive input
 - **Help Integration**: Direct link to search help with SVG icon
 - **Submit Handling**: Multiple submit methods (form submit, button click)
@@ -236,6 +256,7 @@ export class HomeSearchBarComponent {
 ### Homepage Visual Design
 
 #### Color Scheme and Branding
+
 ```css
 .jumbotron {
     color: white;
@@ -249,12 +270,14 @@ export class HomeSearchBarComponent {
 ```
 
 **Design Principles**:
+
 - **Brand Color**: Maroon (#800000) background for PGNC brand consistency
 - **Full Height**: 100% height for immersive hero section experience
 - **White Text**: High contrast text for readability
 - **Minimal Padding**: Optimized spacing for content focus
 
 #### Logo and Tagline Presentation
+
 ```css
 .jumbotron .pgnc-logo-block {
     width: 230px;
@@ -271,12 +294,14 @@ export class HomeSearchBarComponent {
 ```
 
 **Visual Hierarchy**:
+
 - **Centered Logo**: Auto margins for perfect centering
 - **Tagline Color**: Gold (#ebc741) for visual distinction and brand accent
 - **Progressive Disclosure**: Tagline hidden on mobile, visible on larger screens
 - **Typography Scaling**: Responsive font sizes for different screen sizes
 
 #### Responsive Layout Strategy
+
 ```css
 @media (min-width: 768px) {
     .jumbotron .larger-screens {
@@ -297,6 +322,7 @@ export class HomeSearchBarComponent {
 ```
 
 **Responsive Features**:
+
 - **Mobile-First Design**: Default mobile layout with desktop enhancements
 - **Content Scaling**: Logo and text sizing adjustments for different screens
 - **Layout Transformation**: Table display for desktop layout flexibility
@@ -305,6 +331,7 @@ export class HomeSearchBarComponent {
 ### Header Styling Integration
 
 #### Overlay Positioning
+
 ```css
 .navbar {
     --txt-color: #fff;
@@ -315,12 +342,14 @@ export class HomeSearchBarComponent {
 ```
 
 **Positioning Strategy**:
+
 - **Absolute Positioning**: Overlays jumbotron without affecting layout flow
 - **High Z-Index**: Ensures visibility above background content
 - **Full Width**: Spans entire viewport width
 - **Color Variables**: CSS custom properties for consistent theming
 
 #### Mobile Menu Integration
+
 ```css
 .navbar-collapse {
     margin-top: 10px;
@@ -331,6 +360,7 @@ export class HomeSearchBarComponent {
 ```
 
 **Mobile Features**:
+
 - **Background Integration**: Matches jumbotron background color
 - **Visual Separation**: Border for menu definition
 - **Spacing Control**: Margin and padding for optimal mobile experience
@@ -339,6 +369,7 @@ export class HomeSearchBarComponent {
 ### Search Bar Visual Integration
 
 #### Input Group Design
+
 ```css
 .query-group {
     border: 1px solid #ccc;
@@ -351,12 +382,14 @@ export class HomeSearchBarComponent {
 ```
 
 **Search Design Principles**:
+
 - **Table Layout**: Consistent alignment of input, help, and button elements
 - **White Background**: Clean contrast against maroon jumbotron
 - **Border Radius**: Subtle rounded corners for modern appearance
 - **Overflow Hidden**: Clean edges for table cell elements
 
 #### Interactive Elements
+
 ```css
 a.help {
     color: #7f9ed3;
@@ -370,6 +403,7 @@ a.help {
 ```
 
 **User Experience Details**:
+
 - **Help Color**: Blue help icon for visual distinction and recognition
 - **Button Integration**: Height matching for seamless input group appearance
 - **Brand Consistency**: Search button uses brand maroon color
@@ -380,18 +414,21 @@ a.help {
 ### Component Integration
 
 #### Parent-Child Communication
+
 ```typescript
 // HomeComponent orchestrates child components
 imports: [HomeHeaderComponent, HomeSearchBarComponent]
 ```
 
 **Integration Patterns**:
+
 - **Component Composition**: Clean separation of header and search functionality
 - **Standalone Architecture**: Modern Angular component design
 - **No Direct Communication**: Components operate independently
 - **Shared Navigation**: Router service used across components
 
 #### Router Integration
+
 ```typescript
 // HomeSearchBarComponent navigation
 search() {
@@ -404,6 +441,7 @@ search() {
 ```
 
 **Navigation Features**:
+
 - **Programmatic Navigation**: Angular Router for search result navigation
 - **Query Parameter Passing**: Search terms passed as URL parameters
 - **Validation Logic**: Search only executes with valid query
@@ -412,6 +450,7 @@ search() {
 ### State Management
 
 #### Minimal State Approach
+
 ```typescript
 // HomeSearchBarComponent state
 query: string | undefined;
@@ -419,6 +458,7 @@ isMenuCollapsed = true;
 ```
 
 **State Characteristics**:
+
 - **Simple Properties**: Minimal state for optimal performance
 - **Form Binding**: Two-way data binding for search input
 - **UI State**: Menu collapse state for mobile navigation
@@ -427,12 +467,14 @@ isMenuCollapsed = true;
 ### Dependencies and Services
 
 #### External Dependencies
+
 - **FontAwesome**: Icon system for visual elements
 - **NgBootstrap**: Collapse functionality for mobile menu
 - **Angular Router**: Navigation and routing services
 - **Angular Forms**: Form handling and two-way binding
 
 #### Service Integration
+
 - **Router Service**: Navigation between application sections
 - **No Custom Services**: Components use built-in Angular services
 - **Clean Dependencies**: Minimal external dependencies for performance
@@ -442,6 +484,7 @@ isMenuCollapsed = true;
 ### Component Testing Approach
 
 #### Mock Component Strategy
+
 ```typescript
 // Mock components for testing
 @Component({
@@ -460,6 +503,7 @@ class MockHomeSearchBarComponent { }
 ```
 
 #### Test Configuration
+
 ```typescript
 beforeEach(async () => {
     await TestBed.configureTestingModule({
@@ -470,6 +514,7 @@ beforeEach(async () => {
 ```
 
 **Testing Areas**:
+
 - **Component Creation**: Basic component instantiation and definition
 - **Template Rendering**: Layout structure and child component integration
 - **Responsive Behavior**: Layout adaptation across different screen sizes
@@ -478,6 +523,7 @@ beforeEach(async () => {
 ### Integration Testing
 
 #### Child Component Integration
+
 - **Header Integration**: Navigation functionality within homepage context
 - **Search Integration**: Search form submission and router navigation
 - **Layout Testing**: Visual integration and responsive behavior
@@ -486,6 +532,7 @@ beforeEach(async () => {
 ### Visual Testing Considerations
 
 #### Responsive Design Testing
+
 - **Mobile Layout**: Collapsed navigation and mobile-optimized search
 - **Tablet Layout**: Intermediate responsive behavior
 - **Desktop Layout**: Full logo, tagline, and expanded navigation
@@ -496,12 +543,14 @@ beforeEach(async () => {
 ### Landing Page Experience
 
 #### First Impression Design
+
 - **Brand Recognition**: Large PGNC logo for immediate brand identification
 - **Purpose Communication**: Clear tagline explaining PGNC's role
 - **Action Facilitation**: Prominent search interface encouraging immediate engagement
 - **Professional Appearance**: Clean, scientific aesthetic appropriate for research community
 
 #### Progressive Disclosure
+
 - **Mobile-First**: Essential elements visible on all devices
 - **Enhanced Desktop**: Additional tagline and expanded layout on larger screens
 - **Navigation Access**: Always-available navigation through header component
@@ -510,12 +559,14 @@ beforeEach(async () => {
 ### Accessibility Features
 
 #### Semantic Structure
+
 - **Proper Headings**: H1 tag for main logo and brand identification
 - **Form Labels**: Appropriate labeling for search form elements
 - **Alt Text**: Descriptive alt text for PGNC logo image
 - **Role Attributes**: Search role for form element
 
 #### Keyboard Navigation
+
 - **Tab Order**: Logical tab progression through interactive elements
 - **Form Submission**: Enter key support for search form
 - **Navigation Access**: Keyboard access to all navigation elements
@@ -524,12 +575,14 @@ beforeEach(async () => {
 ### Performance Optimization
 
 #### Loading Performance
+
 - **Minimal Dependencies**: Lightweight component structure
 - **Image Optimization**: SVG logos for scalable, fast-loading graphics
 - **CSS Efficiency**: Scoped component styles for optimal loading
 - **Component Architecture**: Modular design for efficient loading
 
 #### Runtime Performance
+
 - **Static Content**: Minimal dynamic content for fast rendering
 - **Simple State**: Basic component state without complex reactivity
 - **Efficient Navigation**: Router-based navigation without page reloads
@@ -540,12 +593,14 @@ beforeEach(async () => {
 ### Application Integration
 
 #### Global Navigation
+
 - **Header Integration**: HomeHeaderComponent integrates with main navigation
 - **Search Integration**: HomeSearchBarComponent connects to application search
 - **Router Integration**: Seamless navigation to other application sections
 - **Brand Consistency**: Visual and functional consistency with rest of application
 
 #### Design System Integration
+
 - **Color Scheme**: Consistent use of PGNC brand colors
 - **Typography**: Matching typography hierarchy and styling
 - **Component Patterns**: Consistent patterns with other application components
@@ -554,6 +609,7 @@ beforeEach(async () => {
 ### External Service Integration
 
 #### Asset Management
+
 - **Logo Assets**: Integration with image asset management system
 - **Icon Integration**: FontAwesome icon system integration
 - **CSS Framework**: Bootstrap grid system and component integration
@@ -564,12 +620,14 @@ beforeEach(async () => {
 ### Content Updates
 
 #### Logo and Branding
+
 - **Logo Updates**: Process for updating PGNC logo and branding
 - **Tagline Management**: Updates to homepage tagline and messaging
 - **Color Scheme**: Brand color updates and consistency maintenance
 - **Typography**: Font and styling updates across components
 
 #### Functionality Updates
+
 - **Search Enhancement**: Updates to search functionality and integration
 - **Navigation Updates**: Changes to navigation structure and links
 - **Responsive Improvements**: Mobile and desktop experience enhancements
@@ -578,12 +636,14 @@ beforeEach(async () => {
 ### Technical Maintenance
 
 #### Framework Updates
+
 - **Angular Updates**: Compatibility with Angular framework evolution
 - **Dependency Management**: Third-party library updates and compatibility
 - **Browser Support**: Ensuring compatibility with modern browsers
 - **Testing Maintenance**: Test coverage and mock component updates
 
 #### Code Quality
+
 - **Component Architecture**: Maintaining clean component separation
 - **Style Organization**: CSS structure and maintainability
 - **Performance Monitoring**: Regular performance analysis and optimization
@@ -594,18 +654,21 @@ beforeEach(async () => {
 ### Planned Improvements
 
 #### Enhanced User Experience
+
 - **Animation Integration**: Smooth transitions and micro-interactions
 - **Search Suggestions**: Auto-complete and search suggestion functionality
 - **Recent Searches**: User-specific search history and quick access
 - **Personalization**: User-customizable homepage content and preferences
 
 #### Content Enhancements
+
 - **Featured Content**: Highlighted genes or recent updates
 - **News Integration**: PGNC announcements and updates
 - **Quick Links**: Direct access to popular sections or resources
 - **Search Statistics**: Usage statistics and popular search terms
 
 #### Technical Improvements
+
 - **Performance Optimization**: Further optimization for loading and rendering
 - **Accessibility Enhancements**: Advanced accessibility features and compliance
 - **Mobile App Integration**: Progressive Web App features
@@ -614,12 +677,14 @@ beforeEach(async () => {
 ### Long-term Vision
 
 #### Advanced Features
+
 - **Interactive Tours**: Guided tours for new users
 - **Advanced Search**: Enhanced search functionality with filters
 - **Data Visualization**: Visual representation of nomenclature data
 - **Community Features**: User feedback and community interaction
 
 #### Integration Expansion
+
 - **API Integration**: Real-time data integration from external sources
 - **Social Sharing**: Social media integration for content sharing
 - **Export Functionality**: Data export and download capabilities
@@ -630,12 +695,14 @@ beforeEach(async () => {
 ### Common Issues
 
 #### Layout Problems
+
 - **Responsive Issues**: Layout problems on different screen sizes
 - **Component Overlap**: Header and content positioning conflicts
 - **Image Loading**: Logo loading and display problems
 - **Search Interface**: Search form layout and functionality issues
 
 #### Navigation Issues
+
 - **Router Problems**: Navigation and routing configuration issues
 - **Mobile Menu**: Collapsible navigation functionality problems
 - **Search Navigation**: Search result navigation and parameter passing
@@ -644,12 +711,14 @@ beforeEach(async () => {
 ### Debugging Strategies
 
 #### Development Tools
+
 - **Browser Inspector**: Layout debugging and CSS inspection
 - **Angular DevTools**: Component state and property inspection
 - **Router Debugging**: Angular Router debugging and navigation flow
 - **Responsive Testing**: Cross-device and screen size testing
 
 #### Performance Debugging
+
 - **Loading Analysis**: Asset loading and performance monitoring
 - **Memory Usage**: Component memory usage and leak detection
 - **Rendering Performance**: Component rendering and update performance
@@ -658,12 +727,14 @@ beforeEach(async () => {
 ### Error Handling
 
 #### Graceful Degradation
+
 - **Component Failures**: Ensure homepage renders with missing child components
 - **Asset Failures**: Fallback behavior for missing images or assets
 - **Navigation Failures**: Alternative navigation when router issues occur
 - **Search Failures**: Error handling for search functionality problems
 
 #### User Feedback
+
 - **Error Communication**: Clear error messages for user-facing issues
 - **Loading States**: Appropriate loading indicators and feedback
 - **Navigation Guidance**: Help users navigate when issues occur

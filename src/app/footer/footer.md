@@ -7,9 +7,11 @@ The Footer component serves as the main footer container for the PGNC applicatio
 ## Component Architecture
 
 ### Core Component
+
 - **FooterComponent** (`footer.component.ts`): Main container component that imports and organizes three primary child components in a structured layout.
 
 ### Child Components Structure
+
 ```
 footer/
 ├── footer.component.* (Main container)
@@ -28,6 +30,7 @@ footer/
 ## Functionality
 
 ### Layout Structure
+
 The footer follows a three-tier vertical layout:
 
 1. **Footer Top** (`.footer-top`):
@@ -54,11 +57,13 @@ The footer follows a three-tier vertical layout:
 ### Key Features
 
 #### Navigation Integration
+
 - **Router Integration**: Extensive use of Angular Router for internal navigation
 - **External Links**: Direct links to partner institutions and social media
 - **Home Navigation**: Dedicated home link with PGNC logo and FontAwesome icon
 
 #### Institutional Partnerships
+
 - **U.S. Department of Energy**: Funding acknowledgment with Award Number DE-AC05-00OR22725
 - **Partner Organizations**:
   - Center for Bioenergy Innovation (CBI)
@@ -66,10 +71,12 @@ The footer follows a three-tier vertical layout:
   - Hugo Genome Nomenclature Committee (HGNC)
 
 #### Social Media Presence
+
 - **Platforms**: Bluesky, X (Twitter), GitHub, YouTube, Blog, Feedback
 - **Icon Implementation**: FontAwesome icons for consistent visual presentation
 
 #### Copyright and Legal
+
 - **Copyright Notice**: Current year copyright with FontAwesome copyright symbol
 - **License Information**: Dedicated license component
 - **Legal Compliance**: Structured legal information presentation
@@ -77,6 +84,7 @@ The footer follows a three-tier vertical layout:
 ## Technical Implementation
 
 ### Dependencies
+
 ```typescript
 // Core Angular
 import { Component } from '@angular/core';
@@ -88,6 +96,7 @@ import { MenuComponent } from './menu/menu.component';
 ```
 
 ### Template Structure
+
 ```html
 <footer id="footer">
     <div class="footer-top">
@@ -103,6 +112,7 @@ import { MenuComponent } from './menu/menu.component';
 ```
 
 ### Styling Approach
+
 - **Color Scheme**: Light gray background (`#dee0e2`) with dark gray text (`#454a4c`)
 - **Visual Hierarchy**: Border and margin spacing to distinguish sections
 - **Responsive Design**: Bootstrap grid system implementation in child components
@@ -110,11 +120,13 @@ import { MenuComponent } from './menu/menu.component';
 ## Child Component Integration
 
 ### Grant Notice Component
+
 - **Purpose**: U.S. Department of Energy funding acknowledgment
 - **Implementation**: Simple display component with funding information
 - **Layout**: Full-width container with centered text
 
 ### Menu Component
+
 - **Purpose**: Primary navigation and social media integration
 - **Features**:
   - PGNC logo with home navigation
@@ -126,6 +138,7 @@ import { MenuComponent } from './menu/menu.component';
 - **Dependencies**: RouterLink, FontAwesome, child components (CpRightComponent, SocialMediaComponent)
 
 ### Legal Component
+
 - **Purpose**: Legal information and institutional partnerships
 - **Structure**: Container for associates and licence components
 - **Features**:
@@ -136,12 +149,14 @@ import { MenuComponent } from './menu/menu.component';
 ## Testing Strategy
 
 ### Component Testing
+
 - **Creation Tests**: Component instantiation and definition validation
 - **Template Tests**: Footer structure and section presence verification
 - **Child Component Tests**: Integration testing for all child components
 - **Router Integration**: Navigation functionality testing
 
 ### Test Configuration
+
 ```typescript
 beforeEach(async () => {
     await TestBed.configureTestingModule({
@@ -154,11 +169,13 @@ beforeEach(async () => {
 ## Integration Points
 
 ### Application Integration
+
 - **Global Footer**: Included in main application layout
 - **Router Dependency**: Requires Angular Router for navigation functionality
 - **External Services**: Links to external partner websites and social media
 
 ### Cross-Component Communication
+
 - **Self-Contained**: No external data dependencies
 - **Static Content**: All footer content is template-based
 - **Navigation Service**: Utilizes Angular Router for internal navigation
@@ -166,18 +183,21 @@ beforeEach(async () => {
 ## Development Guidelines
 
 ### Adding New Links
+
 1. Update appropriate child component template
 2. Add router configuration if internal link
 3. Test navigation functionality
 4. Update tests to cover new functionality
 
 ### Styling Modifications
+
 1. Follow existing color scheme and spacing patterns
 2. Maintain responsive design principles
 3. Test across different screen sizes
 4. Update child component styles as needed
 
 ### Content Updates
+
 1. Modify child component templates for content changes
 2. Update partner logos in associates component
 3. Maintain consistent formatting and accessibility

@@ -7,6 +7,7 @@ This repository contains the Angular frontend application for the PGNC External 
 For comprehensive technical documentation, architecture details, configuration guides, and development workflows, see the **[Complete Angular Documentation](./angular.md)**.
 
 The comprehensive documentation includes:
+
 - **Project Architecture**: Angular 19+ with SSR, standalone components, and modern tooling
 - **Source Code Documentation**: Complete cross-referenced documentation for all modules and components
 - **Configuration Details**: TypeScript, Angular CLI, Jest testing, ESLint, and build optimization

@@ -25,26 +25,31 @@ The `extractVersionNumber` method converts version strings to comparable numbers
 To add a new Phytozome version (e.g., v5_2), you only need to update three places:
 
 1. **Type Definition** (`external-resource-name.type.ts`):
+
    ```typescript
    | 'Phytozome v5_2'
    ```
 
 2. **Resource URLs** (`xref-resources.component.ts`):
+
    ```typescript
    'Phytozome v5_2': 'https://phytozome-next.jgi.doe.gov/report/gene/Ptrichocarpa_v5_2/',
    ```
 
 3. **Initialize Data Structure** (`xref-resources.component.ts`):
+
    ```typescript
    'Phytozome v5_2': [],
    ```
 
 4. **Fragment Mapping** (if different from existing):
+
    ```typescript
    'Phytozome v5_2': 'phytoz', // or unique fragment if needed
    ```
 
 The component logic will automatically:
+
 - Detect the new version
 - Sort it correctly (v5_2 > v4_1 > v3_1)
 - Display it if data is available
