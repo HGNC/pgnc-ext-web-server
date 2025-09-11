@@ -111,11 +111,11 @@
             <span class="key">Primary ID
                 <a class="clickable help" title="Primary ID help" [routerLink]="['/help/gene-symbol-report']"
                     fragment="1_id"><fa-icon [icon]="faQuestionCircle" /></a></span>
-            @if (result.data?.primaryIdSource?.toLowerCase().startsWith('phytozome')) {
+            @if ((result.data?.primaryIdSource ?? '').toLowerCase().startsWith('phytozome')) {
             <span class="val"><a href="https://phytozome-next.jgi.doe.gov/report/gene/Ptrichocarpa_{{ getPhytozomeVersion() }}/{{
                                 result.data?.primaryId
                             }}">{{ result.data?.primaryId }}</a></span>
-            } @else if (result.data?.primaryIdSource?.toLowerCase().startsWith('ncbi gene')) {
+            } @else if ((result.data?.primaryIdSource ?? '').toLowerCase().startsWith('ncbi gene')) {
             <span class="val">
                 <a href="https://www.ncbi.nlm.nih.gov/gene/{{result.data?.primaryId}}">
                     {{ result.data?.primaryId }}
