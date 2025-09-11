@@ -19,7 +19,7 @@ describe('PgncDataComponent', () => {
             status: 'Approved',
             species: {
                 commonName: 'Human',
-                scientificName: 'Homo sapiens'
+                scientificName: 'Homo sapiens',
             },
             geneNames: [
                 {
@@ -27,22 +27,22 @@ describe('PgncDataComponent', () => {
                     creationDate: new Date('2023-01-01'),
                     modDate: null,
                     withdrawnDate: null,
-                    type: 'approved'
+                    type: 'approved',
                 },
                 {
                     name: { name: 'Previous Gene Name' },
                     creationDate: new Date('2023-01-01'),
                     modDate: null,
                     withdrawnDate: null,
-                    type: 'previous'
+                    type: 'previous',
                 },
                 {
                     name: { name: 'Alias Gene Name' },
                     creationDate: new Date('2023-01-01'),
                     modDate: null,
                     withdrawnDate: null,
-                    type: 'alias'
-                }
+                    type: 'alias',
+                },
             ] as any,
             geneSymbols: [
                 {
@@ -50,53 +50,57 @@ describe('PgncDataComponent', () => {
                     creationDate: new Date('2023-01-01'),
                     modDate: null,
                     withdrawnDate: null,
-                    type: 'approved'
+                    type: 'approved',
                 },
                 {
                     symbol: { symbol: 'PREVSYM' },
                     creationDate: new Date('2023-01-01'),
                     modDate: null,
                     withdrawnDate: null,
-                    type: 'previous'
+                    type: 'previous',
                 },
                 {
                     symbol: { symbol: 'ALIASSYM' },
                     creationDate: new Date('2023-01-01'),
                     modDate: null,
                     withdrawnDate: null,
-                    type: 'alias'
-                }
+                    type: 'alias',
+                },
             ] as any,
-            geneLocusTypes: [{
-                creationDate: new Date('2023-01-01'),
-                modDate: null,
-                withdrawnDate: null,
-                locusType: {
-                    name: 'gene with protein product',
-                    locusGroup: {
-                        name: 'protein-coding gene'
-                    }
-                }
-            }],
+            geneLocusTypes: [
+                {
+                    creationDate: new Date('2023-01-01'),
+                    modDate: null,
+                    withdrawnDate: null,
+                    locusType: {
+                        name: 'gene with protein product',
+                        locusGroup: {
+                            name: 'protein-coding gene',
+                        },
+                    },
+                },
+            ],
             geneNotes: null,
             geneReplacements: null,
             genesReplaced: null,
             geneXrefs: [],
-            geneLocations: [{
-                creationDate: new Date('2023-01-01'),
-                withdrawnDate: null,
-                location: {
-                    name: '1p36.33',
-                    refseqAccession: 'NC_000001.11',
-                    genbankAccession: 'CM000663.2',
-                    coordSystem: 'chromosome',
-                    type: 'primary assembly'
-                }
-            }],
+            geneLocations: [
+                {
+                    creationDate: new Date('2023-01-01'),
+                    withdrawnDate: null,
+                    location: {
+                        name: '1p36.33',
+                        refseqAccession: 'NC_000001.11',
+                        genbankAccession: 'CM000663.2',
+                        coordSystem: 'chromosome',
+                        type: 'primary assembly',
+                    },
+                },
+            ],
             primaryId: 'PGNC:123',
-            primaryIdSource: 'PGNC'
+            primaryIdSource: 'PGNC',
         },
-        apiVersion: '1.0'
+        apiVersion: '1.0',
     };
 
     // Mock report with multiple symbols and names for testing filtering
@@ -109,7 +113,7 @@ describe('PgncDataComponent', () => {
             status: 'Approved',
             species: {
                 commonName: 'Human',
-                scientificName: 'Homo sapiens'
+                scientificName: 'Homo sapiens',
             },
             geneNames: [
                 {
@@ -117,8 +121,8 @@ describe('PgncDataComponent', () => {
                     creationDate: new Date('2023-01-01'),
                     modDate: null,
                     withdrawnDate: null,
-                    type: 'approved'
-                }
+                    type: 'approved',
+                },
             ],
             geneSymbols: [
                 {
@@ -126,44 +130,48 @@ describe('PgncDataComponent', () => {
                     creationDate: new Date('2023-01-01'),
                     modDate: null,
                     withdrawnDate: null,
-                    type: 'approved'
-                }
+                    type: 'approved',
+                },
             ],
-            geneLocusTypes: [{
-                creationDate: new Date('2023-01-01'),
-                modDate: null,
-                withdrawnDate: null,
-                locusType: {
-                    name: 'gene with protein product',
-                    locusGroup: {
-                        name: 'protein-coding gene'
-                    }
-                }
-            }],
+            geneLocusTypes: [
+                {
+                    creationDate: new Date('2023-01-01'),
+                    modDate: null,
+                    withdrawnDate: null,
+                    locusType: {
+                        name: 'gene with protein product',
+                        locusGroup: {
+                            name: 'protein-coding gene',
+                        },
+                    },
+                },
+            ],
             geneNotes: null,
             geneReplacements: null,
             genesReplaced: null,
             geneXrefs: [],
-            geneLocations: [{
-                creationDate: new Date('2023-01-01'),
-                withdrawnDate: null,
-                location: {
-                    name: '1p36.33',
-                    refseqAccession: 'NC_000001.11',
-                    genbankAccession: 'CM000663.2',
-                    coordSystem: 'chromosome',
-                    type: 'primary assembly'
-                }
-            }],
+            geneLocations: [
+                {
+                    creationDate: new Date('2023-01-01'),
+                    withdrawnDate: null,
+                    location: {
+                        name: '1p36.33',
+                        refseqAccession: 'NC_000001.11',
+                        genbankAccession: 'CM000663.2',
+                        coordSystem: 'chromosome',
+                        type: 'primary assembly',
+                    },
+                },
+            ],
             primaryId: 'PGNC:123',
-            primaryIdSource: 'PGNC'
+            primaryIdSource: 'PGNC',
         },
-        apiVersion: '1.0'
+        apiVersion: '1.0',
     };
 
     beforeEach(async () => {
         await TestBed.configureTestingModule({
-            imports: [PgncDataComponent, RouterTestingModule, FontAwesomeModule]
+            imports: [PgncDataComponent, RouterTestingModule, FontAwesomeModule],
         }).compileComponents();
 
         fixture = TestBed.createComponent(PgncDataComponent);
@@ -283,19 +291,21 @@ describe('PgncDataComponent', () => {
             const reportWithDifferentLocation: GeneSymbolReport = {
                 data: {
                     ...mockGeneSymbolReport.data!,
-                    geneLocations: [{
-                        creationDate: new Date('2023-01-01'),
-                        withdrawnDate: null,
-                        location: {
-                            name: 'wrong location',
-                            refseqAccession: 'NC_000001.11',
-                            genbankAccession: 'CM000663.2',
-                            coordSystem: 'other',
-                            type: 'secondary'
-                        }
-                    }]
+                    geneLocations: [
+                        {
+                            creationDate: new Date('2023-01-01'),
+                            withdrawnDate: null,
+                            location: {
+                                name: 'wrong location',
+                                refseqAccession: 'NC_000001.11',
+                                genbankAccession: 'CM000663.2',
+                                coordSystem: 'other',
+                                type: 'secondary',
+                            },
+                        },
+                    ],
                 },
-                apiVersion: '1.0'
+                apiVersion: '1.0',
             };
             component.result = reportWithDifferentLocation;
 
@@ -308,19 +318,21 @@ describe('PgncDataComponent', () => {
             const reportWithCorrectLocation: GeneSymbolReport = {
                 data: {
                     ...mockGeneSymbolReport.data!,
-                    geneLocations: [{
-                        creationDate: new Date('2023-01-01'),
-                        withdrawnDate: null,
-                        location: {
-                            name: 'correct location',
-                            refseqAccession: 'NC_000001.11',
-                            genbankAccession: 'CM000663.2',
-                            coordSystem: 'chromosome',
-                            type: 'primary assembly'
-                        }
-                    }]
+                    geneLocations: [
+                        {
+                            creationDate: new Date('2023-01-01'),
+                            withdrawnDate: null,
+                            location: {
+                                name: 'correct location',
+                                refseqAccession: 'NC_000001.11',
+                                genbankAccession: 'CM000663.2',
+                                coordSystem: 'chromosome',
+                                type: 'primary assembly',
+                            },
+                        },
+                    ],
                 },
-                apiVersion: '1.0'
+                apiVersion: '1.0',
             };
             component.result = reportWithCorrectLocation;
 
@@ -335,9 +347,9 @@ describe('PgncDataComponent', () => {
             const reportWithoutSource: GeneSymbolReport = {
                 data: {
                     ...mockGeneSymbolReport.data!,
-                    primaryIdSource: null
+                    primaryIdSource: null,
                 },
-                apiVersion: '1.0'
+                apiVersion: '1.0',
             };
             component.result = reportWithoutSource;
 
@@ -349,9 +361,9 @@ describe('PgncDataComponent', () => {
             const reportWithSimpleSource: GeneSymbolReport = {
                 data: {
                     ...mockGeneSymbolReport.data!,
-                    primaryIdSource: 'phytozome'
+                    primaryIdSource: 'phytozome',
                 },
-                apiVersion: '1.0'
+                apiVersion: '1.0',
             };
             component.result = reportWithSimpleSource;
 
@@ -363,9 +375,9 @@ describe('PgncDataComponent', () => {
             const reportWithVersion: GeneSymbolReport = {
                 data: {
                     ...mockGeneSymbolReport.data!,
-                    primaryIdSource: 'phytozome v5_0'
+                    primaryIdSource: 'phytozome v5_0',
                 },
-                apiVersion: '1.0'
+                apiVersion: '1.0',
             };
             component.result = reportWithVersion;
 
@@ -377,9 +389,9 @@ describe('PgncDataComponent', () => {
             const reportWithComplexSource: GeneSymbolReport = {
                 data: {
                     ...mockGeneSymbolReport.data!,
-                    primaryIdSource: 'phytozome database v5_0 test'
+                    primaryIdSource: 'phytozome database v5_0 test',
                 },
-                apiVersion: '1.0'
+                apiVersion: '1.0',
             };
             component.result = reportWithComplexSource;
 
@@ -406,31 +418,41 @@ describe('PgncDataComponent', () => {
 
         it('should display approved symbol', () => {
             const symbolElements = fixture.debugElement.queryAll(By.css('.key-val-pairs .val'));
-            const symbolElement = symbolElements.find(el => el.nativeElement.textContent.trim() === 'APPSYM');
+            const symbolElement = symbolElements.find(
+                el => el.nativeElement.textContent.trim() === 'APPSYM'
+            );
             expect(symbolElement).toBeTruthy();
         });
 
         it('should display approved name', () => {
             const nameElements = fixture.debugElement.queryAll(By.css('.key-val-pairs .val'));
-            const nameElement = nameElements.find(el => el.nativeElement.textContent.trim() === 'Approved Gene Name');
+            const nameElement = nameElements.find(
+                el => el.nativeElement.textContent.trim() === 'Approved Gene Name'
+            );
             expect(nameElement).toBeTruthy();
         });
 
         it('should display PGNC ID', () => {
             const pgncElements = fixture.debugElement.queryAll(By.css('.key-val-pairs .val'));
-            const pgncElement = pgncElements.find(el => el.nativeElement.textContent.trim() === 'PGNC:123');
+            const pgncElement = pgncElements.find(
+                el => el.nativeElement.textContent.trim() === 'PGNC:123'
+            );
             expect(pgncElement).toBeTruthy();
         });
 
         it('should display status', () => {
             const statusElements = fixture.debugElement.queryAll(By.css('.key-val-pairs .val'));
-            const statusElement = statusElements.find(el => el.nativeElement.textContent.trim() === 'Approved');
+            const statusElement = statusElements.find(
+                el => el.nativeElement.textContent.trim() === 'Approved'
+            );
             expect(statusElement).toBeTruthy();
         });
 
         it('should display chromosomal location', () => {
             const locationElements = fixture.debugElement.queryAll(By.css('.key-val-pairs .val'));
-            const locationElement = locationElements.find(el => el.nativeElement.textContent.trim() === '1p36.33');
+            const locationElement = locationElements.find(
+                el => el.nativeElement.textContent.trim() === '1p36.33'
+            );
             expect(locationElement).toBeTruthy();
         });
 
@@ -464,9 +486,9 @@ describe('PgncDataComponent', () => {
             const reportWithoutLocation: GeneSymbolReport = {
                 data: {
                     ...mockGeneSymbolReport.data!,
-                    geneLocations: null
+                    geneLocations: null,
                 },
-                apiVersion: '1.0'
+                apiVersion: '1.0',
             };
             component.result = reportWithoutLocation;
             component.ngOnInit();
@@ -483,9 +505,9 @@ describe('PgncDataComponent', () => {
                 data: {
                     ...mockGeneSymbolReport.data!,
                     primaryIdSource: 'phytozome v5_0',
-                    primaryId: 'GENE123'
+                    primaryId: 'GENE123',
                 },
-                apiVersion: '1.0'
+                apiVersion: '1.0',
             };
             component.result = reportWithPhytozome;
             component.ngOnInit();
@@ -503,9 +525,9 @@ describe('PgncDataComponent', () => {
                 data: {
                     ...mockGeneSymbolReport.data!,
                     primaryIdSource: 'ncbi gene',
-                    primaryId: '12345'
+                    primaryId: '12345',
                 },
-                apiVersion: '1.0'
+                apiVersion: '1.0',
             };
             component.result = reportWithNCBI;
             component.ngOnInit();
@@ -520,9 +542,9 @@ describe('PgncDataComponent', () => {
             const reportWithUnknown: GeneSymbolReport = {
                 data: {
                     ...mockGeneSymbolReport.data!,
-                    primaryIdSource: 'unknown source'
+                    primaryIdSource: 'unknown source',
                 },
-                apiVersion: '1.0'
+                apiVersion: '1.0',
             };
             component.result = reportWithUnknown;
             component.ngOnInit();
@@ -549,9 +571,9 @@ describe('PgncDataComponent', () => {
                 data: {
                     id: 123,
                     geneSymbols: [{ type: 'approved' }],
-                    geneNames: [{ type: 'approved' }]
+                    geneNames: [{ type: 'approved' }],
                 },
-                apiVersion: '1.0'
+                apiVersion: '1.0',
             } as any;
             component.result = incompleteReport;
 

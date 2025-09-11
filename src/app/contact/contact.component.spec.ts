@@ -11,7 +11,7 @@ describe('ContactComponent', () => {
 
     beforeEach(async () => {
         await TestBed.configureTestingModule({
-            imports: [ContactComponent]
+            imports: [ContactComponent],
         }).compileComponents();
 
         fixture = TestBed.createComponent(ContactComponent);
@@ -51,7 +51,9 @@ describe('ContactComponent', () => {
         it('should display organization name', () => {
             const strongElement = compiled.querySelector('strong');
             expect(strongElement).toBeTruthy();
-            expect(strongElement?.textContent?.trim()).toBe('Plant Gene Nomenclature Committee (PGNC)');
+            expect(strongElement?.textContent?.trim()).toBe(
+                'Plant Gene Nomenclature Committee (PGNC)'
+            );
         });
 
         it('should display complete address', () => {
@@ -330,7 +332,7 @@ describe('ContactComponent', () => {
             // Test with different document ready states
             Object.defineProperty(document, 'readyState', {
                 writable: true,
-                value: 'loading'
+                value: 'loading',
             });
 
             expect(() => {
@@ -339,7 +341,7 @@ describe('ContactComponent', () => {
 
             Object.defineProperty(document, 'readyState', {
                 writable: true,
-                value: 'complete'
+                value: 'complete',
             });
         });
 

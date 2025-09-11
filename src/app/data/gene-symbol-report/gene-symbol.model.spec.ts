@@ -5,12 +5,12 @@ describe('GeneSymbol Model', () => {
         it('should define GeneSymbol interface correctly', () => {
             const geneSymbol: GeneSymbol = {
                 symbol: {
-                    symbol: 'TEST1'
+                    symbol: 'TEST1',
                 },
                 creationDate: new Date('2023-01-01'),
                 modDate: new Date('2023-06-01'),
                 withdrawnDate: null,
-                type: 'approved'
+                type: 'approved',
             };
 
             expect(geneSymbol).toBeDefined();
@@ -27,7 +27,7 @@ describe('GeneSymbol Model', () => {
                 creationDate: new Date(),
                 modDate: null,
                 withdrawnDate: null,
-                type: 'approved'
+                type: 'approved',
             };
 
             expect(geneSymbol.modDate).toBeNull();
@@ -39,7 +39,7 @@ describe('GeneSymbol Model', () => {
                 creationDate: new Date(),
                 modDate: new Date(),
                 withdrawnDate: null,
-                type: 'approved'
+                type: 'approved',
             };
 
             expect(geneSymbol.withdrawnDate).toBeNull();
@@ -52,7 +52,7 @@ describe('GeneSymbol Model', () => {
                 creationDate: new Date(),
                 modDate: null,
                 withdrawnDate: withdrawnDate,
-                type: 'withdrawn'
+                type: 'withdrawn',
             };
 
             expect(geneSymbol.withdrawnDate).toBe(withdrawnDate);
@@ -67,7 +67,7 @@ describe('GeneSymbol Model', () => {
                 creationDate: new Date(),
                 modDate: null,
                 withdrawnDate: null,
-                type: 'approved'
+                type: 'approved',
             };
 
             expect(geneSymbol.type).toBe('approved');
@@ -79,7 +79,7 @@ describe('GeneSymbol Model', () => {
                 creationDate: new Date(),
                 modDate: new Date(),
                 withdrawnDate: null,
-                type: 'previous'
+                type: 'previous',
             };
 
             expect(geneSymbol.type).toBe('previous');
@@ -91,7 +91,7 @@ describe('GeneSymbol Model', () => {
                 creationDate: new Date(),
                 modDate: null,
                 withdrawnDate: null,
-                type: 'alias'
+                type: 'alias',
             };
 
             expect(geneSymbol.type).toBe('alias');
@@ -103,7 +103,7 @@ describe('GeneSymbol Model', () => {
                 creationDate: new Date(),
                 modDate: new Date(),
                 withdrawnDate: new Date(),
-                type: 'withdrawn'
+                type: 'withdrawn',
             };
 
             expect(geneSymbol.type).toBe('withdrawn');
@@ -115,7 +115,7 @@ describe('GeneSymbol Model', () => {
                 creationDate: new Date(),
                 modDate: null,
                 withdrawnDate: null,
-                type: 'custom-type'
+                type: 'custom-type',
             };
 
             expect(geneSymbol.type).toBe('custom-type');
@@ -129,7 +129,7 @@ describe('GeneSymbol Model', () => {
                 creationDate: new Date(),
                 modDate: null,
                 withdrawnDate: null,
-                type: 'approved'
+                type: 'approved',
             };
 
             expect(geneSymbol.symbol.symbol).toBe('GENE1');
@@ -141,7 +141,7 @@ describe('GeneSymbol Model', () => {
                 creationDate: new Date(),
                 modDate: null,
                 withdrawnDate: null,
-                type: 'approved'
+                type: 'approved',
             };
 
             expect(geneSymbol.symbol.symbol).toBe('gene1');
@@ -153,7 +153,7 @@ describe('GeneSymbol Model', () => {
                 creationDate: new Date(),
                 modDate: null,
                 withdrawnDate: null,
-                type: 'approved'
+                type: 'approved',
             };
 
             expect(geneSymbol.symbol.symbol).toBe('GeNe1');
@@ -165,7 +165,7 @@ describe('GeneSymbol Model', () => {
                 creationDate: new Date(),
                 modDate: null,
                 withdrawnDate: null,
-                type: 'approved'
+                type: 'approved',
             };
 
             expect(geneSymbol.symbol.symbol).toBe('GENE123');
@@ -177,7 +177,7 @@ describe('GeneSymbol Model', () => {
                 creationDate: new Date(),
                 modDate: null,
                 withdrawnDate: null,
-                type: 'approved'
+                type: 'approved',
             };
 
             expect(geneSymbol.symbol.symbol).toBe('GENE_1');
@@ -189,7 +189,7 @@ describe('GeneSymbol Model', () => {
                 creationDate: new Date(),
                 modDate: null,
                 withdrawnDate: null,
-                type: 'approved'
+                type: 'approved',
             };
 
             expect(geneSymbol.symbol.symbol).toBe('GENE-1');
@@ -201,7 +201,7 @@ describe('GeneSymbol Model', () => {
                 creationDate: new Date(),
                 modDate: null,
                 withdrawnDate: null,
-                type: 'approved'
+                type: 'approved',
             };
 
             expect(geneSymbol.symbol.symbol).toBe('GENE.1');
@@ -215,7 +215,7 @@ describe('GeneSymbol Model', () => {
                 creationDate: new Date(),
                 modDate: null,
                 withdrawnDate: null,
-                type: 'approved'
+                type: 'approved',
             };
 
             expect(geneSymbol.symbol.symbol).toBe('');
@@ -227,7 +227,7 @@ describe('GeneSymbol Model', () => {
                 creationDate: new Date(),
                 modDate: null,
                 withdrawnDate: null,
-                type: 'approved'
+                type: 'approved',
             };
 
             expect(geneSymbol.symbol.symbol).toBe('GENE@#$%^&*()');
@@ -239,7 +239,7 @@ describe('GeneSymbol Model', () => {
                 creationDate: new Date(),
                 modDate: null,
                 withdrawnDate: null,
-                type: 'approved'
+                type: 'approved',
             };
 
             expect(geneSymbol.symbol.symbol).toBe('GENE-ñéñē');
@@ -252,7 +252,7 @@ describe('GeneSymbol Model', () => {
                 creationDate: new Date(),
                 modDate: null,
                 withdrawnDate: null,
-                type: 'approved'
+                type: 'approved',
             };
 
             expect(geneSymbol.symbol.symbol).toHaveLength(1005);
@@ -265,7 +265,7 @@ describe('GeneSymbol Model', () => {
                 creationDate: new Date(),
                 modDate: null,
                 withdrawnDate: null,
-                type: 'approved'
+                type: 'approved',
             };
 
             expect(geneSymbol.symbol.symbol).toBe('   GENE WITH SPACES   ');
@@ -277,7 +277,7 @@ describe('GeneSymbol Model', () => {
                 creationDate: new Date(),
                 modDate: null,
                 withdrawnDate: null,
-                type: 'approved'
+                type: 'approved',
             };
 
             expect(geneSymbol.symbol.symbol).toBe('12345');
@@ -289,7 +289,7 @@ describe('GeneSymbol Model', () => {
                 creationDate: new Date(),
                 modDate: null,
                 withdrawnDate: null,
-                type: ''
+                type: '',
             };
 
             expect(geneSymbol.type).toBe('');
@@ -306,7 +306,7 @@ describe('GeneSymbol Model', () => {
                 creationDate: futureDate,
                 modDate: pastDate,
                 withdrawnDate: null,
-                type: 'approved'
+                type: 'approved',
             };
 
             expect(geneSymbol.creationDate).toBe(futureDate);
@@ -321,7 +321,7 @@ describe('GeneSymbol Model', () => {
                 creationDate: sameDate,
                 modDate: sameDate,
                 withdrawnDate: null,
-                type: 'approved'
+                type: 'approved',
             };
 
             expect(geneSymbol.creationDate).toBe(sameDate);
@@ -338,7 +338,7 @@ describe('GeneSymbol Model', () => {
                 creationDate: creation,
                 modDate: modification,
                 withdrawnDate: withdrawn,
-                type: 'withdrawn'
+                type: 'withdrawn',
             };
 
             expect(geneSymbol.creationDate.getTime()).toBeLessThan(geneSymbol.modDate!.getTime());
@@ -353,7 +353,7 @@ describe('GeneSymbol Model', () => {
                 creationDate: new Date('2023-01-01'),
                 modDate: new Date('2023-06-01'),
                 withdrawnDate: null,
-                type: 'approved'
+                type: 'approved',
             };
 
             const jsonString = JSON.stringify(originalSymbol);
@@ -369,7 +369,7 @@ describe('GeneSymbol Model', () => {
                 creationDate: new Date(),
                 modDate: null,
                 withdrawnDate: null,
-                type: 'approved'
+                type: 'approved',
             };
 
             const jsonString = JSON.stringify(symbolWithNulls);
@@ -387,7 +387,7 @@ describe('GeneSymbol Model', () => {
                 creationDate: new Date(),
                 modDate: null,
                 withdrawnDate: null,
-                type: 'approved'
+                type: 'approved',
             };
 
             // Verify all required fields are present
@@ -403,7 +403,7 @@ describe('GeneSymbol Model', () => {
                 creationDate: new Date(),
                 modDate: null,
                 withdrawnDate: null,
-                type: 'approved'
+                type: 'approved',
             };
 
             expect(typeof geneSymbol.symbol).toBe('object');

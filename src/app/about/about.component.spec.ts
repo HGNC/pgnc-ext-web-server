@@ -11,7 +11,7 @@ describe('AboutComponent', () => {
 
     beforeEach(async () => {
         await TestBed.configureTestingModule({
-            imports: [AboutComponent]
+            imports: [AboutComponent],
         }).compileComponents();
 
         fixture = TestBed.createComponent(AboutComponent);
@@ -89,13 +89,17 @@ describe('AboutComponent', () => {
         it('should have correct Oak Ridge CBI link', () => {
             const cbiLink = debugElement.query(By.css('a[href="https://cbi.ornl.gov/"]'));
             expect(cbiLink).toBeTruthy();
-            expect(cbiLink.nativeElement.textContent.trim()).toBe('Oak Ridge Center for Bioenergy Innovation');
+            expect(cbiLink.nativeElement.textContent.trim()).toBe(
+                'Oak Ridge Center for Bioenergy Innovation'
+            );
         });
 
         it('should have correct HGNC link', () => {
             const hgncLink = debugElement.query(By.css('a[href="https://www.genenames.org"]'));
             expect(hgncLink).toBeTruthy();
-            expect(hgncLink.nativeElement.textContent.trim()).toBe('HUGO Gene Nomenclature Committee (HGNC)');
+            expect(hgncLink.nativeElement.textContent.trim()).toBe(
+                'HUGO Gene Nomenclature Committee (HGNC)'
+            );
         });
 
         it('should have links with proper href attributes', () => {
@@ -236,7 +240,7 @@ describe('AboutComponent', () => {
                 'oak ridge',
                 'hgnc',
                 'populus trichocarpa',
-                'collaboration'
+                'collaboration',
             ];
 
             expectedKeywords.forEach(keyword => {
@@ -251,7 +255,7 @@ describe('AboutComponent', () => {
                 'placeholder',
                 'todo',
                 'coming soon',
-                'under construction'
+                'under construction',
             ];
 
             placeholderTexts.forEach(placeholder => {

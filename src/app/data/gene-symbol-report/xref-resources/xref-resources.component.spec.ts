@@ -22,9 +22,9 @@ describe('XrefComponent', () => {
             xref: {
                 displayId: 'NCBI123',
                 externalResource: {
-                    name: 'NCBI Gene'
-                }
-            }
+                    name: 'NCBI Gene',
+                },
+            },
         },
         {
             geneId: 123,
@@ -36,9 +36,9 @@ describe('XrefComponent', () => {
             xref: {
                 displayId: 'ENS123',
                 externalResource: {
-                    name: 'Ensembl Gene'
-                }
-            }
+                    name: 'Ensembl Gene',
+                },
+            },
         },
         {
             geneId: 123,
@@ -50,9 +50,9 @@ describe('XrefComponent', () => {
             xref: {
                 displayId: 'UNI123',
                 externalResource: {
-                    name: 'UniProt'
-                }
-            }
+                    name: 'UniProt',
+                },
+            },
         },
         {
             geneId: 123,
@@ -64,9 +64,9 @@ describe('XrefComponent', () => {
             xref: {
                 displayId: 'PUB123',
                 externalResource: {
-                    name: 'PubMed'
-                }
-            }
+                    name: 'PubMed',
+                },
+            },
         },
         {
             geneId: 123,
@@ -78,10 +78,10 @@ describe('XrefComponent', () => {
             xref: {
                 displayId: 'PHY123',
                 externalResource: {
-                    name: 'Phytozome v4_1'
-                }
-            }
-        }
+                    name: 'Phytozome v4_1',
+                },
+            },
+        },
     ];
 
     const mockGeneSymbolReport: GeneSymbolReport = {
@@ -93,57 +93,65 @@ describe('XrefComponent', () => {
             status: 'Approved',
             species: {
                 commonName: 'Human',
-                scientificName: 'Homo sapiens'
+                scientificName: 'Homo sapiens',
             },
-            geneNames: [{
-                name: { name: 'Test Gene' },
-                creationDate: new Date('2023-01-01'),
-                modDate: null,
-                withdrawnDate: null,
-                type: 'approved'
-            }],
-            geneSymbols: [{
-                symbol: { symbol: 'TESTGENE' },
-                creationDate: new Date('2023-01-01'),
-                modDate: null,
-                withdrawnDate: null,
-                type: 'approved'
-            }],
-            geneLocusTypes: [{
-                creationDate: new Date('2023-01-01'),
-                modDate: null,
-                withdrawnDate: null,
-                locusType: {
-                    name: 'gene with protein product',
-                    locusGroup: {
-                        name: 'protein-coding gene'
-                    }
-                }
-            }],
+            geneNames: [
+                {
+                    name: { name: 'Test Gene' },
+                    creationDate: new Date('2023-01-01'),
+                    modDate: null,
+                    withdrawnDate: null,
+                    type: 'approved',
+                },
+            ],
+            geneSymbols: [
+                {
+                    symbol: { symbol: 'TESTGENE' },
+                    creationDate: new Date('2023-01-01'),
+                    modDate: null,
+                    withdrawnDate: null,
+                    type: 'approved',
+                },
+            ],
+            geneLocusTypes: [
+                {
+                    creationDate: new Date('2023-01-01'),
+                    modDate: null,
+                    withdrawnDate: null,
+                    locusType: {
+                        name: 'gene with protein product',
+                        locusGroup: {
+                            name: 'protein-coding gene',
+                        },
+                    },
+                },
+            ],
             geneNotes: null,
             geneReplacements: null,
             genesReplaced: null,
             geneXrefs: mockXrefs,
-            geneLocations: [{
-                creationDate: new Date('2023-01-01'),
-                withdrawnDate: null,
-                location: {
-                    name: '1p36.33',
-                    refseqAccession: 'NC_000001.11',
-                    genbankAccession: 'CM000663.2',
-                    coordSystem: 'chromosome',
-                    type: 'primary assembly'
-                }
-            }],
+            geneLocations: [
+                {
+                    creationDate: new Date('2023-01-01'),
+                    withdrawnDate: null,
+                    location: {
+                        name: '1p36.33',
+                        refseqAccession: 'NC_000001.11',
+                        genbankAccession: 'CM000663.2',
+                        coordSystem: 'chromosome',
+                        type: 'primary assembly',
+                    },
+                },
+            ],
             primaryId: 'PGNC:123',
-            primaryIdSource: 'PGNC'
+            primaryIdSource: 'PGNC',
         },
-        apiVersion: '1.0'
+        apiVersion: '1.0',
     };
 
     beforeEach(async () => {
         await TestBed.configureTestingModule({
-            imports: [XrefComponent, RouterTestingModule, FontAwesomeModule]
+            imports: [XrefComponent, RouterTestingModule, FontAwesomeModule],
         }).compileComponents();
 
         fixture = TestBed.createComponent(XrefComponent);
@@ -179,12 +187,20 @@ describe('XrefComponent', () => {
 
         it('should initialize xrefURLS with correct URLs', () => {
             expect(component.xrefURLS['NCBI Gene']).toBe('https://www.ncbi.nlm.nih.gov/gene/');
-            expect(component.xrefURLS['Ensembl Gene']).toBe('https://plants.ensembl.org/Populus_trichocarpa/Gene/Summary?db=core;g=');
+            expect(component.xrefURLS['Ensembl Gene']).toBe(
+                'https://plants.ensembl.org/Populus_trichocarpa/Gene/Summary?db=core;g='
+            );
             expect(component.xrefURLS['UniProt']).toBe('https://www.uniprot.org/uniprotkb/');
             expect(component.xrefURLS['PubMed']).toBe('https://pubmed.ncbi.nlm.nih.gov/');
-            expect(component.xrefURLS['Phytozome v4_1']).toBe('https://phytozome-next.jgi.doe.gov/report/gene/Ptrichocarpa_v4_1/');
-            expect(component.xrefURLS['Phytozome v3_1']).toBe('https://phytozome-next.jgi.doe.gov/report/gene/Ptrichocarpa_v3_1/');
-            expect(component.xrefURLS['CBI sequence viewer']).toBe('https://fair.ornl.gov/ThirdParty/jbrowse2/?PGNCID=');
+            expect(component.xrefURLS['Phytozome v4_1']).toBe(
+                'https://phytozome-next.jgi.doe.gov/report/gene/Ptrichocarpa_v4_1/'
+            );
+            expect(component.xrefURLS['Phytozome v3_1']).toBe(
+                'https://phytozome-next.jgi.doe.gov/report/gene/Ptrichocarpa_v3_1/'
+            );
+            expect(component.xrefURLS['CBI sequence viewer']).toBe(
+                'https://fair.ornl.gov/ThirdParty/jbrowse2/?PGNCID='
+            );
         });
 
         it('should initialize xrefFrags with correct fragments', () => {
@@ -223,8 +239,8 @@ describe('XrefComponent', () => {
                 ...mockGeneSymbolReport,
                 data: {
                     ...mockGeneSymbolReport.data!,
-                    geneXrefs: []
-                }
+                    geneXrefs: [],
+                },
             };
             component.result = reportWithoutXrefs;
 
@@ -243,8 +259,8 @@ describe('XrefComponent', () => {
                 ...mockGeneSymbolReport,
                 data: {
                     ...mockGeneSymbolReport.data!,
-                    geneXrefs: undefined
-                }
+                    geneXrefs: undefined,
+                },
             };
             component.result = reportWithUndefinedXrefs;
 
@@ -261,7 +277,7 @@ describe('XrefComponent', () => {
         it('should handle null data', () => {
             const reportWithNullData: GeneSymbolReport = {
                 data: null,
-                apiVersion: '1.0'
+                apiVersion: '1.0',
             };
             component.result = reportWithNullData;
 
@@ -302,7 +318,10 @@ describe('XrefComponent', () => {
         });
 
         it('should return empty array for non-existent resource', () => {
-            const nonExistentXrefs = component.xrefsByResourceName('CBI sequence viewer', mockXrefs);
+            const nonExistentXrefs = component.xrefsByResourceName(
+                'CBI sequence viewer',
+                mockXrefs
+            );
             expect(nonExistentXrefs).toEqual([]);
         });
 
@@ -356,18 +375,18 @@ describe('XrefComponent', () => {
                     xref: {
                         displayId: 'NCBI456',
                         externalResource: {
-                            name: 'NCBI Gene'
-                        }
-                    }
-                }
+                            name: 'NCBI Gene',
+                        },
+                    },
+                },
             ];
 
             const reportWithMultipleXrefs: GeneSymbolReport = {
                 ...mockGeneSymbolReport,
                 data: {
                     ...mockGeneSymbolReport.data!,
-                    geneXrefs: multipleNCBIXrefs
-                }
+                    geneXrefs: multipleNCBIXrefs,
+                },
             };
             component.result = reportWithMultipleXrefs;
             component.ngOnInit();
@@ -388,18 +407,18 @@ describe('XrefComponent', () => {
                     xref: {
                         displayId: 'UNK123',
                         externalResource: {
-                            name: 'Unknown Resource' as ExternalResourceName
-                        }
-                    }
-                }
+                            name: 'Unknown Resource' as ExternalResourceName,
+                        },
+                    },
+                },
             ];
 
             const reportWithUnknownXrefs: GeneSymbolReport = {
                 ...mockGeneSymbolReport,
                 data: {
                     ...mockGeneSymbolReport.data!,
-                    geneXrefs: xrefsWithUnknown
-                }
+                    geneXrefs: xrefsWithUnknown,
+                },
             };
             component.result = reportWithUnknownXrefs;
 
@@ -409,7 +428,7 @@ describe('XrefComponent', () => {
         it('should handle missing geneSymbols for appSymbol', () => {
             const reportWithoutSymbols: GeneSymbolReport = {
                 data: null,
-                apiVersion: '1.0'
+                apiVersion: '1.0',
             };
             component.result = reportWithoutSymbols;
             component.ngOnInit();
@@ -462,9 +481,9 @@ describe('XrefComponent', () => {
                     xref: {
                         displayId: '123456',
                         externalResource: {
-                            name: 'NCBI Gene'
-                        }
-                    }
+                            name: 'NCBI Gene',
+                        },
+                    },
                 },
                 {
                     geneId: 12345,
@@ -476,18 +495,18 @@ describe('XrefComponent', () => {
                     xref: {
                         displayId: 'P0ABC12',
                         externalResource: {
-                            name: 'UniProt'
-                        }
-                    }
-                }
+                            name: 'UniProt',
+                        },
+                    },
+                },
             ];
 
             const realisticReport: GeneSymbolReport = {
                 ...mockGeneSymbolReport,
                 data: {
                     ...mockGeneSymbolReport.data!,
-                    geneXrefs: realisticXrefs
-                }
+                    geneXrefs: realisticXrefs,
+                },
             };
             component.result = realisticReport;
             component.ngOnInit();
@@ -510,17 +529,17 @@ describe('XrefComponent', () => {
                     source: 'test',
                     xref: {
                         displayId: 'TEST123',
-                        externalResource: null as any
-                    }
-                }
+                        externalResource: null as any,
+                    },
+                },
             ];
 
             const reportWithMalformedXrefs: GeneSymbolReport = {
                 ...mockGeneSymbolReport,
                 data: {
                     ...mockGeneSymbolReport.data!,
-                    geneXrefs: malformedXrefs as any
-                }
+                    geneXrefs: malformedXrefs as any,
+                },
             };
             component.result = reportWithMalformedXrefs;
 
@@ -538,8 +557,8 @@ describe('XrefComponent', () => {
             component.classifiedXrefs = {
                 'NCBI Gene': [],
                 'Ensembl Gene': [],
-                'UniProt': [],
-                'PubMed': [],
+                UniProt: [],
+                PubMed: [],
                 'Phytozome v4_1': [],
                 'Phytozome v3_1': [],
                 'CBI sequence viewer': '',
@@ -552,8 +571,8 @@ describe('XrefComponent', () => {
             component.classifiedXrefs = {
                 'NCBI Gene': [],
                 'Ensembl Gene': [],
-                'UniProt': [],
-                'PubMed': [],
+                UniProt: [],
+                PubMed: [],
                 'Phytozome v4_1': [mockXrefs[4]], // Has data
                 'Phytozome v3_1': [mockXrefs[4]], // Also has data
                 'CBI sequence viewer': '',
@@ -566,8 +585,8 @@ describe('XrefComponent', () => {
             component.classifiedXrefs = {
                 'NCBI Gene': [],
                 'Ensembl Gene': [],
-                'UniProt': [],
-                'PubMed': [],
+                UniProt: [],
+                PubMed: [],
                 'Phytozome v4_1': [], // No data
                 'Phytozome v3_1': [mockXrefs[4]], // Has data
                 'CBI sequence viewer': '',

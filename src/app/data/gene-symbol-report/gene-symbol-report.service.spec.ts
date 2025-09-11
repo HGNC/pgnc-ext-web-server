@@ -20,79 +20,84 @@ describe('GeneReportService', () => {
             status: 'Approved',
             species: {
                 commonName: 'Human',
-                scientificName: 'Homo sapiens'
+                scientificName: 'Homo sapiens',
             },
-            geneNames: [{
-                name: {
-                    name: 'Test Gene'
+            geneNames: [
+                {
+                    name: {
+                        name: 'Test Gene',
+                    },
+                    creationDate: new Date('2023-01-01'),
+                    modDate: null,
+                    withdrawnDate: null,
+                    type: 'approved',
                 },
-                creationDate: new Date('2023-01-01'),
-                modDate: null,
-                withdrawnDate: null,
-                type: 'approved'
-            }],
-            geneSymbols: [{
-                symbol: {
-                    symbol: 'TEST'
+            ],
+            geneSymbols: [
+                {
+                    symbol: {
+                        symbol: 'TEST',
+                    },
+                    creationDate: new Date('2023-01-01'),
+                    modDate: null,
+                    withdrawnDate: null,
+                    type: 'approved',
                 },
-                creationDate: new Date('2023-01-01'),
-                modDate: null,
-                withdrawnDate: null,
-                type: 'approved'
-            }],
-            geneLocusTypes: [{
-                creationDate: new Date('2023-01-01'),
-                modDate: null,
-                withdrawnDate: null,
-                locusType: {
-                    name: 'gene with protein product',
-                    locusGroup: {
-                        name: 'protein-coding gene'
-                    }
-                }
-            }],
+            ],
+            geneLocusTypes: [
+                {
+                    creationDate: new Date('2023-01-01'),
+                    modDate: null,
+                    withdrawnDate: null,
+                    locusType: {
+                        name: 'gene with protein product',
+                        locusGroup: {
+                            name: 'protein-coding gene',
+                        },
+                    },
+                },
+            ],
             geneNotes: null,
             geneReplacements: null,
             genesReplaced: null,
             geneXrefs: [],
-            geneLocations: [{
-                creationDate: new Date('2023-01-01'),
-                withdrawnDate: null,
-                location: {
-                    name: '1p36.33',
-                    refseqAccession: 'NC_000001.11',
-                    genbankAccession: 'CM000663.2',
-                    coordSystem: 'GRCh38',
-                    type: 'cytogenetic'
-                }
-            }],
+            geneLocations: [
+                {
+                    creationDate: new Date('2023-01-01'),
+                    withdrawnDate: null,
+                    location: {
+                        name: '1p36.33',
+                        refseqAccession: 'NC_000001.11',
+                        genbankAccession: 'CM000663.2',
+                        coordSystem: 'GRCh38',
+                        type: 'cytogenetic',
+                    },
+                },
+            ],
             primaryId: 'PGNC:123',
-            primaryIdSource: 'PGNC'
+            primaryIdSource: 'PGNC',
         },
-        apiVersion: '1.0'
+        apiVersion: '1.0',
     };
 
     const mockJwtResponse = {
         data: {
             accessToken: 'mock-jwt-token',
-            refreshToken: 'mock-refresh-token'
+            refreshToken: 'mock-refresh-token',
         },
-        apiVersion: '1.0'
+        apiVersion: '1.0',
     };
 
     beforeEach(() => {
         const authSpy = {
             getJwt: jest.fn(),
             renewToken: jest.fn(),
-            error: jest.fn()
+            error: jest.fn(),
         } as unknown as jest.Mocked<AuthService>;
 
         TestBed.configureTestingModule({
             imports: [HttpClientTestingModule],
-            providers: [
-                GeneReportService,
-                { provide: AuthService, useValue: authSpy }
-            ]
+            providers: [GeneReportService, { provide: AuthService, useValue: authSpy }],
         });
 
         service = TestBed.inject(GeneReportService);
@@ -125,15 +130,15 @@ describe('GeneReportService', () => {
             authServiceMock.renewToken.mockReturnValue(of(mockJwtResponse));
         });
 
-        it('should get report by PGNC ID with prefix', (done) => {
+        it('should get report by PGNC ID with prefix', done => {
             const pgncId = 'PGNC:123';
 
             service.getReportById(pgncId).subscribe({
-                next: (report) => {
+                next: report => {
                     expect(report).toEqual(mockGeneReport);
                     done();
                 },
-                error: done.fail
+                error: done.fail,
             });
 
             const req = httpMock.expectOne('/api/gene/123');
@@ -144,15 +149,15 @@ describe('GeneReportService', () => {
             req.flush(mockGeneReport);
         });
 
-        it('should get report by PGNC ID without prefix', (done) => {
+        it('should get report by PGNC ID without prefix', done => {
             const pgncId = '123';
 
             service.getReportById(pgncId).subscribe({
-                next: (report) => {
+                next: report => {
                     expect(report).toEqual(mockGeneReport);
                     done();
                 },
-                error: done.fail
+                error: done.fail,
             });
 
             const req = httpMock.expectOne('/api/gene/123');
@@ -160,13 +165,13 @@ describe('GeneReportService', () => {
             req.flush(mockGeneReport);
         });
 
-        it('should handle JWT expiration and retry with renewed token', (done) => {
+        it('should handle JWT expiration and retry with renewed token', done => {
             const pgncId = 'PGNC:123';
             const expiredError = { error: { message: 'jwt expired' } };
             let doneCallCount = 0;
 
             service.getReportById(pgncId).subscribe({
-                next: (report) => {
+                next: report => {
                     if (doneCallCount === 0) {
                         expect(report).toEqual(mockGeneReport);
                         expect(authServiceMock.renewToken).toHaveBeenCalled();
@@ -174,14 +179,14 @@ describe('GeneReportService', () => {
                         done();
                     }
                 },
-                error: (error) => {
+                error: _error => {
                     if (doneCallCount === 0) {
                         // The service should handle JWT renewal but may fail on subsequent error
                         expect(authServiceMock.renewToken).toHaveBeenCalled();
                         doneCallCount++;
                         done();
                     }
-                }
+                },
             });
 
             // First request should fail with expired JWT
@@ -194,70 +199,73 @@ describe('GeneReportService', () => {
             });
         });
 
-        it('should handle non-JWT errors', (done) => {
+        it('should handle non-JWT errors', done => {
             const pgncId = 'PGNC:123';
             const serverError = { error: { message: 'Server error' } };
 
             service.getReportById(pgncId).subscribe({
                 next: () => done.fail('Should have failed'),
-                error: (error) => {
-                    expect(error.message).toBe('Error: Problem found when fetching data. Please try again later');
+                error: error => {
+                    expect(error.message).toBe(
+                        'Error: Problem found when fetching data. Please try again later'
+                    );
                     // renewToken() is called eagerly when the service method is invoked, but it shouldn't be used in the retry logic for non-JWT errors
                     expect(authServiceMock.renewToken).toHaveBeenCalled();
                     done();
-                }
+                },
             });
 
             const req = httpMock.expectOne('/api/gene/123');
             req.flush(serverError, { status: 500, statusText: 'Internal Server Error' });
         });
 
-        it('should handle 404 not found errors', (done) => {
+        it('should handle 404 not found errors', done => {
             const pgncId = 'PGNC:999';
             const notFoundError = { error: { message: 'Gene not found' } };
 
             service.getReportById(pgncId).subscribe({
                 next: () => done.fail('Should have failed'),
-                error: (error) => {
+                error: error => {
                     expect(error).toBeDefined();
                     done();
-                }
+                },
             });
 
             const req = httpMock.expectOne('/api/gene/999');
             req.flush(notFoundError, { status: 404, statusText: 'Not Found' });
         });
 
-        it('should handle empty PGNC ID', (done) => {
+        it('should handle empty PGNC ID', done => {
             const pgncId = '';
 
             service.getReportById(pgncId).subscribe({
-                next: (report) => {
+                next: report => {
                     expect(report).toEqual(mockGeneReport);
                     done();
                 },
-                error: done.fail
+                error: done.fail,
             });
 
             const req = httpMock.expectOne('/api/gene/');
             req.flush(mockGeneReport);
         });
 
-        it('should handle auth service errors', (done) => {
+        it('should handle auth service errors', done => {
             const pgncId = 'PGNC:123';
-            authServiceMock.getJwt.mockReturnValue(throwError(() => new Error('Auth service error')));
+            authServiceMock.getJwt.mockReturnValue(
+                throwError(() => new Error('Auth service error'))
+            );
 
             service.getReportById(pgncId).subscribe({
                 next: () => done.fail('Should have failed'),
-                error: (error) => {
+                error: error => {
                     expect(error).toBeDefined();
                     done();
-                }
+                },
             });
 
             httpMock.expectNone('/api/gene/123');
         });
-
     });
 
     describe('Edge Cases', () => {
@@ -265,37 +273,37 @@ describe('GeneReportService', () => {
             authServiceMock.getJwt.mockReturnValue(of(mockJwtResponse));
         });
 
-        it('should handle special characters in PGNC ID', (done) => {
+        it('should handle special characters in PGNC ID', done => {
             const pgncId = 'PGNC:123-ABC_test.1';
 
             service.getReportById(pgncId).subscribe({
-                next: (report) => {
+                next: report => {
                     expect(report).toEqual(mockGeneReport);
                     done();
                 },
-                error: done.fail
+                error: done.fail,
             });
 
             const req = httpMock.expectOne('/api/gene/123-ABC_test.1');
             req.flush(mockGeneReport);
         });
 
-        it('should handle network timeouts', (done) => {
+        it('should handle network timeouts', done => {
             const pgncId = 'PGNC:123';
 
             service.getReportById(pgncId).subscribe({
                 next: () => done.fail('Should have failed'),
-                error: (error) => {
+                error: error => {
                     expect(error).toBeDefined();
                     done();
-                }
+                },
             });
 
             const req = httpMock.expectOne('/api/gene/123');
             req.error(new ProgressEvent('timeout'));
         });
 
-        it('should handle concurrent requests', (done) => {
+        it('should handle concurrent requests', done => {
             const pgncId1 = 'PGNC:123';
             const pgncId2 = 'PGNC:456';
             let completed = 0;
@@ -306,19 +314,19 @@ describe('GeneReportService', () => {
             };
 
             service.getReportById(pgncId1).subscribe({
-                next: (report) => {
+                next: report => {
                     expect(report).toEqual(mockGeneReport);
                     checkCompletion();
                 },
-                error: done.fail
+                error: done.fail,
             });
 
             service.getReportById(pgncId2).subscribe({
-                next: (report) => {
+                next: report => {
                     expect(report).toEqual(mockGeneReport);
                     checkCompletion();
                 },
-                error: done.fail
+                error: done.fail,
             });
 
             const req1 = httpMock.expectOne('/api/gene/123');
@@ -330,13 +338,16 @@ describe('GeneReportService', () => {
     });
 
     describe('Authentication Integration', () => {
-        it('should pass JWT token in Authorization header', (done) => {
-            const customJwt = { data: { accessToken: 'custom-token', refreshToken: 'custom-refresh' }, apiVersion: '1.0' };
+        it('should pass JWT token in Authorization header', done => {
+            const customJwt = {
+                data: { accessToken: 'custom-token', refreshToken: 'custom-refresh' },
+                apiVersion: '1.0',
+            };
             authServiceMock.getJwt.mockReturnValue(of(customJwt));
 
             service.getReportById('PGNC:123').subscribe({
                 next: () => done(),
-                error: done.fail
+                error: done.fail,
             });
 
             const req = httpMock.expectOne('/api/gene/123');
@@ -344,13 +355,13 @@ describe('GeneReportService', () => {
             req.flush(mockGeneReport);
         });
 
-        it('should handle missing JWT token gracefully', (done) => {
+        it('should handle missing JWT token gracefully', done => {
             const emptyJwt = { data: { accessToken: '', refreshToken: '' }, apiVersion: '1.0' };
             authServiceMock.getJwt.mockReturnValue(of(emptyJwt));
 
             service.getReportById('PGNC:123').subscribe({
                 next: () => done(),
-                error: done.fail
+                error: done.fail,
             });
 
             const req = httpMock.expectOne('/api/gene/123');

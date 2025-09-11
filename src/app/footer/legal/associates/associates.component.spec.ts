@@ -11,7 +11,7 @@ describe('AssociatesComponent', () => {
 
     beforeEach(async () => {
         await TestBed.configureTestingModule({
-            imports: [AssociatesComponent]
+            imports: [AssociatesComponent],
         }).compileComponents();
 
         fixture = TestBed.createComponent(AssociatesComponent);
@@ -145,7 +145,9 @@ describe('AssociatesComponent', () => {
         });
 
         it('should have CBI logo image', () => {
-            const cbiImage = debugElement.query(By.css('img[alt*="Center for Bioenergy Innovation"]'));
+            const cbiImage = debugElement.query(
+                By.css('img[alt*="Center for Bioenergy Innovation"]')
+            );
             expect(cbiImage).toBeTruthy();
             expect(cbiImage.nativeElement.src).toContain('cbi-logo__stacked3lines-01.svg');
             expect(cbiImage.nativeElement.alt).toBe('Center for Bioenergy Innovation');
@@ -236,7 +238,7 @@ describe('AssociatesComponent', () => {
                 'https://www.energy.gov/',
                 'https://cbi.ornl.gov/',
                 'https://www.cam.ac.uk/',
-                'https://www.genenames.org/'
+                'https://www.genenames.org/',
             ];
 
             const allLinks = debugElement.queryAll(By.css('a'));
@@ -262,7 +264,7 @@ describe('AssociatesComponent', () => {
                 'U.S. Department of Energy Awardee',
                 'Center for Bioenergy Innovation',
                 'University of Cambridge',
-                'Hugo Genome Nomenclature Committee (HGNC)'
+                'Hugo Genome Nomenclature Committee (HGNC)',
             ];
 
             const allImages = debugElement.queryAll(By.css('img'));

@@ -8,8 +8,8 @@ import { AuthService } from './auth.service';
 jest.mock('../../../environments/environment', () => ({
     environment: {
         apiUser: 'test@example.com',
-        apiPassword: 'testPassword123'
-    }
+        apiPassword: 'testPassword123',
+    },
 }));
 
 describe('AuthService', () => {
@@ -19,15 +19,15 @@ describe('AuthService', () => {
     const mockLoginCredentials: LoginCredentials = {
         data: {
             accessToken: 'mock-access-token',
-            refreshToken: 'mock-refresh-token'
+            refreshToken: 'mock-refresh-token',
         },
-        apiVersion: '1.0.0'
+        apiVersion: '1.0.0',
     };
 
     beforeEach(() => {
         TestBed.configureTestingModule({
             imports: [HttpClientTestingModule],
-            providers: [AuthService]
+            providers: [AuthService],
         });
 
         service = TestBed.inject(AuthService);
@@ -76,9 +76,9 @@ describe('AuthService', () => {
         it('should handle sign in error', () => {
             service.getJwt().subscribe({
                 next: () => fail('Should have thrown an error'),
-                error: (error) => {
+                error: error => {
                     expect(error.message).toContain('Problem found when signing in');
-                }
+                },
             });
 
             const req = httpMock.expectOne('/api/auth/sign-in');
@@ -98,9 +98,9 @@ describe('AuthService', () => {
             const renewedCredentials: LoginCredentials = {
                 data: {
                     accessToken: 'renewed-access-token',
-                    refreshToken: 'renewed-refresh-token'
+                    refreshToken: 'renewed-refresh-token',
                 },
-                apiVersion: '1.0.0'
+                apiVersion: '1.0.0',
             };
 
             service.renewToken().subscribe(result => {
@@ -110,7 +110,7 @@ describe('AuthService', () => {
             const req = httpMock.expectOne('/api/auth/refresh-tokens');
             expect(req.request.method).toBe('POST');
             expect(req.request.body).toEqual({
-                refreshToken: mockLoginCredentials.data.refreshToken
+                refreshToken: mockLoginCredentials.data.refreshToken,
             });
             req.flush(renewedCredentials);
         });
@@ -118,9 +118,11 @@ describe('AuthService', () => {
         it('should handle token renewal error and clear JWT result', () => {
             service.renewToken().subscribe({
                 next: () => fail('Should have thrown an error'),
-                error: (error) => {
-                    expect(error.message).toContain('Problem found when refreshing token. Please sign in again.');
-                }
+                error: error => {
+                    expect(error.message).toContain(
+                        'Problem found when refreshing token. Please sign in again.'
+                    );
+                },
             });
 
             const req = httpMock.expectOne('/api/auth/refresh-tokens');

@@ -17,9 +17,9 @@ describe('NotFoundComponent', () => {
             providers: [
                 provideRouter([
                     { path: 'help/search', component: NotFoundComponent },
-                    { path: 'search', component: NotFoundComponent }
-                ])
-            ]
+                    { path: 'search', component: NotFoundComponent },
+                ]),
+            ],
         }).compileComponents();
 
         fixture = TestBed.createComponent(NotFoundComponent);
@@ -133,7 +133,9 @@ describe('NotFoundComponent', () => {
         });
 
         it('should render external search example link', () => {
-            const exampleLink = debugElement.query(By.css('a[href="/search?q=gene_symbol%3ACYP*"]'));
+            const exampleLink = debugElement.query(
+                By.css('a[href="/search?q=gene_symbol%3ACYP*"]')
+            );
             expect(exampleLink).toBeTruthy();
             expect(exampleLink.nativeElement.textContent.trim()).toBe('gene_symbol:CYP*');
         });
@@ -234,7 +236,9 @@ describe('NotFoundComponent', () => {
         it('should have router link for search help', () => {
             const helpLink = debugElement.query(By.css('a[ng-reflect-router-link="/help/search"]'));
             expect(helpLink).toBeTruthy();
-            expect(helpLink.nativeElement.getAttribute('ng-reflect-router-link')).toBe('/help/search');
+            expect(helpLink.nativeElement.getAttribute('ng-reflect-router-link')).toBe(
+                '/help/search'
+            );
         });
 
         it('should have fragment for help link', () => {
@@ -253,7 +257,9 @@ describe('NotFoundComponent', () => {
 
     describe('External Links', () => {
         it('should have correct href for search example', () => {
-            const exampleLink = debugElement.query(By.css('a[href="/search?q=gene_symbol%3ACYP*"]'));
+            const exampleLink = debugElement.query(
+                By.css('a[href="/search?q=gene_symbol%3ACYP*"]')
+            );
             expect(exampleLink.nativeElement.href).toContain('/search?q=gene_symbol%3ACYP*');
         });
 
@@ -263,7 +269,9 @@ describe('NotFoundComponent', () => {
         });
 
         it('should handle external link clicks', () => {
-            const exampleLink = debugElement.query(By.css('a[href="/search?q=gene_symbol%3ACYP*"]'));
+            const exampleLink = debugElement.query(
+                By.css('a[href="/search?q=gene_symbol%3ACYP*"]')
+            );
 
             expect(() => {
                 exampleLink.nativeElement.click();
@@ -364,7 +372,9 @@ describe('NotFoundComponent', () => {
             fixture.detectChanges();
 
             const codeElement = debugElement.query(By.css('code.orange'));
-            expect(codeElement.nativeElement.textContent).toBe('query with "quotes" and \'apostrophes\'');
+            expect(codeElement.nativeElement.textContent).toBe(
+                'query with "quotes" and \'apostrophes\''
+            );
         });
 
         it('should handle very long queries', () => {

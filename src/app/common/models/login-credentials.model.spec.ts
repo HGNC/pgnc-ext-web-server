@@ -6,9 +6,9 @@ describe('LoginCredentials Model', () => {
             const mockCredentials: LoginCredentials = {
                 data: {
                     accessToken: 'test-access-token',
-                    refreshToken: 'test-refresh-token'
+                    refreshToken: 'test-refresh-token',
                 },
-                apiVersion: '1.0.0'
+                apiVersion: '1.0.0',
             };
 
             expect(mockCredentials).toBeDefined();
@@ -21,13 +21,16 @@ describe('LoginCredentials Model', () => {
         it('should accept valid access token', () => {
             const credentials: LoginCredentials = {
                 data: {
-                    accessToken: '***REMOVED_SECRET***',
-                    refreshToken: 'refresh-token-123'
+                    accessToken:
+                        '***REMOVED_SECRET***',
+                    refreshToken: 'refresh-token-123',
                 },
-                apiVersion: '2.0.0'
+                apiVersion: '2.0.0',
             };
 
-            expect(credentials.data.accessToken).toBe('***REMOVED_SECRET***');
+            expect(credentials.data.accessToken).toBe(
+                '***REMOVED_SECRET***'
+            );
             expect(credentials.data.refreshToken).toBe('refresh-token-123');
             expect(credentials.apiVersion).toBe('2.0.0');
         });
@@ -36,9 +39,9 @@ describe('LoginCredentials Model', () => {
             const credentials: LoginCredentials = {
                 data: {
                     accessToken: '',
-                    refreshToken: ''
+                    refreshToken: '',
                 },
-                apiVersion: ''
+                apiVersion: '',
             };
 
             expect(credentials.data.accessToken).toBe('');
@@ -52,9 +55,9 @@ describe('LoginCredentials Model', () => {
             const credentials: LoginCredentials = {
                 data: {
                     accessToken: 'access-123',
-                    refreshToken: 'refresh-456'
+                    refreshToken: 'refresh-456',
                 },
-                apiVersion: '1.0'
+                apiVersion: '1.0',
             };
 
             expect(typeof credentials.data).toBe('object');
@@ -70,9 +73,9 @@ describe('LoginCredentials Model', () => {
             const credentials: LoginCredentials = {
                 data: {
                     accessToken: originalAccessToken,
-                    refreshToken: originalRefreshToken
+                    refreshToken: originalRefreshToken,
                 },
-                apiVersion: originalApiVersion
+                apiVersion: originalApiVersion,
             };
 
             expect(credentials.data.accessToken).toBe(originalAccessToken);
@@ -86,9 +89,9 @@ describe('LoginCredentials Model', () => {
             const credentials: LoginCredentials = {
                 data: {
                     accessToken: 'string-token',
-                    refreshToken: 'string-refresh'
+                    refreshToken: 'string-refresh',
                 },
-                apiVersion: 'string-version'
+                apiVersion: 'string-version',
             };
 
             expect(typeof credentials.data.accessToken).toBe('string');
@@ -104,9 +107,9 @@ describe('LoginCredentials Model', () => {
             const credentials: LoginCredentials = {
                 data: {
                     accessToken: longAccessToken,
-                    refreshToken: longRefreshToken
+                    refreshToken: longRefreshToken,
                 },
-                apiVersion: longApiVersion
+                apiVersion: longApiVersion,
             };
 
             expect(credentials.data.accessToken.length).toBe(1000);
@@ -121,9 +124,9 @@ describe('LoginCredentials Model', () => {
             const credentials: LoginCredentials = {
                 data: {
                     accessToken: specialCharToken,
-                    refreshToken: 'normal-refresh'
+                    refreshToken: 'normal-refresh',
                 },
-                apiVersion: '1.0.0'
+                apiVersion: '1.0.0',
             };
 
             expect(credentials.data.accessToken).toBe(specialCharToken);
@@ -134,9 +137,9 @@ describe('LoginCredentials Model', () => {
             const credentials: LoginCredentials = {
                 data: {
                     accessToken: unicodeToken,
-                    refreshToken: 'refresh-token'
+                    refreshToken: 'refresh-token',
                 },
-                apiVersion: '2.0.0'
+                apiVersion: '2.0.0',
             };
 
             expect(credentials.data.accessToken).toBe(unicodeToken);
@@ -147,9 +150,9 @@ describe('LoginCredentials Model', () => {
             const credentials: LoginCredentials = {
                 data: {
                     accessToken: tokenWithSpaces,
-                    refreshToken: 'refresh'
+                    refreshToken: 'refresh',
                 },
-                apiVersion: '1.0'
+                apiVersion: '1.0',
             };
 
             expect(credentials.data.accessToken).toBe(tokenWithSpaces);
@@ -161,16 +164,20 @@ describe('LoginCredentials Model', () => {
             const originalCredentials: LoginCredentials = {
                 data: {
                     accessToken: 'access-token-123',
-                    refreshToken: 'refresh-token-456'
+                    refreshToken: 'refresh-token-456',
                 },
-                apiVersion: '1.2.3'
+                apiVersion: '1.2.3',
             };
 
             const jsonString = JSON.stringify(originalCredentials);
             const deserializedCredentials: LoginCredentials = JSON.parse(jsonString);
 
-            expect(deserializedCredentials.data.accessToken).toBe(originalCredentials.data.accessToken);
-            expect(deserializedCredentials.data.refreshToken).toBe(originalCredentials.data.refreshToken);
+            expect(deserializedCredentials.data.accessToken).toBe(
+                originalCredentials.data.accessToken
+            );
+            expect(deserializedCredentials.data.refreshToken).toBe(
+                originalCredentials.data.refreshToken
+            );
             expect(deserializedCredentials.apiVersion).toBe(originalCredentials.apiVersion);
         });
 
@@ -178,14 +185,14 @@ describe('LoginCredentials Model', () => {
             const baseCredentials: LoginCredentials = {
                 data: {
                     accessToken: 'base-access',
-                    refreshToken: 'base-refresh'
+                    refreshToken: 'base-refresh',
                 },
-                apiVersion: '1.0.0'
+                apiVersion: '1.0.0',
             };
 
             const newCredentials: LoginCredentials = {
                 ...baseCredentials,
-                apiVersion: '2.0.0'
+                apiVersion: '2.0.0',
             };
 
             expect(newCredentials.data.accessToken).toBe('base-access');
@@ -197,16 +204,16 @@ describe('LoginCredentials Model', () => {
             const originalCredentials: LoginCredentials = {
                 data: {
                     accessToken: 'original-access',
-                    refreshToken: 'original-refresh'
+                    refreshToken: 'original-refresh',
                 },
-                apiVersion: '1.0.0'
+                apiVersion: '1.0.0',
             };
 
             const copiedCredentials: LoginCredentials = {
                 data: {
-                    ...originalCredentials.data
+                    ...originalCredentials.data,
                 },
-                apiVersion: originalCredentials.apiVersion
+                apiVersion: originalCredentials.apiVersion,
             };
 
             // Modify the copy
@@ -220,15 +227,16 @@ describe('LoginCredentials Model', () => {
 
     describe('Real-world Usage Scenarios', () => {
         it('should work with JWT-like tokens', () => {
-            const jwtToken = '***REMOVED_SECRET***';
+            const jwtToken =
+                '***REMOVED_SECRET***';
             const refreshToken = 'refresh_token_abcd1234';
 
             const credentials: LoginCredentials = {
                 data: {
                     accessToken: jwtToken,
-                    refreshToken: refreshToken
+                    refreshToken: refreshToken,
                 },
-                apiVersion: 'v1'
+                apiVersion: 'v1',
             };
 
             expect(credentials.data.accessToken.split('.').length).toBe(3); // JWT has 3 parts
@@ -242,9 +250,9 @@ describe('LoginCredentials Model', () => {
                 const credentials: LoginCredentials = {
                     data: {
                         accessToken: 'access',
-                        refreshToken: 'refresh'
+                        refreshToken: 'refresh',
                     },
-                    apiVersion: version
+                    apiVersion: version,
                 };
 
                 expect(credentials.apiVersion).toBe(version);
@@ -256,9 +264,9 @@ describe('LoginCredentials Model', () => {
             const apiResponse = {
                 data: {
                     accessToken: 'api-access-token',
-                    refreshToken: 'api-refresh-token'
+                    refreshToken: 'api-refresh-token',
                 },
-                apiVersion: '2.0.0'
+                apiVersion: '2.0.0',
             };
 
             const credentials: LoginCredentials = apiResponse;

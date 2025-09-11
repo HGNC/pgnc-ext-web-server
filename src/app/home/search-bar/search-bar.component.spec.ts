@@ -19,7 +19,7 @@ describe('HomeSearchBarComponent', () => {
 
     beforeEach(async () => {
         const routerSpy = {
-            navigate: jest.fn()
+            navigate: jest.fn(),
         };
 
         await TestBed.configureTestingModule({
@@ -27,11 +27,9 @@ describe('HomeSearchBarComponent', () => {
                 HomeSearchBarComponent,
                 FormsModule,
                 FontAwesomeModule,
-                RouterTestingModule.withRoutes([])
+                RouterTestingModule.withRoutes([]),
             ],
-            providers: [
-                { provide: Router, useValue: routerSpy }
-            ]
+            providers: [{ provide: Router, useValue: routerSpy }],
         }).compileComponents();
 
         fixture = TestBed.createComponent(HomeSearchBarComponent);
@@ -276,7 +274,7 @@ describe('HomeSearchBarComponent', () => {
             component.search();
 
             expect(mockRouter.navigate).toHaveBeenCalledWith(['/search'], {
-                queryParams: { q: 'test search' }
+                queryParams: { q: 'test search' },
             });
         });
 
@@ -301,7 +299,9 @@ describe('HomeSearchBarComponent', () => {
 
             component.search();
 
-            expect(mockRouter.navigate).toHaveBeenCalledWith(['/search'], { queryParams: { q: '   ' } });
+            expect(mockRouter.navigate).toHaveBeenCalledWith(['/search'], {
+                queryParams: { q: '   ' },
+            });
         });
 
         it('should handle special characters in search query', () => {
@@ -311,7 +311,7 @@ describe('HomeSearchBarComponent', () => {
             component.search();
 
             expect(mockRouter.navigate).toHaveBeenCalledWith(['/search'], {
-                queryParams: { q: specialQuery }
+                queryParams: { q: specialQuery },
             });
         });
 
@@ -322,7 +322,7 @@ describe('HomeSearchBarComponent', () => {
             component.search();
 
             expect(mockRouter.navigate).toHaveBeenCalledWith(['/search'], {
-                queryParams: { q: longQuery }
+                queryParams: { q: longQuery },
             });
         });
     });
@@ -344,7 +344,7 @@ describe('HomeSearchBarComponent', () => {
             form.triggerEventHandler('ngSubmit', null);
 
             expect(mockRouter.navigate).toHaveBeenCalledWith(['/search'], {
-                queryParams: { q: 'test query' }
+                queryParams: { q: 'test query' },
             });
         });
 
@@ -416,10 +416,12 @@ describe('HomeSearchBarComponent', () => {
         it('should not use inline styles', () => {
             const allElements = debugElement.queryAll(By.css('*'));
             allElements.forEach(element => {
-                if (!element.nativeElement.tagName.toLowerCase().startsWith('app-') &&
+                if (
+                    !element.nativeElement.tagName.toLowerCase().startsWith('app-') &&
                     !element.nativeElement.tagName.toLowerCase().startsWith('fa-') &&
                     element.nativeElement.tagName.toLowerCase() !== 'svg' &&
-                    element.nativeElement.tagName.toLowerCase() !== 'path') {
+                    element.nativeElement.tagName.toLowerCase() !== 'path'
+                ) {
                     expect(element.nativeElement.style.length).toBe(0);
                 }
             });
@@ -559,7 +561,11 @@ describe('HomeSearchBarComponent', () => {
 
             allElements.forEach(element => {
                 const tagName = element.nativeElement.tagName.toLowerCase();
-                if (!tagName.startsWith('app-') && !tagName.startsWith('fa-') && tagName !== 'ng-container') {
+                if (
+                    !tagName.startsWith('app-') &&
+                    !tagName.startsWith('fa-') &&
+                    tagName !== 'ng-container'
+                ) {
                     expect(standardTags).toContain(tagName);
                 }
             });
@@ -598,7 +604,7 @@ describe('HomeSearchBarComponent', () => {
             component.search();
 
             expect(mockRouter.navigate).toHaveBeenCalledWith(['/search'], {
-                queryParams: { q: 'gene symbol' }
+                queryParams: { q: 'gene symbol' },
             });
         });
 
@@ -612,13 +618,19 @@ describe('HomeSearchBarComponent', () => {
         });
 
         it('should work with different query parameter formats', () => {
-            const testQueries = ['simple', 'multi word', 'with-dashes', 'with_underscores', '123numbers'];
+            const testQueries = [
+                'simple',
+                'multi word',
+                'with-dashes',
+                'with_underscores',
+                '123numbers',
+            ];
 
             testQueries.forEach(query => {
                 component.query = query;
                 component.search();
                 expect(mockRouter.navigate).toHaveBeenCalledWith(['/search'], {
-                    queryParams: { q: query }
+                    queryParams: { q: query },
                 });
             });
         });

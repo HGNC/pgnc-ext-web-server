@@ -18,8 +18,8 @@ describe('ResultsComponent', () => {
             display: [
                 { label: 'PGNC ID', value: 'PGNC:1100' },
                 { label: 'Locus Type', value: 'protein-coding gene' },
-                { label: 'Status', value: 'Approved' }
-            ]
+                { label: 'Status', value: 'Approved' },
+            ],
         },
         {
             symbol: 'BRCA2',
@@ -32,17 +32,17 @@ describe('ResultsComponent', () => {
                 {
                     label: 'Matches',
                     value: {
-                        'gene_symbol': '<em>BRCA</em>2',
-                        'gene_name': 'breast <em>cancer</em> 2'
-                    }
-                }
-            ]
-        }
+                        gene_symbol: '<em>BRCA</em>2',
+                        gene_name: 'breast <em>cancer</em> 2',
+                    },
+                },
+            ],
+        },
     ];
 
     beforeEach(async () => {
         await TestBed.configureTestingModule({
-            imports: [ResultsComponent, KeyValuePipe]
+            imports: [ResultsComponent, KeyValuePipe],
         }).compileComponents();
 
         fixture = TestBed.createComponent(ResultsComponent);
@@ -80,10 +80,8 @@ describe('ResultsComponent', () => {
                     symbol: 'TEST1',
                     name: 'test gene 1',
                     url: '/gene/TEST1',
-                    display: [
-                        { label: 'PGNC ID', value: 'PGNC:12345' }
-                    ]
-                }
+                    display: [{ label: 'PGNC ID', value: 'PGNC:12345' }],
+                },
             ];
 
             component.results = newResults;
@@ -112,9 +110,7 @@ describe('ResultsComponent', () => {
                 symbol: `GENE${i}`,
                 name: `Gene ${i}`,
                 url: `/gene/${i}`,
-                display: [
-                    { label: 'PGNC ID', value: `PGNC:${i}` }
-                ]
+                display: [{ label: 'PGNC ID', value: `PGNC:${i}` }],
             }));
 
             component.results = largeResults;
@@ -220,10 +216,7 @@ describe('ResultsComponent', () => {
         it('should handle empty matches object', () => {
             const resultWithEmptyMatches = {
                 ...mockResults[1],
-                display: [
-                    ...mockResults[1].display.slice(0, -1),
-                    { label: 'Matches', value: {} }
-                ]
+                display: [...mockResults[1].display.slice(0, -1), { label: 'Matches', value: {} }],
             };
 
             component.results = [resultWithEmptyMatches];
@@ -262,13 +255,13 @@ describe('ResultsComponent', () => {
                     {
                         label: 'Matches',
                         value: {
-                            'symbol': '<em>BRCA</em>1',
-                            'name': 'breast <em>cancer</em> 1',
-                            'aliases': 'BRCC1, <em>FANCS</em>',
-                            'location': '17q21.31'
-                        }
-                    }
-                ]
+                            symbol: '<em>BRCA</em>1',
+                            name: 'breast <em>cancer</em> 1',
+                            aliases: 'BRCC1, <em>FANCS</em>',
+                            location: '17q21.31',
+                        },
+                    },
+                ],
             };
 
             component.results = [complexMatches];
@@ -289,8 +282,8 @@ describe('ResultsComponent', () => {
                     { label: 'ID', value: '123' },
                     { label: 'Type', value: 'custom-type' },
                     { label: 'Status', value: 'test-status' },
-                    { label: 'Extra', value: 'extra-info' }
-                ]
+                    { label: 'Extra', value: 'extra-info' },
+                ],
             };
 
             component.results = [customResult];
@@ -314,9 +307,7 @@ describe('ResultsComponent', () => {
                 symbol: 'INCOMPLETE',
                 name: 'Incomplete Gene',
                 url: '/gene/INCOMPLETE',
-                display: [
-                    { label: 'ID', value: '456' }
-                ]
+                display: [{ label: 'ID', value: '456' }],
             };
 
             component.results = [incompleteResult];
@@ -346,11 +337,11 @@ describe('ResultsComponent', () => {
                     {
                         label: 'Matches',
                         value: {
-                            'symbol': 'SPECIAL&<>',
-                            'description': 'Contains "quotes" & symbols'
-                        }
-                    }
-                ]
+                            symbol: 'SPECIAL&<>',
+                            description: 'Contains "quotes" & symbols',
+                        },
+                    },
+                ],
             };
 
             component.results = [specialResult];
@@ -385,8 +376,8 @@ describe('ResultsComponent', () => {
                     symbol: 'TEST',
                     // Missing name
                     url: '/gene/TEST',
-                    display: []
-                } as any
+                    display: [],
+                } as any,
             ];
 
             component.results = incompleteResults;
@@ -418,9 +409,9 @@ describe('ResultsComponent', () => {
                     { label: 'Status', value: 'Approved' },
                     {
                         label: 'Matches',
-                        value: null as any
-                    }
-                ]
+                        value: null as any,
+                    },
+                ],
             };
 
             component.results = [malformedResult];
@@ -437,8 +428,8 @@ describe('ResultsComponent', () => {
                 display: [
                     { label: 'PGNC ID', value: `PGNC:${i}` },
                     { label: 'Locus Type', value: 'protein-coding gene' },
-                    { label: 'Status', value: 'Approved' }
-                ]
+                    { label: 'Status', value: 'Approved' },
+                ],
             }));
 
             const start = performance.now();
@@ -458,10 +449,8 @@ describe('ResultsComponent', () => {
                         symbol: `GENE${i}`,
                         name: `Gene ${i}`,
                         url: `/gene/${i}`,
-                        display: [
-                            { label: 'PGNC ID', value: `PGNC:${i}` }
-                        ]
-                    }
+                        display: [{ label: 'PGNC ID', value: `PGNC:${i}` }],
+                    },
                 ];
                 fixture.detectChanges();
             }
@@ -537,7 +526,7 @@ describe('ResultsComponent', () => {
                 '.locus-type',
                 '.status',
                 '.key',
-                '.value'
+                '.value',
             ];
 
             expectedClasses.forEach(className => {
@@ -552,7 +541,7 @@ describe('ResultsComponent', () => {
                 '.match_table',
                 '.match_thead',
                 '.match_key',
-                '.match_td'
+                '.match_td',
             ];
 
             matchClasses.forEach(className => {
@@ -573,7 +562,17 @@ describe('ResultsComponent', () => {
 
     describe('Browser Compatibility', () => {
         it('should use standard HTML elements', () => {
-            const standardElements = ['div', 'a', 'span', 'table', 'tr', 'th', 'td', 'strong', 'em'];
+            const standardElements = [
+                'div',
+                'a',
+                'span',
+                'table',
+                'tr',
+                'th',
+                'td',
+                'strong',
+                'em',
+            ];
             const allElements = debugElement.queryAll(By.css('*'));
 
             allElements.forEach(element => {
@@ -617,14 +616,14 @@ describe('ResultsComponent', () => {
                         {
                             label: 'Matches',
                             value: {
-                                'gene_symbol': '<em>TP53</em>',
-                                'gene_name': 'tumor <em>protein</em> p53',
-                                'alias_symbol': 'P53, <em>TRP53</em>',
-                                'prev_symbol': 'TP53'
-                            }
-                        }
-                    ]
-                }
+                                gene_symbol: '<em>TP53</em>',
+                                gene_name: 'tumor <em>protein</em> p53',
+                                alias_symbol: 'P53, <em>TRP53</em>',
+                                prev_symbol: 'TP53',
+                            },
+                        },
+                    ],
+                },
             ];
 
             component.results = realWorldData;
@@ -646,9 +645,9 @@ describe('ResultsComponent', () => {
                     display: [
                         { label: 'PGNC ID', value: 'PGNC:132' },
                         { label: 'Locus Type', value: 'protein-coding gene' },
-                        { label: 'Status', value: 'Approved' }
-                    ]
-                }
+                        { label: 'Status', value: 'Approved' },
+                    ],
+                },
             ];
 
             component.results = noMatchesData;

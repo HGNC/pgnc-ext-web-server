@@ -11,7 +11,7 @@ describe('LicenceComponent', () => {
 
     beforeEach(async () => {
         await TestBed.configureTestingModule({
-            imports: [LicenceComponent]
+            imports: [LicenceComponent],
         }).compileComponents();
 
         fixture = TestBed.createComponent(LicenceComponent);
@@ -82,7 +82,9 @@ describe('LicenceComponent', () => {
         it('should have Creative Commons Zero external link', () => {
             const ccLink = debugElement.query(By.css('a[href*="creativecommons.org"]'));
             expect(ccLink).toBeTruthy();
-            expect(ccLink.nativeElement.href).toBe('https://creativecommons.org/publicdomain/zero/1.0/legalcode.en');
+            expect(ccLink.nativeElement.href).toBe(
+                'https://creativecommons.org/publicdomain/zero/1.0/legalcode.en'
+            );
             expect(ccLink.nativeElement.target).toBe('_blank');
         });
 
@@ -129,7 +131,8 @@ describe('LicenceComponent', () => {
         it('should have complete license notice', () => {
             const small = debugElement.query(By.css('small'));
             const licenseLink = small.query(By.css('a'));
-            const expectedText = 'All PGNC data are freely available under the Creative Commons Zero license (CC0)';
+            const expectedText =
+                'All PGNC data are freely available under the Creative Commons Zero license (CC0)';
 
             expect(licenseLink.nativeElement.textContent.trim()).toBe(expectedText);
         });
@@ -149,7 +152,9 @@ describe('LicenceComponent', () => {
         it('should have footer-license-block class', () => {
             const licenseBlock = debugElement.query(By.css('.footer-license-block'));
             expect(licenseBlock).toBeTruthy();
-            expect(licenseBlock.nativeElement.classList.contains('footer-license-block')).toBe(true);
+            expect(licenseBlock.nativeElement.classList.contains('footer-license-block')).toBe(
+                true
+            );
         });
 
         it('should have text-muted and text-center classes', () => {
@@ -184,7 +189,9 @@ describe('LicenceComponent', () => {
             const ccLink = debugElement.query(By.css('a[href*="creativecommons.org"]'));
             const licenseLink = debugElement.query(By.css('a[href="/license"]'));
 
-            expect(ccLink.nativeElement.href).toBe('https://creativecommons.org/publicdomain/zero/1.0/legalcode.en');
+            expect(ccLink.nativeElement.href).toBe(
+                'https://creativecommons.org/publicdomain/zero/1.0/legalcode.en'
+            );
             expect(licenseLink.nativeElement.href).toContain('/license');
         });
     });

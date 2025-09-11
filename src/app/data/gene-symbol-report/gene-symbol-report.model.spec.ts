@@ -1,7 +1,7 @@
 import { GeneLocation } from './gene-location.model';
 import { GeneName } from './gene-name.model';
-import { GeneSymbolReport } from './gene-symbol-report.model';
 import { GeneSymbol } from './gene-symbol.model';
+import { GeneSymbolReport } from './gene-symbol-report.model';
 import { Xref } from './xref-resources/xref-resources.model';
 
 describe('GeneSymbolReport Model', () => {
@@ -16,26 +16,30 @@ describe('GeneSymbolReport Model', () => {
                     status: 'active',
                     species: {
                         commonName: 'Human',
-                        scientificName: 'Homo sapiens'
+                        scientificName: 'Homo sapiens',
                     },
-                    geneNames: [{
-                        creationDate: new Date('2023-01-15'),
-                        modDate: null,
-                        withdrawnDate: null,
-                        type: 'approved',
-                        name: {
-                            name: 'tumor protein p53'
-                        }
-                    }],
-                    geneSymbols: [{
-                        creationDate: new Date('2023-01-15'),
-                        modDate: null,
-                        withdrawnDate: null,
-                        type: 'approved',
-                        symbol: {
-                            symbol: 'TP53'
-                        }
-                    }],
+                    geneNames: [
+                        {
+                            creationDate: new Date('2023-01-15'),
+                            modDate: null,
+                            withdrawnDate: null,
+                            type: 'approved',
+                            name: {
+                                name: 'tumor protein p53',
+                            },
+                        },
+                    ],
+                    geneSymbols: [
+                        {
+                            creationDate: new Date('2023-01-15'),
+                            modDate: null,
+                            withdrawnDate: null,
+                            type: 'approved',
+                            symbol: {
+                                symbol: 'TP53',
+                            },
+                        },
+                    ],
                     geneLocusTypes: null,
                     geneNotes: null,
                     geneReplacements: null,
@@ -43,9 +47,9 @@ describe('GeneSymbolReport Model', () => {
                     geneXrefs: undefined,
                     geneLocations: null,
                     primaryId: null,
-                    primaryIdSource: null
+                    primaryIdSource: null,
                 },
-                apiVersion: '1.0.0'
+                apiVersion: '1.0.0',
             };
 
             expect(report).toBeDefined();
@@ -57,7 +61,7 @@ describe('GeneSymbolReport Model', () => {
         it('should handle null data', () => {
             const report: GeneSymbolReport = {
                 data: null,
-                apiVersion: '1.0.0'
+                apiVersion: '1.0.0',
             };
 
             expect(report.data).toBeNull();
@@ -76,22 +80,26 @@ describe('GeneSymbolReport Model', () => {
                     status: 'approved',
                     species: {
                         commonName: 'Human',
-                        scientificName: 'Homo sapiens'
+                        scientificName: 'Homo sapiens',
                     },
-                    geneNames: [{
-                        creationDate: new Date('1986-01-01'),
-                        modDate: null,
-                        withdrawnDate: null,
-                        type: 'approved',
-                        name: { name: 'tumor protein p53' }
-                    }],
-                    geneSymbols: [{
-                        creationDate: new Date('1986-01-01'),
-                        modDate: null,
-                        withdrawnDate: null,
-                        type: 'approved',
-                        symbol: { symbol: 'TP53' }
-                    }],
+                    geneNames: [
+                        {
+                            creationDate: new Date('1986-01-01'),
+                            modDate: null,
+                            withdrawnDate: null,
+                            type: 'approved',
+                            name: { name: 'tumor protein p53' },
+                        },
+                    ],
+                    geneSymbols: [
+                        {
+                            creationDate: new Date('1986-01-01'),
+                            modDate: null,
+                            withdrawnDate: null,
+                            type: 'approved',
+                            symbol: { symbol: 'TP53' },
+                        },
+                    ],
                     geneLocusTypes: null,
                     geneNotes: null,
                     geneReplacements: null,
@@ -99,9 +107,9 @@ describe('GeneSymbolReport Model', () => {
                     geneXrefs: undefined,
                     geneLocations: null,
                     primaryId: null,
-                    primaryIdSource: null
+                    primaryIdSource: null,
                 },
-                apiVersion: '1.0.0'
+                apiVersion: '1.0.0',
             };
 
             expect(report.data?.id).toBe(7157);
@@ -120,22 +128,26 @@ describe('GeneSymbolReport Model', () => {
                     status: 'withdrawn',
                     species: {
                         commonName: 'Human',
-                        scientificName: 'Homo sapiens'
+                        scientificName: 'Homo sapiens',
                     },
-                    geneNames: [{
-                        creationDate: new Date('2020-01-01'),
-                        modDate: null,
-                        withdrawnDate: new Date('2023-01-01'),
-                        type: 'withdrawn',
-                        name: { name: 'obsolete gene name' }
-                    }],
-                    geneSymbols: [{
-                        creationDate: new Date('2020-01-01'),
-                        modDate: null,
-                        withdrawnDate: new Date('2023-01-01'),
-                        type: 'withdrawn',
-                        symbol: { symbol: 'OBSLT' }
-                    }],
+                    geneNames: [
+                        {
+                            creationDate: new Date('2020-01-01'),
+                            modDate: null,
+                            withdrawnDate: new Date('2023-01-01'),
+                            type: 'withdrawn',
+                            name: { name: 'obsolete gene name' },
+                        },
+                    ],
+                    geneSymbols: [
+                        {
+                            creationDate: new Date('2020-01-01'),
+                            modDate: null,
+                            withdrawnDate: new Date('2023-01-01'),
+                            type: 'withdrawn',
+                            symbol: { symbol: 'OBSLT' },
+                        },
+                    ],
                     geneLocusTypes: null,
                     geneNotes: null,
                     geneReplacements: null,
@@ -143,9 +155,9 @@ describe('GeneSymbolReport Model', () => {
                     geneXrefs: undefined,
                     geneLocations: null,
                     primaryId: null,
-                    primaryIdSource: null
+                    primaryIdSource: null,
                 },
-                apiVersion: '1.0.0'
+                apiVersion: '1.0.0',
             };
 
             expect(report.data?.status).toBe('withdrawn');
@@ -166,10 +178,26 @@ describe('GeneSymbolReport Model', () => {
                     status: 'active',
                     species: {
                         commonName: 'Human',
-                        scientificName: 'Homo sapiens'
+                        scientificName: 'Homo sapiens',
                     },
-                    geneNames: [{ creationDate: new Date(), modDate: null, withdrawnDate: null, type: 'approved', name: { name: 'test' } }],
-                    geneSymbols: [{ creationDate: new Date(), modDate: null, withdrawnDate: null, type: 'approved', symbol: { symbol: 'TEST' } }],
+                    geneNames: [
+                        {
+                            creationDate: new Date(),
+                            modDate: null,
+                            withdrawnDate: null,
+                            type: 'approved',
+                            name: { name: 'test' },
+                        },
+                    ],
+                    geneSymbols: [
+                        {
+                            creationDate: new Date(),
+                            modDate: null,
+                            withdrawnDate: null,
+                            type: 'approved',
+                            symbol: { symbol: 'TEST' },
+                        },
+                    ],
                     geneLocusTypes: null,
                     geneNotes: null,
                     geneReplacements: null,
@@ -177,9 +205,9 @@ describe('GeneSymbolReport Model', () => {
                     geneXrefs: undefined,
                     geneLocations: null,
                     primaryId: null,
-                    primaryIdSource: null
+                    primaryIdSource: null,
                 },
-                apiVersion: '1.0.0'
+                apiVersion: '1.0.0',
             };
 
             expect(report.data?.species.commonName).toBe('Human');
@@ -196,10 +224,26 @@ describe('GeneSymbolReport Model', () => {
                     status: 'active',
                     species: {
                         commonName: 'Mouse',
-                        scientificName: 'Mus musculus'
+                        scientificName: 'Mus musculus',
                     },
-                    geneNames: [{ creationDate: new Date(), modDate: null, withdrawnDate: null, type: 'approved', name: { name: 'test' } }],
-                    geneSymbols: [{ creationDate: new Date(), modDate: null, withdrawnDate: null, type: 'approved', symbol: { symbol: 'Test' } }],
+                    geneNames: [
+                        {
+                            creationDate: new Date(),
+                            modDate: null,
+                            withdrawnDate: null,
+                            type: 'approved',
+                            name: { name: 'test' },
+                        },
+                    ],
+                    geneSymbols: [
+                        {
+                            creationDate: new Date(),
+                            modDate: null,
+                            withdrawnDate: null,
+                            type: 'approved',
+                            symbol: { symbol: 'Test' },
+                        },
+                    ],
                     geneLocusTypes: null,
                     geneNotes: null,
                     geneReplacements: null,
@@ -207,9 +251,9 @@ describe('GeneSymbolReport Model', () => {
                     geneXrefs: undefined,
                     geneLocations: null,
                     primaryId: null,
-                    primaryIdSource: null
+                    primaryIdSource: null,
                 },
-                apiVersion: '1.0.0'
+                apiVersion: '1.0.0',
             };
 
             expect(report.data?.species.commonName).toBe('Mouse');
@@ -225,8 +269,8 @@ describe('GeneSymbolReport Model', () => {
                     modDate: null,
                     withdrawnDate: null,
                     type: 'approved',
-                    name: { name: 'tumor protein p53' }
-                }
+                    name: { name: 'tumor protein p53' },
+                },
             ];
 
             const report: GeneSymbolReport = {
@@ -238,7 +282,15 @@ describe('GeneSymbolReport Model', () => {
                     status: 'active',
                     species: { commonName: 'Human', scientificName: 'Homo sapiens' },
                     geneNames,
-                    geneSymbols: [{ creationDate: new Date(), modDate: null, withdrawnDate: null, type: 'approved', symbol: { symbol: 'TP53' } }],
+                    geneSymbols: [
+                        {
+                            creationDate: new Date(),
+                            modDate: null,
+                            withdrawnDate: null,
+                            type: 'approved',
+                            symbol: { symbol: 'TP53' },
+                        },
+                    ],
                     geneLocusTypes: null,
                     geneNotes: null,
                     geneReplacements: null,
@@ -246,9 +298,9 @@ describe('GeneSymbolReport Model', () => {
                     geneXrefs: undefined,
                     geneLocations: null,
                     primaryId: null,
-                    primaryIdSource: null
+                    primaryIdSource: null,
                 },
-                apiVersion: '1.0.0'
+                apiVersion: '1.0.0',
             };
 
             expect(report.data?.geneNames).toBe(geneNames);
@@ -265,8 +317,8 @@ describe('GeneSymbolReport Model', () => {
                     modDate: null,
                     withdrawnDate: null,
                     type: 'approved',
-                    symbol: { symbol: 'TP53' }
-                }
+                    symbol: { symbol: 'TP53' },
+                },
             ];
 
             const report: GeneSymbolReport = {
@@ -277,7 +329,15 @@ describe('GeneSymbolReport Model', () => {
                     withdrawnDate: null,
                     status: 'active',
                     species: { commonName: 'Human', scientificName: 'Homo sapiens' },
-                    geneNames: [{ creationDate: new Date(), modDate: null, withdrawnDate: null, type: 'approved', name: { name: 'tumor protein p53' } }],
+                    geneNames: [
+                        {
+                            creationDate: new Date(),
+                            modDate: null,
+                            withdrawnDate: null,
+                            type: 'approved',
+                            name: { name: 'tumor protein p53' },
+                        },
+                    ],
                     geneSymbols,
                     geneLocusTypes: null,
                     geneNotes: null,
@@ -286,9 +346,9 @@ describe('GeneSymbolReport Model', () => {
                     geneXrefs: undefined,
                     geneLocations: null,
                     primaryId: null,
-                    primaryIdSource: null
+                    primaryIdSource: null,
                 },
-                apiVersion: '1.0.0'
+                apiVersion: '1.0.0',
             };
 
             expect(report.data?.geneSymbols).toBe(geneSymbols);
@@ -307,8 +367,24 @@ describe('GeneSymbolReport Model', () => {
                     withdrawnDate: null,
                     status: 'active',
                     species: { commonName: 'Human', scientificName: 'Homo sapiens' },
-                    geneNames: [{ creationDate: new Date(), modDate: null, withdrawnDate: null, type: 'approved', name: { name: 'test' } }],
-                    geneSymbols: [{ creationDate: new Date(), modDate: null, withdrawnDate: null, type: 'approved', symbol: { symbol: 'TEST' } }],
+                    geneNames: [
+                        {
+                            creationDate: new Date(),
+                            modDate: null,
+                            withdrawnDate: null,
+                            type: 'approved',
+                            name: { name: 'test' },
+                        },
+                    ],
+                    geneSymbols: [
+                        {
+                            creationDate: new Date(),
+                            modDate: null,
+                            withdrawnDate: null,
+                            type: 'approved',
+                            symbol: { symbol: 'TEST' },
+                        },
+                    ],
                     geneLocusTypes: null,
                     geneNotes: null,
                     geneReplacements: null,
@@ -316,16 +392,23 @@ describe('GeneSymbolReport Model', () => {
                     geneXrefs: undefined,
                     geneLocations: null,
                     primaryId: null,
-                    primaryIdSource: null
+                    primaryIdSource: null,
                 },
-                apiVersion: '1.0.0'
+                apiVersion: '1.0.0',
             };
 
             expect(report.data?.geneLocusTypes).toBeNull();
         });
 
         it('should handle gene locus types array', () => {
-            const geneLocusTypes: [{ creationDate: Date; modDate: Date | null; withdrawnDate: Date | null; locusType: { name: string; locusGroup: { name: string; }; }; }] = [
+            const geneLocusTypes: [
+                {
+                    creationDate: Date;
+                    modDate: Date | null;
+                    withdrawnDate: Date | null;
+                    locusType: { name: string; locusGroup: { name: string } };
+                },
+            ] = [
                 {
                     creationDate: new Date('2023-01-01'),
                     modDate: null,
@@ -333,10 +416,10 @@ describe('GeneSymbolReport Model', () => {
                     locusType: {
                         name: 'protein coding gene',
                         locusGroup: {
-                            name: 'protein coding'
-                        }
-                    }
-                }
+                            name: 'protein coding',
+                        },
+                    },
+                },
             ];
 
             const report: GeneSymbolReport = {
@@ -347,8 +430,24 @@ describe('GeneSymbolReport Model', () => {
                     withdrawnDate: null,
                     status: 'active',
                     species: { commonName: 'Human', scientificName: 'Homo sapiens' },
-                    geneNames: [{ creationDate: new Date(), modDate: null, withdrawnDate: null, type: 'approved', name: { name: 'tumor protein p53' } }],
-                    geneSymbols: [{ creationDate: new Date(), modDate: null, withdrawnDate: null, type: 'approved', symbol: { symbol: 'TP53' } }],
+                    geneNames: [
+                        {
+                            creationDate: new Date(),
+                            modDate: null,
+                            withdrawnDate: null,
+                            type: 'approved',
+                            name: { name: 'tumor protein p53' },
+                        },
+                    ],
+                    geneSymbols: [
+                        {
+                            creationDate: new Date(),
+                            modDate: null,
+                            withdrawnDate: null,
+                            type: 'approved',
+                            symbol: { symbol: 'TP53' },
+                        },
+                    ],
                     geneLocusTypes,
                     geneNotes: null,
                     geneReplacements: null,
@@ -356,14 +455,16 @@ describe('GeneSymbolReport Model', () => {
                     geneXrefs: undefined,
                     geneLocations: null,
                     primaryId: null,
-                    primaryIdSource: null
+                    primaryIdSource: null,
                 },
-                apiVersion: '1.0.0'
+                apiVersion: '1.0.0',
             };
 
             expect(report.data?.geneLocusTypes).toBe(geneLocusTypes);
             expect(report.data?.geneLocusTypes?.[0].locusType.name).toBe('protein coding gene');
-            expect(report.data?.geneLocusTypes?.[0].locusType.locusGroup.name).toBe('protein coding');
+            expect(report.data?.geneLocusTypes?.[0].locusType.locusGroup.name).toBe(
+                'protein coding'
+            );
         });
     });
 
@@ -377,8 +478,24 @@ describe('GeneSymbolReport Model', () => {
                     withdrawnDate: null,
                     status: 'active',
                     species: { commonName: 'Human', scientificName: 'Homo sapiens' },
-                    geneNames: [{ creationDate: new Date(), modDate: null, withdrawnDate: null, type: 'approved', name: { name: 'test' } }],
-                    geneSymbols: [{ creationDate: new Date(), modDate: null, withdrawnDate: null, type: 'approved', symbol: { symbol: 'TEST' } }],
+                    geneNames: [
+                        {
+                            creationDate: new Date(),
+                            modDate: null,
+                            withdrawnDate: null,
+                            type: 'approved',
+                            name: { name: 'test' },
+                        },
+                    ],
+                    geneSymbols: [
+                        {
+                            creationDate: new Date(),
+                            modDate: null,
+                            withdrawnDate: null,
+                            type: 'approved',
+                            symbol: { symbol: 'TEST' },
+                        },
+                    ],
                     geneLocusTypes: null,
                     geneNotes: null,
                     geneReplacements: null,
@@ -386,24 +503,31 @@ describe('GeneSymbolReport Model', () => {
                     geneXrefs: undefined,
                     geneLocations: null,
                     primaryId: null,
-                    primaryIdSource: null
+                    primaryIdSource: null,
                 },
-                apiVersion: '1.0.0'
+                apiVersion: '1.0.0',
             };
 
             expect(report.data?.geneNotes).toBeNull();
         });
 
         it('should handle gene notes array', () => {
-            const geneNotes: [{ creationDate: Date; modDate: Date | null; withdrawnDate: Date | null; note: { note: string; }; }] = [
+            const geneNotes: [
+                {
+                    creationDate: Date;
+                    modDate: Date | null;
+                    withdrawnDate: Date | null;
+                    note: { note: string };
+                },
+            ] = [
                 {
                     creationDate: new Date('2023-01-01'),
                     modDate: new Date('2023-06-01'),
                     withdrawnDate: null,
                     note: {
-                        note: 'This gene encodes a tumor suppressor protein'
-                    }
-                }
+                        note: 'This gene encodes a tumor suppressor protein',
+                    },
+                },
             ];
 
             const report: GeneSymbolReport = {
@@ -414,8 +538,24 @@ describe('GeneSymbolReport Model', () => {
                     withdrawnDate: null,
                     status: 'active',
                     species: { commonName: 'Human', scientificName: 'Homo sapiens' },
-                    geneNames: [{ creationDate: new Date(), modDate: null, withdrawnDate: null, type: 'approved', name: { name: 'tumor protein p53' } }],
-                    geneSymbols: [{ creationDate: new Date(), modDate: null, withdrawnDate: null, type: 'approved', symbol: { symbol: 'TP53' } }],
+                    geneNames: [
+                        {
+                            creationDate: new Date(),
+                            modDate: null,
+                            withdrawnDate: null,
+                            type: 'approved',
+                            name: { name: 'tumor protein p53' },
+                        },
+                    ],
+                    geneSymbols: [
+                        {
+                            creationDate: new Date(),
+                            modDate: null,
+                            withdrawnDate: null,
+                            type: 'approved',
+                            symbol: { symbol: 'TP53' },
+                        },
+                    ],
                     geneLocusTypes: null,
                     geneNotes,
                     geneReplacements: null,
@@ -423,13 +563,15 @@ describe('GeneSymbolReport Model', () => {
                     geneXrefs: undefined,
                     geneLocations: null,
                     primaryId: null,
-                    primaryIdSource: null
+                    primaryIdSource: null,
                 },
-                apiVersion: '1.0.0'
+                apiVersion: '1.0.0',
             };
 
             expect(report.data?.geneNotes).toBe(geneNotes);
-            expect(report.data?.geneNotes?.[0].note.note).toBe('This gene encodes a tumor suppressor protein');
+            expect(report.data?.geneNotes?.[0].note.note).toBe(
+                'This gene encodes a tumor suppressor protein'
+            );
         });
     });
 
@@ -443,8 +585,24 @@ describe('GeneSymbolReport Model', () => {
                     withdrawnDate: null,
                     status: 'active',
                     species: { commonName: 'Human', scientificName: 'Homo sapiens' },
-                    geneNames: [{ creationDate: new Date(), modDate: null, withdrawnDate: null, type: 'approved', name: { name: 'test' } }],
-                    geneSymbols: [{ creationDate: new Date(), modDate: null, withdrawnDate: null, type: 'approved', symbol: { symbol: 'TEST' } }],
+                    geneNames: [
+                        {
+                            creationDate: new Date(),
+                            modDate: null,
+                            withdrawnDate: null,
+                            type: 'approved',
+                            name: { name: 'test' },
+                        },
+                    ],
+                    geneSymbols: [
+                        {
+                            creationDate: new Date(),
+                            modDate: null,
+                            withdrawnDate: null,
+                            type: 'approved',
+                            symbol: { symbol: 'TEST' },
+                        },
+                    ],
                     geneLocusTypes: null,
                     geneNotes: null,
                     geneReplacements: null,
@@ -452,9 +610,9 @@ describe('GeneSymbolReport Model', () => {
                     geneXrefs: undefined,
                     geneLocations: null,
                     primaryId: null,
-                    primaryIdSource: null
+                    primaryIdSource: null,
                 },
-                apiVersion: '1.0.0'
+                apiVersion: '1.0.0',
             };
 
             expect(report.data?.geneReplacements).toBeNull();
@@ -462,18 +620,18 @@ describe('GeneSymbolReport Model', () => {
         });
 
         it('should handle gene replacements arrays', () => {
-            const geneReplacements: [{ replacementId: number; date: Date; }] = [
+            const geneReplacements: [{ replacementId: number; date: Date }] = [
                 {
                     replacementId: 54321,
-                    date: new Date('2023-01-01')
-                }
+                    date: new Date('2023-01-01'),
+                },
             ];
 
-            const genesReplaced: [{ previousId: number; date: Date; }] = [
+            const genesReplaced: [{ previousId: number; date: Date }] = [
                 {
                     previousId: 98765,
-                    date: new Date('2022-12-31')
-                }
+                    date: new Date('2022-12-31'),
+                },
             ];
 
             const report: GeneSymbolReport = {
@@ -484,8 +642,24 @@ describe('GeneSymbolReport Model', () => {
                     withdrawnDate: null,
                     status: 'active',
                     species: { commonName: 'Human', scientificName: 'Homo sapiens' },
-                    geneNames: [{ creationDate: new Date(), modDate: null, withdrawnDate: null, type: 'approved', name: { name: 'test gene' } }],
-                    geneSymbols: [{ creationDate: new Date(), modDate: null, withdrawnDate: null, type: 'approved', symbol: { symbol: 'TESTG' } }],
+                    geneNames: [
+                        {
+                            creationDate: new Date(),
+                            modDate: null,
+                            withdrawnDate: null,
+                            type: 'approved',
+                            name: { name: 'test gene' },
+                        },
+                    ],
+                    geneSymbols: [
+                        {
+                            creationDate: new Date(),
+                            modDate: null,
+                            withdrawnDate: null,
+                            type: 'approved',
+                            symbol: { symbol: 'TESTG' },
+                        },
+                    ],
                     geneLocusTypes: null,
                     geneNotes: null,
                     geneReplacements,
@@ -493,9 +667,9 @@ describe('GeneSymbolReport Model', () => {
                     geneXrefs: undefined,
                     geneLocations: null,
                     primaryId: null,
-                    primaryIdSource: null
+                    primaryIdSource: null,
                 },
-                apiVersion: '1.0.0'
+                apiVersion: '1.0.0',
             };
 
             expect(report.data?.geneReplacements).toBe(geneReplacements);
@@ -515,8 +689,24 @@ describe('GeneSymbolReport Model', () => {
                     withdrawnDate: null,
                     status: 'active',
                     species: { commonName: 'Human', scientificName: 'Homo sapiens' },
-                    geneNames: [{ creationDate: new Date(), modDate: null, withdrawnDate: null, type: 'approved', name: { name: 'test' } }],
-                    geneSymbols: [{ creationDate: new Date(), modDate: null, withdrawnDate: null, type: 'approved', symbol: { symbol: 'TEST' } }],
+                    geneNames: [
+                        {
+                            creationDate: new Date(),
+                            modDate: null,
+                            withdrawnDate: null,
+                            type: 'approved',
+                            name: { name: 'test' },
+                        },
+                    ],
+                    geneSymbols: [
+                        {
+                            creationDate: new Date(),
+                            modDate: null,
+                            withdrawnDate: null,
+                            type: 'approved',
+                            symbol: { symbol: 'TEST' },
+                        },
+                    ],
                     geneLocusTypes: null,
                     geneNotes: null,
                     geneReplacements: null,
@@ -524,9 +714,9 @@ describe('GeneSymbolReport Model', () => {
                     geneXrefs: undefined,
                     geneLocations: null,
                     primaryId: null,
-                    primaryIdSource: null
+                    primaryIdSource: null,
                 },
-                apiVersion: '1.0.0'
+                apiVersion: '1.0.0',
             };
 
             expect(report.data?.geneXrefs).toBeUndefined();
@@ -543,8 +733,8 @@ describe('GeneSymbolReport Model', () => {
                     source: 'automatic',
                     xref: {
                         displayId: 'NCBI:7157',
-                        externalResource: { name: 'NCBI Gene' }
-                    }
+                        externalResource: { name: 'NCBI Gene' },
+                    },
                 },
                 {
                     geneId: 7157,
@@ -555,9 +745,9 @@ describe('GeneSymbolReport Model', () => {
                     source: 'automatic',
                     xref: {
                         displayId: 'P04637',
-                        externalResource: { name: 'UniProt' }
-                    }
-                }
+                        externalResource: { name: 'UniProt' },
+                    },
+                },
             ];
 
             const report: GeneSymbolReport = {
@@ -568,8 +758,24 @@ describe('GeneSymbolReport Model', () => {
                     withdrawnDate: null,
                     status: 'active',
                     species: { commonName: 'Human', scientificName: 'Homo sapiens' },
-                    geneNames: [{ creationDate: new Date(), modDate: null, withdrawnDate: null, type: 'approved', name: { name: 'tumor protein p53' } }],
-                    geneSymbols: [{ creationDate: new Date(), modDate: null, withdrawnDate: null, type: 'approved', symbol: { symbol: 'TP53' } }],
+                    geneNames: [
+                        {
+                            creationDate: new Date(),
+                            modDate: null,
+                            withdrawnDate: null,
+                            type: 'approved',
+                            name: { name: 'tumor protein p53' },
+                        },
+                    ],
+                    geneSymbols: [
+                        {
+                            creationDate: new Date(),
+                            modDate: null,
+                            withdrawnDate: null,
+                            type: 'approved',
+                            symbol: { symbol: 'TP53' },
+                        },
+                    ],
                     geneLocusTypes: null,
                     geneNotes: null,
                     geneReplacements: null,
@@ -577,9 +783,9 @@ describe('GeneSymbolReport Model', () => {
                     geneXrefs,
                     geneLocations: null,
                     primaryId: null,
-                    primaryIdSource: null
+                    primaryIdSource: null,
                 },
-                apiVersion: '1.0.0'
+                apiVersion: '1.0.0',
             };
 
             expect(report.data?.geneXrefs).toBe(geneXrefs);
@@ -599,8 +805,24 @@ describe('GeneSymbolReport Model', () => {
                     withdrawnDate: null,
                     status: 'active',
                     species: { commonName: 'Human', scientificName: 'Homo sapiens' },
-                    geneNames: [{ creationDate: new Date(), modDate: null, withdrawnDate: null, type: 'approved', name: { name: 'test' } }],
-                    geneSymbols: [{ creationDate: new Date(), modDate: null, withdrawnDate: null, type: 'approved', symbol: { symbol: 'TEST' } }],
+                    geneNames: [
+                        {
+                            creationDate: new Date(),
+                            modDate: null,
+                            withdrawnDate: null,
+                            type: 'approved',
+                            name: { name: 'test' },
+                        },
+                    ],
+                    geneSymbols: [
+                        {
+                            creationDate: new Date(),
+                            modDate: null,
+                            withdrawnDate: null,
+                            type: 'approved',
+                            symbol: { symbol: 'TEST' },
+                        },
+                    ],
                     geneLocusTypes: null,
                     geneNotes: null,
                     geneReplacements: null,
@@ -608,9 +830,9 @@ describe('GeneSymbolReport Model', () => {
                     geneXrefs: undefined,
                     geneLocations: null,
                     primaryId: null,
-                    primaryIdSource: null
+                    primaryIdSource: null,
                 },
-                apiVersion: '1.0.0'
+                apiVersion: '1.0.0',
             };
 
             expect(report.data?.geneLocations).toBeNull();
@@ -626,9 +848,9 @@ describe('GeneSymbolReport Model', () => {
                         refseqAccession: 'NC_000017.11',
                         genbankAccession: 'CM000679.2',
                         coordSystem: 'GRCh38',
-                        type: 'genomic'
-                    }
-                }
+                        type: 'genomic',
+                    },
+                },
             ];
 
             const report: GeneSymbolReport = {
@@ -639,8 +861,24 @@ describe('GeneSymbolReport Model', () => {
                     withdrawnDate: null,
                     status: 'active',
                     species: { commonName: 'Human', scientificName: 'Homo sapiens' },
-                    geneNames: [{ creationDate: new Date(), modDate: null, withdrawnDate: null, type: 'approved', name: { name: 'tumor protein p53' } }],
-                    geneSymbols: [{ creationDate: new Date(), modDate: null, withdrawnDate: null, type: 'approved', symbol: { symbol: 'TP53' } }],
+                    geneNames: [
+                        {
+                            creationDate: new Date(),
+                            modDate: null,
+                            withdrawnDate: null,
+                            type: 'approved',
+                            name: { name: 'tumor protein p53' },
+                        },
+                    ],
+                    geneSymbols: [
+                        {
+                            creationDate: new Date(),
+                            modDate: null,
+                            withdrawnDate: null,
+                            type: 'approved',
+                            symbol: { symbol: 'TP53' },
+                        },
+                    ],
                     geneLocusTypes: null,
                     geneNotes: null,
                     geneReplacements: null,
@@ -648,9 +886,9 @@ describe('GeneSymbolReport Model', () => {
                     geneXrefs: undefined,
                     geneLocations,
                     primaryId: null,
-                    primaryIdSource: null
+                    primaryIdSource: null,
                 },
-                apiVersion: '1.0.0'
+                apiVersion: '1.0.0',
             };
 
             expect(report.data?.geneLocations).toBe(geneLocations);
@@ -669,8 +907,24 @@ describe('GeneSymbolReport Model', () => {
                     withdrawnDate: null,
                     status: 'active',
                     species: { commonName: 'Human', scientificName: 'Homo sapiens' },
-                    geneNames: [{ creationDate: new Date(), modDate: null, withdrawnDate: null, type: 'approved', name: { name: 'test' } }],
-                    geneSymbols: [{ creationDate: new Date(), modDate: null, withdrawnDate: null, type: 'approved', symbol: { symbol: 'TEST' } }],
+                    geneNames: [
+                        {
+                            creationDate: new Date(),
+                            modDate: null,
+                            withdrawnDate: null,
+                            type: 'approved',
+                            name: { name: 'test' },
+                        },
+                    ],
+                    geneSymbols: [
+                        {
+                            creationDate: new Date(),
+                            modDate: null,
+                            withdrawnDate: null,
+                            type: 'approved',
+                            symbol: { symbol: 'TEST' },
+                        },
+                    ],
                     geneLocusTypes: null,
                     geneNotes: null,
                     geneReplacements: null,
@@ -678,9 +932,9 @@ describe('GeneSymbolReport Model', () => {
                     geneXrefs: undefined,
                     geneLocations: null,
                     primaryId: null,
-                    primaryIdSource: null
+                    primaryIdSource: null,
                 },
-                apiVersion: '1.0.0'
+                apiVersion: '1.0.0',
             };
 
             expect(report.data?.primaryId).toBeNull();
@@ -696,8 +950,24 @@ describe('GeneSymbolReport Model', () => {
                     withdrawnDate: null,
                     status: 'active',
                     species: { commonName: 'Human', scientificName: 'Homo sapiens' },
-                    geneNames: [{ creationDate: new Date(), modDate: null, withdrawnDate: null, type: 'approved', name: { name: 'tumor protein p53' } }],
-                    geneSymbols: [{ creationDate: new Date(), modDate: null, withdrawnDate: null, type: 'approved', symbol: { symbol: 'TP53' } }],
+                    geneNames: [
+                        {
+                            creationDate: new Date(),
+                            modDate: null,
+                            withdrawnDate: null,
+                            type: 'approved',
+                            name: { name: 'tumor protein p53' },
+                        },
+                    ],
+                    geneSymbols: [
+                        {
+                            creationDate: new Date(),
+                            modDate: null,
+                            withdrawnDate: null,
+                            type: 'approved',
+                            symbol: { symbol: 'TP53' },
+                        },
+                    ],
                     geneLocusTypes: null,
                     geneNotes: null,
                     geneReplacements: null,
@@ -705,9 +975,9 @@ describe('GeneSymbolReport Model', () => {
                     geneXrefs: undefined,
                     geneLocations: null,
                     primaryId: 'HGNC:11998',
-                    primaryIdSource: 'HGNC'
+                    primaryIdSource: 'HGNC',
                 },
-                apiVersion: '1.0.0'
+                apiVersion: '1.0.0',
             };
 
             expect(report.data?.primaryId).toBe('HGNC:11998');
@@ -722,7 +992,7 @@ describe('GeneSymbolReport Model', () => {
             versions.forEach(version => {
                 const report: GeneSymbolReport = {
                     data: null,
-                    apiVersion: version
+                    apiVersion: version,
                 };
 
                 expect(report.apiVersion).toBe(version);
@@ -744,8 +1014,24 @@ describe('GeneSymbolReport Model', () => {
                     withdrawnDate,
                     status: 'withdrawn',
                     species: { commonName: 'Human', scientificName: 'Homo sapiens' },
-                    geneNames: [{ creationDate, modDate, withdrawnDate, type: 'withdrawn', name: { name: 'test' } }],
-                    geneSymbols: [{ creationDate, modDate, withdrawnDate, type: 'withdrawn', symbol: { symbol: 'TEST' } }],
+                    geneNames: [
+                        {
+                            creationDate,
+                            modDate,
+                            withdrawnDate,
+                            type: 'withdrawn',
+                            name: { name: 'test' },
+                        },
+                    ],
+                    geneSymbols: [
+                        {
+                            creationDate,
+                            modDate,
+                            withdrawnDate,
+                            type: 'withdrawn',
+                            symbol: { symbol: 'TEST' },
+                        },
+                    ],
                     geneLocusTypes: null,
                     geneNotes: null,
                     geneReplacements: null,
@@ -753,13 +1039,17 @@ describe('GeneSymbolReport Model', () => {
                     geneXrefs: undefined,
                     geneLocations: null,
                     primaryId: null,
-                    primaryIdSource: null
+                    primaryIdSource: null,
                 },
-                apiVersion: '1.0.0'
+                apiVersion: '1.0.0',
             };
 
-            expect(report.data!.creationDate.getTime()).toBeLessThan(report.data!.modDate!.getTime());
-            expect(report.data!.modDate!.getTime()).toBeLessThan(report.data!.withdrawnDate!.getTime());
+            expect(report.data!.creationDate.getTime()).toBeLessThan(
+                report.data!.modDate!.getTime()
+            );
+            expect(report.data!.modDate!.getTime()).toBeLessThan(
+                report.data!.withdrawnDate!.getTime()
+            );
         });
     });
 
@@ -774,66 +1064,78 @@ describe('GeneSymbolReport Model', () => {
                     status: 'approved',
                     species: {
                         commonName: 'Human',
-                        scientificName: 'Homo sapiens'
+                        scientificName: 'Homo sapiens',
                     },
-                    geneNames: [{
-                        creationDate: new Date('1986-01-01'),
-                        modDate: null,
-                        withdrawnDate: null,
-                        type: 'approved',
-                        name: { name: 'tumor protein p53' }
-                    }],
-                    geneSymbols: [{
-                        creationDate: new Date('1986-01-01'),
-                        modDate: null,
-                        withdrawnDate: null,
-                        type: 'approved',
-                        symbol: { symbol: 'TP53' }
-                    }],
-                    geneLocusTypes: [{
-                        creationDate: new Date('1986-01-01'),
-                        modDate: null,
-                        withdrawnDate: null,
-                        locusType: {
-                            name: 'protein coding gene',
-                            locusGroup: { name: 'protein coding' }
-                        }
-                    }],
-                    geneNotes: [{
-                        creationDate: new Date('2000-01-01'),
-                        modDate: null,
-                        withdrawnDate: null,
-                        note: { note: 'Guardian of the genome' }
-                    }],
+                    geneNames: [
+                        {
+                            creationDate: new Date('1986-01-01'),
+                            modDate: null,
+                            withdrawnDate: null,
+                            type: 'approved',
+                            name: { name: 'tumor protein p53' },
+                        },
+                    ],
+                    geneSymbols: [
+                        {
+                            creationDate: new Date('1986-01-01'),
+                            modDate: null,
+                            withdrawnDate: null,
+                            type: 'approved',
+                            symbol: { symbol: 'TP53' },
+                        },
+                    ],
+                    geneLocusTypes: [
+                        {
+                            creationDate: new Date('1986-01-01'),
+                            modDate: null,
+                            withdrawnDate: null,
+                            locusType: {
+                                name: 'protein coding gene',
+                                locusGroup: { name: 'protein coding' },
+                            },
+                        },
+                    ],
+                    geneNotes: [
+                        {
+                            creationDate: new Date('2000-01-01'),
+                            modDate: null,
+                            withdrawnDate: null,
+                            note: { note: 'Guardian of the genome' },
+                        },
+                    ],
                     geneReplacements: null,
                     genesReplaced: null,
-                    geneXrefs: [{
-                        geneId: 7157,
-                        xrefId: 1,
-                        creationDate: new Date('2000-01-01'),
-                        withdrawnDate: null,
-                        status: 'active',
-                        source: 'automatic',
-                        xref: {
-                            displayId: 'NCBI:7157',
-                            externalResource: { name: 'NCBI Gene' }
-                        }
-                    }],
-                    geneLocations: [{
-                        creationDate: new Date('1986-01-01'),
-                        withdrawnDate: null,
-                        location: {
-                            name: '17p13.1',
-                            refseqAccession: 'NC_000017.11',
-                            genbankAccession: 'CM000679.2',
-                            coordSystem: 'GRCh38',
-                            type: 'genomic'
-                        }
-                    }],
+                    geneXrefs: [
+                        {
+                            geneId: 7157,
+                            xrefId: 1,
+                            creationDate: new Date('2000-01-01'),
+                            withdrawnDate: null,
+                            status: 'active',
+                            source: 'automatic',
+                            xref: {
+                                displayId: 'NCBI:7157',
+                                externalResource: { name: 'NCBI Gene' },
+                            },
+                        },
+                    ],
+                    geneLocations: [
+                        {
+                            creationDate: new Date('1986-01-01'),
+                            withdrawnDate: null,
+                            location: {
+                                name: '17p13.1',
+                                refseqAccession: 'NC_000017.11',
+                                genbankAccession: 'CM000679.2',
+                                coordSystem: 'GRCh38',
+                                type: 'genomic',
+                            },
+                        },
+                    ],
                     primaryId: 'HGNC:11998',
-                    primaryIdSource: 'HGNC'
+                    primaryIdSource: 'HGNC',
                 },
-                apiVersion: '1.0.0'
+                apiVersion: '1.0.0',
             };
 
             expect(report.data?.id).toBe(7157);
@@ -856,10 +1158,26 @@ describe('GeneSymbolReport Model', () => {
                     status: 'active',
                     species: {
                         commonName: 'Human',
-                        scientificName: 'Homo sapiens'
+                        scientificName: 'Homo sapiens',
                     },
-                    geneNames: [{ creationDate: new Date(), modDate: null, withdrawnDate: null, type: 'approved', name: { name: 'test gene' } }],
-                    geneSymbols: [{ creationDate: new Date(), modDate: null, withdrawnDate: null, type: 'approved', symbol: { symbol: 'TESTG' } }],
+                    geneNames: [
+                        {
+                            creationDate: new Date(),
+                            modDate: null,
+                            withdrawnDate: null,
+                            type: 'approved',
+                            name: { name: 'test gene' },
+                        },
+                    ],
+                    geneSymbols: [
+                        {
+                            creationDate: new Date(),
+                            modDate: null,
+                            withdrawnDate: null,
+                            type: 'approved',
+                            symbol: { symbol: 'TESTG' },
+                        },
+                    ],
                     geneLocusTypes: null,
                     geneNotes: null,
                     geneReplacements: null,
@@ -867,9 +1185,9 @@ describe('GeneSymbolReport Model', () => {
                     geneXrefs: undefined,
                     geneLocations: null,
                     primaryId: null,
-                    primaryIdSource: null
+                    primaryIdSource: null,
                 },
-                apiVersion: '1.0.0'
+                apiVersion: '1.0.0',
             };
 
             // Verify types
@@ -893,8 +1211,24 @@ describe('GeneSymbolReport Model', () => {
                     withdrawnDate: null,
                     status: 'active',
                     species: { commonName: 'Human', scientificName: 'Homo sapiens' },
-                    geneNames: [{ creationDate: new Date('2023-01-01'), modDate: null, withdrawnDate: null, type: 'approved', name: { name: 'tumor protein p53' } }],
-                    geneSymbols: [{ creationDate: new Date('2023-01-01'), modDate: null, withdrawnDate: null, type: 'approved', symbol: { symbol: 'TP53' } }],
+                    geneNames: [
+                        {
+                            creationDate: new Date('2023-01-01'),
+                            modDate: null,
+                            withdrawnDate: null,
+                            type: 'approved',
+                            name: { name: 'tumor protein p53' },
+                        },
+                    ],
+                    geneSymbols: [
+                        {
+                            creationDate: new Date('2023-01-01'),
+                            modDate: null,
+                            withdrawnDate: null,
+                            type: 'approved',
+                            symbol: { symbol: 'TP53' },
+                        },
+                    ],
                     geneLocusTypes: null,
                     geneNotes: null,
                     geneReplacements: null,
@@ -902,9 +1236,9 @@ describe('GeneSymbolReport Model', () => {
                     geneXrefs: undefined,
                     geneLocations: null,
                     primaryId: 'HGNC:11998',
-                    primaryIdSource: 'HGNC'
+                    primaryIdSource: 'HGNC',
                 },
-                apiVersion: '1.0.0'
+                apiVersion: '1.0.0',
             };
 
             const jsonString = JSON.stringify(originalReport);

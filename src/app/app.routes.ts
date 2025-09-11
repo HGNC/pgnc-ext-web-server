@@ -58,7 +58,7 @@ export const routes: Routes = [
     },
     {
         path: 'publications',
-        component: PublicationsComponent
+        component: PublicationsComponent,
     },
     {
         path: 'search',

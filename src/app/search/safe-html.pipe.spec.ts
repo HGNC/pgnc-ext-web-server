@@ -9,16 +9,14 @@ describe('SafeHtmlPipe', () => {
 
     beforeEach(() => {
         mockSanitizer = {
-            bypassSecurityTrustHtml: jest.fn().mockImplementation((value) => ({
+            bypassSecurityTrustHtml: jest.fn().mockImplementation(value => ({
                 changingThisBreaksApplicationSecurity: value,
-                toString: () => value
-            }))
+                toString: () => value,
+            })),
         } as any;
 
         TestBed.configureTestingModule({
-            providers: [
-                { provide: DomSanitizer, useValue: mockSanitizer }
-            ]
+            providers: [{ provide: DomSanitizer, useValue: mockSanitizer }],
         });
 
         pipe = new SafeHtmlPipe(mockSanitizer);
@@ -50,7 +48,8 @@ describe('SafeHtmlPipe', () => {
 
         it('should handle multiple <em> tags', () => {
             const input = 'Text with <em>first</em> and <em>second</em> highlights';
-            const expectedModified = 'Text with <em class="match">first</em> and <em class="match">second</em> highlights';
+            const expectedModified =
+                'Text with <em class="match">first</em> and <em class="match">second</em> highlights';
 
             pipe.transform(input);
 
@@ -58,8 +57,10 @@ describe('SafeHtmlPipe', () => {
         });
 
         it('should handle nested HTML with <em> tags', () => {
-            const input = '<div>Container with <em>highlighted</em> <span>nested</span> content</div>';
-            const expectedModified = '<div>Container with <em class="match">highlighted</em> <span>nested</span> content</div>';
+            const input =
+                '<div>Container with <em>highlighted</em> <span>nested</span> content</div>';
+            const expectedModified =
+                '<div>Container with <em class="match">highlighted</em> <span>nested</span> content</div>';
 
             pipe.transform(input);
 
@@ -84,7 +85,8 @@ describe('SafeHtmlPipe', () => {
 
         it('should handle string with only <em> tags', () => {
             const input = '<em>completely</em><em>highlighted</em>';
-            const expectedModified = '<em class="match">completely</em><em class="match">highlighted</em>';
+            const expectedModified =
+                '<em class="match">completely</em><em class="match">highlighted</em>';
 
             pipe.transform(input);
 
@@ -92,8 +94,10 @@ describe('SafeHtmlPipe', () => {
         });
 
         it('should preserve existing em tags with classes', () => {
-            const input = 'Text with <em class="existing">existing class</em> and <em>new highlight</em>';
-            const expectedModified = 'Text with <em class="existing match">existing class</em> and <em class="match">new highlight</em>';
+            const input =
+                'Text with <em class="existing">existing class</em> and <em>new highlight</em>';
+            const expectedModified =
+                'Text with <em class="existing match">existing class</em> and <em class="match">new highlight</em>';
 
             pipe.transform(input);
 
@@ -120,7 +124,8 @@ describe('SafeHtmlPipe', () => {
 
         it('should handle potentially dangerous content', () => {
             const input = 'Test <em>highlight</em> with <script>alert("xss")</script>';
-            const expectedModified = 'Test <em class="match">highlight</em> with <script>alert("xss")</script>';
+            const expectedModified =
+                'Test <em class="match">highlight</em> with <script>alert("xss")</script>';
 
             pipe.transform(input);
 
@@ -140,7 +145,8 @@ describe('SafeHtmlPipe', () => {
 
         it('should handle special characters', () => {
             const input = 'Special chars: <em>&amp; &lt; &gt;</em> symbols';
-            const expectedModified = 'Special chars: <em class="match">&amp; &lt; &gt;</em> symbols';
+            const expectedModified =
+                'Special chars: <em class="match">&amp; &lt; &gt;</em> symbols';
 
             pipe.transform(input);
 
@@ -208,7 +214,9 @@ describe('SafeHtmlPipe', () => {
             const result1 = pipe.transform(input);
             const result2 = pipe.transform(input);
 
-            expect((result1 as any).changingThisBreaksApplicationSecurity).toEqual((result2 as any).changingThisBreaksApplicationSecurity);
+            expect((result1 as any).changingThisBreaksApplicationSecurity).toEqual(
+                (result2 as any).changingThisBreaksApplicationSecurity
+            );
         });
     });
 });

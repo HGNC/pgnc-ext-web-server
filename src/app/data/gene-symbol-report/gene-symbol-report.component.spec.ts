@@ -24,58 +24,66 @@ describe('GeneSymbolReportComponent', () => {
             status: 'Approved',
             species: {
                 commonName: 'Human',
-                scientificName: 'Homo sapiens'
+                scientificName: 'Homo sapiens',
             },
-            geneNames: [{
-                name: { name: 'Test Gene Name' },
-                creationDate: new Date('2023-01-01'),
-                modDate: null,
-                withdrawnDate: null,
-                type: 'approved'
-            }],
-            geneSymbols: [{
-                symbol: { symbol: 'TESTGENE' },
-                creationDate: new Date('2023-01-01'),
-                modDate: null,
-                withdrawnDate: null,
-                type: 'approved'
-            }],
-            geneLocusTypes: [{
-                creationDate: new Date('2023-01-01'),
-                modDate: null,
-                withdrawnDate: null,
-                locusType: {
-                    name: 'gene with protein product',
-                    locusGroup: {
-                        name: 'protein-coding gene'
-                    }
-                }
-            }],
+            geneNames: [
+                {
+                    name: { name: 'Test Gene Name' },
+                    creationDate: new Date('2023-01-01'),
+                    modDate: null,
+                    withdrawnDate: null,
+                    type: 'approved',
+                },
+            ],
+            geneSymbols: [
+                {
+                    symbol: { symbol: 'TESTGENE' },
+                    creationDate: new Date('2023-01-01'),
+                    modDate: null,
+                    withdrawnDate: null,
+                    type: 'approved',
+                },
+            ],
+            geneLocusTypes: [
+                {
+                    creationDate: new Date('2023-01-01'),
+                    modDate: null,
+                    withdrawnDate: null,
+                    locusType: {
+                        name: 'gene with protein product',
+                        locusGroup: {
+                            name: 'protein-coding gene',
+                        },
+                    },
+                },
+            ],
             geneNotes: null,
             geneReplacements: null,
             genesReplaced: null,
             geneXrefs: [],
-            geneLocations: [{
-                creationDate: new Date('2023-01-01'),
-                withdrawnDate: null,
-                location: {
-                    name: '1p36.33',
-                    refseqAccession: 'NC_000001.11',
-                    genbankAccession: 'CM000663.2',
-                    coordSystem: 'chromosome',
-                    type: 'primary assembly'
-                }
-            }],
+            geneLocations: [
+                {
+                    creationDate: new Date('2023-01-01'),
+                    withdrawnDate: null,
+                    location: {
+                        name: '1p36.33',
+                        refseqAccession: 'NC_000001.11',
+                        genbankAccession: 'CM000663.2',
+                        coordSystem: 'chromosome',
+                        type: 'primary assembly',
+                    },
+                },
+            ],
             primaryId: 'PGNC:123',
-            primaryIdSource: 'PGNC'
+            primaryIdSource: 'PGNC',
         },
-        apiVersion: '1.0'
+        apiVersion: '1.0',
     };
 
     beforeEach(async () => {
         const serviceSpy = {
             getReportById: jest.fn(),
-            error: jest.fn()
+            error: jest.fn(),
         } as unknown as jest.Mocked<GeneReportService>;
 
         await TestBed.configureTestingModule({
@@ -84,11 +92,9 @@ describe('GeneSymbolReportComponent', () => {
                 RouterTestingModule,
                 FontAwesomeModule,
                 PgncDataComponent,
-                XrefComponent
+                XrefComponent,
             ],
-            providers: [
-                { provide: GeneReportService, useValue: serviceSpy }
-            ]
+            providers: [{ provide: GeneReportService, useValue: serviceSpy }],
         }).compileComponents();
 
         fixture = TestBed.createComponent(GeneSymbolReportComponent);
@@ -145,7 +151,9 @@ describe('GeneSymbolReportComponent', () => {
 
         it('should handle service errors', () => {
             const errorMessage = 'Service error';
-            geneReportServiceMock.getReportById.mockReturnValue(throwError(() => new Error(errorMessage)));
+            geneReportServiceMock.getReportById.mockReturnValue(
+                throwError(() => new Error(errorMessage))
+            );
 
             component.ngOnInit();
 
@@ -173,14 +181,16 @@ describe('GeneSymbolReportComponent', () => {
                 ...mockGeneSymbolReport,
                 data: {
                     ...mockGeneSymbolReport.data!,
-                    geneSymbols: [{
-                        symbol: { symbol: 'NONAPPROVED' },
-                        creationDate: new Date('2023-01-01'),
-                        modDate: null,
-                        withdrawnDate: null,
-                        type: 'previous'
-                    }]
-                }
+                    geneSymbols: [
+                        {
+                            symbol: { symbol: 'NONAPPROVED' },
+                            creationDate: new Date('2023-01-01'),
+                            modDate: null,
+                            withdrawnDate: null,
+                            type: 'previous',
+                        },
+                    ],
+                },
             };
             geneReportServiceMock.getReportById.mockReturnValue(of(reportWithoutApprovedSymbol));
 
@@ -192,7 +202,7 @@ describe('GeneSymbolReportComponent', () => {
         it('should handle null data gracefully', () => {
             const reportWithNullData: GeneSymbolReport = {
                 data: null,
-                apiVersion: '1.0'
+                apiVersion: '1.0',
             };
             geneReportServiceMock.getReportById.mockReturnValue(of(reportWithNullData));
 
@@ -216,15 +226,17 @@ describe('GeneSymbolReportComponent', () => {
             const reportWithMultipleSymbols: GeneSymbolReport = {
                 data: {
                     ...mockGeneSymbolReport.data!,
-                    geneSymbols: [{
-                        symbol: { symbol: 'TESTGENE' },
-                        creationDate: new Date('2023-01-01'),
-                        modDate: null,
-                        withdrawnDate: null,
-                        type: 'approved'
-                    }]
+                    geneSymbols: [
+                        {
+                            symbol: { symbol: 'TESTGENE' },
+                            creationDate: new Date('2023-01-01'),
+                            modDate: null,
+                            withdrawnDate: null,
+                            type: 'approved',
+                        },
+                    ],
                 },
-                apiVersion: '1.0'
+                apiVersion: '1.0',
             };
             geneReportServiceMock.getReportById.mockReturnValue(of(reportWithMultipleSymbols));
 
@@ -237,15 +249,17 @@ describe('GeneSymbolReportComponent', () => {
             const reportWithMissingSymbol: GeneSymbolReport = {
                 data: {
                     ...mockGeneSymbolReport.data!,
-                    geneSymbols: [{
-                        symbol: { symbol: undefined as any },
-                        creationDate: new Date('2023-01-01'),
-                        modDate: null,
-                        withdrawnDate: null,
-                        type: 'approved'
-                    }]
+                    geneSymbols: [
+                        {
+                            symbol: { symbol: undefined as any },
+                            creationDate: new Date('2023-01-01'),
+                            modDate: null,
+                            withdrawnDate: null,
+                            type: 'approved',
+                        },
+                    ],
                 },
-                apiVersion: '1.0'
+                apiVersion: '1.0',
             };
             geneReportServiceMock.getReportById.mockReturnValue(of(reportWithMissingSymbol));
 
@@ -363,7 +377,9 @@ describe('GeneSymbolReportComponent', () => {
         });
 
         it('should not render child components when no data', () => {
-            geneReportServiceMock.getReportById.mockReturnValue(throwError(() => new Error('Error')));
+            geneReportServiceMock.getReportById.mockReturnValue(
+                throwError(() => new Error('Error'))
+            );
 
             component.ngOnInit();
             fixture.detectChanges();
@@ -376,10 +392,10 @@ describe('GeneSymbolReportComponent', () => {
     describe('Subscription Management', () => {
         it('should clean up subscription on destroy', () => {
             const subscription = {
-                unsubscribe: jest.fn()
+                unsubscribe: jest.fn(),
             };
             geneReportServiceMock.getReportById.mockReturnValue({
-                subscribe: jest.fn().mockReturnValue(subscription)
+                subscribe: jest.fn().mockReturnValue(subscription),
             } as any);
 
             component.ngOnInit();
@@ -405,9 +421,9 @@ describe('GeneSymbolReportComponent', () => {
             const reportWithUndefinedSymbols: GeneSymbolReport = {
                 data: {
                     ...mockGeneSymbolReport.data!,
-                    geneSymbols: undefined as any
+                    geneSymbols: undefined as any,
                 },
-                apiVersion: '1.0'
+                apiVersion: '1.0',
             };
             geneReportServiceMock.getReportById.mockReturnValue(of(reportWithUndefinedSymbols));
 
@@ -421,15 +437,17 @@ describe('GeneSymbolReportComponent', () => {
             const reportWithLongSymbol: GeneSymbolReport = {
                 data: {
                     ...mockGeneSymbolReport.data!,
-                    geneSymbols: [{
-                        symbol: { symbol: longSymbol },
-                        creationDate: new Date('2023-01-01'),
-                        modDate: null,
-                        withdrawnDate: null,
-                        type: 'approved'
-                    }]
+                    geneSymbols: [
+                        {
+                            symbol: { symbol: longSymbol },
+                            creationDate: new Date('2023-01-01'),
+                            modDate: null,
+                            withdrawnDate: null,
+                            type: 'approved',
+                        },
+                    ],
                 },
-                apiVersion: '1.0'
+                apiVersion: '1.0',
             };
             geneReportServiceMock.getReportById.mockReturnValue(of(reportWithLongSymbol));
 
@@ -441,17 +459,21 @@ describe('GeneSymbolReportComponent', () => {
         it('should handle malformed data gracefully', () => {
             const malformedReport = {
                 data: {
-                    geneSymbols: [{
-                        type: 'approved',
-                        symbol: null // This exposes a bug - component doesn't handle null symbols
-                    }]
+                    geneSymbols: [
+                        {
+                            type: 'approved',
+                            symbol: null, // This exposes a bug - component doesn't handle null symbols
+                        },
+                    ],
                 },
-                apiVersion: '1.0'
+                apiVersion: '1.0',
             } as any;
 
             // This test documents the current bug in the component
             // The component will throw when processing this data
-            geneReportServiceMock.getReportById.mockReturnValue(throwError(() => new Error('Malformed data')));
+            geneReportServiceMock.getReportById.mockReturnValue(
+                throwError(() => new Error('Malformed data'))
+            );
 
             component.ngOnInit();
 
@@ -467,7 +489,7 @@ describe('GeneSymbolReportComponent', () => {
             geneReportServiceMock.getReportById.mockReset();
         });
 
-        it('should manage loading state correctly during successful request', (done) => {
+        it('should manage loading state correctly during successful request', done => {
             geneReportServiceMock.getReportById.mockReturnValue(of(mockGeneSymbolReport));
 
             // Initially not fetching
@@ -483,8 +505,10 @@ describe('GeneSymbolReportComponent', () => {
             }, 0);
         });
 
-        it('should manage loading state correctly during failed request', (done) => {
-            geneReportServiceMock.getReportById.mockReturnValue(throwError(() => new Error('Error')));
+        it('should manage loading state correctly during failed request', done => {
+            geneReportServiceMock.getReportById.mockReturnValue(
+                throwError(() => new Error('Error'))
+            );
 
             expect(component.isFetching()).toBe(false);
 
@@ -511,7 +535,9 @@ describe('GeneSymbolReportComponent', () => {
 
         it('should update error signal correctly', () => {
             const errorMessage = 'Test error';
-            geneReportServiceMock.getReportById.mockReturnValue(throwError(() => new Error(errorMessage)));
+            geneReportServiceMock.getReportById.mockReturnValue(
+                throwError(() => new Error(errorMessage))
+            );
 
             expect(component.error()).toBeUndefined();
 

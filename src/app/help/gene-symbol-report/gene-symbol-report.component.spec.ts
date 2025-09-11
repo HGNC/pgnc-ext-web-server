@@ -26,9 +26,7 @@ describe('GeneSymbolReportHelpComponent', () => {
     beforeEach(async () => {
         await TestBed.configureTestingModule({
             imports: [GeneSymbolReportHelpComponent],
-            providers: [
-                { provide: FragmentJumpService, useClass: MockFragmentJumpService }
-            ]
+            providers: [{ provide: FragmentJumpService, useClass: MockFragmentJumpService }],
         }).compileComponents();
 
         fixture = TestBed.createComponent(GeneSymbolReportHelpComponent);
@@ -115,7 +113,9 @@ describe('GeneSymbolReportHelpComponent', () => {
 
         it('should handle fragment changes', () => {
             const jumpToSectionSpy = jest.spyOn(fragmentJumpService, 'jumpToSection');
-            jest.spyOn(fragmentJumpService, 'subscribeToFragmentChanges').mockReturnValue(of('gene-data'));
+            jest.spyOn(fragmentJumpService, 'subscribeToFragmentChanges').mockReturnValue(
+                of('gene-data')
+            );
 
             component.ngOnInit();
 
@@ -155,11 +155,12 @@ describe('GeneSymbolReportHelpComponent', () => {
             const paragraphs = debugElement.queryAll(By.css('p'));
             expect(paragraphs.length).toBeGreaterThan(0);
 
-            const hasGuidance = paragraphs.some(p =>
-                p.nativeElement.textContent.toLowerCase().includes('symbol') ||
-                p.nativeElement.textContent.toLowerCase().includes('report') ||
-                p.nativeElement.textContent.toLowerCase().includes('gene') ||
-                p.nativeElement.textContent.toLowerCase().includes('information')
+            const hasGuidance = paragraphs.some(
+                p =>
+                    p.nativeElement.textContent.toLowerCase().includes('symbol') ||
+                    p.nativeElement.textContent.toLowerCase().includes('report') ||
+                    p.nativeElement.textContent.toLowerCase().includes('gene') ||
+                    p.nativeElement.textContent.toLowerCase().includes('information')
             );
             expect(hasGuidance).toBe(true);
         });
@@ -224,7 +225,9 @@ describe('GeneSymbolReportHelpComponent', () => {
 
         it('should support section jumping', () => {
             const jumpToSectionSpy = jest.spyOn(fragmentJumpService, 'jumpToSection');
-            jest.spyOn(fragmentJumpService, 'subscribeToFragmentChanges').mockReturnValue(of('core-data'));
+            jest.spyOn(fragmentJumpService, 'subscribeToFragmentChanges').mockReturnValue(
+                of('core-data')
+            );
 
             component.ngOnInit();
 
@@ -330,7 +333,9 @@ describe('GeneSymbolReportHelpComponent', () => {
         });
 
         it('should manage service subscriptions properly', () => {
-            jest.spyOn(fragmentJumpService, 'subscribeToFragmentChanges').mockReturnValue(of('test'));
+            jest.spyOn(fragmentJumpService, 'subscribeToFragmentChanges').mockReturnValue(
+                of('test')
+            );
 
             component.ngOnInit();
 
@@ -342,7 +347,29 @@ describe('GeneSymbolReportHelpComponent', () => {
     describe('Browser Compatibility', () => {
         it('should use standard HTML elements', () => {
             const allElements = debugElement.queryAll(By.css('*'));
-            const standardTags = ['div', 'h1', 'h2', 'h3', 'p', 'a', 'ul', 'li', 'table', 'tr', 'td', 'th', 'strong', 'em', 'span', 'br', 'hr', 'ol', 'dl', 'dt', 'dd'];
+            const standardTags = [
+                'div',
+                'h1',
+                'h2',
+                'h3',
+                'p',
+                'a',
+                'ul',
+                'li',
+                'table',
+                'tr',
+                'td',
+                'th',
+                'strong',
+                'em',
+                'span',
+                'br',
+                'hr',
+                'ol',
+                'dl',
+                'dt',
+                'dd',
+            ];
 
             allElements.forEach(element => {
                 const tagName = element.nativeElement.tagName.toLowerCase();
@@ -428,9 +455,11 @@ describe('GeneSymbolReportHelpComponent', () => {
             const allContent = debugElement.nativeElement.textContent.toLowerCase();
 
             // Should use PGNC-specific terminology
-            expect(allContent.includes('pgnc') ||
-                allContent.includes('hgnc') ||
-                allContent.includes('nomenclature')).toBe(true);
+            expect(
+                allContent.includes('pgnc') ||
+                    allContent.includes('hgnc') ||
+                    allContent.includes('nomenclature')
+            ).toBe(true);
         });
 
         it('should explain gene nomenclature concepts', () => {
@@ -446,7 +475,14 @@ describe('GeneSymbolReportHelpComponent', () => {
             const allContent = debugElement.nativeElement.textContent.toLowerCase();
 
             // Should address different types of gene data
-            const dataTypeTerms = ['locus', 'type', 'location', 'chromosome', 'mapping', 'position'];
+            const dataTypeTerms = [
+                'locus',
+                'type',
+                'location',
+                'chromosome',
+                'mapping',
+                'position',
+            ];
             const addressesDataTypes = dataTypeTerms.some(term => allContent.includes(term));
             expect(addressesDataTypes).toBe(true);
         });

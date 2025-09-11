@@ -11,16 +11,16 @@ import { HeaderComponent } from './header.component';
 @Component({
     selector: 'app-nav',
     template: '<div>Mock Nav Component</div>',
-    standalone: true
+    standalone: true,
 })
-class MockNavComponent { }
+class MockNavComponent {}
 
 @Component({
     selector: 'app-search-bar',
     template: '<div>Mock Search Bar Component</div>',
-    standalone: true
+    standalone: true,
 })
-class MockSearchBarComponent { }
+class MockSearchBarComponent {}
 
 describe('HeaderComponent', () => {
     let component: HeaderComponent;
@@ -29,17 +29,13 @@ describe('HeaderComponent', () => {
 
     beforeEach(async () => {
         await TestBed.configureTestingModule({
-            imports: [
-                HeaderComponent,
-                NgbModule,
-                FontAwesomeModule
-            ],
+            imports: [HeaderComponent, NgbModule, FontAwesomeModule],
             providers: [
                 provideRouter([
                     { path: '', component: MockNavComponent },
-                    { path: 'test', component: MockNavComponent }
-                ])
-            ]
+                    { path: 'test', component: MockNavComponent },
+                ]),
+            ],
         }).compileComponents();
 
         fixture = TestBed.createComponent(HeaderComponent);
@@ -356,7 +352,9 @@ describe('HeaderComponent', () => {
 
             const collapses = debugElement.queryAll(By.css('.collapse'));
             collapses.forEach(collapse => {
-                expect(collapse.nativeElement.getAttribute('ng-reflect-ngb-collapse')).toBe('false');
+                expect(collapse.nativeElement.getAttribute('ng-reflect-ngb-collapse')).toBe(
+                    'false'
+                );
             });
         });
     });
@@ -516,11 +514,26 @@ describe('HeaderComponent', () => {
     describe('Browser Compatibility', () => {
         it('should use standard HTML elements', () => {
             const allElements = debugElement.queryAll(By.css('*'));
-            const standardTags = ['header', 'div', 'nav', 'a', 'img', 'button', 'svg', 'path', 'form', 'input'];
+            const standardTags = [
+                'header',
+                'div',
+                'nav',
+                'a',
+                'img',
+                'button',
+                'svg',
+                'path',
+                'form',
+                'input',
+            ];
 
             allElements.forEach(element => {
                 const tagName = element.nativeElement.tagName.toLowerCase();
-                if (!tagName.startsWith('app-') && !tagName.startsWith('fa-') && tagName !== 'ng-container') {
+                if (
+                    !tagName.startsWith('app-') &&
+                    !tagName.startsWith('fa-') &&
+                    tagName !== 'ng-container'
+                ) {
                     expect(standardTags).toContain(tagName);
                 }
             });

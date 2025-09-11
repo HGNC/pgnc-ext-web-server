@@ -3,8 +3,8 @@ import { RouterLink } from '@angular/router';
 import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
 import { faQuestionCircle } from '@fortawesome/free-solid-svg-icons';
 
-import { GeneSymbolReport } from '../gene-symbol-report.model';
 import { GeneSymbol } from '../gene-symbol.model';
+import { GeneSymbolReport } from '../gene-symbol-report.model';
 import { ExternalResourceName } from './external-resource-name.type';
 import { Xref } from './xref-resources.model';
 
@@ -28,8 +28,8 @@ export class XrefComponent implements OnInit {
     classifiedXrefs: Record<ExternalResourceName, Xref[] | string> = {
         'NCBI Gene': [],
         'Ensembl Gene': [],
-        'UniProt': [],
-        'PubMed': [],
+        UniProt: [],
+        PubMed: [],
         'Phytozome v4_1': [],
         'Phytozome v3_1': [],
         'CBI sequence viewer': '',
@@ -39,8 +39,8 @@ export class XrefComponent implements OnInit {
     xrefURLS: Record<ExternalResourceName, string> = {
         'NCBI Gene': 'https://www.ncbi.nlm.nih.gov/gene/',
         'Ensembl Gene': 'https://plants.ensembl.org/Populus_trichocarpa/Gene/Summary?db=core;g=',
-        'UniProt': 'https://www.uniprot.org/uniprotkb/',
-        'PubMed': 'https://pubmed.ncbi.nlm.nih.gov/',
+        UniProt: 'https://www.uniprot.org/uniprotkb/',
+        PubMed: 'https://pubmed.ncbi.nlm.nih.gov/',
         'Phytozome v4_1': 'https://phytozome-next.jgi.doe.gov/report/gene/Ptrichocarpa_v4_1/',
         'Phytozome v3_1': 'https://phytozome-next.jgi.doe.gov/report/gene/Ptrichocarpa_v3_1/',
         'CBI sequence viewer': 'https://fair.ornl.gov/ThirdParty/jbrowse2/?PGNCID=',
@@ -49,8 +49,8 @@ export class XrefComponent implements OnInit {
     xrefFrags: Record<ExternalResourceName, string> = {
         'NCBI Gene': 'ncbi_g',
         'Ensembl Gene': 'ens_g',
-        'UniProt': 'unip',
-        'PubMed': 'pubmed',
+        UniProt: 'unip',
+        PubMed: 'pubmed',
         'Phytozome v4_1': 'phytoz',
         'Phytozome v3_1': 'phytoz',
         'CBI sequence viewer': 'cbi_v',
@@ -113,7 +113,7 @@ export class XrefComponent implements OnInit {
         if (match) {
             const major = parseInt(match[1], 10);
             const minor = parseInt(match[2], 10);
-            return major + (minor / 10); // Convert to decimal (e.g., 4.1, 3.1)
+            return major + minor / 10; // Convert to decimal (e.g., 4.1, 3.1)
         }
         return 0; // Fallback for invalid format
     }

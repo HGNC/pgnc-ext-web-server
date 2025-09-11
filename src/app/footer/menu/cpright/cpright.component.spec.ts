@@ -12,7 +12,7 @@ describe('CpRightComponent', () => {
 
     beforeEach(async () => {
         await TestBed.configureTestingModule({
-            imports: [CpRightComponent, FontAwesomeModule]
+            imports: [CpRightComponent, FontAwesomeModule],
         }).compileComponents();
 
         fixture = TestBed.createComponent(CpRightComponent);
@@ -309,8 +309,10 @@ describe('CpRightComponent', () => {
         it('should not use inline styles', () => {
             const allElements = debugElement.queryAll(By.css('*'));
             allElements.forEach(element => {
-                if (!element.nativeElement.tagName.toLowerCase().startsWith('app-') &&
-                    !element.nativeElement.tagName.toLowerCase().startsWith('fa-')) {
+                if (
+                    !element.nativeElement.tagName.toLowerCase().startsWith('app-') &&
+                    !element.nativeElement.tagName.toLowerCase().startsWith('fa-')
+                ) {
                     expect(element.nativeElement.style.length).toBe(0);
                 }
             });

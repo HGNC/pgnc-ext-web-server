@@ -11,7 +11,7 @@ describe('UsefulLinksComponent', () => {
 
     beforeEach(async () => {
         await TestBed.configureTestingModule({
-            imports: [UsefulLinksComponent]
+            imports: [UsefulLinksComponent],
         }).compileComponents();
 
         fixture = TestBed.createComponent(UsefulLinksComponent);
@@ -89,7 +89,9 @@ describe('UsefulLinksComponent', () => {
         });
 
         it('should include external links', () => {
-            const externalLinks = debugElement.queryAll(By.css('a[href^="http"], a[href^="https"]'));
+            const externalLinks = debugElement.queryAll(
+                By.css('a[href^="http"], a[href^="https"]')
+            );
             expect(externalLinks.length).toBeGreaterThanOrEqual(0);
         });
 
@@ -141,7 +143,9 @@ describe('UsefulLinksComponent', () => {
 
     describe('External Link Safety', () => {
         it('should have target="_blank" for external links', () => {
-            const externalLinks = debugElement.queryAll(By.css('a[href^="http"], a[href^="https"]'));
+            const externalLinks = debugElement.queryAll(
+                By.css('a[href^="http"], a[href^="https"]')
+            );
 
             externalLinks.forEach(link => {
                 expect(link.nativeElement.target).toBe('_blank');
@@ -149,7 +153,9 @@ describe('UsefulLinksComponent', () => {
         });
 
         it('should have rel="noopener" for security', () => {
-            const externalLinks = debugElement.queryAll(By.css('a[href^="http"], a[href^="https"]'));
+            const externalLinks = debugElement.queryAll(
+                By.css('a[href^="http"], a[href^="https"]')
+            );
 
             externalLinks.forEach(link => {
                 const rel = link.nativeElement.rel;
@@ -158,7 +164,9 @@ describe('UsefulLinksComponent', () => {
         });
 
         it('should have valid external URLs', () => {
-            const externalLinks = debugElement.queryAll(By.css('a[href^="http"], a[href^="https"]'));
+            const externalLinks = debugElement.queryAll(
+                By.css('a[href^="http"], a[href^="https"]')
+            );
 
             externalLinks.forEach(link => {
                 const href = link.nativeElement.href;
@@ -201,7 +209,9 @@ describe('UsefulLinksComponent', () => {
         });
 
         it('should provide context for external links', () => {
-            const externalLinks = debugElement.queryAll(By.css('a[href^="http"], a[href^="https"]'));
+            const externalLinks = debugElement.queryAll(
+                By.css('a[href^="http"], a[href^="https"]')
+            );
 
             externalLinks.forEach(link => {
                 const linkText = link.nativeElement.textContent.trim();
@@ -352,7 +362,9 @@ describe('UsefulLinksComponent', () => {
         });
 
         it('should provide cross-browser compatible links', () => {
-            const externalLinks = debugElement.queryAll(By.css('a[href^="http"], a[href^="https"]'));
+            const externalLinks = debugElement.queryAll(
+                By.css('a[href^="http"], a[href^="https"]')
+            );
 
             externalLinks.forEach(link => {
                 const href = link.nativeElement.href;
@@ -390,7 +402,9 @@ describe('UsefulLinksComponent', () => {
 
             // Should mention useful or links (adjust for minimal component)
             const basicContent = ['useful', 'links', 'link'];
-            const includesRelevantResources = basicContent.some(resource => allContent.includes(resource));
+            const includesRelevantResources = basicContent.some(resource =>
+                allContent.includes(resource)
+            );
             expect(includesRelevantResources).toBe(true);
         });
 
@@ -410,7 +424,8 @@ describe('UsefulLinksComponent', () => {
 
             // Should include basic content (adjust for minimal component)
             const basicContent = ['useful', 'links'];
-            const includesDiverseTypes = basicContent.filter(type => allContent.includes(type)).length >= 1;
+            const includesDiverseTypes =
+                basicContent.filter(type => allContent.includes(type)).length >= 1;
             expect(includesDiverseTypes).toBe(true);
         });
     });
@@ -422,7 +437,8 @@ describe('UsefulLinksComponent', () => {
             // Check for basic content or allow for minimal component
             const hasBasicStructure = paragraphs.length >= 0;
             const h1 = debugElement.query(By.css('h1'));
-            const hasEducationalContent = hasBasicStructure || (h1 && h1.nativeElement.textContent.includes('Useful'));
+            const hasEducationalContent =
+                hasBasicStructure || (h1 && h1.nativeElement.textContent.includes('Useful'));
 
             expect(hasEducationalContent).toBe(true);
         });
@@ -440,7 +456,14 @@ describe('UsefulLinksComponent', () => {
             const allContent = debugElement.nativeElement.textContent.toLowerCase();
 
             // Should help users understand value
-            const valueTerms = ['useful', 'helpful', 'important', 'comprehensive', 'essential', 'valuable'];
+            const valueTerms = [
+                'useful',
+                'helpful',
+                'important',
+                'comprehensive',
+                'essential',
+                'valuable',
+            ];
             const explainsValue = valueTerms.some(term => allContent.includes(term));
             expect(explainsValue).toBe(true);
         });

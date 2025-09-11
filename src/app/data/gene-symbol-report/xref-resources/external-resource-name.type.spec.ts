@@ -47,7 +47,7 @@ describe('ExternalResourceName Type', () => {
                 'PubMed',
                 'Phytozome v4_1',
                 'Phytozome v3_1',
-                'CBI sequence viewer'
+                'CBI sequence viewer',
             ];
 
             expect(resourceNames).toHaveLength(7);
@@ -62,7 +62,15 @@ describe('ExternalResourceName Type', () => {
 
         it('should work in type guards', () => {
             function isValidResourceName(name: string): name is ExternalResourceName {
-                return ['NCBI Gene', 'Ensembl Gene', 'UniProt', 'PubMed', 'Phytozome v4_1', 'Phytozome v3_1', 'CBI sequence viewer'].includes(name as ExternalResourceName);
+                return [
+                    'NCBI Gene',
+                    'Ensembl Gene',
+                    'UniProt',
+                    'PubMed',
+                    'Phytozome v4_1',
+                    'Phytozome v3_1',
+                    'CBI sequence viewer',
+                ].includes(name as ExternalResourceName);
             }
 
             expect(isValidResourceName('NCBI Gene')).toBe(true);
@@ -94,11 +102,11 @@ describe('ExternalResourceName Type', () => {
             const resourceConfig: Record<ExternalResourceName, string> = {
                 'NCBI Gene': 'https://www.ncbi.nlm.nih.gov/gene/',
                 'Ensembl Gene': 'https://plants.ensembl.org/',
-                'UniProt': 'https://www.uniprot.org/',
-                'PubMed': 'https://pubmed.ncbi.nlm.nih.gov/',
+                UniProt: 'https://www.uniprot.org/',
+                PubMed: 'https://pubmed.ncbi.nlm.nih.gov/',
                 'Phytozome v4_1': 'https://phytozome-next.jgi.doe.gov/v4_1/',
                 'Phytozome v3_1': 'https://phytozome-next.jgi.doe.gov/v3_1/',
-                'CBI sequence viewer': 'https://fair.ornl.gov/'
+                'CBI sequence viewer': 'https://fair.ornl.gov/',
             };
 
             expect(Object.keys(resourceConfig)).toHaveLength(7);
@@ -106,8 +114,12 @@ describe('ExternalResourceName Type', () => {
             expect(resourceConfig['Ensembl Gene']).toBe('https://plants.ensembl.org/');
             expect(resourceConfig['UniProt']).toBe('https://www.uniprot.org/');
             expect(resourceConfig['PubMed']).toBe('https://pubmed.ncbi.nlm.nih.gov/');
-            expect(resourceConfig['Phytozome v4_1']).toBe('https://phytozome-next.jgi.doe.gov/v4_1/');
-            expect(resourceConfig['Phytozome v3_1']).toBe('https://phytozome-next.jgi.doe.gov/v3_1/');
+            expect(resourceConfig['Phytozome v4_1']).toBe(
+                'https://phytozome-next.jgi.doe.gov/v4_1/'
+            );
+            expect(resourceConfig['Phytozome v3_1']).toBe(
+                'https://phytozome-next.jgi.doe.gov/v3_1/'
+            );
             expect(resourceConfig['CBI sequence viewer']).toBe('https://fair.ornl.gov/');
         });
     });
@@ -184,7 +196,7 @@ describe('ExternalResourceName Type', () => {
             const resourceData = {
                 name: 'NCBI Gene' as ExternalResourceName,
                 url: 'https://www.ncbi.nlm.nih.gov/gene/',
-                active: true
+                active: true,
             };
 
             const jsonString = JSON.stringify(resourceData);

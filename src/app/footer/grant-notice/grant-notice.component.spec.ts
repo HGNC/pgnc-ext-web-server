@@ -11,7 +11,7 @@ describe('GrantNoticeComponent', () => {
 
     beforeEach(async () => {
         await TestBed.configureTestingModule({
-            imports: [GrantNoticeComponent]
+            imports: [GrantNoticeComponent],
         }).compileComponents();
 
         fixture = TestBed.createComponent(GrantNoticeComponent);
@@ -89,7 +89,9 @@ describe('GrantNoticeComponent', () => {
             expect(paragraph).toBeTruthy();
 
             const text = paragraph.nativeElement.textContent.trim();
-            expect(text).toContain('This work is based upon work supported by the U.S. Department of Energy');
+            expect(text).toContain(
+                'This work is based upon work supported by the U.S. Department of Energy'
+            );
             expect(text).toContain('Award Number DE-AC05-00OR22725');
         });
 
@@ -111,7 +113,8 @@ describe('GrantNoticeComponent', () => {
 
         it('should have the complete grant notice', () => {
             const paragraph = debugElement.query(By.css('p'));
-            const expectedText = 'This work is based upon work supported by the U.S. Department of Energy under Award Number DE-AC05-00OR22725.';
+            const expectedText =
+                'This work is based upon work supported by the U.S. Department of Energy under Award Number DE-AC05-00OR22725.';
 
             expect(paragraph.nativeElement.textContent.trim()).toBe(expectedText);
         });

@@ -26,9 +26,7 @@ describe('SearchHelpComponent', () => {
     beforeEach(async () => {
         await TestBed.configureTestingModule({
             imports: [SearchHelpComponent],
-            providers: [
-                { provide: FragmentJumpService, useClass: MockFragmentJumpService }
-            ]
+            providers: [{ provide: FragmentJumpService, useClass: MockFragmentJumpService }],
         }).compileComponents();
 
         fixture = TestBed.createComponent(SearchHelpComponent);
@@ -115,7 +113,9 @@ describe('SearchHelpComponent', () => {
 
         it('should handle fragment changes', () => {
             const jumpToSectionSpy = jest.spyOn(fragmentJumpService, 'jumpToSection');
-            jest.spyOn(fragmentJumpService, 'subscribeToFragmentChanges').mockReturnValue(of('test-fragment'));
+            jest.spyOn(fragmentJumpService, 'subscribeToFragmentChanges').mockReturnValue(
+                of('test-fragment')
+            );
 
             component.ngOnInit();
 
@@ -155,11 +155,12 @@ describe('SearchHelpComponent', () => {
             const paragraphs = debugElement.queryAll(By.css('p'));
             expect(paragraphs.length).toBeGreaterThan(0);
 
-            const hasInstructions = paragraphs.some(p =>
-                p.nativeElement.textContent.toLowerCase().includes('how to') ||
-                p.nativeElement.textContent.toLowerCase().includes('you can') ||
-                p.nativeElement.textContent.toLowerCase().includes('enter') ||
-                p.nativeElement.textContent.toLowerCase().includes('type')
+            const hasInstructions = paragraphs.some(
+                p =>
+                    p.nativeElement.textContent.toLowerCase().includes('how to') ||
+                    p.nativeElement.textContent.toLowerCase().includes('you can') ||
+                    p.nativeElement.textContent.toLowerCase().includes('enter') ||
+                    p.nativeElement.textContent.toLowerCase().includes('type')
             );
             expect(hasInstructions).toBe(true);
         });
@@ -228,7 +229,9 @@ describe('SearchHelpComponent', () => {
 
         it('should support section jumping', () => {
             const jumpToSectionSpy = jest.spyOn(fragmentJumpService, 'jumpToSection');
-            jest.spyOn(fragmentJumpService, 'subscribeToFragmentChanges').mockReturnValue(of('search-syntax'));
+            jest.spyOn(fragmentJumpService, 'subscribeToFragmentChanges').mockReturnValue(
+                of('search-syntax')
+            );
 
             component.ngOnInit();
 
@@ -334,7 +337,9 @@ describe('SearchHelpComponent', () => {
         });
 
         it('should manage service subscriptions properly', () => {
-            jest.spyOn(fragmentJumpService, 'subscribeToFragmentChanges').mockReturnValue(of('test'));
+            jest.spyOn(fragmentJumpService, 'subscribeToFragmentChanges').mockReturnValue(
+                of('test')
+            );
 
             component.ngOnInit();
 
@@ -346,7 +351,30 @@ describe('SearchHelpComponent', () => {
     describe('Browser Compatibility', () => {
         it('should use standard HTML elements', () => {
             const allElements = debugElement.queryAll(By.css('*'));
-            const standardTags = ['div', 'h1', 'h2', 'h3', 'p', 'a', 'ul', 'li', 'code', 'pre', 'ol', 'dl', 'dt', 'dd', 'strong', 'em', 'span', 'section', 'article', 'figure', 'img', 'figcaption'];
+            const standardTags = [
+                'div',
+                'h1',
+                'h2',
+                'h3',
+                'p',
+                'a',
+                'ul',
+                'li',
+                'code',
+                'pre',
+                'ol',
+                'dl',
+                'dt',
+                'dd',
+                'strong',
+                'em',
+                'span',
+                'section',
+                'article',
+                'figure',
+                'img',
+                'figcaption',
+            ];
 
             allElements.forEach(element => {
                 const tagName = element.nativeElement.tagName.toLowerCase();
@@ -403,9 +431,11 @@ describe('SearchHelpComponent', () => {
             const allContent = debugElement.nativeElement.textContent.toLowerCase();
 
             // Should contain examples or sample searches
-            expect(allContent.includes('example') ||
-                allContent.includes('sample') ||
-                allContent.includes('instance')).toBe(true);
+            expect(
+                allContent.includes('example') ||
+                    allContent.includes('sample') ||
+                    allContent.includes('instance')
+            ).toBe(true);
         });
 
         it('should explain search features', () => {

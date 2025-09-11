@@ -9,105 +9,105 @@ import { routes } from './app.routes';
 @Component({
     selector: 'mock-about',
     template: '<div>About Component</div>',
-    standalone: true
+    standalone: true,
 })
 class MockAboutComponent { }
 
 @Component({
     selector: 'mock-contact',
     template: '<div>Contact Component</div>',
-    standalone: true
+    standalone: true,
 })
 class MockContactComponent { }
 
 @Component({
     selector: 'mock-gene-symbol-report',
     template: '<div>Gene Symbol Report Component</div>',
-    standalone: true
+    standalone: true,
 })
 class MockGeneSymbolReportComponent { }
 
 @Component({
     selector: 'mock-not-found',
     template: '<div>Not Found Component</div>',
-    standalone: true
+    standalone: true,
 })
 class MockNotFoundComponent { }
 
 @Component({
     selector: 'mock-browser-help',
     template: '<div>Browser Help Component</div>',
-    standalone: true
+    standalone: true,
 })
 class MockBrowserHelpComponent { }
 
 @Component({
     selector: 'mock-faq',
     template: '<div>FAQ Component</div>',
-    standalone: true
+    standalone: true,
 })
 class MockFaqComponent { }
 
 @Component({
     selector: 'mock-gene-symbol-report-help',
     template: '<div>Gene Symbol Report Help Component</div>',
-    standalone: true
+    standalone: true,
 })
 class MockGeneSymbolReportHelpComponent { }
 
 @Component({
     selector: 'mock-help',
     template: '<div>Help Component</div>',
-    standalone: true
+    standalone: true,
 })
 class MockHelpComponent { }
 
 @Component({
     selector: 'mock-search-help',
     template: '<div>Search Help Component</div>',
-    standalone: true
+    standalone: true,
 })
 class MockSearchHelpComponent { }
 
 @Component({
     selector: 'mock-useful-links',
     template: '<div>Useful Links Component</div>',
-    standalone: true
+    standalone: true,
 })
 class MockUsefulLinksComponent { }
 
 @Component({
     selector: 'mock-home',
     template: '<div>Home Component</div>',
-    standalone: true
+    standalone: true,
 })
 class MockHomeComponent { }
 
 @Component({
     selector: 'mock-license',
     template: '<div>License Component</div>',
-    standalone: true
+    standalone: true,
 })
 class MockLicenseComponent { }
 
 @Component({
     selector: 'mock-publications',
     template: '<div>Publications Component</div>',
-    standalone: true
+    standalone: true,
 })
 class MockPublicationsComponent { }
 
 @Component({
     selector: 'mock-search',
     template: '<div>Search Component</div>',
-    standalone: true
+    standalone: true,
 })
 class MockSearchComponent { }
 
 describe('App Routes', () => {
-    let router: Router;
-    let location: Location;
-    let fixture: any;
+    let _router: Router;
+    let _location: Location;
+    let _fixture: any;
 
     beforeEach(async () => {
         TestBed.configureTestingModule({
@@ -125,38 +125,38 @@ describe('App Routes', () => {
                 MockHomeComponent,
                 MockLicenseComponent,
                 MockPublicationsComponent,
-                MockSearchComponent
+                MockSearchComponent,
             ],
             providers: [
                 // Replace real components with mock components in routes
                 ...routes.map(route => ({
                     provide: route.component,
-                    useClass: getMockComponent(route.component?.name || '')
-                }))
-            ]
+                    useClass: getMockComponent(route.component?.name || ''),
+                })),
+            ],
         });
 
-        router = TestBed.inject(Router);
-        location = TestBed.inject(Location);
-        fixture = TestBed.createComponent(MockHomeComponent);
+        _router = TestBed.inject(Router);
+        _location = TestBed.inject(Location);
+        _fixture = TestBed.createComponent(MockHomeComponent);
     });
 
     function getMockComponent(componentName: string) {
-        const mockMap: { [key: string]: any } = {
-            'AboutComponent': MockAboutComponent,
-            'ContactComponent': MockContactComponent,
-            'GeneSymbolReportComponent': MockGeneSymbolReportComponent,
-            'NotFoundComponent': MockNotFoundComponent,
-            'BrowserHelpComponent': MockBrowserHelpComponent,
-            'FaqComponent': MockFaqComponent,
-            'GeneSymbolReportHelpComponent': MockGeneSymbolReportHelpComponent,
-            'HelpComponent': MockHelpComponent,
-            'SearchHelpComponent': MockSearchHelpComponent,
-            'UsefulLinksComponent': MockUsefulLinksComponent,
-            'HomeComponent': MockHomeComponent,
-            'LicenseComponent': MockLicenseComponent,
-            'PublicationsComponent': MockPublicationsComponent,
-            'SearchComponent': MockSearchComponent
+        const mockMap: Record<string, any> = {
+            AboutComponent: MockAboutComponent,
+            ContactComponent: MockContactComponent,
+            GeneSymbolReportComponent: MockGeneSymbolReportComponent,
+            NotFoundComponent: MockNotFoundComponent,
+            BrowserHelpComponent: MockBrowserHelpComponent,
+            FaqComponent: MockFaqComponent,
+            GeneSymbolReportHelpComponent: MockGeneSymbolReportHelpComponent,
+            HelpComponent: MockHelpComponent,
+            SearchHelpComponent: MockSearchHelpComponent,
+            UsefulLinksComponent: MockUsefulLinksComponent,
+            HomeComponent: MockHomeComponent,
+            LicenseComponent: MockLicenseComponent,
+            PublicationsComponent: MockPublicationsComponent,
+            SearchComponent: MockSearchComponent,
         };
         return mockMap[componentName] || MockHomeComponent;
     }
@@ -228,13 +228,17 @@ describe('App Routes', () => {
 
     describe('Parameterized Routes', () => {
         it('should define gene symbol report route with parameters', () => {
-            const geneRoute = routes.find(route => route.path === 'data/gene-symbol-report/:type/:id');
+            const geneRoute = routes.find(
+                route => route.path === 'data/gene-symbol-report/:type/:id'
+            );
             expect(geneRoute).toBeDefined();
             expect(geneRoute?.component?.name).toBe('GeneSymbolReportComponent');
         });
 
         it('should handle route parameters correctly', () => {
-            const geneRoute = routes.find(route => route.path === 'data/gene-symbol-report/:type/:id');
+            const geneRoute = routes.find(
+                route => route.path === 'data/gene-symbol-report/:type/:id'
+            );
             expect(geneRoute?.path).toContain(':type');
             expect(geneRoute?.path).toContain(':id');
         });
@@ -392,7 +396,7 @@ describe('App Routes', () => {
                 { path: 'publications', component: 'PublicationsComponent' },
                 { path: 'search', component: 'SearchComponent' },
                 { path: '', component: 'HomeComponent' },
-                { path: '**', component: 'NotFoundComponent' }
+                { path: '**', component: 'NotFoundComponent' },
             ];
 
             expectedAssociations.forEach(expected => {
@@ -444,11 +448,18 @@ describe('App Routes', () => {
 
     describe('Route Completeness', () => {
         it('should cover all major application sections', () => {
-            const expectedSections = ['about', 'contact', 'help', 'search', 'license', 'publications'];
+            const expectedSections = [
+                'about',
+                'contact',
+                'help',
+                'search',
+                'license',
+                'publications',
+            ];
 
             expectedSections.forEach(section => {
-                const hasRoute = routes.some(route =>
-                    route.path === section || route.path?.startsWith(section + '/')
+                const hasRoute = routes.some(
+                    route => route.path === section || route.path?.startsWith(section + '/')
                 );
                 expect(hasRoute).toBe(true);
             });

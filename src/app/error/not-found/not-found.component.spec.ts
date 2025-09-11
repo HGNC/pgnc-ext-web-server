@@ -8,21 +8,21 @@ import { NotFoundComponent } from './not-found.component';
 // Mock component for routing tests
 @Component({
     template: '<div>Mock Home Component</div>',
-    standalone: true
+    standalone: true,
 })
-class MockHomeComponent { }
+class MockHomeComponent {}
 
 @Component({
     template: '<div>Mock About Component</div>',
-    standalone: true
+    standalone: true,
 })
-class MockAboutComponent { }
+class MockAboutComponent {}
 
 @Component({
     template: '<div>Mock Contact Component</div>',
-    standalone: true
+    standalone: true,
 })
-class MockContactComponent { }
+class MockContactComponent {}
 
 describe('NotFoundComponent', () => {
     let component: NotFoundComponent;
@@ -38,9 +38,9 @@ describe('NotFoundComponent', () => {
                 provideRouter([
                     { path: '', component: MockHomeComponent },
                     { path: 'about', component: MockAboutComponent },
-                    { path: 'contact', component: MockContactComponent }
-                ])
-            ]
+                    { path: 'contact', component: MockContactComponent },
+                ]),
+            ],
         }).compileComponents();
 
         fixture = TestBed.createComponent(NotFoundComponent);
@@ -118,7 +118,9 @@ describe('NotFoundComponent', () => {
             expect(paragraphs.length).toBeGreaterThan(0);
 
             const errorMessage = paragraphs.find(p =>
-                p.nativeElement.textContent.includes('Sorry, but the page you are looking for does not exist')
+                p.nativeElement.textContent.includes(
+                    'Sorry, but the page you are looking for does not exist'
+                )
             );
             expect(errorMessage).toBeTruthy();
         });
@@ -313,15 +315,15 @@ describe('NotFoundComponent', () => {
         });
 
         it('should not have input properties', () => {
-            const inputs = Object.keys(component).filter(key =>
-                key.startsWith('@Input') || key.includes('input')
+            const inputs = Object.keys(component).filter(
+                key => key.startsWith('@Input') || key.includes('input')
             );
             expect(inputs.length).toBe(0);
         });
 
         it('should not have output properties', () => {
-            const outputs = Object.keys(component).filter(key =>
-                key.startsWith('@Output') || key.includes('output')
+            const outputs = Object.keys(component).filter(
+                key => key.startsWith('@Output') || key.includes('output')
             );
             expect(outputs.length).toBe(0);
         });
@@ -368,12 +370,7 @@ describe('NotFoundComponent', () => {
     describe('Template Content Validation', () => {
         it('should contain specific error-related keywords', () => {
             const allText = compiled.textContent?.toLowerCase() || '';
-            const expectedKeywords = [
-                '404',
-                'page not found',
-                'sorry',
-                'does not exist'
-            ];
+            const expectedKeywords = ['404', 'page not found', 'sorry', 'does not exist'];
 
             expectedKeywords.forEach(keyword => {
                 expect(allText).toContain(keyword);

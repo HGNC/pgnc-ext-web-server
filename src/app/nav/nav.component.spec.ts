@@ -17,11 +17,7 @@ describe('NavComponent', () => {
 
     beforeEach(async () => {
         await TestBed.configureTestingModule({
-            imports: [
-                NavComponent,
-                FontAwesomeModule,
-                NgbModule
-            ],
+            imports: [NavComponent, FontAwesomeModule, NgbModule],
             providers: [
                 provideRouter([
                     { path: '', component: NavComponent },
@@ -30,9 +26,9 @@ describe('NavComponent', () => {
                     { path: 'about', component: NavComponent },
                     { path: 'license', component: NavComponent },
                     { path: 'publications', component: NavComponent },
-                    { path: 'help', component: NavComponent }
-                ])
-            ]
+                    { path: 'help', component: NavComponent },
+                ]),
+            ],
         }).compileComponents();
 
         fixture = TestBed.createComponent(NavComponent);
@@ -150,10 +146,13 @@ describe('NavComponent', () => {
 
         it('should have correct router link and query parameters', () => {
             const geneDataLink = debugElement.query(By.css('a[ng-reflect-router-link="/search"]'));
-            expect(geneDataLink.nativeElement.getAttribute('ng-reflect-router-link')).toBe('/search');
+            expect(geneDataLink.nativeElement.getAttribute('ng-reflect-router-link')).toBe(
+                '/search'
+            );
 
             // Check if query params attribute exists - it may be serialized as an object
-            const queryParamsAttr = geneDataLink.nativeElement.getAttribute('ng-reflect-query-params');
+            const queryParamsAttr =
+                geneDataLink.nativeElement.getAttribute('ng-reflect-query-params');
             expect(queryParamsAttr).toBeTruthy();
         });
 
@@ -164,7 +163,9 @@ describe('NavComponent', () => {
 
         it('should be in a nav-item container', () => {
             const geneDataNavItem = debugElement.query(By.css('.nav-item:nth-child(2)'));
-            const geneDataLink = geneDataNavItem.query(By.css('a[ng-reflect-router-link="/search"]'));
+            const geneDataLink = geneDataNavItem.query(
+                By.css('a[ng-reflect-router-link="/search"]')
+            );
 
             expect(geneDataNavItem.nativeElement.classList.contains('nav-item')).toBe(true);
             expect(geneDataLink).toBeTruthy();
@@ -175,7 +176,9 @@ describe('NavComponent', () => {
         it('should render downloads link with correct href', () => {
             const downloadsLink = debugElement.query(By.css('a[href*="github.com"]'));
             expect(downloadsLink).toBeTruthy();
-            expect(downloadsLink.nativeElement.href).toContain('github.com/PGNC-Plant-Gene-Nomenclature-Committee/Downloads');
+            expect(downloadsLink.nativeElement.href).toContain(
+                'github.com/PGNC-Plant-Gene-Nomenclature-Committee/Downloads'
+            );
         });
 
         it('should have correct link text', () => {
@@ -211,7 +214,9 @@ describe('NavComponent', () => {
 
         it('should have correct router link', () => {
             const contactLink = debugElement.query(By.css('a[ng-reflect-router-link="/contact"]'));
-            expect(contactLink.nativeElement.getAttribute('ng-reflect-router-link')).toBe('/contact');
+            expect(contactLink.nativeElement.getAttribute('ng-reflect-router-link')).toBe(
+                '/contact'
+            );
         });
 
         it('should have correct CSS classes', () => {
@@ -221,7 +226,9 @@ describe('NavComponent', () => {
 
         it('should be in a nav-item container', () => {
             const contactNavItem = debugElement.query(By.css('.nav-item:nth-child(4)'));
-            const contactLink = contactNavItem.query(By.css('a[ng-reflect-router-link="/contact"]'));
+            const contactLink = contactNavItem.query(
+                By.css('a[ng-reflect-router-link="/contact"]')
+            );
 
             expect(contactNavItem.nativeElement.classList.contains('nav-item')).toBe(true);
             expect(contactLink).toBeTruthy();
@@ -259,14 +266,18 @@ describe('NavComponent', () => {
         });
 
         it('should have License dropdown item', () => {
-            const licenseItem = debugElement.query(By.css('button[ng-reflect-router-link="/license"]'));
+            const licenseItem = debugElement.query(
+                By.css('button[ng-reflect-router-link="/license"]')
+            );
             expect(licenseItem).toBeTruthy();
             expect(licenseItem.nativeElement.textContent.trim()).toBe('License');
             expect(licenseItem.nativeElement.hasAttribute('ngbdropdownitem')).toBe(true);
         });
 
         it('should have Publications dropdown item', () => {
-            const publicationsItem = debugElement.query(By.css('button[ng-reflect-router-link="/publications"]'));
+            const publicationsItem = debugElement.query(
+                By.css('button[ng-reflect-router-link="/publications"]')
+            );
             expect(publicationsItem).toBeTruthy();
             expect(publicationsItem.nativeElement.textContent.trim()).toBe('Publications');
             expect(publicationsItem.nativeElement.hasAttribute('ngbdropdownitem')).toBe(true);
@@ -401,8 +412,12 @@ describe('NavComponent', () => {
 
         it('should use router links for dropdown items', () => {
             const aboutItem = debugElement.query(By.css('button[ng-reflect-router-link="/about"]'));
-            const licenseItem = debugElement.query(By.css('button[ng-reflect-router-link="/license"]'));
-            const publicationsItem = debugElement.query(By.css('button[ng-reflect-router-link="/publications"]'));
+            const licenseItem = debugElement.query(
+                By.css('button[ng-reflect-router-link="/license"]')
+            );
+            const publicationsItem = debugElement.query(
+                By.css('button[ng-reflect-router-link="/publications"]')
+            );
             const helpItem = debugElement.query(By.css('button[ng-reflect-router-link="/help"]'));
 
             expect(aboutItem).toBeTruthy();
@@ -610,7 +625,11 @@ describe('NavComponent', () => {
 
             allElements.forEach(element => {
                 const tagName = element.nativeElement.tagName.toLowerCase();
-                if (!tagName.startsWith('app-') && !tagName.startsWith('fa-') && tagName !== 'ng-container') {
+                if (
+                    !tagName.startsWith('app-') &&
+                    !tagName.startsWith('fa-') &&
+                    tagName !== 'ng-container'
+                ) {
                     expect(standardTags).toContain(tagName);
                 }
             });
@@ -645,8 +664,8 @@ describe('NavComponent', () => {
             const navLinks = debugElement.queryAll(By.css('.nav-link'));
             expect(navLinks.length).toBeGreaterThanOrEqual(6);
 
-            const visibleLinks = navLinks.filter(link =>
-                link.nativeElement.style.visibility !== 'hidden'
+            const visibleLinks = navLinks.filter(
+                link => link.nativeElement.style.visibility !== 'hidden'
             );
             expect(visibleLinks.length).toBeGreaterThanOrEqual(5);
         });
@@ -702,15 +721,19 @@ describe('NavComponent', () => {
         });
 
         it('should provide comprehensive site navigation', () => {
-            const allLinks = debugElement.queryAll(By.css('a[ng-reflect-router-link], button[ng-reflect-router-link]'));
-            const routes = allLinks.map(link =>
-                link.nativeElement.getAttribute('ng-reflect-router-link')
-            ).filter(route => route);
+            const allLinks = debugElement.queryAll(
+                By.css('a[ng-reflect-router-link], button[ng-reflect-router-link]')
+            );
+            const routes = allLinks
+                .map(link => link.nativeElement.getAttribute('ng-reflect-router-link'))
+                .filter(route => route);
 
             expect(routes.length).toBeGreaterThan(0);
             // Check for some expected routes
             const expectedRoutes = ['/', '/search'];
-            const hasExpectedRoutes = expectedRoutes.some(expectedRoute => routes.includes(expectedRoute));
+            const hasExpectedRoutes = expectedRoutes.some(expectedRoute =>
+                routes.includes(expectedRoute)
+            );
             expect(hasExpectedRoutes).toBe(true);
         });
     });
@@ -719,7 +742,9 @@ describe('NavComponent', () => {
         it('should have GitHub downloads link', () => {
             const githubLink = debugElement.query(By.css('a[href*="github.com"]'));
             expect(githubLink).toBeTruthy();
-            expect(githubLink.nativeElement.href).toContain('PGNC-Plant-Gene-Nomenclature-Committee/Downloads');
+            expect(githubLink.nativeElement.href).toContain(
+                'PGNC-Plant-Gene-Nomenclature-Committee/Downloads'
+            );
         });
 
         it('should have valid external URL format', () => {
@@ -731,7 +756,9 @@ describe('NavComponent', () => {
 
         it('should point to correct GitHub organization', () => {
             const githubLink = debugElement.query(By.css('a[href*="github.com"]'));
-            expect(githubLink.nativeElement.href).toContain('PGNC-Plant-Gene-Nomenclature-Committee');
+            expect(githubLink.nativeElement.href).toContain(
+                'PGNC-Plant-Gene-Nomenclature-Committee'
+            );
         });
     });
 });

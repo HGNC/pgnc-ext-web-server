@@ -9,16 +9,16 @@ import { HomeComponent } from './home.component';
 @Component({
     selector: 'app-home-header',
     template: '<div>Mock Home Header Component</div>',
-    standalone: true
+    standalone: true,
 })
-class MockHomeHeaderComponent { }
+class MockHomeHeaderComponent {}
 
 @Component({
     selector: 'app-home-search-bar',
     template: '<div>Mock Home Search Bar Component</div>',
-    standalone: true
+    standalone: true,
 })
-class MockHomeSearchBarComponent { }
+class MockHomeSearchBarComponent {}
 
 describe('HomeComponent', () => {
     let component: HomeComponent;
@@ -28,7 +28,7 @@ describe('HomeComponent', () => {
     beforeEach(async () => {
         await TestBed.configureTestingModule({
             imports: [HomeComponent],
-            providers: [provideRouter([])]
+            providers: [provideRouter([])],
         }).compileComponents();
 
         fixture = TestBed.createComponent(HomeComponent);
@@ -121,7 +121,9 @@ describe('HomeComponent', () => {
         it('should display the tagline', () => {
             const tagline = debugElement.query(By.css('.tag-line'));
             expect(tagline).toBeTruthy();
-            expect(tagline.nativeElement.textContent.trim()).toBe('The resource for approved plant gene nomenclature');
+            expect(tagline.nativeElement.textContent.trim()).toBe(
+                'The resource for approved plant gene nomenclature'
+            );
         });
 
         it('should have logo and tagline in logo section', () => {
@@ -326,7 +328,8 @@ describe('HomeComponent', () => {
         });
 
         it('should maintain component state after multiple change detection cycles', () => {
-            const initialContent = debugElement.query(By.css('.tag-line')).nativeElement.textContent;
+            const initialContent = debugElement.query(By.css('.tag-line')).nativeElement
+                .textContent;
 
             fixture.detectChanges();
             fixture.detectChanges();
@@ -395,15 +398,50 @@ describe('HomeComponent', () => {
         it('should use standard HTML elements', () => {
             const allElements = debugElement.queryAll(By.css('*'));
             const standardTags = [
-                'div', 'h1', 'img', 'header', 'nav', 'main', 'section', 'article',
-                'aside', 'footer', 'p', 'a', 'ul', 'li', 'strong', 'em', 'span',
-                'button', 'form', 'input', 'label', 'h2', 'h3', 'table', 'tr', 'td', 'th',
-                'svg', 'path', 'g', 'circle', 'rect', 'line', 'polygon', 'polyline'
+                'div',
+                'h1',
+                'img',
+                'header',
+                'nav',
+                'main',
+                'section',
+                'article',
+                'aside',
+                'footer',
+                'p',
+                'a',
+                'ul',
+                'li',
+                'strong',
+                'em',
+                'span',
+                'button',
+                'form',
+                'input',
+                'label',
+                'h2',
+                'h3',
+                'table',
+                'tr',
+                'td',
+                'th',
+                'svg',
+                'path',
+                'g',
+                'circle',
+                'rect',
+                'line',
+                'polygon',
+                'polyline',
             ];
 
             allElements.forEach(element => {
                 const tagName = element.nativeElement.tagName.toLowerCase();
-                if (!tagName.startsWith('app-') && !tagName.startsWith('router-') && !tagName.startsWith('fa-')) {
+                if (
+                    !tagName.startsWith('app-') &&
+                    !tagName.startsWith('router-') &&
+                    !tagName.startsWith('fa-')
+                ) {
                     expect(standardTags).toContain(tagName);
                 }
             });

@@ -11,8 +11,8 @@ describe('GeneLocation Model', () => {
                     refseqAccession: 'NC_000001.11',
                     genbankAccession: 'CM000663.2',
                     coordSystem: 'chromosome',
-                    type: 'primary assembly'
-                }
+                    type: 'primary assembly',
+                },
             };
 
             expect(geneLocation).toBeDefined();
@@ -34,8 +34,8 @@ describe('GeneLocation Model', () => {
                     refseqAccession: 'test',
                     genbankAccession: 'test',
                     coordSystem: 'test',
-                    type: 'test'
-                }
+                    type: 'test',
+                },
             };
 
             expect(geneLocation.withdrawnDate).toBeNull();
@@ -51,8 +51,8 @@ describe('GeneLocation Model', () => {
                     refseqAccession: 'test',
                     genbankAccession: 'test',
                     coordSystem: 'test',
-                    type: 'test'
-                }
+                    type: 'test',
+                },
             };
 
             expect(geneLocation.withdrawnDate).toBe(withdrawnDate);
@@ -70,8 +70,8 @@ describe('GeneLocation Model', () => {
                     refseqAccession: '',
                     genbankAccession: '',
                     coordSystem: '',
-                    type: ''
-                }
+                    type: '',
+                },
             };
 
             expect(geneLocation.location.name).toBe('');
@@ -90,8 +90,8 @@ describe('GeneLocation Model', () => {
                     refseqAccession: 'NC_000001.11-test',
                     genbankAccession: 'CM000663.2@test',
                     coordSystem: 'chromosome-special',
-                    type: 'primary assembly (test)'
-                }
+                    type: 'primary assembly (test)',
+                },
             };
 
             expect(geneLocation.location.name).toBe('Location-@#$%^&*()');
@@ -110,8 +110,8 @@ describe('GeneLocation Model', () => {
                     refseqAccession: 'NC_000001.11-ñ',
                     genbankAccession: 'CM000663.2-é',
                     coordSystem: 'chromosome-ñ',
-                    type: 'primary-é'
-                }
+                    type: 'primary-é',
+                },
             };
 
             expect(geneLocation.location.name).toBe('Locación-ñéñē');
@@ -131,8 +131,8 @@ describe('GeneLocation Model', () => {
                     refseqAccession: longString,
                     genbankAccession: longString,
                     coordSystem: longString,
-                    type: longString
-                }
+                    type: longString,
+                },
             };
 
             expect(geneLocation.location.name).toHaveLength(1000);
@@ -154,8 +154,8 @@ describe('GeneLocation Model', () => {
                     refseqAccession: 'test',
                     genbankAccession: 'test',
                     coordSystem: 'test',
-                    type: 'test'
-                }
+                    type: 'test',
+                },
             };
 
             expect(geneLocation.creationDate).toBe(futureDate);
@@ -173,8 +173,8 @@ describe('GeneLocation Model', () => {
                     refseqAccession: 'NC_000001.11',
                     genbankAccession: 'CM000663.2',
                     coordSystem: 'chromosome',
-                    type: 'primary assembly'
-                }
+                    type: 'primary assembly',
+                },
             };
 
             const jsonString = JSON.stringify(originalLocation);
@@ -182,7 +182,9 @@ describe('GeneLocation Model', () => {
 
             expect(parsed.location.name).toBe(originalLocation.location.name);
             expect(parsed.location.refseqAccession).toBe(originalLocation.location.refseqAccession);
-            expect(parsed.location.genbankAccession).toBe(originalLocation.location.genbankAccession);
+            expect(parsed.location.genbankAccession).toBe(
+                originalLocation.location.genbankAccession
+            );
             expect(parsed.location.coordSystem).toBe(originalLocation.location.coordSystem);
             expect(parsed.location.type).toBe(originalLocation.location.type);
         });
@@ -196,8 +198,8 @@ describe('GeneLocation Model', () => {
                     refseqAccession: 'test',
                     genbankAccession: 'test',
                     coordSystem: 'test',
-                    type: 'test'
-                }
+                    type: 'test',
+                },
             };
 
             const jsonString = JSON.stringify(locationWithNull);
@@ -218,8 +220,8 @@ describe('GeneLocation Model', () => {
                     refseqAccession: 'test',
                     genbankAccession: 'test',
                     coordSystem: 'test',
-                    type: 'test'
-                }
+                    type: 'test',
+                },
             };
 
             // Verify all required fields are present

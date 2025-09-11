@@ -8,27 +8,27 @@ import { HelpComponent } from './help.component';
 // Mock components for routing tests
 @Component({
     template: '<div>Mock FAQ Component</div>',
-    standalone: true
+    standalone: true,
 })
-class MockFaqComponent { }
+class MockFaqComponent {}
 
 @Component({
     template: '<div>Mock Browser Component</div>',
-    standalone: true
+    standalone: true,
 })
-class MockBrowserComponent { }
+class MockBrowserComponent {}
 
 @Component({
     template: '<div>Mock Search Component</div>',
-    standalone: true
+    standalone: true,
 })
-class MockSearchComponent { }
+class MockSearchComponent {}
 
 @Component({
     template: '<div>Mock Gene Symbol Report Component</div>',
-    standalone: true
+    standalone: true,
 })
-class MockGeneSymbolReportComponent { }
+class MockGeneSymbolReportComponent {}
 
 describe('HelpComponent', () => {
     let component: HelpComponent;
@@ -43,9 +43,9 @@ describe('HelpComponent', () => {
                     { path: 'help/faq', component: MockFaqComponent },
                     { path: 'help/browser', component: MockBrowserComponent },
                     { path: 'help/search', component: MockSearchComponent },
-                    { path: 'help/gene-symbol-report', component: MockGeneSymbolReportComponent }
-                ])
-            ]
+                    { path: 'help/gene-symbol-report', component: MockGeneSymbolReportComponent },
+                ]),
+            ],
         }).compileComponents();
 
         fixture = TestBed.createComponent(HelpComponent);
@@ -134,7 +134,9 @@ describe('HelpComponent', () => {
         });
 
         it('should have Gene Symbol Report Help link', () => {
-            const reportLink = debugElement.query(By.css('a[ng-reflect-router-link="gene-symbol-report"]'));
+            const reportLink = debugElement.query(
+                By.css('a[ng-reflect-router-link="gene-symbol-report"]')
+            );
             expect(reportLink).toBeTruthy();
             expect(reportLink.nativeElement.textContent).toContain('Symbol report help');
         });
@@ -150,7 +152,9 @@ describe('HelpComponent', () => {
 
     describe('Section Content', () => {
         it('should have FAQ section with description', () => {
-            const faqSection = debugElement.query(By.css('h2:has(a[ng-reflect-router-link="faq"])'));
+            const faqSection = debugElement.query(
+                By.css('h2:has(a[ng-reflect-router-link="faq"])')
+            );
             expect(faqSection).toBeTruthy();
 
             const nextP = faqSection.nativeElement.nextElementSibling;
@@ -159,7 +163,9 @@ describe('HelpComponent', () => {
         });
 
         it('should have Browser Help section with description', () => {
-            const browserSection = debugElement.query(By.css('h2:has(a[ng-reflect-router-link="browser"])'));
+            const browserSection = debugElement.query(
+                By.css('h2:has(a[ng-reflect-router-link="browser"])')
+            );
             expect(browserSection).toBeTruthy();
 
             const nextP = browserSection.nativeElement.nextElementSibling;
@@ -168,7 +174,9 @@ describe('HelpComponent', () => {
         });
 
         it('should have Search Help section with description', () => {
-            const searchSection = debugElement.query(By.css('h2:has(a[ng-reflect-router-link="search"])'));
+            const searchSection = debugElement.query(
+                By.css('h2:has(a[ng-reflect-router-link="search"])')
+            );
             expect(searchSection).toBeTruthy();
 
             const nextP = searchSection.nativeElement.nextElementSibling;
@@ -177,7 +185,9 @@ describe('HelpComponent', () => {
         });
 
         it('should have Gene Symbol Report section with description', () => {
-            const reportSection = debugElement.query(By.css('h2:has(a[ng-reflect-router-link="gene-symbol-report"])'));
+            const reportSection = debugElement.query(
+                By.css('h2:has(a[ng-reflect-router-link="gene-symbol-report"])')
+            );
             expect(reportSection).toBeTruthy();
 
             const nextP = reportSection.nativeElement.nextElementSibling;
@@ -207,7 +217,8 @@ describe('HelpComponent', () => {
 
         it('should navigate to correct routes', () => {
             const expectedRoutes = ['faq', 'browser', 'search', 'gene-symbol-report'];
-            const actualRoutes = debugElement.queryAll(By.css('a[ng-reflect-router-link]'))
+            const actualRoutes = debugElement
+                .queryAll(By.css('a[ng-reflect-router-link]'))
                 .map(link => link.nativeElement.getAttribute('ng-reflect-router-link'))
                 .filter(route => expectedRoutes.includes(route));
 
@@ -289,7 +300,9 @@ describe('HelpComponent', () => {
             h2Elements.forEach(heading => {
                 const text = heading.nativeElement.textContent.trim();
                 expect(text.length).toBeGreaterThan(5);
-                expect(text.toLowerCase()).toMatch(/help|questions|faq|browser|search|symbol|report/);
+                expect(text.toLowerCase()).toMatch(
+                    /help|questions|faq|browser|search|symbol|report/
+                );
             });
         });
     });
@@ -431,7 +444,9 @@ describe('HelpComponent', () => {
         it('should provide navigation to all help subsections', () => {
             const expectedSections = ['faq', 'browser', 'search', 'gene-symbol-report'];
             const links = debugElement.queryAll(By.css('a[ng-reflect-router-link]'));
-            const routerLinks = links.map(link => link.nativeElement.getAttribute('ng-reflect-router-link'));
+            const routerLinks = links.map(link =>
+                link.nativeElement.getAttribute('ng-reflect-router-link')
+            );
 
             expectedSections.forEach(section => {
                 expect(routerLinks).toContain(section);

@@ -17,9 +17,9 @@ describe('SearchService', () => {
                 display: [
                     {
                         label: 'PGNC ID',
-                        value: 'PGNC:12345'
-                    }
-                ]
+                        value: 'PGNC:12345',
+                    },
+                ],
             },
             {
                 symbol: 'TEST2',
@@ -28,26 +28,23 @@ describe('SearchService', () => {
                 display: [
                     {
                         label: 'Status',
-                        value: 'Approved'
-                    }
-                ]
-            }
+                        value: 'Approved',
+                    },
+                ],
+            },
         ],
         total: 25,
         start: 1,
-        rows: 10
+        rows: 10,
     };
 
     beforeEach(() => {
         mockHttpClient = {
-            get: jest.fn()
+            get: jest.fn(),
         } as any;
 
         TestBed.configureTestingModule({
-            providers: [
-                SearchService,
-                { provide: HttpClient, useValue: mockHttpClient }
-            ]
+            providers: [SearchService, { provide: HttpClient, useValue: mockHttpClient }],
         });
 
         service = TestBed.inject(SearchService);
@@ -71,7 +68,7 @@ describe('SearchService', () => {
             expect(typeof service.loading$.subscribe).toBe('function');
         });
 
-        it('should initialize with loading false', (done) => {
+        it('should initialize with loading false', done => {
             service.loading$.subscribe(loading => {
                 expect(loading).toBe(false);
                 done();
@@ -164,8 +161,8 @@ describe('SearchService', () => {
                 params: {
                     q: 'test query',
                     start: '1',
-                    rows: '10'
-                }
+                    rows: '10',
+                },
             });
         });
 
@@ -176,12 +173,12 @@ describe('SearchService', () => {
                 params: {
                     q: 'test query',
                     start: '1',
-                    rows: '10'
-                }
+                    rows: '10',
+                },
             });
         });
 
-        it('should return search response', (done) => {
+        it('should return search response', done => {
             service.browse('test', 1, 10).subscribe(response => {
                 expect(response).toEqual(mockSearchResponse);
                 done();
@@ -195,8 +192,8 @@ describe('SearchService', () => {
                 params: {
                     q: 'test',
                     start: '25',
-                    rows: '50'
-                }
+                    rows: '50',
+                },
             });
         });
 
@@ -208,8 +205,8 @@ describe('SearchService', () => {
                 params: {
                     q: specialQuery,
                     start: '1',
-                    rows: '10'
-                }
+                    rows: '10',
+                },
             });
         });
     });
@@ -219,7 +216,7 @@ describe('SearchService', () => {
             mockHttpClient.get.mockReturnValue(of(mockSearchResponse));
         });
 
-        it('should cache successful responses', (done) => {
+        it('should cache successful responses', done => {
             service.browse('test', 1, 10).subscribe(() => {
                 // Second call should return cached data without HTTP request
                 service.browse('test', 1, 10).subscribe(response => {
@@ -230,7 +227,7 @@ describe('SearchService', () => {
             });
         });
 
-        it('should return different cached responses for different parameters', (done) => {
+        it('should return different cached responses for different parameters', done => {
             const response2 = { ...mockSearchResponse, total: 50 };
 
             mockHttpClient.get
@@ -247,7 +244,7 @@ describe('SearchService', () => {
             });
         });
 
-        it('should not make HTTP request for cached data', (done) => {
+        it('should not make HTTP request for cached data', done => {
             service.browse('test', 1, 10).subscribe(() => {
                 mockHttpClient.get.mockClear();
 
@@ -259,7 +256,7 @@ describe('SearchService', () => {
             });
         });
 
-        it('should clear all cache', (done) => {
+        it('should clear all cache', done => {
             service.browse('test', 1, 10).subscribe(() => {
                 service.clearCache();
                 mockHttpClient.get.mockClear();
@@ -271,7 +268,7 @@ describe('SearchService', () => {
             });
         });
 
-        it('should clear cache for specific query', (done) => {
+        it('should clear cache for specific query', done => {
             service.browse('test1', 1, 10).subscribe(() => {
                 service.browse('test2', 1, 10).subscribe(() => {
                     service.clearCacheForQuery('test1');
@@ -313,7 +310,7 @@ describe('SearchService', () => {
             expect(mockHttpClient.get).toHaveBeenCalledTimes(2);
         });
 
-        it('should clean up ongoing requests after completion', (done) => {
+        it('should clean up ongoing requests after completion', done => {
             service.browse('test', 1, 10).subscribe(() => {
                 // After completion, new request should create new observable
                 const request2 = service.browse('test', 1, 10);
@@ -324,20 +321,20 @@ describe('SearchService', () => {
     });
 
     describe('Error Handling', () => {
-        it('should handle HTTP errors', (done) => {
+        it('should handle HTTP errors', done => {
             const error = new Error('Network error');
             mockHttpClient.get.mockReturnValue(throwError(() => error));
 
             service.browse('test', 1, 10).subscribe({
                 next: () => fail('Should not succeed'),
-                error: (err) => {
+                error: err => {
                     expect(err).toBe(error);
                     done();
-                }
+                },
             });
         });
 
-        it('should clean up ongoing requests on error', (done) => {
+        it('should clean up ongoing requests on error', done => {
             const error = new Error('Network error');
             mockHttpClient.get.mockReturnValue(throwError(() => error));
 
@@ -349,11 +346,11 @@ describe('SearchService', () => {
                         expect(mockHttpClient.get).toHaveBeenCalledTimes(2);
                         done();
                     });
-                }
+                },
             });
         });
 
-        it('should update loading state on error', (done) => {
+        it('should update loading state on error', done => {
             const loadingStates: boolean[] = [];
             service.loading$.subscribe(loading => loadingStates.push(loading));
 
@@ -365,11 +362,11 @@ describe('SearchService', () => {
                     expect(loadingStates).toContain(true);
                     expect(loadingStates[loadingStates.length - 1]).toBe(false);
                     done();
-                }
+                },
             });
         });
 
-        it('should not cache failed requests', (done) => {
+        it('should not cache failed requests', done => {
             const error = new Error('Network error');
             mockHttpClient.get
                 .mockReturnValueOnce(throwError(() => error))
@@ -382,7 +379,7 @@ describe('SearchService', () => {
                         expect(mockHttpClient.get).toHaveBeenCalledTimes(2);
                         done();
                     });
-                }
+                },
             });
         });
     });
@@ -392,7 +389,7 @@ describe('SearchService', () => {
             mockHttpClient.get.mockReturnValue(of(mockSearchResponse));
         });
 
-        it('should share replay between multiple subscribers', (done) => {
+        it('should share replay between multiple subscribers', done => {
             const request = service.browse('test', 1, 10);
             let completedCount = 0;
 
@@ -413,7 +410,7 @@ describe('SearchService', () => {
             });
         });
 
-        it('should provide same data to all subscribers', (done) => {
+        it('should provide same data to all subscribers', done => {
             const request = service.browse('test', 1, 10);
             const results: SearchResponse[] = [];
 
@@ -442,7 +439,7 @@ describe('SearchService', () => {
             mockHttpClient.get.mockReturnValue(of(mockSearchResponse));
         });
 
-        it('should handle large cache sizes efficiently', (done) => {
+        it('should handle large cache sizes efficiently', done => {
             let completedRequests = 0;
             const totalRequests = 100;
 
@@ -457,7 +454,7 @@ describe('SearchService', () => {
             }
         });
 
-        it('should handle rapid concurrent requests', (done) => {
+        it('should handle rapid concurrent requests', done => {
             const promises: Promise<any>[] = [];
 
             for (let i = 0; i < 50; i++) {
@@ -507,8 +504,8 @@ describe('SearchService', () => {
                 params: {
                     q: '',
                     start: '1',
-                    rows: '10'
-                }
+                    rows: '10',
+                },
             });
         });
 
@@ -521,8 +518,8 @@ describe('SearchService', () => {
                 params: {
                     q: 'test',
                     start: '0',
-                    rows: '10'
-                }
+                    rows: '10',
+                },
             });
         });
 
@@ -535,8 +532,8 @@ describe('SearchService', () => {
                 params: {
                     q: 'test',
                     start: '1',
-                    rows: '10000'
-                }
+                    rows: '10000',
+                },
             });
         });
 
@@ -550,14 +547,14 @@ describe('SearchService', () => {
                 params: {
                     q: unicodeQuery,
                     start: '1',
-                    rows: '10'
-                }
+                    rows: '10',
+                },
             });
         });
     });
 
     describe('Type Safety', () => {
-        it('should handle SearchResponse interface correctly', (done) => {
+        it('should handle SearchResponse interface correctly', done => {
             mockHttpClient.get.mockReturnValue(of(mockSearchResponse));
 
             service.browse('test', 1, 10).subscribe(response => {
@@ -570,7 +567,7 @@ describe('SearchService', () => {
             });
         });
 
-        it('should handle Gene interface correctly', (done) => {
+        it('should handle Gene interface correctly', done => {
             mockHttpClient.get.mockReturnValue(of(mockSearchResponse));
 
             service.browse('test', 1, 10).subscribe(response => {

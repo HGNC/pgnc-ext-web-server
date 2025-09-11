@@ -11,7 +11,7 @@ describe('LicenseComponent', () => {
 
     beforeEach(async () => {
         await TestBed.configureTestingModule({
-            imports: [LicenseComponent]
+            imports: [LicenseComponent],
         }).compileComponents();
 
         fixture = TestBed.createComponent(LicenseComponent);
@@ -96,11 +96,15 @@ describe('LicenseComponent', () => {
         });
 
         it('should have CC0 license links', () => {
-            const cc0Links = debugElement.queryAll(By.css('a[href*="creativecommons.org/publicdomain/zero"]'));
+            const cc0Links = debugElement.queryAll(
+                By.css('a[href*="creativecommons.org/publicdomain/zero"]')
+            );
             expect(cc0Links.length).toBeGreaterThanOrEqual(1);
 
             cc0Links.forEach(link => {
-                expect(link.nativeElement.href).toContain('creativecommons.org/publicdomain/zero/1.0/legalcode.en');
+                expect(link.nativeElement.href).toContain(
+                    'creativecommons.org/publicdomain/zero/1.0/legalcode.en'
+                );
             });
         });
 
@@ -147,7 +151,9 @@ describe('LicenseComponent', () => {
         it('should contain citation with cite element', () => {
             const cite = debugElement.query(By.css('blockquote cite'));
             expect(cite).toBeTruthy();
-            expect(cite.nativeElement.textContent.trim()).toContain('Towards an official gene nomenclature for');
+            expect(cite.nativeElement.textContent.trim()).toContain(
+                'Towards an official gene nomenclature for'
+            );
             expect(cite.nativeElement.textContent.trim()).toContain('Populus trichocarpa');
         });
 
@@ -169,7 +175,7 @@ describe('LicenseComponent', () => {
             const expectedORCIDs = [
                 '0000-0003-1818-8243', // Susan Tweedie
                 '0000-0001-9246-8193', // Stanton Martin
-                '0000-0002-8380-5247'  // Elspeth A Bruford
+                '0000-0002-8380-5247', // Elspeth A Bruford
             ];
 
             const orcidIds = orcidLinks.map(link => {
@@ -189,7 +195,9 @@ describe('LicenseComponent', () => {
             );
             expect(dateFooter).toBeTruthy();
             if (dateFooter) {
-                expect(dateFooter.nativeElement.textContent.trim()).toBe('Tree Physiology 2025 May 09');
+                expect(dateFooter.nativeElement.textContent.trim()).toBe(
+                    'Tree Physiology 2025 May 09'
+                );
             }
         });
 
@@ -226,7 +234,9 @@ describe('LicenseComponent', () => {
             const emailLink = debugElement.query(By.css('a[href^="mailto:"]'));
             expect(emailLink).toBeTruthy();
             expect(emailLink.nativeElement.href).toContain('mailto:hgnc@genenames.org');
-            expect(emailLink.nativeElement.href).toContain('subject=PGNC%20CC%20licensing%20%26%20attribution');
+            expect(emailLink.nativeElement.href).toContain(
+                'subject=PGNC%20CC%20licensing%20%26%20attribution'
+            );
             expect(emailLink.nativeElement.textContent.trim()).toBe('PGNC');
         });
     });
@@ -238,22 +248,24 @@ describe('LicenseComponent', () => {
         });
 
         it('should have external links', () => {
-            const externalLinks = debugElement.queryAll(By.css('a[href^="http"], a[href^="https"]'));
+            const externalLinks = debugElement.queryAll(
+                By.css('a[href^="http"], a[href^="https"]')
+            );
             expect(externalLinks.length).toBeGreaterThan(0);
         });
 
         it('should have proper external link URLs', () => {
-            const externalLinks = debugElement.queryAll(By.css('a[href^="http"], a[href^="https"]'));
+            const externalLinks = debugElement.queryAll(
+                By.css('a[href^="http"], a[href^="https"]')
+            );
 
-            const expectedDomains = [
-                'creativecommons.org',
-                'orcid.org',
-                'doi.org'
-            ];
+            const expectedDomains = ['creativecommons.org', 'orcid.org', 'doi.org'];
 
             externalLinks.forEach(link => {
                 const href = link.nativeElement.href;
-                const containsExpectedDomain = expectedDomains.some(domain => href.includes(domain));
+                const containsExpectedDomain = expectedDomains.some(domain =>
+                    href.includes(domain)
+                );
                 expect(containsExpectedDomain).toBe(true);
             });
         });
@@ -272,7 +284,9 @@ describe('LicenseComponent', () => {
             expect(orcidLinks.length).toBe(3);
 
             orcidLinks.forEach(link => {
-                expect(link.nativeElement.href).toMatch(/^https:\/\/orcid\.org\/\d{4}-\d{4}-\d{4}-\d{4}$/);
+                expect(link.nativeElement.href).toMatch(
+                    /^https:\/\/orcid\.org\/\d{4}-\d{4}-\d{4}-\d{4}$/
+                );
             });
         });
 
@@ -439,7 +453,7 @@ describe('LicenseComponent', () => {
                 'public domain',
                 'attribution',
                 'pgnc',
-                'plant gene nomenclature'
+                'plant gene nomenclature',
             ];
 
             essentialTerms.forEach(term => {
@@ -451,7 +465,9 @@ describe('LicenseComponent', () => {
             const cite = debugElement.query(By.css('cite'));
             const footers = debugElement.queryAll(By.css('blockquote footer'));
 
-            expect(cite.nativeElement.textContent).toContain('Towards an official gene nomenclature');
+            expect(cite.nativeElement.textContent).toContain(
+                'Towards an official gene nomenclature'
+            );
             expect(footers.length).toBeGreaterThanOrEqual(2);
         });
 
@@ -486,7 +502,19 @@ describe('LicenseComponent', () => {
     describe('Browser Compatibility', () => {
         it('should use standard HTML elements', () => {
             const allElements = debugElement.queryAll(By.css('*'));
-            const standardTags = ['div', 'h1', 'h2', 'p', 'a', 'blockquote', 'cite', 'footer', 'strong', 'em', 'span'];
+            const standardTags = [
+                'div',
+                'h1',
+                'h2',
+                'p',
+                'a',
+                'blockquote',
+                'cite',
+                'footer',
+                'strong',
+                'em',
+                'span',
+            ];
 
             allElements.forEach(element => {
                 const tagName = element.nativeElement.tagName.toLowerCase();
@@ -509,7 +537,9 @@ describe('LicenseComponent', () => {
             expect(doiLink.nativeElement.target).toBe('_blank');
             expect(doiLink.nativeElement.href).toMatch(/^https?:\/\/.+/);
 
-            const externalLinks = debugElement.queryAll(By.css('a[href^="http"], a[href^="https"]'));
+            const externalLinks = debugElement.queryAll(
+                By.css('a[href^="http"], a[href^="https"]')
+            );
             expect(externalLinks.length).toBeGreaterThan(0);
         });
     });
@@ -541,7 +571,9 @@ describe('LicenseComponent', () => {
 
     describe('Legal and Compliance', () => {
         it('should reference official Creative Commons license', () => {
-            const cc0Links = debugElement.queryAll(By.css('a[href*="creativecommons.org/publicdomain/zero"]'));
+            const cc0Links = debugElement.queryAll(
+                By.css('a[href*="creativecommons.org/publicdomain/zero"]')
+            );
             expect(cc0Links.length).toBeGreaterThanOrEqual(1);
 
             cc0Links.forEach(link => {

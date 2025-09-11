@@ -8,9 +8,9 @@ import { FaqComponent } from './faq.component';
 // Mock component for routing tests
 @Component({
     template: '<div>Mock Component</div>',
-    standalone: true
+    standalone: true,
 })
-class MockComponent { }
+class MockComponent {}
 
 describe('FaqComponent', () => {
     let component: FaqComponent;
@@ -20,11 +20,7 @@ describe('FaqComponent', () => {
     beforeEach(async () => {
         await TestBed.configureTestingModule({
             imports: [FaqComponent],
-            providers: [
-                provideRouter([
-                    { path: 'help', component: MockComponent }
-                ])
-            ]
+            providers: [provideRouter([{ path: 'help', component: MockComponent }])],
         }).compileComponents();
 
         fixture = TestBed.createComponent(FaqComponent);
@@ -65,7 +61,9 @@ describe('FaqComponent', () => {
         it('should render the main heading', () => {
             const heading = debugElement.query(By.css('h1'));
             expect(heading).toBeTruthy();
-            expect(heading.nativeElement.textContent.trim()).toContain('Frequently asked questions');
+            expect(heading.nativeElement.textContent.trim()).toContain(
+                'Frequently asked questions'
+            );
         });
 
         it('should have proper DOM structure', () => {
@@ -99,13 +97,14 @@ describe('FaqComponent', () => {
 
         it('should contain question indicators', () => {
             const headings = debugElement.queryAll(By.css('h2, h3'));
-            const questionHeadings = headings.filter(h =>
-                h.nativeElement.textContent.includes('?') ||
-                h.nativeElement.textContent.toLowerCase().includes('what') ||
-                h.nativeElement.textContent.toLowerCase().includes('how') ||
-                h.nativeElement.textContent.toLowerCase().includes('why') ||
-                h.nativeElement.textContent.toLowerCase().includes('when') ||
-                h.nativeElement.textContent.toLowerCase().includes('where')
+            const questionHeadings = headings.filter(
+                h =>
+                    h.nativeElement.textContent.includes('?') ||
+                    h.nativeElement.textContent.toLowerCase().includes('what') ||
+                    h.nativeElement.textContent.toLowerCase().includes('how') ||
+                    h.nativeElement.textContent.toLowerCase().includes('why') ||
+                    h.nativeElement.textContent.toLowerCase().includes('when') ||
+                    h.nativeElement.textContent.toLowerCase().includes('where')
             );
 
             expect(questionHeadings.length).toBeGreaterThan(0);
@@ -278,7 +277,25 @@ describe('FaqComponent', () => {
     describe('Browser Compatibility', () => {
         it('should use standard HTML elements', () => {
             const allElements = debugElement.queryAll(By.css('*'));
-            const standardTags = ['div', 'h1', 'h2', 'h3', 'p', 'a', 'ul', 'li', 'ol', 'dl', 'dt', 'dd', 'em', 'strong', 'span', 'section', 'article'];
+            const standardTags = [
+                'div',
+                'h1',
+                'h2',
+                'h3',
+                'p',
+                'a',
+                'ul',
+                'li',
+                'ol',
+                'dl',
+                'dt',
+                'dd',
+                'em',
+                'strong',
+                'span',
+                'section',
+                'article',
+            ];
 
             allElements.forEach(element => {
                 const tagName = element.nativeElement.tagName.toLowerCase();

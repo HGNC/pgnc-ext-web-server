@@ -13,7 +13,7 @@ describe('FooterComponent', () => {
     beforeEach(async () => {
         await TestBed.configureTestingModule({
             imports: [FooterComponent],
-            providers: [provideRouter([])]
+            providers: [provideRouter([])],
         }).compileComponents();
 
         fixture = TestBed.createComponent(FooterComponent);

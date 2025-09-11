@@ -11,9 +11,9 @@ import { HomeHeaderComponent } from './header.component';
 @Component({
     selector: 'app-nav',
     template: '<div>Mock Nav Component</div>',
-    standalone: true
+    standalone: true,
 })
-class MockNavComponent { }
+class MockNavComponent {}
 
 describe('HomeHeaderComponent', () => {
     let component: HomeHeaderComponent;
@@ -22,12 +22,8 @@ describe('HomeHeaderComponent', () => {
 
     beforeEach(async () => {
         await TestBed.configureTestingModule({
-            imports: [
-                HomeHeaderComponent,
-                NgbModule,
-                FontAwesomeModule
-            ],
-            providers: [provideRouter([])]
+            imports: [HomeHeaderComponent, NgbModule, FontAwesomeModule],
+            providers: [provideRouter([])],
         }).compileComponents();
 
         fixture = TestBed.createComponent(HomeHeaderComponent);
@@ -282,8 +278,10 @@ describe('HomeHeaderComponent', () => {
         it('should not use inline styles', () => {
             const allElements = debugElement.queryAll(By.css('*'));
             allElements.forEach(element => {
-                if (!element.nativeElement.tagName.toLowerCase().startsWith('app-') &&
-                    !element.nativeElement.tagName.toLowerCase().startsWith('fa-')) {
+                if (
+                    !element.nativeElement.tagName.toLowerCase().startsWith('app-') &&
+                    !element.nativeElement.tagName.toLowerCase().startsWith('fa-')
+                ) {
                     expect(element.nativeElement.style.length).toBeLessThanOrEqual(1);
                 }
             });
@@ -487,7 +485,11 @@ describe('HomeHeaderComponent', () => {
 
             allElements.forEach(element => {
                 const tagName = element.nativeElement.tagName.toLowerCase();
-                if (!tagName.startsWith('app-') && !tagName.startsWith('fa-') && tagName !== 'ng-container') {
+                if (
+                    !tagName.startsWith('app-') &&
+                    !tagName.startsWith('fa-') &&
+                    tagName !== 'ng-container'
+                ) {
                     expect(standardTags).toContain(tagName);
                 }
             });

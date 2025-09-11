@@ -5,12 +5,12 @@ describe('GeneName Model', () => {
         it('should define GeneName interface correctly', () => {
             const geneName: GeneName = {
                 name: {
-                    name: 'Test Gene Name'
+                    name: 'Test Gene Name',
                 },
                 creationDate: new Date('2023-01-01'),
                 modDate: new Date('2023-06-01'),
                 withdrawnDate: null,
-                type: 'approved'
+                type: 'approved',
             };
 
             expect(geneName).toBeDefined();
@@ -27,7 +27,7 @@ describe('GeneName Model', () => {
                 creationDate: new Date(),
                 modDate: null,
                 withdrawnDate: null,
-                type: 'approved'
+                type: 'approved',
             };
 
             expect(geneName.modDate).toBeNull();
@@ -39,7 +39,7 @@ describe('GeneName Model', () => {
                 creationDate: new Date(),
                 modDate: new Date(),
                 withdrawnDate: null,
-                type: 'approved'
+                type: 'approved',
             };
 
             expect(geneName.withdrawnDate).toBeNull();
@@ -52,7 +52,7 @@ describe('GeneName Model', () => {
                 creationDate: new Date(),
                 modDate: null,
                 withdrawnDate: withdrawnDate,
-                type: 'withdrawn'
+                type: 'withdrawn',
             };
 
             expect(geneName.withdrawnDate).toBe(withdrawnDate);
@@ -67,7 +67,7 @@ describe('GeneName Model', () => {
                 creationDate: new Date(),
                 modDate: null,
                 withdrawnDate: null,
-                type: 'approved'
+                type: 'approved',
             };
 
             expect(geneName.type).toBe('approved');
@@ -79,7 +79,7 @@ describe('GeneName Model', () => {
                 creationDate: new Date(),
                 modDate: new Date(),
                 withdrawnDate: null,
-                type: 'previous'
+                type: 'previous',
             };
 
             expect(geneName.type).toBe('previous');
@@ -91,7 +91,7 @@ describe('GeneName Model', () => {
                 creationDate: new Date(),
                 modDate: null,
                 withdrawnDate: null,
-                type: 'alias'
+                type: 'alias',
             };
 
             expect(geneName.type).toBe('alias');
@@ -103,7 +103,7 @@ describe('GeneName Model', () => {
                 creationDate: new Date(),
                 modDate: new Date(),
                 withdrawnDate: new Date(),
-                type: 'withdrawn'
+                type: 'withdrawn',
             };
 
             expect(geneName.type).toBe('withdrawn');
@@ -115,7 +115,7 @@ describe('GeneName Model', () => {
                 creationDate: new Date(),
                 modDate: null,
                 withdrawnDate: null,
-                type: 'custom-type'
+                type: 'custom-type',
             };
 
             expect(geneName.type).toBe('custom-type');
@@ -129,7 +129,7 @@ describe('GeneName Model', () => {
                 creationDate: new Date(),
                 modDate: null,
                 withdrawnDate: null,
-                type: 'approved'
+                type: 'approved',
             };
 
             expect(geneName.name.name).toBe('');
@@ -141,7 +141,7 @@ describe('GeneName Model', () => {
                 creationDate: new Date(),
                 modDate: null,
                 withdrawnDate: null,
-                type: 'approved'
+                type: 'approved',
             };
 
             expect(geneName.name.name).toBe('GENE-@#$%^&*()');
@@ -153,7 +153,7 @@ describe('GeneName Model', () => {
                 creationDate: new Date(),
                 modDate: null,
                 withdrawnDate: null,
-                type: 'approved'
+                type: 'approved',
             };
 
             expect(geneName.name.name).toBe('GENE-ñéñē');
@@ -166,7 +166,7 @@ describe('GeneName Model', () => {
                 creationDate: new Date(),
                 modDate: null,
                 withdrawnDate: null,
-                type: 'approved'
+                type: 'approved',
             };
 
             expect(geneName.name.name).toHaveLength(1005);
@@ -179,7 +179,7 @@ describe('GeneName Model', () => {
                 creationDate: new Date(),
                 modDate: null,
                 withdrawnDate: null,
-                type: 'approved'
+                type: 'approved',
             };
 
             expect(geneName.name.name).toBe('   GENE WITH SPACES   ');
@@ -191,7 +191,7 @@ describe('GeneName Model', () => {
                 creationDate: new Date(),
                 modDate: null,
                 withdrawnDate: null,
-                type: 'approved'
+                type: 'approved',
             };
 
             expect(geneName.name.name).toBe('12345');
@@ -203,7 +203,7 @@ describe('GeneName Model', () => {
                 creationDate: new Date(),
                 modDate: null,
                 withdrawnDate: null,
-                type: ''
+                type: '',
             };
 
             expect(geneName.type).toBe('');
@@ -220,7 +220,7 @@ describe('GeneName Model', () => {
                 creationDate: futureDate,
                 modDate: pastDate,
                 withdrawnDate: null,
-                type: 'approved'
+                type: 'approved',
             };
 
             expect(geneName.creationDate).toBe(futureDate);
@@ -235,7 +235,7 @@ describe('GeneName Model', () => {
                 creationDate: sameDate,
                 modDate: sameDate,
                 withdrawnDate: null,
-                type: 'approved'
+                type: 'approved',
             };
 
             expect(geneName.creationDate).toBe(sameDate);
@@ -252,7 +252,7 @@ describe('GeneName Model', () => {
                 creationDate: creation,
                 modDate: modification,
                 withdrawnDate: withdrawn,
-                type: 'withdrawn'
+                type: 'withdrawn',
             };
 
             expect(geneName.creationDate.getTime()).toBeLessThan(geneName.modDate!.getTime());
@@ -267,7 +267,7 @@ describe('GeneName Model', () => {
                 creationDate: new Date('2023-01-01'),
                 modDate: new Date('2023-06-01'),
                 withdrawnDate: null,
-                type: 'approved'
+                type: 'approved',
             };
 
             const jsonString = JSON.stringify(originalGeneName);
@@ -283,7 +283,7 @@ describe('GeneName Model', () => {
                 creationDate: new Date(),
                 modDate: null,
                 withdrawnDate: null,
-                type: 'approved'
+                type: 'approved',
             };
 
             const jsonString = JSON.stringify(geneNameWithNulls);
@@ -301,7 +301,7 @@ describe('GeneName Model', () => {
                 creationDate: new Date(),
                 modDate: null,
                 withdrawnDate: null,
-                type: 'approved'
+                type: 'approved',
             };
 
             // Verify all required fields are present
@@ -317,7 +317,7 @@ describe('GeneName Model', () => {
                 creationDate: new Date(),
                 modDate: null,
                 withdrawnDate: null,
-                type: 'approved'
+                type: 'approved',
             };
 
             expect(typeof geneName.name).toBe('object');

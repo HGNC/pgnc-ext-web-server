@@ -9,7 +9,7 @@ import { FragmentJumpService } from '../../common/services/fragment-jump.service
     styleUrl: './search.component.css',
 })
 export class SearchHelpComponent implements OnInit {
-    constructor(private fragJumpService: FragmentJumpService) { }
+    constructor(private fragJumpService: FragmentJumpService) {}
 
     ngOnInit() {
         try {

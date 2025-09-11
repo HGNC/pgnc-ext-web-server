@@ -1,11 +1,11 @@
-import { ExternalResourceName } from './external-resource-name.type';
 import { ExternalResource } from './external-resource.model';
+import { ExternalResourceName } from './external-resource-name.type';
 
 describe('ExternalResource Model', () => {
     describe('Interface Structure', () => {
         it('should define ExternalResource interface correctly', () => {
             const externalResource: ExternalResource = {
-                name: 'NCBI Gene'
+                name: 'NCBI Gene',
             };
 
             expect(externalResource).toBeDefined();
@@ -20,7 +20,7 @@ describe('ExternalResource Model', () => {
                 'PubMed',
                 'Phytozome v4_1',
                 'Phytozome v3_1',
-                'CBI sequence viewer'
+                'CBI sequence viewer',
             ];
 
             validNames.forEach(name => {
@@ -33,7 +33,7 @@ describe('ExternalResource Model', () => {
     describe('NCBI Gene Resource', () => {
         it('should create NCBI Gene resource', () => {
             const resource: ExternalResource = {
-                name: 'NCBI Gene'
+                name: 'NCBI Gene',
             };
 
             expect(resource.name).toBe('NCBI Gene');
@@ -41,7 +41,7 @@ describe('ExternalResource Model', () => {
 
         it('should be type-safe for NCBI Gene', () => {
             const resource: ExternalResource = {
-                name: 'NCBI Gene'
+                name: 'NCBI Gene',
             };
 
             expect(typeof resource.name).toBe('string');
@@ -53,7 +53,7 @@ describe('ExternalResource Model', () => {
     describe('Ensembl Gene Resource', () => {
         it('should create Ensembl Gene resource', () => {
             const resource: ExternalResource = {
-                name: 'Ensembl Gene'
+                name: 'Ensembl Gene',
             };
 
             expect(resource.name).toBe('Ensembl Gene');
@@ -61,7 +61,7 @@ describe('ExternalResource Model', () => {
 
         it('should be type-safe for Ensembl Gene', () => {
             const resource: ExternalResource = {
-                name: 'Ensembl Gene'
+                name: 'Ensembl Gene',
             };
 
             expect(typeof resource.name).toBe('string');
@@ -73,7 +73,7 @@ describe('ExternalResource Model', () => {
     describe('UniProt Resource', () => {
         it('should create UniProt resource', () => {
             const resource: ExternalResource = {
-                name: 'UniProt'
+                name: 'UniProt',
             };
 
             expect(resource.name).toBe('UniProt');
@@ -81,7 +81,7 @@ describe('ExternalResource Model', () => {
 
         it('should be type-safe for UniProt', () => {
             const resource: ExternalResource = {
-                name: 'UniProt'
+                name: 'UniProt',
             };
 
             expect(typeof resource.name).toBe('string');
@@ -92,7 +92,7 @@ describe('ExternalResource Model', () => {
     describe('PubMed Resource', () => {
         it('should create PubMed resource', () => {
             const resource: ExternalResource = {
-                name: 'PubMed'
+                name: 'PubMed',
             };
 
             expect(resource.name).toBe('PubMed');
@@ -100,7 +100,7 @@ describe('ExternalResource Model', () => {
 
         it('should be type-safe for PubMed', () => {
             const resource: ExternalResource = {
-                name: 'PubMed'
+                name: 'PubMed',
             };
 
             expect(typeof resource.name).toBe('string');
@@ -111,7 +111,7 @@ describe('ExternalResource Model', () => {
     describe('Phytozome Resources', () => {
         it('should create Phytozome v4_1 resource', () => {
             const resource: ExternalResource = {
-                name: 'Phytozome v4_1'
+                name: 'Phytozome v4_1',
             };
 
             expect(resource.name).toBe('Phytozome v4_1');
@@ -119,7 +119,7 @@ describe('ExternalResource Model', () => {
 
         it('should create Phytozome v3_1 resource', () => {
             const resource: ExternalResource = {
-                name: 'Phytozome v3_1'
+                name: 'Phytozome v3_1',
             };
 
             expect(resource.name).toBe('Phytozome v3_1');
@@ -127,7 +127,7 @@ describe('ExternalResource Model', () => {
 
         it('should be type-safe for Phytozome versions', () => {
             const resource: ExternalResource = {
-                name: 'Phytozome v4_1'
+                name: 'Phytozome v4_1',
             };
 
             expect(typeof resource.name).toBe('string');
@@ -138,7 +138,7 @@ describe('ExternalResource Model', () => {
     describe('CBI Sequence Viewer Resource', () => {
         it('should create CBI sequence viewer resource', () => {
             const resource: ExternalResource = {
-                name: 'CBI sequence viewer'
+                name: 'CBI sequence viewer',
             };
 
             expect(resource.name).toBe('CBI sequence viewer');
@@ -146,7 +146,7 @@ describe('ExternalResource Model', () => {
 
         it('should be type-safe for CBI sequence viewer', () => {
             const resource: ExternalResource = {
-                name: 'CBI sequence viewer'
+                name: 'CBI sequence viewer',
             };
 
             expect(typeof resource.name).toBe('string');
@@ -161,7 +161,7 @@ describe('ExternalResource Model', () => {
             const resources: ExternalResource[] = [
                 { name: 'NCBI Gene' },
                 { name: 'UniProt' },
-                { name: 'PubMed' }
+                { name: 'PubMed' },
             ];
 
             expect(resources).toHaveLength(3);
@@ -175,7 +175,7 @@ describe('ExternalResource Model', () => {
                 { name: 'NCBI Gene' },
                 { name: 'Ensembl Gene' },
                 { name: 'UniProt' },
-                { name: 'PubMed' }
+                { name: 'PubMed' },
             ];
 
             const geneResources = resources.filter(r => r.name.includes('Gene'));
@@ -188,7 +188,7 @@ describe('ExternalResource Model', () => {
             const resources: ExternalResource[] = [
                 { name: 'NCBI Gene' },
                 { name: 'UniProt' },
-                { name: 'PubMed' }
+                { name: 'PubMed' },
             ];
 
             const found = resources.find(r => r.name === 'UniProt');
@@ -205,7 +205,7 @@ describe('ExternalResource Model', () => {
             const resourceMap: Record<string, ExternalResource> = {
                 ncbi: { name: 'NCBI Gene' },
                 ensembl: { name: 'Ensembl Gene' },
-                uniprot: { name: 'UniProt' }
+                uniprot: { name: 'UniProt' },
             };
 
             expect(resourceMap['ncbi'].name).toBe('NCBI Gene');
@@ -247,7 +247,13 @@ describe('ExternalResource Model', () => {
         it('should validate resource existence', () => {
             function isValidResource(resource: ExternalResource): boolean {
                 const validNames: ExternalResourceName[] = [
-                    'NCBI Gene', 'Ensembl Gene', 'UniProt', 'PubMed', 'Phytozome v4_1', 'Phytozome v3_1', 'CBI sequence viewer'
+                    'NCBI Gene',
+                    'Ensembl Gene',
+                    'UniProt',
+                    'PubMed',
+                    'Phytozome v4_1',
+                    'Phytozome v3_1',
+                    'CBI sequence viewer',
                 ];
                 return validNames.includes(resource.name);
             }
@@ -260,7 +266,7 @@ describe('ExternalResource Model', () => {
     describe('JSON Serialization', () => {
         it('should serialize and deserialize correctly', () => {
             const originalResource: ExternalResource = {
-                name: 'NCBI Gene'
+                name: 'NCBI Gene',
             };
 
             const jsonString = JSON.stringify(originalResource);
@@ -276,8 +282,8 @@ describe('ExternalResource Model', () => {
                 resource: { name: 'UniProt' as ExternalResourceName },
                 metadata: {
                     created: new Date().toISOString(),
-                    active: true
-                }
+                    active: true,
+                },
             };
 
             const jsonString = JSON.stringify(complexObject);
@@ -292,7 +298,7 @@ describe('ExternalResource Model', () => {
             const resourceArray: ExternalResource[] = [
                 { name: 'NCBI Gene' },
                 { name: 'UniProt' },
-                { name: 'PubMed' }
+                { name: 'PubMed' },
             ];
 
             const jsonString = JSON.stringify(resourceArray);
@@ -321,7 +327,7 @@ describe('ExternalResource Model', () => {
                 { name: 'UniProt' },
                 { name: 'NCBI Gene' },
                 { name: 'PubMed' },
-                { name: 'Ensembl Gene' }
+                { name: 'Ensembl Gene' },
             ];
 
             const sorted = resources.sort((a, b) => a.name.localeCompare(b.name));
@@ -336,7 +342,7 @@ describe('ExternalResource Model', () => {
     describe('Type Safety', () => {
         it('should enforce type constraints', () => {
             const resource: ExternalResource = {
-                name: 'NCBI Gene'
+                name: 'NCBI Gene',
             };
 
             // Verify required fields are present

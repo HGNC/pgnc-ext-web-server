@@ -12,7 +12,7 @@ describe('SocialMediaComponent', () => {
 
     beforeEach(async () => {
         await TestBed.configureTestingModule({
-            imports: [SocialMediaComponent, FontAwesomeModule]
+            imports: [SocialMediaComponent, FontAwesomeModule],
         }).compileComponents();
 
         fixture = TestBed.createComponent(SocialMediaComponent);
@@ -209,7 +209,9 @@ describe('SocialMediaComponent', () => {
     describe('External URLs Validation', () => {
         it('should have valid Bluesky URL', () => {
             const blueSkyLink = debugElement.query(By.css('a[href*="bsky.app"]'));
-            expect(blueSkyLink.nativeElement.href).toBe('https://bsky.app/profile/hgnc.bsky.social');
+            expect(blueSkyLink.nativeElement.href).toBe(
+                'https://bsky.app/profile/hgnc.bsky.social'
+            );
         });
 
         it('should have valid Twitter URL', () => {
@@ -224,7 +226,9 @@ describe('SocialMediaComponent', () => {
 
         it('should have valid YouTube URL', () => {
             const youtubeLink = debugElement.query(By.css('a[href*="youtube.com"]'));
-            expect(youtubeLink.nativeElement.href).toBe('https://www.youtube.com/channel/UCqGBx2FrgmeXlbeRTCkvI3g');
+            expect(youtubeLink.nativeElement.href).toBe(
+                'https://www.youtube.com/channel/UCqGBx2FrgmeXlbeRTCkvI3g'
+            );
         });
 
         it('should have valid Blog URL', () => {
@@ -284,7 +288,7 @@ describe('SocialMediaComponent', () => {
                 faYoutube: component.faYoutube,
                 faBlog: component.faBlog,
                 faComment: component.faComment,
-                faBluesky: component.faBluesky
+                faBluesky: component.faBluesky,
             };
 
             fixture.detectChanges();
@@ -382,8 +386,10 @@ describe('SocialMediaComponent', () => {
             const links = debugElement.queryAll(By.css('a'));
             links.forEach(link => {
                 expect(link.nativeElement.href).toBeDefined();
-                expect(link.nativeElement.href.startsWith('http') ||
-                    link.nativeElement.href.startsWith('/')).toBe(true);
+                expect(
+                    link.nativeElement.href.startsWith('http') ||
+                        link.nativeElement.href.startsWith('/')
+                ).toBe(true);
             });
         });
     });
@@ -400,8 +406,10 @@ describe('SocialMediaComponent', () => {
         it('should not use inline styles', () => {
             const allElements = debugElement.queryAll(By.css('*'));
             allElements.forEach(element => {
-                if (!element.nativeElement.tagName.toLowerCase().startsWith('app-') &&
-                    !element.nativeElement.tagName.toLowerCase().startsWith('fa-')) {
+                if (
+                    !element.nativeElement.tagName.toLowerCase().startsWith('app-') &&
+                    !element.nativeElement.tagName.toLowerCase().startsWith('fa-')
+                ) {
                     expect(element.nativeElement.style.length).toBe(0);
                 }
             });

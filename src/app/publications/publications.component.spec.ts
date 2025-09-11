@@ -11,7 +11,7 @@ describe('PublicationsComponent', () => {
 
     beforeEach(async () => {
         await TestBed.configureTestingModule({
-            imports: [PublicationsComponent]
+            imports: [PublicationsComponent],
         }).compileComponents();
 
         fixture = TestBed.createComponent(PublicationsComponent);
@@ -87,7 +87,9 @@ describe('PublicationsComponent', () => {
         it('should render publication paragraph', () => {
             const paragraph = debugElement.query(By.css('p'));
             expect(paragraph).toBeTruthy();
-            expect(paragraph.nativeElement.textContent).toContain('Tweedie S, Martin S, Bruford E.');
+            expect(paragraph.nativeElement.textContent).toContain(
+                'Tweedie S, Martin S, Bruford E.'
+            );
         });
 
         it('should have proper DOM hierarchy', () => {
@@ -188,7 +190,9 @@ describe('PublicationsComponent', () => {
         it('should have publication title in strong formatting', () => {
             const strongTitle = debugElement.query(By.css('p strong'));
             expect(strongTitle).toBeTruthy();
-            expect(strongTitle.nativeElement.textContent).toContain('Towards an official gene nomenclature for');
+            expect(strongTitle.nativeElement.textContent).toContain(
+                'Towards an official gene nomenclature for'
+            );
         });
 
         it('should have italicized species name', () => {
@@ -475,7 +479,19 @@ describe('PublicationsComponent', () => {
 
     describe('Browser Compatibility', () => {
         it('should use standard HTML elements', () => {
-            const standardElements = ['div', 'h1', 'h2', 'table', 'tbody', 'tr', 'td', 'p', 'a', 'strong', 'em'];
+            const standardElements = [
+                'div',
+                'h1',
+                'h2',
+                'table',
+                'tbody',
+                'tr',
+                'td',
+                'p',
+                'a',
+                'strong',
+                'em',
+            ];
             const allElements = debugElement.queryAll(By.css('*'));
 
             allElements.forEach(element => {

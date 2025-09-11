@@ -9,7 +9,7 @@ import { FragmentJumpService } from '../../common/services/fragment-jump.service
     styleUrl: './gene-symbol-report.component.css',
 })
 export class GeneSymbolReportHelpComponent implements OnInit {
-    constructor(private fragJumpService: FragmentJumpService) { }
+    constructor(private fragJumpService: FragmentJumpService) {}
 
     ngOnInit() {
         try {

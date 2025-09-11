@@ -7,8 +7,8 @@ describe('XrefData Model', () => {
             const xrefData: XrefData = {
                 displayId: 'XR-123456',
                 externalResource: {
-                    name: 'NCBI Gene'
-                }
+                    name: 'NCBI Gene',
+                },
             };
 
             expect(xrefData).toBeDefined();
@@ -20,8 +20,8 @@ describe('XrefData Model', () => {
             const xrefData: XrefData = {
                 displayId: 'TEST-001',
                 externalResource: {
-                    name: 'UniProt'
-                }
+                    name: 'UniProt',
+                },
             };
 
             expect(xrefData.displayId).toBe('TEST-001');
@@ -34,8 +34,8 @@ describe('XrefData Model', () => {
             const xrefData: XrefData = {
                 displayId: 'NCBI-12345',
                 externalResource: {
-                    name: 'NCBI Gene'
-                }
+                    name: 'NCBI Gene',
+                },
             };
 
             expect(xrefData.displayId).toBe('NCBI-12345');
@@ -45,12 +45,12 @@ describe('XrefData Model', () => {
         it('should handle different NCBI formats', () => {
             const numericXref: XrefData = {
                 displayId: '123456',
-                externalResource: { name: 'NCBI Gene' }
+                externalResource: { name: 'NCBI Gene' },
             };
 
             const prefixedXref: XrefData = {
                 displayId: 'GeneID:123456',
-                externalResource: { name: 'NCBI Gene' }
+                externalResource: { name: 'NCBI Gene' },
             };
 
             expect(numericXref.displayId).toBe('123456');
@@ -65,8 +65,8 @@ describe('XrefData Model', () => {
             const xrefData: XrefData = {
                 displayId: 'ENSG00000139618',
                 externalResource: {
-                    name: 'Ensembl Gene'
-                }
+                    name: 'Ensembl Gene',
+                },
             };
 
             expect(xrefData.displayId).toBe('ENSG00000139618');
@@ -76,12 +76,12 @@ describe('XrefData Model', () => {
         it('should handle Ensembl ID formats', () => {
             const humanGene: XrefData = {
                 displayId: 'ENSG00000139618',
-                externalResource: { name: 'Ensembl Gene' }
+                externalResource: { name: 'Ensembl Gene' },
             };
 
             const mouseGene: XrefData = {
                 displayId: 'ENSMUSG00000020122',
-                externalResource: { name: 'Ensembl Gene' }
+                externalResource: { name: 'Ensembl Gene' },
             };
 
             expect(humanGene.displayId.startsWith('ENSG')).toBe(true);
@@ -96,8 +96,8 @@ describe('XrefData Model', () => {
             const xrefData: XrefData = {
                 displayId: 'P04637',
                 externalResource: {
-                    name: 'UniProt'
-                }
+                    name: 'UniProt',
+                },
             };
 
             expect(xrefData.displayId).toBe('P04637');
@@ -107,12 +107,12 @@ describe('XrefData Model', () => {
         it('should handle different UniProt formats', () => {
             const swissProtId: XrefData = {
                 displayId: 'P04637',
-                externalResource: { name: 'UniProt' }
+                externalResource: { name: 'UniProt' },
             };
 
             const tremblId: XrefData = {
                 displayId: 'Q9Y6K9',
-                externalResource: { name: 'UniProt' }
+                externalResource: { name: 'UniProt' },
             };
 
             expect(swissProtId.displayId).toMatch(/^[A-Z]\d{5}$/);
@@ -124,7 +124,7 @@ describe('XrefData Model', () => {
         it('should enforce type constraints', () => {
             const xrefData: XrefData = {
                 displayId: 'NCBI:123456',
-                externalResource: { name: 'NCBI Gene' }
+                externalResource: { name: 'NCBI Gene' },
             };
 
             // Verify all required fields are present
@@ -144,7 +144,7 @@ describe('XrefData Model', () => {
 
             const xrefData: XrefData = {
                 displayId: 'NCBI:123',
-                externalResource: { name: 'NCBI Gene' }
+                externalResource: { name: 'NCBI Gene' },
             };
 
             const result = processXrefData(xrefData);
@@ -155,7 +155,7 @@ describe('XrefData Model', () => {
             function createXrefData(display: string, resourceName: ExternalResourceName): XrefData {
                 return {
                     displayId: display,
-                    externalResource: { name: resourceName }
+                    externalResource: { name: resourceName },
                 };
             }
 

@@ -13,8 +13,8 @@ describe('Xref Model', () => {
                 source: 'automatic',
                 xref: {
                     displayId: 'NCBI:123456',
-                    externalResource: { name: 'NCBI Gene' }
-                }
+                    externalResource: { name: 'NCBI Gene' },
+                },
             };
 
             expect(xref).toBeDefined();
@@ -37,8 +37,8 @@ describe('Xref Model', () => {
                 source: 'manual',
                 xref: {
                     displayId: 'P04637',
-                    externalResource: { name: 'UniProt' }
-                }
+                    externalResource: { name: 'UniProt' },
+                },
             };
 
             expect(xref.geneId).toBe(999);
@@ -58,8 +58,8 @@ describe('Xref Model', () => {
                 source: 'automatic',
                 xref: {
                     displayId: 'ENSG00000139618',
-                    externalResource: { name: 'Ensembl Gene' }
-                }
+                    externalResource: { name: 'Ensembl Gene' },
+                },
             };
 
             expect(activeXref.status).toBe('active');
@@ -80,8 +80,8 @@ describe('Xref Model', () => {
                     source: 'automatic',
                     xref: {
                         displayId: 'test',
-                        externalResource: { name: 'NCBI Gene' }
-                    }
+                        externalResource: { name: 'NCBI Gene' },
+                    },
                 };
 
                 expect(xref.status).toBe(status);
@@ -101,13 +101,15 @@ describe('Xref Model', () => {
                 source: 'manual',
                 xref: {
                     displayId: 'OBSOLETE:123',
-                    externalResource: { name: 'NCBI Gene' }
-                }
+                    externalResource: { name: 'NCBI Gene' },
+                },
             };
 
             expect(withdrawnXref.status).toBe('withdrawn');
             expect(withdrawnXref.withdrawnDate).toEqual(new Date('2023-06-01'));
-            expect(withdrawnXref.creationDate.getTime()).toBeLessThan(withdrawnXref.withdrawnDate!.getTime());
+            expect(withdrawnXref.creationDate.getTime()).toBeLessThan(
+                withdrawnXref.withdrawnDate!.getTime()
+            );
         });
 
         it('should handle different withdrawn statuses', () => {
@@ -123,8 +125,8 @@ describe('Xref Model', () => {
                     source: 'manual',
                     xref: {
                         displayId: 'test',
-                        externalResource: { name: 'NCBI Gene' }
-                    }
+                        externalResource: { name: 'NCBI Gene' },
+                    },
                 };
 
                 expect(xref.status).toBe(status);
@@ -144,8 +146,8 @@ describe('Xref Model', () => {
                 source: 'automatic',
                 xref: {
                     displayId: 'AUTO:123',
-                    externalResource: { name: 'NCBI Gene' }
-                }
+                    externalResource: { name: 'NCBI Gene' },
+                },
             };
 
             expect(automaticXref.source).toBe('automatic');
@@ -161,8 +163,8 @@ describe('Xref Model', () => {
                 source: 'manual',
                 xref: {
                     displayId: 'MANUAL:123',
-                    externalResource: { name: 'UniProt' }
-                }
+                    externalResource: { name: 'UniProt' },
+                },
             };
 
             expect(manualXref.source).toBe('manual');
@@ -181,8 +183,8 @@ describe('Xref Model', () => {
                     source,
                     xref: {
                         displayId: 'test',
-                        externalResource: { name: 'NCBI Gene' }
-                    }
+                        externalResource: { name: 'NCBI Gene' },
+                    },
                 };
 
                 expect(xref.source).toBe(source);
@@ -202,8 +204,8 @@ describe('Xref Model', () => {
                 source: 'automatic',
                 xref: {
                     displayId: 'DATE:123',
-                    externalResource: { name: 'NCBI Gene' }
-                }
+                    externalResource: { name: 'NCBI Gene' },
+                },
             };
 
             expect(xref.creationDate).toEqual(creationDate);
@@ -225,8 +227,8 @@ describe('Xref Model', () => {
                 source: 'manual',
                 xref: {
                     displayId: 'WITHDRAWN:123',
-                    externalResource: { name: 'UniProt' }
-                }
+                    externalResource: { name: 'UniProt' },
+                },
             };
 
             expect(xref.withdrawnDate).toEqual(withdrawnDate);
@@ -244,8 +246,8 @@ describe('Xref Model', () => {
                 source: 'manual',
                 xref: {
                     displayId: 'CHRONO:123',
-                    externalResource: { name: 'NCBI Gene' }
-                }
+                    externalResource: { name: 'NCBI Gene' },
+                },
             };
 
             expect(xref.creationDate.getTime()).toBeLessThan(xref.withdrawnDate!.getTime());
@@ -256,7 +258,7 @@ describe('Xref Model', () => {
         it('should properly embed XrefData', () => {
             const xrefData: XrefData = {
                 displayId: 'EMBEDDED:123',
-                externalResource: { name: 'Phytozome v4_1' }
+                externalResource: { name: 'Phytozome v4_1' },
             };
 
             const xref: Xref = {
@@ -266,7 +268,7 @@ describe('Xref Model', () => {
                 withdrawnDate: null,
                 status: 'active',
                 source: 'automatic',
-                xref: xrefData
+                xref: xrefData,
             };
 
             expect(xref.xref).toBe(xrefData);
@@ -281,7 +283,7 @@ describe('Xref Model', () => {
                 'UniProt',
                 'PubMed',
                 'Phytozome v4_1',
-                'CBI sequence viewer'
+                'CBI sequence viewer',
             ] as const;
 
             resourceTypes.forEach((resourceName, index) => {
@@ -294,8 +296,8 @@ describe('Xref Model', () => {
                     source: 'automatic',
                     xref: {
                         displayId: `${resourceName}:${index}`,
-                        externalResource: { name: resourceName }
-                    }
+                        externalResource: { name: resourceName },
+                    },
                 };
 
                 expect(xref.xref.externalResource.name).toBe(resourceName);
@@ -314,8 +316,8 @@ describe('Xref Model', () => {
                 source: 'automatic',
                 xref: {
                     displayId: 'POSITIVE:123',
-                    externalResource: { name: 'NCBI Gene' }
-                }
+                    externalResource: { name: 'NCBI Gene' },
+                },
             };
 
             expect(xref.geneId).toBe(12345);
@@ -337,8 +339,8 @@ describe('Xref Model', () => {
                 source: 'automatic',
                 xref: {
                     displayId: 'LARGE:123',
-                    externalResource: { name: 'NCBI Gene' }
-                }
+                    externalResource: { name: 'NCBI Gene' },
+                },
             };
 
             expect(xref.geneId).toBe(largeGeneId);
@@ -358,8 +360,8 @@ describe('Xref Model', () => {
                     source: 'automatic',
                     xref: {
                         displayId: 'ARRAY1:123',
-                        externalResource: { name: 'NCBI Gene' }
-                    }
+                        externalResource: { name: 'NCBI Gene' },
+                    },
                 },
                 {
                     geneId: 2,
@@ -370,9 +372,9 @@ describe('Xref Model', () => {
                     source: 'manual',
                     xref: {
                         displayId: 'ARRAY2:456',
-                        externalResource: { name: 'UniProt' }
-                    }
-                }
+                        externalResource: { name: 'UniProt' },
+                    },
+                },
             ];
 
             expect(xrefArray).toHaveLength(2);
@@ -383,20 +385,32 @@ describe('Xref Model', () => {
         it('should filter by status', () => {
             const xrefArray: Xref[] = [
                 {
-                    geneId: 1, xrefId: 1, creationDate: new Date(), withdrawnDate: null,
-                    status: 'active', source: 'automatic',
-                    xref: { displayId: 'A1', externalResource: { name: 'NCBI Gene' } }
+                    geneId: 1,
+                    xrefId: 1,
+                    creationDate: new Date(),
+                    withdrawnDate: null,
+                    status: 'active',
+                    source: 'automatic',
+                    xref: { displayId: 'A1', externalResource: { name: 'NCBI Gene' } },
                 },
                 {
-                    geneId: 2, xrefId: 2, creationDate: new Date(), withdrawnDate: new Date(),
-                    status: 'withdrawn', source: 'manual',
-                    xref: { displayId: 'A2', externalResource: { name: 'UniProt' } }
+                    geneId: 2,
+                    xrefId: 2,
+                    creationDate: new Date(),
+                    withdrawnDate: new Date(),
+                    status: 'withdrawn',
+                    source: 'manual',
+                    xref: { displayId: 'A2', externalResource: { name: 'UniProt' } },
                 },
                 {
-                    geneId: 3, xrefId: 3, creationDate: new Date(), withdrawnDate: null,
-                    status: 'active', source: 'automatic',
-                    xref: { displayId: 'A3', externalResource: { name: 'PubMed' } }
-                }
+                    geneId: 3,
+                    xrefId: 3,
+                    creationDate: new Date(),
+                    withdrawnDate: null,
+                    status: 'active',
+                    source: 'automatic',
+                    xref: { displayId: 'A3', externalResource: { name: 'PubMed' } },
+                },
             ];
 
             const activeXrefs = xrefArray.filter(x => x.status === 'active');
@@ -409,15 +423,23 @@ describe('Xref Model', () => {
         it('should find by gene ID', () => {
             const xrefArray: Xref[] = [
                 {
-                    geneId: 100, xrefId: 1, creationDate: new Date(), withdrawnDate: null,
-                    status: 'active', source: 'automatic',
-                    xref: { displayId: 'FIND:100', externalResource: { name: 'NCBI Gene' } }
+                    geneId: 100,
+                    xrefId: 1,
+                    creationDate: new Date(),
+                    withdrawnDate: null,
+                    status: 'active',
+                    source: 'automatic',
+                    xref: { displayId: 'FIND:100', externalResource: { name: 'NCBI Gene' } },
                 },
                 {
-                    geneId: 200, xrefId: 2, creationDate: new Date(), withdrawnDate: null,
-                    status: 'active', source: 'automatic',
-                    xref: { displayId: 'FIND:200', externalResource: { name: 'UniProt' } }
-                }
+                    geneId: 200,
+                    xrefId: 2,
+                    creationDate: new Date(),
+                    withdrawnDate: null,
+                    status: 'active',
+                    source: 'automatic',
+                    xref: { displayId: 'FIND:200', externalResource: { name: 'UniProt' } },
+                },
             ];
 
             const found = xrefArray.find(x => x.geneId === 200);
@@ -438,8 +460,8 @@ describe('Xref Model', () => {
                 source: 'automatic',
                 xref: {
                     displayId: 'DESTRUCT:777',
-                    externalResource: { name: 'Ensembl Gene' }
-                }
+                    externalResource: { name: 'Ensembl Gene' },
+                },
             };
 
             const { geneId, xrefId, status, source, xref: xrefData } = xref;
@@ -461,11 +483,16 @@ describe('Xref Model', () => {
                 source: 'automatic',
                 xref: {
                     displayId: 'NESTED:999',
-                    externalResource: { name: 'PubMed' }
-                }
+                    externalResource: { name: 'PubMed' },
+                },
             };
 
-            const { xref: { displayId, externalResource: { name } } } = xref;
+            const {
+                xref: {
+                    displayId,
+                    externalResource: { name },
+                },
+            } = xref;
 
             expect(displayId).toBe('NESTED:999');
             expect(name).toBe('PubMed');
@@ -474,15 +501,23 @@ describe('Xref Model', () => {
         it('should work as object values', () => {
             const xrefMap: Record<string, Xref> = {
                 first: {
-                    geneId: 1, xrefId: 1, creationDate: new Date(), withdrawnDate: null,
-                    status: 'active', source: 'automatic',
-                    xref: { displayId: 'MAP:1', externalResource: { name: 'NCBI Gene' } }
+                    geneId: 1,
+                    xrefId: 1,
+                    creationDate: new Date(),
+                    withdrawnDate: null,
+                    status: 'active',
+                    source: 'automatic',
+                    xref: { displayId: 'MAP:1', externalResource: { name: 'NCBI Gene' } },
                 },
                 second: {
-                    geneId: 2, xrefId: 2, creationDate: new Date(), withdrawnDate: null,
-                    status: 'active', source: 'manual',
-                    xref: { displayId: 'MAP:2', externalResource: { name: 'UniProt' } }
-                }
+                    geneId: 2,
+                    xrefId: 2,
+                    creationDate: new Date(),
+                    withdrawnDate: null,
+                    status: 'active',
+                    source: 'manual',
+                    xref: { displayId: 'MAP:2', externalResource: { name: 'UniProt' } },
+                },
             };
 
             expect(xrefMap['first'].geneId).toBe(1);
@@ -494,7 +529,8 @@ describe('Xref Model', () => {
     describe('Type Guards and Validation', () => {
         it('should validate xref structure', () => {
             function isValidXref(obj: any): obj is Xref {
-                return obj &&
+                return (
+                    obj &&
                     typeof obj.geneId === 'number' &&
                     typeof obj.xrefId === 'number' &&
                     obj.creationDate instanceof Date &&
@@ -502,13 +538,18 @@ describe('Xref Model', () => {
                     typeof obj.status === 'string' &&
                     typeof obj.source === 'string' &&
                     obj.xref &&
-                    typeof obj.xref.displayId === 'string';
+                    typeof obj.xref.displayId === 'string'
+                );
             }
 
             const validXref: Xref = {
-                geneId: 123, xrefId: 456, creationDate: new Date(), withdrawnDate: null,
-                status: 'active', source: 'automatic',
-                xref: { displayId: 'VALID:123', externalResource: { name: 'NCBI Gene' } }
+                geneId: 123,
+                xrefId: 456,
+                creationDate: new Date(),
+                withdrawnDate: null,
+                status: 'active',
+                source: 'automatic',
+                xref: { displayId: 'VALID:123', externalResource: { name: 'NCBI Gene' } },
             };
 
             const invalidXref = {
@@ -518,7 +559,7 @@ describe('Xref Model', () => {
                 withdrawnDate: null,
                 status: 'active',
                 source: 'automatic',
-                xref: { displayId: 'INVALID:123', externalResource: { name: 'NCBI Gene' } }
+                xref: { displayId: 'INVALID:123', externalResource: { name: 'NCBI Gene' } },
             };
 
             expect(isValidXref(validXref)).toBe(true);
@@ -531,15 +572,23 @@ describe('Xref Model', () => {
             }
 
             const activeXref: Xref = {
-                geneId: 1, xrefId: 1, creationDate: new Date(), withdrawnDate: null,
-                status: 'active', source: 'automatic',
-                xref: { displayId: 'ACTIVE:1', externalResource: { name: 'NCBI Gene' } }
+                geneId: 1,
+                xrefId: 1,
+                creationDate: new Date(),
+                withdrawnDate: null,
+                status: 'active',
+                source: 'automatic',
+                xref: { displayId: 'ACTIVE:1', externalResource: { name: 'NCBI Gene' } },
             };
 
             const withdrawnXref: Xref = {
-                geneId: 2, xrefId: 2, creationDate: new Date(), withdrawnDate: new Date(),
-                status: 'withdrawn', source: 'manual',
-                xref: { displayId: 'WITHDRAWN:2', externalResource: { name: 'UniProt' } }
+                geneId: 2,
+                xrefId: 2,
+                creationDate: new Date(),
+                withdrawnDate: new Date(),
+                status: 'withdrawn',
+                source: 'manual',
+                xref: { displayId: 'WITHDRAWN:2', externalResource: { name: 'UniProt' } },
             };
 
             expect(isActiveXref(activeXref)).toBe(true);
@@ -558,8 +607,8 @@ describe('Xref Model', () => {
                 source: 'automatic',
                 xref: {
                     displayId: 'JSON:12345',
-                    externalResource: { name: 'NCBI Gene' }
-                }
+                    externalResource: { name: 'NCBI Gene' },
+                },
             };
 
             const jsonString = JSON.stringify(originalXref);
@@ -577,15 +626,23 @@ describe('Xref Model', () => {
         it('should handle arrays in JSON', () => {
             const xrefArray: Xref[] = [
                 {
-                    geneId: 1, xrefId: 10, creationDate: new Date('2023-01-01'),
-                    withdrawnDate: null, status: 'active', source: 'automatic',
-                    xref: { displayId: 'JSON-ARRAY:1', externalResource: { name: 'NCBI Gene' } }
+                    geneId: 1,
+                    xrefId: 10,
+                    creationDate: new Date('2023-01-01'),
+                    withdrawnDate: null,
+                    status: 'active',
+                    source: 'automatic',
+                    xref: { displayId: 'JSON-ARRAY:1', externalResource: { name: 'NCBI Gene' } },
                 },
                 {
-                    geneId: 2, xrefId: 20, creationDate: new Date('2023-02-01'),
-                    withdrawnDate: new Date('2023-06-01'), status: 'withdrawn', source: 'manual',
-                    xref: { displayId: 'JSON-ARRAY:2', externalResource: { name: 'UniProt' } }
-                }
+                    geneId: 2,
+                    xrefId: 20,
+                    creationDate: new Date('2023-02-01'),
+                    withdrawnDate: new Date('2023-06-01'),
+                    status: 'withdrawn',
+                    source: 'manual',
+                    xref: { displayId: 'JSON-ARRAY:2', externalResource: { name: 'UniProt' } },
+                },
             ];
 
             const jsonString = JSON.stringify(xrefArray);
@@ -609,8 +666,8 @@ describe('Xref Model', () => {
                 source: 'automatic',
                 xref: {
                     displayId: 'EDGE:1',
-                    externalResource: { name: 'NCBI Gene' }
-                }
+                    externalResource: { name: 'NCBI Gene' },
+                },
             };
 
             expect(edgeXref.geneId).toBe(1);
@@ -622,9 +679,13 @@ describe('Xref Model', () => {
 
             specialStatuses.forEach(status => {
                 const xref: Xref = {
-                    geneId: 1, xrefId: 1, creationDate: new Date(), withdrawnDate: null,
-                    status, source: 'automatic',
-                    xref: { displayId: 'SPECIAL:1', externalResource: { name: 'NCBI Gene' } }
+                    geneId: 1,
+                    xrefId: 1,
+                    creationDate: new Date(),
+                    withdrawnDate: null,
+                    status,
+                    source: 'automatic',
+                    xref: { displayId: 'SPECIAL:1', externalResource: { name: 'NCBI Gene' } },
                 };
 
                 expect(xref.status).toBe(status);
@@ -641,8 +702,8 @@ describe('Xref Model', () => {
                 source: '',
                 xref: {
                     displayId: 'EMPTY-SOURCE:1',
-                    externalResource: { name: 'NCBI Gene' }
-                }
+                    externalResource: { name: 'NCBI Gene' },
+                },
             };
 
             expect(xref.source).toBe('');
@@ -660,8 +721,8 @@ describe('Xref Model', () => {
                 source: 'automatic',
                 xref: {
                     displayId: 'TYPE-SAFE:12345',
-                    externalResource: { name: 'NCBI Gene' }
-                }
+                    externalResource: { name: 'NCBI Gene' },
+                },
             };
 
             // Verify all required fields are present and of correct type
@@ -681,9 +742,13 @@ describe('Xref Model', () => {
             }
 
             const xref: Xref = {
-                geneId: 999, xrefId: 777, creationDate: new Date(), withdrawnDate: null,
-                status: 'active', source: 'automatic',
-                xref: { displayId: 'FUNC:999', externalResource: { name: 'NCBI Gene' } }
+                geneId: 999,
+                xrefId: 777,
+                creationDate: new Date(),
+                withdrawnDate: null,
+                status: 'active',
+                source: 'automatic',
+                xref: { displayId: 'FUNC:999', externalResource: { name: 'NCBI Gene' } },
             };
 
             const result = processXref(xref);
@@ -701,8 +766,8 @@ describe('Xref Model', () => {
                     source: 'automatic',
                     xref: {
                         displayId,
-                        externalResource: { name: 'NCBI Gene' }
-                    }
+                        externalResource: { name: 'NCBI Gene' },
+                    },
                 };
             }
 

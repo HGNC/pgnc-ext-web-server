@@ -12,10 +12,7 @@ describe('BrowserHelpComponent', () => {
 
     beforeEach(async () => {
         await TestBed.configureTestingModule({
-            imports: [
-                BrowserHelpComponent,
-                FontAwesomeModule
-            ]
+            imports: [BrowserHelpComponent, FontAwesomeModule],
         }).compileComponents();
 
         fixture = TestBed.createComponent(BrowserHelpComponent);
@@ -129,10 +126,11 @@ describe('BrowserHelpComponent', () => {
             const paragraphs = debugElement.queryAll(By.css('p'));
             expect(paragraphs.length).toBeGreaterThan(0);
 
-            const hasRecommendations = paragraphs.some(p =>
-                p.nativeElement.textContent.toLowerCase().includes('recommend') ||
-                p.nativeElement.textContent.toLowerCase().includes('support') ||
-                p.nativeElement.textContent.toLowerCase().includes('compatible')
+            const hasRecommendations = paragraphs.some(
+                p =>
+                    p.nativeElement.textContent.toLowerCase().includes('recommend') ||
+                    p.nativeElement.textContent.toLowerCase().includes('support') ||
+                    p.nativeElement.textContent.toLowerCase().includes('compatible')
             );
             expect(hasRecommendations).toBe(true);
         });
@@ -252,8 +250,10 @@ describe('BrowserHelpComponent', () => {
         it('should not use inline styles', () => {
             const allElements = debugElement.queryAll(By.css('*'));
             allElements.forEach(element => {
-                if (!element.nativeElement.tagName.toLowerCase().startsWith('app-') &&
-                    !element.nativeElement.tagName.toLowerCase().startsWith('fa-')) {
+                if (
+                    !element.nativeElement.tagName.toLowerCase().startsWith('app-') &&
+                    !element.nativeElement.tagName.toLowerCase().startsWith('fa-')
+                ) {
                     expect(element.nativeElement.style.length).toBe(0);
                 }
             });
@@ -293,16 +293,57 @@ describe('BrowserHelpComponent', () => {
         it('should use standard HTML elements', () => {
             const allElements = debugElement.queryAll(By.css('*'));
             const standardTags = [
-                'div', 'h1', 'h2', 'h3', 'p', 'a', 'ul', 'li', 'strong', 'em',
-                'table', 'tr', 'th', 'td', 'tbody', 'thead', 'tfoot', 'ol', 'span',
-                'img', 'button', 'input', 'form', 'label', 'select', 'option',
-                'textarea', 'nav', 'section', 'article', 'aside', 'header', 'footer', 'main',
-                'svg', 'path', 'g', 'circle', 'rect', 'line', 'polygon', 'polyline'
+                'div',
+                'h1',
+                'h2',
+                'h3',
+                'p',
+                'a',
+                'ul',
+                'li',
+                'strong',
+                'em',
+                'table',
+                'tr',
+                'th',
+                'td',
+                'tbody',
+                'thead',
+                'tfoot',
+                'ol',
+                'span',
+                'img',
+                'button',
+                'input',
+                'form',
+                'label',
+                'select',
+                'option',
+                'textarea',
+                'nav',
+                'section',
+                'article',
+                'aside',
+                'header',
+                'footer',
+                'main',
+                'svg',
+                'path',
+                'g',
+                'circle',
+                'rect',
+                'line',
+                'polygon',
+                'polyline',
             ];
 
             allElements.forEach(element => {
                 const tagName = element.nativeElement.tagName.toLowerCase();
-                if (!tagName.startsWith('app-') && !tagName.startsWith('fa-') && !tagName.startsWith('router-')) {
+                if (
+                    !tagName.startsWith('app-') &&
+                    !tagName.startsWith('fa-') &&
+                    !tagName.startsWith('router-')
+                ) {
                     expect(standardTags).toContain(tagName);
                 }
             });
@@ -355,18 +396,22 @@ describe('BrowserHelpComponent', () => {
             const allContent = debugElement.nativeElement.textContent.toLowerCase();
 
             // Should mention JavaScript or scripting
-            expect(allContent.includes('javascript') ||
-                allContent.includes('script') ||
-                allContent.includes('js')).toBe(true);
+            expect(
+                allContent.includes('javascript') ||
+                    allContent.includes('script') ||
+                    allContent.includes('js')
+            ).toBe(true);
         });
 
         it('should provide browser version information', () => {
             const allContent = debugElement.nativeElement.textContent.toLowerCase();
 
             // Should mention versions or updates
-            expect(allContent.includes('version') ||
-                allContent.includes('update') ||
-                allContent.includes('latest')).toBe(true);
+            expect(
+                allContent.includes('version') ||
+                    allContent.includes('update') ||
+                    allContent.includes('latest')
+            ).toBe(true);
         });
 
         it('should address common browser issues', () => {
@@ -395,7 +440,9 @@ describe('BrowserHelpComponent', () => {
                 let depth = 0;
 
                 while (element && depth < 3) {
-                    const textContent = element.textContent?.replace(icon.nativeElement.textContent || '', '').trim();
+                    const textContent = element.textContent
+                        ?.replace(icon.nativeElement.textContent || '', '')
+                        .trim();
                     if (textContent && textContent.length > 0) {
                         hasTextContent = true;
                         break;
@@ -407,8 +454,9 @@ describe('BrowserHelpComponent', () => {
                 // If no text content found, check if it has siblings with text
                 if (!hasTextContent && parent.parentElement) {
                     const siblings = Array.from(parent.parentElement.children);
-                    const siblingHasText = siblings.some(sibling =>
-                        sibling !== parent && (sibling as HTMLElement).textContent?.trim()
+                    const siblingHasText = siblings.some(
+                        sibling =>
+                            sibling !== parent && (sibling as HTMLElement).textContent?.trim()
                     );
                     hasTextContent = siblingHasText;
                 }

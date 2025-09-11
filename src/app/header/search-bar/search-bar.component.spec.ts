@@ -14,15 +14,15 @@ const { spyOn } = jest;
 // Mock component for routing tests
 @Component({
     template: '<div>Mock Search Results Component</div>',
-    standalone: true
+    standalone: true,
 })
-class MockSearchResultsComponent { }
+class MockSearchResultsComponent {}
 
 @Component({
     template: '<div>Mock Help Component</div>',
-    standalone: true
+    standalone: true,
 })
-class MockHelpComponent { }
+class MockHelpComponent {}
 
 describe('SearchBarComponent', () => {
     let component: SearchBarComponent;
@@ -38,9 +38,9 @@ describe('SearchBarComponent', () => {
                 FontAwesomeModule,
                 RouterTestingModule.withRoutes([
                     { path: 'search', component: MockSearchResultsComponent },
-                    { path: 'help/search', component: MockHelpComponent }
-                ])
-            ]
+                    { path: 'help/search', component: MockHelpComponent },
+                ]),
+            ],
         }).compileComponents();
 
         fixture = TestBed.createComponent(SearchBarComponent);
@@ -163,7 +163,9 @@ describe('SearchBarComponent', () => {
         it('should render help link with correct route', () => {
             const helpLink = debugElement.query(By.css('.help a'));
             expect(helpLink).toBeTruthy();
-            expect(helpLink.nativeElement.getAttribute('ng-reflect-router-link')).toBe('/help/search');
+            expect(helpLink.nativeElement.getAttribute('ng-reflect-router-link')).toBe(
+                '/help/search'
+            );
         });
 
         it('should have help title attribute', () => {
@@ -257,7 +259,7 @@ describe('SearchBarComponent', () => {
             component.search();
 
             expect(router.navigate).toHaveBeenCalledWith(['/search'], {
-                queryParams: { q: 'test gene' }
+                queryParams: { q: 'test gene' },
             });
         });
 
@@ -295,7 +297,7 @@ describe('SearchBarComponent', () => {
             component.search();
 
             expect(router.navigate).toHaveBeenCalledWith(['/search'], {
-                queryParams: { q: '   ' }
+                queryParams: { q: '   ' },
             });
         });
     });
@@ -370,7 +372,9 @@ describe('SearchBarComponent', () => {
 
         it('should navigate to help search page from help link', () => {
             const helpLink = debugElement.query(By.css('.help a'));
-            expect(helpLink.nativeElement.getAttribute('ng-reflect-router-link')).toBe('/help/search');
+            expect(helpLink.nativeElement.getAttribute('ng-reflect-router-link')).toBe(
+                '/help/search'
+            );
         });
 
         it('should use programmatic navigation for search', () => {
@@ -380,7 +384,7 @@ describe('SearchBarComponent', () => {
             component.search();
 
             expect(router.navigate).toHaveBeenCalledWith(['/search'], {
-                queryParams: { q: 'test' }
+                queryParams: { q: 'test' },
             });
         });
 
@@ -474,7 +478,7 @@ describe('SearchBarComponent', () => {
             component.search();
 
             expect(router.navigate).toHaveBeenCalledWith(['/search'], {
-                queryParams: { q: specialQuery }
+                queryParams: { q: specialQuery },
             });
         });
 
@@ -486,7 +490,7 @@ describe('SearchBarComponent', () => {
             component.search();
 
             expect(router.navigate).toHaveBeenCalledWith(['/search'], {
-                queryParams: { q: longQuery }
+                queryParams: { q: longQuery },
             });
         });
 
@@ -546,7 +550,7 @@ describe('SearchBarComponent', () => {
             component.search();
 
             expect(router.navigate).toHaveBeenCalledWith(['/search'], {
-                queryParams: { q: '  test query  ' }
+                queryParams: { q: '  test query  ' },
             });
         });
 
@@ -557,7 +561,7 @@ describe('SearchBarComponent', () => {
             component.search();
 
             expect(router.navigate).toHaveBeenCalledWith(['/search'], {
-                queryParams: { q: '12345' }
+                queryParams: { q: '12345' },
             });
         });
 
@@ -568,7 +572,7 @@ describe('SearchBarComponent', () => {
             component.search();
 
             expect(router.navigate).toHaveBeenCalledWith(['/search'], {
-                queryParams: { q: 'BRCA1_001' }
+                queryParams: { q: 'BRCA1_001' },
             });
         });
 
@@ -579,7 +583,7 @@ describe('SearchBarComponent', () => {
             component.search();
 
             expect(router.navigate).toHaveBeenCalledWith(['/search'], {
-                queryParams: { q: 'MixedCaseQuery' }
+                queryParams: { q: 'MixedCaseQuery' },
             });
         });
     });
@@ -659,7 +663,11 @@ describe('SearchBarComponent', () => {
 
             allElements.forEach(element => {
                 const tagName = element.nativeElement.tagName.toLowerCase();
-                if (!tagName.startsWith('app-') && !tagName.startsWith('fa-') && tagName !== 'ng-container') {
+                if (
+                    !tagName.startsWith('app-') &&
+                    !tagName.startsWith('fa-') &&
+                    tagName !== 'ng-container'
+                ) {
                     expect(standardTags).toContain(tagName);
                 }
             });
@@ -698,8 +706,10 @@ describe('SearchBarComponent', () => {
         it('should not use inline styles', () => {
             const allElements = debugElement.queryAll(By.css('*'));
             allElements.forEach(element => {
-                if (!element.nativeElement.tagName.toLowerCase().startsWith('app-') &&
-                    !element.nativeElement.tagName.toLowerCase().startsWith('fa-')) {
+                if (
+                    !element.nativeElement.tagName.toLowerCase().startsWith('app-') &&
+                    !element.nativeElement.tagName.toLowerCase().startsWith('fa-')
+                ) {
                     expect(element.nativeElement.style.length).toBe(0);
                 }
             });
@@ -743,13 +753,15 @@ describe('SearchBarComponent', () => {
             button.nativeElement.click();
 
             expect(router.navigate).toHaveBeenCalledWith(['/search'], {
-                queryParams: { q: 'BRCA1' }
+                queryParams: { q: 'BRCA1' },
             });
         });
 
         it('should support help workflow', () => {
             const helpLink = debugElement.query(By.css('.help a'));
-            expect(helpLink.nativeElement.getAttribute('ng-reflect-router-link')).toBe('/help/search');
+            expect(helpLink.nativeElement.getAttribute('ng-reflect-router-link')).toBe(
+                '/help/search'
+            );
         });
 
         it('should maintain state during user interaction', () => {

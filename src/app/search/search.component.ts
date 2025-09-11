@@ -20,7 +20,7 @@ export interface DisplayItem {
     pure: true,
 })
 export class SafeHtmlPipe implements PipeTransform {
-    constructor(private sanitizer: DomSanitizer) { }
+    constructor(private sanitizer: DomSanitizer) {}
 
     transform(value: string): SafeHtml {
         // First, handle <em> tags with existing classes by adding "match" class
@@ -86,7 +86,7 @@ export class SearchComponent implements OnInit, OnDestroy {
         public searchService: SearchService,
         private router: Router,
         private route: ActivatedRoute
-    ) { }
+    ) {}
 
     ngOnInit() {
         // Subscribe to route query params changes

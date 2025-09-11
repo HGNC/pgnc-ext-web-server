@@ -11,7 +11,7 @@ describe('LegalComponent', () => {
 
     beforeEach(async () => {
         await TestBed.configureTestingModule({
-            imports: [LegalComponent]
+            imports: [LegalComponent],
         }).compileComponents();
 
         fixture = TestBed.createComponent(LegalComponent);
@@ -273,9 +273,30 @@ describe('LegalComponent', () => {
             allElements.forEach(element => {
                 const tagName = element.nativeElement.tagName.toLowerCase();
                 if (!tagName.startsWith('app-')) {
-                    expect(['div', 'p', 'a', 'span', 'h1', 'h2', 'h3', 'ul', 'li', 'section', 'header', 'footer', 'article', 'nav', 'img', 'small'].includes(tagName)).toBe(true);
+                    expect(
+                        [
+                            'div',
+                            'p',
+                            'a',
+                            'span',
+                            'h1',
+                            'h2',
+                            'h3',
+                            'ul',
+                            'li',
+                            'section',
+                            'header',
+                            'footer',
+                            'article',
+                            'nav',
+                            'img',
+                            'small',
+                        ].includes(tagName)
+                    ).toBe(true);
                 } else {
-                    expect(['app-associates', 'app-licence', 'app-legal'].includes(tagName)).toBe(true);
+                    expect(['app-associates', 'app-licence', 'app-legal'].includes(tagName)).toBe(
+                        true
+                    );
                 }
             });
         });

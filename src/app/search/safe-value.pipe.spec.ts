@@ -64,7 +64,7 @@ describe('SafeValuePipe', () => {
             const input = {
                 key1: 'value1',
                 key2: 'value2',
-                key3: 'value3'
+                key3: 'value3',
             };
             const result = pipe.transform(input);
 
@@ -73,7 +73,7 @@ describe('SafeValuePipe', () => {
 
         it('should handle single property object', () => {
             const input = {
-                onlyKey: 'onlyValue'
+                onlyKey: 'onlyValue',
             };
             const result = pipe.transform(input);
 
@@ -91,7 +91,7 @@ describe('SafeValuePipe', () => {
             const input = {
                 key1: '',
                 key2: 'value2',
-                key3: ''
+                key3: '',
             };
             const result = pipe.transform(input);
 
@@ -102,7 +102,7 @@ describe('SafeValuePipe', () => {
             const input = {
                 symbols: '!@#$%^&*()',
                 unicode: 'café naïve',
-                html: '<em>emphasis</em>'
+                html: '<em>emphasis</em>',
             };
             const result = pipe.transform(input);
 
@@ -113,7 +113,7 @@ describe('SafeValuePipe', () => {
             const input = {
                 number1: '123',
                 number2: '456.789',
-                scientific: '1.23e-4'
+                scientific: '1.23e-4',
             };
             const result = pipe.transform(input);
 
@@ -125,7 +125,7 @@ describe('SafeValuePipe', () => {
                 a: 'first',
                 b: 'second',
                 c: 'third',
-                d: 'fourth'
+                d: 'fourth',
             };
             const result = pipe.transform(input);
 
@@ -138,7 +138,7 @@ describe('SafeValuePipe', () => {
             const input = {
                 simple: 'value',
                 withSpaces: 'value with spaces',
-                withCommas: 'value, with, commas'
+                withCommas: 'value, with, commas',
             };
             const result = pipe.transform(input);
 
@@ -148,7 +148,7 @@ describe('SafeValuePipe', () => {
         it('should handle object with undefined values', () => {
             const input = {
                 defined: 'value',
-                undefined: undefined as any
+                undefined: undefined as any,
             };
             const result = pipe.transform(input);
 
@@ -158,7 +158,7 @@ describe('SafeValuePipe', () => {
         it('should handle object with null values', () => {
             const input = {
                 defined: 'value',
-                null: null as any
+                null: null as any,
             };
             const result = pipe.transform(input);
 
@@ -170,7 +170,7 @@ describe('SafeValuePipe', () => {
                 string: 'text',
                 number: '123',
                 boolean: 'true',
-                array: '[1,2,3]'
+                array: '[1,2,3]',
             };
             const result = pipe.transform(input);
 
@@ -247,9 +247,9 @@ describe('SafeValuePipe', () => {
     describe('Real-world Use Cases', () => {
         it('should handle gene display data', () => {
             const geneMatches = {
-                'gene_symbol': 'BRCA1',
-                'gene_name': 'breast cancer 1',
-                'aliases': 'BRCC1, FANCS'
+                gene_symbol: 'BRCA1',
+                gene_name: 'breast cancer 1',
+                aliases: 'BRCC1, FANCS',
             };
             const result = pipe.transform(geneMatches);
 
@@ -258,8 +258,8 @@ describe('SafeValuePipe', () => {
 
         it('should handle search match highlights', () => {
             const searchMatches = {
-                'symbol_match': '<em>BRCA</em>1',
-                'name_match': 'breast <em>cancer</em> 1'
+                symbol_match: '<em>BRCA</em>1',
+                name_match: 'breast <em>cancer</em> 1',
             };
             const result = pipe.transform(searchMatches);
 
@@ -268,9 +268,9 @@ describe('SafeValuePipe', () => {
 
         it('should handle metadata fields', () => {
             const metadata = {
-                'status': 'Approved',
-                'location': '17q21.31',
-                'type': 'protein-coding gene'
+                status: 'Approved',
+                location: '17q21.31',
+                type: 'protein-coding gene',
             };
             const result = pipe.transform(metadata);
 
@@ -279,9 +279,9 @@ describe('SafeValuePipe', () => {
 
         it('should handle cross-references', () => {
             const crossRefs = {
-                'Ensembl': 'ENSG00000012048',
-                'NCBI': '672',
-                'UniProt': 'P38398'
+                Ensembl: 'ENSG00000012048',
+                NCBI: '672',
+                UniProt: 'P38398',
             };
             const result = pipe.transform(crossRefs);
 

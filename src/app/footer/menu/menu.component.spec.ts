@@ -9,9 +9,9 @@ import { MenuComponent } from './menu.component';
 // Mock components for routing tests
 @Component({
     template: '',
-    standalone: true
+    standalone: true,
 })
-class MockComponent { }
+class MockComponent {}
 
 describe('MenuComponent', () => {
     let component: MenuComponent;
@@ -21,10 +21,7 @@ describe('MenuComponent', () => {
 
     beforeEach(async () => {
         await TestBed.configureTestingModule({
-            imports: [
-                MenuComponent,
-                FontAwesomeModule
-            ],
+            imports: [MenuComponent, FontAwesomeModule],
             providers: [
                 provideRouter([
                     { path: '', component: MockComponent },
@@ -33,9 +30,9 @@ describe('MenuComponent', () => {
                     { path: 'license', component: MockComponent },
                     { path: 'publications', component: MockComponent },
                     { path: 'help', component: MockComponent },
-                    { path: 'contact', component: MockComponent }
-                ])
-            ]
+                    { path: 'contact', component: MockComponent },
+                ]),
+            ],
         }).compileComponents();
 
         fixture = TestBed.createComponent(MenuComponent);
@@ -209,7 +206,9 @@ describe('MenuComponent', () => {
         it('should have GitHub download link', () => {
             const githubLink = debugElement.query(By.css('a[href*="github.com"]'));
             expect(githubLink).toBeTruthy();
-            expect(githubLink.nativeElement.href).toContain('PGNC-Plant-Gene-Nomenclature-Committee/Downloads');
+            expect(githubLink.nativeElement.href).toContain(
+                'PGNC-Plant-Gene-Nomenclature-Committee/Downloads'
+            );
         });
     });
 
@@ -339,7 +338,8 @@ describe('MenuComponent', () => {
             const links = debugElement.queryAll(By.css('a'));
             links.forEach(link => {
                 const text = link.nativeElement.textContent.trim();
-                if (text) { // Some links might be icon-only
+                if (text) {
+                    // Some links might be icon-only
                     expect(text.length).toBeGreaterThan(0);
                 }
             });
@@ -382,9 +382,10 @@ describe('MenuComponent', () => {
     describe('Router Integration', () => {
         it('should have router links', () => {
             const routerLinks = debugElement.queryAll(By.css('a'));
-            const hasRouterLinks = routerLinks.some(link =>
-                link.nativeElement.hasAttribute('ng-reflect-router-link') ||
-                link.attributes['routerLink']
+            const hasRouterLinks = routerLinks.some(
+                link =>
+                    link.nativeElement.hasAttribute('ng-reflect-router-link') ||
+                    link.attributes['routerLink']
             );
             expect(hasRouterLinks || routerLinks.length > 0).toBe(true);
         });

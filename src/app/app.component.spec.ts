@@ -1,8 +1,8 @@
 import { Component, DebugElement, NO_ERRORS_SCHEMA } from '@angular/core';
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 import { By } from '@angular/platform-browser';
-import { ActivatedRoute, NavigationEnd, Router, provideRouter } from '@angular/router';
-import { Subject, of } from 'rxjs';
+import { ActivatedRoute, NavigationEnd, provideRouter, Router } from '@angular/router';
+import { of, Subject } from 'rxjs';
 
 import { AppComponent } from './app.component';
 
@@ -10,23 +10,23 @@ import { AppComponent } from './app.component';
 @Component({
     selector: 'app-header',
     template: '<div class="mock-header">Mock Header</div>',
-    standalone: true
+    standalone: true,
 })
-class MockHeaderComponent { }
+class MockHeaderComponent {}
 
 @Component({
     selector: 'app-footer',
     template: '<div class="mock-footer">Mock Footer</div>',
-    standalone: true
+    standalone: true,
 })
-class MockFooterComponent { }
+class MockFooterComponent {}
 
 @Component({
     selector: 'router-outlet',
     template: '<div class="mock-router-outlet">Mock Router Outlet</div>',
-    standalone: true
+    standalone: true,
 })
-class MockRouterOutletComponent { }
+class MockRouterOutletComponent {}
 
 describe('AppComponent', () => {
     let component: AppComponent;
@@ -41,7 +41,9 @@ describe('AppComponent', () => {
         const routerSpy = {
             events: navigationSubject.asObservable(),
             url: '/',
-            setUrl: function (newUrl: string) { this.url = newUrl; }
+            setUrl: function (newUrl: string) {
+                this.url = newUrl;
+            },
         };
 
         await TestBed.configureTestingModule({
@@ -54,11 +56,11 @@ describe('AppComponent', () => {
                     useValue: {
                         snapshot: { params: {}, queryParams: {} },
                         params: of({}),
-                        queryParams: of({})
-                    }
-                }
+                        queryParams: of({}),
+                    },
+                },
             ],
-            schemas: [NO_ERRORS_SCHEMA]
+            schemas: [NO_ERRORS_SCHEMA],
         })
             .overrideComponent(AppComponent, {
                 set: {
@@ -76,8 +78,8 @@ describe('AppComponent', () => {
                         <router-outlet></router-outlet>
                         <app-footer></app-footer>
                     }
-                `
-                }
+                `,
+                },
             })
             .compileComponents();
 
@@ -285,7 +287,13 @@ describe('AppComponent', () => {
         });
 
         it('should handle various non-home routes consistently', () => {
-            const nonHomeRoutes = ['/about', '/contact', '/search', '/help', '/data/gene-symbol-report/symbol/BRCA1'];
+            const nonHomeRoutes = [
+                '/about',
+                '/contact',
+                '/search',
+                '/help',
+                '/data/gene-symbol-report/symbol/BRCA1',
+            ];
 
             nonHomeRoutes.forEach(route => {
                 component.currentRoute = route;

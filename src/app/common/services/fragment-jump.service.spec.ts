@@ -14,14 +14,14 @@ describe('FragmentJumpService', () => {
         fragmentSubject = new BehaviorSubject<string | null>(null);
 
         mockActivatedRoute = {
-            fragment: fragmentSubject.asObservable()
+            fragment: fragmentSubject.asObservable(),
         };
 
         TestBed.configureTestingModule({
             providers: [
                 FragmentJumpService,
-                { provide: ActivatedRoute, useValue: mockActivatedRoute }
-            ]
+                { provide: ActivatedRoute, useValue: mockActivatedRoute },
+            ],
         });
 
         service = TestBed.inject(FragmentJumpService);
@@ -193,7 +193,7 @@ describe('FragmentJumpService', () => {
             expect(result).toBe(mockActivatedRoute.fragment);
         });
 
-        it('should emit fragment changes', (done) => {
+        it('should emit fragment changes', done => {
             const result = service.subscribeToFragmentChanges();
 
             result.subscribe(fragment => {
@@ -206,13 +206,14 @@ describe('FragmentJumpService', () => {
             fragmentSubject.next('test-fragment');
         });
 
-        it('should emit null when no fragment', (done) => {
+        it('should emit null when no fragment', done => {
             const result = service.subscribeToFragmentChanges();
             let callCount = 0;
 
             result.subscribe(fragment => {
                 callCount++;
-                if (callCount === 2) { // Skip the initial emission, wait for our manual emission
+                if (callCount === 2) {
+                    // Skip the initial emission, wait for our manual emission
                     expect(fragment).toBeNull();
                     done();
                 }

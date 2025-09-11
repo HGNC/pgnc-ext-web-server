@@ -5,8 +5,8 @@ import { faQuestionCircle } from '@fortawesome/free-solid-svg-icons';
 
 import { GeneLocation } from '../gene-location.model';
 import { GeneName } from '../gene-name.model';
-import { GeneSymbolReport } from '../gene-symbol-report.model';
 import { GeneSymbol } from '../gene-symbol.model';
+import { GeneSymbolReport } from '../gene-symbol-report.model';
 import { Xref } from '../xref-resources/xref-resources.model';
 
 @Component({

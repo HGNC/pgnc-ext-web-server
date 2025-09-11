@@ -3,7 +3,7 @@ import { DebugElement } from '@angular/core';
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 import { FormsModule } from '@angular/forms';
 import { By } from '@angular/platform-browser';
-import { ActivatedRoute, Router, convertToParamMap, provideRouter } from '@angular/router';
+import { ActivatedRoute, convertToParamMap, provideRouter, Router } from '@angular/router';
 import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
 import { BehaviorSubject, of, throwError } from 'rxjs';
 
@@ -29,9 +29,9 @@ describe('SearchComponent', () => {
                 display: [
                     {
                         label: 'PGNC ID',
-                        value: 'PGNC:12345'
-                    }
-                ]
+                        value: 'PGNC:12345',
+                    },
+                ],
             },
             {
                 symbol: 'TEST2',
@@ -41,16 +41,16 @@ describe('SearchComponent', () => {
                     {
                         label: 'Matches',
                         value: {
-                            'gene_symbol': '<em>TEST2</em>',
-                            'gene_name': 'Test <em>Gene</em> 2'
-                        }
-                    }
-                ]
-            }
+                            gene_symbol: '<em>TEST2</em>',
+                            gene_name: 'Test <em>Gene</em> 2',
+                        },
+                    },
+                ],
+            },
         ],
         total: 2,
         start: 1,
-        rows: 10
+        rows: 10,
     };
 
     beforeEach(async () => {
@@ -60,7 +60,7 @@ describe('SearchComponent', () => {
             browse: jest.fn().mockReturnValue(of(mockSearchResponse)),
             loading$: loadingSubject.asObservable(),
             clearCache: jest.fn(),
-            clearCacheForQuery: jest.fn()
+            clearCacheForQuery: jest.fn(),
         } as any;
 
         mockRouter = {
@@ -68,7 +68,7 @@ describe('SearchComponent', () => {
             url: '/search',
             events: of(),
             createUrlTree: jest.fn().mockReturnValue({ toString: () => '/mock-url' }),
-            serializeUrl: jest.fn().mockReturnValue('/mock-url')
+            serializeUrl: jest.fn().mockReturnValue('/mock-url'),
         } as any;
 
         mockActivatedRoute = {
@@ -83,7 +83,7 @@ describe('SearchComponent', () => {
             children: [],
             pathFromRoot: [],
             paramMap: of(convertToParamMap({})),
-            queryParamMap: of(convertToParamMap({ q: 'test' }))
+            queryParamMap: of(convertToParamMap({ q: 'test' })),
         };
 
         await TestBed.configureTestingModule({
@@ -94,14 +94,14 @@ describe('SearchComponent', () => {
                 FontAwesomeModule,
                 NotFoundComponent,
                 SafeValuePipe,
-                SafeHtmlPipe
+                SafeHtmlPipe,
             ],
             providers: [
                 provideRouter([]),
                 { provide: SearchService, useValue: mockSearchService },
                 { provide: Router, useValue: mockRouter },
-                { provide: ActivatedRoute, useValue: mockActivatedRoute }
-            ]
+                { provide: ActivatedRoute, useValue: mockActivatedRoute },
+            ],
         }).compileComponents();
 
         fixture = TestBed.createComponent(SearchComponent);
@@ -369,7 +369,9 @@ describe('SearchComponent', () => {
 
             const loadingIndicator = debugElement.query(By.css('.loading-indicator'));
             expect(loadingIndicator).toBeTruthy();
-            expect(loadingIndicator.nativeElement.textContent.trim()).toContain('Loading results...');
+            expect(loadingIndicator.nativeElement.textContent.trim()).toContain(
+                'Loading results...'
+            );
         });
 
         it('should render error message when error exists', () => {
@@ -430,7 +432,9 @@ describe('SearchComponent', () => {
 
             const resultStats = debugElement.query(By.css('.result-stats'));
             expect(resultStats).toBeTruthy();
-            expect(resultStats.nativeElement.textContent.trim()).toContain('Showing 11 - 20 of 25 results');
+            expect(resultStats.nativeElement.textContent.trim()).toContain(
+                'Showing 11 - 20 of 25 results'
+            );
         });
     });
 
@@ -454,9 +458,9 @@ describe('SearchComponent', () => {
         });
 
         it('should handle next button click', () => {
-            const nextButton = debugElement.queryAll(By.css('button')).find(btn =>
-                btn.nativeElement.textContent.trim() === 'Next'
-            );
+            const nextButton = debugElement
+                .queryAll(By.css('button'))
+                .find(btn => btn.nativeElement.textContent.trim() === 'Next');
             nextButton!.nativeElement.click();
 
             expect(component.currentPage).toBe(2);
@@ -482,9 +486,9 @@ describe('SearchComponent', () => {
             component.currentPage = 3; // Last page with 25 total, 10 per page
             fixture.detectChanges();
 
-            const nextButton = debugElement.queryAll(By.css('button')).find(btn =>
-                btn.nativeElement.textContent.trim() === 'Next'
-            );
+            const nextButton = debugElement
+                .queryAll(By.css('button'))
+                .find(btn => btn.nativeElement.textContent.trim() === 'Next');
             expect(nextButton!.nativeElement.disabled).toBe(true);
         });
 
@@ -515,7 +519,9 @@ describe('SearchComponent', () => {
             const linkElements = debugElement.queryAll(By.css('a[ng-reflect-router-link]'));
             expect(linkElements.length).toBeGreaterThan(0);
             if (linkElements.length > 0) {
-                expect(linkElements[0].nativeElement.getAttribute('ng-reflect-router-link')).toBe('/gene/TEST1');
+                expect(linkElements[0].nativeElement.getAttribute('ng-reflect-router-link')).toBe(
+                    '/gene/TEST1'
+                );
             }
         });
 
@@ -580,7 +586,7 @@ describe('SearchComponent', () => {
                 genes: undefined,
                 total: 0,
                 start: 1,
-                rows: 10
+                rows: 10,
             };
 
             mockSearchService.browse.mockReturnValue(of(responseWithoutGenes));
@@ -597,9 +603,9 @@ describe('SearchComponent', () => {
                 display: [
                     {
                         label: 'Test',
-                        value: '' as any
-                    }
-                ]
+                        value: '' as any,
+                    },
+                ],
             };
 
             component.results = [geneWithoutValue];
@@ -644,9 +650,9 @@ describe('SearchComponent', () => {
                 display: [
                     {
                         label: 'PGNC ID',
-                        value: `PGNC:${i}`
-                    }
-                ]
+                        value: `PGNC:${i}`,
+                    },
+                ],
             }));
 
             component.results = largeResults;
@@ -704,7 +710,20 @@ describe('SearchComponent', () => {
     describe('Browser Compatibility', () => {
         it('should use standard HTML elements', () => {
             const allElements = debugElement.queryAll(By.css('*'));
-            const standardTags = ['div', 'span', 'button', 'select', 'option', 'table', 'tr', 'td', 'a', 'h3', 'strong', 'em'];
+            const standardTags = [
+                'div',
+                'span',
+                'button',
+                'select',
+                'option',
+                'table',
+                'tr',
+                'td',
+                'a',
+                'h3',
+                'strong',
+                'em',
+            ];
 
             allElements.forEach(element => {
                 const tagName = element.nativeElement.tagName.toLowerCase();
