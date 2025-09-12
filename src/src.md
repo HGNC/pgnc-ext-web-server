@@ -4,6 +4,8 @@
 
 The Src directory serves as the root source code directory for the PGNC (Plant Gene Nomenclature Committee) Angular application. This directory contains all application source code, configuration files, assets, and entry points necessary for building and running the comprehensive plant gene nomenclature web platform. The architecture follows modern Angular best practices with standalone components, server-side rendering support, and optimized build configurations.
 
+> See the canonical Angular docs hub at [../angular.md](../angular.md). This file focuses on `src/` specifics and links to the hub to avoid duplication.
+
 ## Directory Architecture
 
 ### Core Application Structure
