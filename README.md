@@ -17,9 +17,9 @@ The comprehensive documentation includes:
 
 ## Prerequisites
 
-- Node.js (LTS version)
-- npm or yarn
-- Angular CLI
+- Node.js 20 LTS (matching the Docker runtime)
+- npm 10+ (bundled with Node 20)
+- Angular CLI 19.1.3 (`npm install -g @angular/cli@19.1.3`)
 
 ## Installation
 
@@ -29,11 +29,34 @@ npm install
 
 ## Development server
 
-Run `ng serve` for a dev server. Navigate to `http://localhost:4200/`. The application will automatically reload if you change any of the source files.
+```bash
+npm start
+```
+
+Navigate to `http://localhost:4200/`. The CLI watches the production configuration by default; update `proxy.conf.json` if you need to point `/api/**` at a different backend.
 
 ## Build
 
-Run `ng build` to build the project. The build artifacts will be stored in the `dist/` directory.
+```bash
+npm run build
+```
+
+Artifacts land in `dist/pgnc` with SSR-ready server output. Start the rendered bundle locally with:
+
+```bash
+npm run serve:ssr:pgnc
+```
+
+The server listens on `http://localhost:4000/`.
+
+## Testing & Linting
+
+```bash
+npm test            # Run the Jest suite once
+npm run test:watch  # Watch tests during development
+npm run test:coverage
+npm run lint        # ESLint + Prettier checks
+```
 
 ## Contributing
 

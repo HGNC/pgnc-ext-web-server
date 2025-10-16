@@ -19,36 +19,36 @@ The Angular directory contains the complete Angular frontend application for the
 ```
 angular/
 ├── src/                                    # Application source code
-│   ├── app/                                # Angular application modules
+│   ├── app/                                # Feature areas and routing
 │   ├── assets/                             # Static application assets
-│   ├── environments/                       # Environment configurations
-│   ├── index.html                          # Main HTML template
+│   ├── environments/                       # Environment configuration templates
 │   ├── main.ts                             # Client-side bootstrap
 │   ├── main.server.ts                      # Server-side bootstrap
 │   ├── server.ts                           # Express server configuration
 │   ├── pgnc-styles.css                     # Global application styles
 │   └── setup.jest.ts                       # Jest testing setup
-├── dist/                                   # Built application output
-├── coverage/                               # Test coverage reports
-├── node_modules/                           # Node.js dependencies
-├── .angular/                               # Angular CLI cache
-├── .git/                                   # Git version control
-├── .vscode/                                # VS Code workspace settings
-├── package.json                            # Node.js project configuration
-├── angular.json                            # Angular CLI configuration
-├── tsconfig.json                           # TypeScript configuration
-├── tsconfig.app.json                       # Application TypeScript config
-├── tsconfig.spec.json                      # Testing TypeScript config
-├── eslint.config.js                        # ESLint code quality configuration
-├── .prettierrc                             # Prettier code formatting
-├── .editorconfig                           # Editor configuration
-├── .gitignore                              # Git ignore patterns
-├── .dockerignore                           # Docker ignore patterns
-├── Dockerfile                              # Docker container configuration
-├── proxy.conf.json                         # Development proxy configuration
-├── README.md                               # Project documentation
+├── .vscode/                                # Workspace settings for VS Code
 ├── 3rdpartylicenses.md                     # Third-party license information
-└── LICENSE                                 # Project license file
+├── Dockerfile                              # Multi-stage Docker build
+├── angular.json                            # Angular CLI project definition
+├── angular.md                              # This documentation hub
+├── eslint.config.js                        # ESLint and Prettier integration
+├── package-lock.json                       # Locked dependency tree
+├── package.json                            # Project metadata and scripts
+├── proxy.conf.json                         # Development proxy configuration
+├── tsconfig.app.json                       # Browser build TypeScript config
+├── tsconfig.json                           # Base TypeScript configuration
+├── tsconfig.spec.json                      # Jest test TypeScript config
+├── README.md                               # Contributor quickstart
+├── LICENSE                                 # Project license file
+├── .dockerignore                           # Docker build ignore rules
+└── .gitignore                              # Git ignore patterns
+
+# Generated locally (not committed)
+- `dist/` – production build output created by `ng build`
+- `coverage/` – Jest coverage reports when `npm run test:coverage` is used
+- `node_modules/` – installed dependencies after `npm install`
+- `.angular/` – Angular CLI cache directory
 ```
 
 ## Source Code Documentation
@@ -103,40 +103,65 @@ Complete Angular application with all feature modules and routing configuration.
     "dependencies": {
         "@angular/animations": "^19.1.2",
         "@angular/common": "^19.1.2",
+        "@angular/compiler": "^19.1.2",
         "@angular/core": "^19.1.2",
+        "@angular/forms": "^19.1.2",
         "@angular/platform-browser": "^19.1.2",
+        "@angular/platform-browser-dynamic": "^19.1.2",
+        "@angular/platform-server": "^19.1.2",
         "@angular/router": "^19.1.2",
         "@angular/ssr": "^19.1.3",
         "@fortawesome/angular-fontawesome": "^1.0.0",
+        "@fortawesome/free-brands-svg-icons": "^6.7.1",
+        "@fortawesome/free-regular-svg-icons": "^6.7.1",
+        "@fortawesome/free-solid-svg-icons": "^6.7.1",
         "@ng-bootstrap/ng-bootstrap": "^18.0.0",
+        "@popperjs/core": "^2.11.8",
         "bootstrap": "^5.3.3",
         "express": "^4.18.2",
-        "rxjs": "~7.8.0"
+        "rxjs": "~7.8.0",
+        "tslib": "^2.3.0",
+        "zone.js": "~0.15.0"
     }
 }
 ```
 
 **Dependency Features**:
 
-- **Angular 19+**: Latest Angular framework with modern features
-- **Angular SSR**: Server-side rendering for performance and SEO
-- **FontAwesome**: Comprehensive icon library integration
-- **NgBootstrap**: Bootstrap components for Angular
-- **Bootstrap 5**: Modern CSS framework for responsive design
-- **Express**: Node.js server framework for production deployment
+- **Angular 19+**: Full platform packages including browser, server, and dynamic runtime
+- **Angular SSR**: Server-side rendering and Universal runtime for SEO and first paint
+- **Forms & Animations**: Reactive forms, animations, and router modules bundled by default
+- **FontAwesome Suite**: Brand, regular, and solid icon packs plus Angular bindings
+- **NgBootstrap + Popper**: Angular-friendly Bootstrap components with Popper tooltips
+- **Bootstrap 5**: Responsive styling foundation layered with project-specific CSS
+- **Express**: Production Node.js server used for SSR delivery
+- **zone.js & tslib**: Angular runtime requirements for change detection and helpers
 
 #### Development Dependencies
 
 ```json
 {
     "devDependencies": {
+        "@angular-devkit/build-angular": "^19.1.3",
         "@angular/cli": "^19.1.3",
         "@angular/compiler-cli": "^19.1.2",
-        "typescript": "~5.6",
+        "@angular/localize": "^19.1.2",
+        "@ngx-env/builder": "^19.0.4",
+        "@types/express": "^4.17.17",
+        "@types/jest": "^29.5.14",
+        "@types/node": "^18.18.0",
+        "angular-eslint": "19.0.2",
+        "eslint": "^9.20.1",
+        "eslint-config-prettier": "^10.0.1",
+        "eslint-plugin-prettier": "^5.2.3",
+        "eslint-plugin-simple-import-sort": "^12.1.1",
+        "eslint-plugin-unused-imports": "^4.1.4",
         "jest": "^29.7.0",
         "jest-preset-angular": "^14.5.1",
-        "eslint": "^9.20.1",
+        "karma-coverage": "~2.2.0",
         "prettier": "^3.4.2",
+        "prettier-eslint": "^16.3.0",
+        "typescript": "~5.6",
         "typescript-eslint": "8.18.0"
     }
 }
@@ -144,11 +169,12 @@ Complete Angular application with all feature modules and routing configuration.
 
 **Development Features**:
 
-- **Angular CLI**: Latest Angular command-line interface
-- **TypeScript 5.6**: Modern TypeScript with strict configuration
-- **Jest Testing**: Modern JavaScript testing framework
-- **ESLint**: Code quality and style enforcement
-- **Prettier**: Code formatting and style consistency
+- **Angular CLI & DevKit**: CLI tooling plus the build-angular executor for SSR builds
+- **Internationalization**: `@angular/localize` ready for runtime translations
+- **TypeScript 5.6**: Strict configuration with `moduleResolution: "bundler"`
+- **Jest + Karma Coverage**: Jest primary runner with coverage instrumentation
+- **ESLint Stack**: Angular ESLint presets with Prettier and import hygiene plugins
+- **Type Declarations**: Node and Express typings for the SSR server
 
 ### Angular CLI Configuration
 
@@ -156,18 +182,73 @@ Complete Angular application with all feature modules and routing configuration.
 
 ```json
 {
-    "architect": {
-        "build": {
-            "builder": "@angular-devkit/build-angular:application",
-            "options": {
-                "outputPath": "dist/pgnc",
-                "index": "src/index.html",
-                "browser": "src/main.ts",
-                "server": "src/main.server.ts",
-                "ssr": {
-                    "entry": "src/server.ts"
-                },
-                "prerender": true
+    "projects": {
+        "pgnc": {
+            "architect": {
+                "build": {
+                    "builder": "@angular-devkit/build-angular:application",
+                    "options": {
+                        "outputPath": "dist/pgnc",
+                        "index": "src/index.html",
+                        "browser": "src/main.ts",
+                        "polyfills": ["zone.js", "@angular/localize/init"],
+                        "tsConfig": "tsconfig.app.json",
+                        "assets": [
+                            "src/favicon.ico",
+                            {
+                                "glob": "**/*",
+                                "input": "src/assets/"
+                            }
+                        ],
+                        "styles": [
+                            "node_modules/bootstrap/dist/css/bootstrap.min.css",
+                            "src/pgnc-styles.css"
+                        ],
+                        "scripts": [],
+                        "server": "src/main.server.ts",
+                        "prerender": true,
+                        "ssr": {
+                            "entry": "src/server.ts"
+                        }
+                    },
+                    "configurations": {
+                        "production": {
+                            "budgets": [
+                                {
+                                    "type": "initial",
+                                    "maximumWarning": "900kb",
+                                    "maximumError": "1mb"
+                                },
+                                {
+                                    "type": "anyComponentStyle",
+                                    "maximumWarning": "3kb",
+                                    "maximumError": "4kb"
+                                }
+                            ],
+                            "optimization": {
+                                "scripts": true,
+                                "styles": {
+                                    "minify": true,
+                                    "inlineCritical": false
+                                },
+                                "fonts": true
+                            },
+                            "outputHashing": "all"
+                        },
+                        "development": {
+                            "optimization": false,
+                            "extractLicenses": false,
+                            "sourceMap": true,
+                            "fileReplacements": [
+                                {
+                                    "replace": "src/environments/environment.ts",
+                                    "with": "src/environments/environment.development.ts"
+                                }
+                            ]
+                        }
+                    },
+                    "defaultConfiguration": "production"
+                }
             }
         }
     }
@@ -176,10 +257,11 @@ Complete Angular application with all feature modules and routing configuration.
 
 **Build Features**:
 
-- **Application Builder**: Modern Angular application builder
-- **SSR Support**: Server-side rendering configuration
-- **Prerendering**: Static page generation for performance
-- **Asset Optimization**: Automatic asset processing and optimization
+- **Application Builder**: Angular `application` builder with SSR and prerender support
+- **Shared Assets**: Favicon and everything under `src/assets/` copied automatically
+- **Global Styles**: Bootstrap CSS bundled alongside `pgnc-styles.css`
+- **Polyfills**: `zone.js` and Angular localization bootstrap at build time
+- **Environment Swap**: Development builds can replace `environment.ts` with a dev variant when present
 
 #### Performance Budgets
 
@@ -214,15 +296,31 @@ Complete Angular application with all feature modules and routing configuration.
 ```jsonc
 {
     "compilerOptions": {
+        "outDir": "./dist/out-tsc",
+        "forceConsistentCasingInFileNames": true,
         "strict": true,
         "noImplicitOverride": true,
         "noPropertyAccessFromIndexSignature": true,
         "noImplicitReturns": true,
         "noFallthroughCasesInSwitch": true,
+        "skipLibCheck": true,
+        "esModuleInterop": true,
+        "sourceMap": true,
+        "declaration": false,
+        "experimentalDecorators": true,
+        "moduleResolution": "bundler",
+        "ignoreDeprecations": "5.0",
+        "importHelpers": true,
         "target": "ES2022",
-        "module": "ES2022"
+        "module": "ES2022",
+        "useDefineForClassFields": false,
+        "lib": [
+            "ES2022",
+            "dom"
+        ]
     },
     "angularCompilerOptions": {
+        "enableI18nLegacyMessageIdFormat": false,
         "strictInjectionParameters": true,
         "strictInputAccessModifiers": true,
         "strictTemplates": true
@@ -233,7 +331,7 @@ Complete Angular application with all feature modules and routing configuration.
 **TypeScript Features**:
 
 - **Strict Mode**: Maximum type safety and error detection
-- **Modern ES2022**: Latest ECMAScript features and optimizations
+- **Modern ES2022**: Targeted for ES2022 with bundler-aware module resolution
 - **Angular Strict**: Strict Angular template and component checking
 - **Performance**: Optimized compilation and build performance
 
@@ -253,7 +351,13 @@ Complete Angular application with all feature modules and routing configuration.
         "testPathIgnorePatterns": [
             "<rootDir>/node_modules/",
             "<rootDir>/dist/"
-        ]
+        ],
+        "globals": {
+            "ts-jest": {
+                "tsConfig": "<rootDir>/tsconfig.spec.json",
+                "stringifyContentPathRegex": "\\.html$"
+            }
+        }
     }
 }
 ```
@@ -264,6 +368,7 @@ Complete Angular application with all feature modules and routing configuration.
 - **Angular Testing**: Angular-specific testing utilities and mocking
 - **Coverage Reporting**: Comprehensive test coverage analysis
 - **Performance Testing**: Application performance and optimization testing
+- **ts-jest Integration**: Uses `tsconfig.spec.json` for Angular-aware TypeScript transforms
 
 #### Testing Scripts
 
@@ -316,22 +421,30 @@ module.exports = {
 
 #### Code Formatting
 
-```json
-{
-    "tabWidth": 4,
-    "useTabs": false,
-    "singleQuote": true,
-    "trailingComma": "es5",
-    "printWidth": 120
-}
+```javascript
+const eslintPluginPrettierRecommended = require('eslint-plugin-prettier/recommended');
+
+module.exports = tseslint.config(
+    {
+        files: ['**/*.ts'],
+        extends: [
+            eslint.configs.recommended,
+            ...tseslint.configs.recommended,
+            ...tseslint.configs.stylistic,
+            ...angular.configs.tsRecommended,
+            eslintPluginPrettierRecommended,
+        ],
+        // ...
+    }
+);
 ```
 
 **Formatting Features**:
 
-- **Consistent Styling**: Uniform code formatting across the entire project
-- **Team Collaboration**: Standardized formatting for team development
-- **Automatic Formatting**: IDE integration for automatic code formatting
-- **Version Control**: Reduced diff noise and improved code reviews
+- **ESLint-Driven**: Prettier enforcement is handled through `eslint.config.js`
+- **One Source of Truth**: No standalone `.prettierrc`; formatting lives alongside lint rules
+- **Import Hygiene**: `simple-import-sort` and `unused-imports` keep modules tidy
+- **Editor Integration**: Run `npm run lint` or enable ESLint in IDEs for on-save formatting feedback
 
 ## Development Scripts
 
@@ -347,6 +460,9 @@ module.exports = {
         "prebuild": "jest --passWithNoTests",
         "build": "ng build --configuration production",
         "watch": "ng build --watch --configuration production",
+        "test": "jest",
+        "test:watch": "jest --watch",
+        "test:coverage": "jest --coverage",
         "serve:ssr:pgnc": "node dist/pgnc/server/server.mjs",
         "lint": "ng lint"
     }
@@ -359,6 +475,7 @@ module.exports = {
 - **Pre-build Testing**: Automatic testing before production builds
 - **Production Build**: Optimized production build with SSR support
 - **Watch Mode**: Continuous building during development
+- **Jest Suite**: Dedicated scripts for unit tests, watch mode, and coverage reports
 - **SSR Serving**: Production server-side rendering deployment
 
 ### Quality Assurance
@@ -375,23 +492,47 @@ module.exports = {
 #### Dockerfile Configuration
 
 ```dockerfile
-FROM node:18-alpine AS builder
+FROM node:20-alpine as builder
 WORKDIR /app
-COPY package*.json ./
-RUN npm ci --only=production
-COPY . .
-RUN npm run build
 
-FROM nginx:alpine
-COPY --from=builder /app/dist /usr/share/nginx/html
+ENV NODE_OPTIONS="--max_old_space_size=8192"
+ENV NODE_ENV=development
+
+RUN npm install -g npm@latest \
+    && npm install -g @angular/cli@19.1.3 \
+    && apk add --no-cache gettext
+
+COPY package*.json ./
+RUN npm ci
+
+COPY . .
+RUN envsubst < src/environments/environment.ts > src/environments/environment.tmp.ts \
+    && mv src/environments/environment.tmp.ts src/environments/environment.ts
+
+RUN ng build --configuration production \
+    --output-path=dist/pgnc \
+    --progress false \
+    --aot true \
+    --optimization true \
+    --output-hashing all
+
+FROM node:20-alpine
+WORKDIR /app
+ENV NODE_ENV=production
+
+COPY --from=builder /app/dist/pgnc ./dist/pgnc
+
+EXPOSE 4000
+CMD ["node", "dist/pgnc/server/server.mjs"]
 ```
 
 **Docker Features**:
 
-- **Multi-Stage Build**: Optimized container size with build and runtime stages
-- **Alpine Linux**: Lightweight container base for production deployment
-- **Nginx Serving**: High-performance static asset serving
-- **Production Ready**: Optimized container for production environments
+- **Node 20 Alpine**: Matches Angular 19 runtime support with minimal base image
+- **Global CLI**: Installs the exact Angular CLI version used locally
+- **envsubst Step**: Injects runtime credentials into `environment.ts` during builds
+- **Optimized Build**: Production `ng build` with hashing, AOT, and compression flags
+- **SSR Runtime**: Ships the built Express/SSR bundle and serves on port 4000
 
 #### Docker Ignore
 
@@ -418,21 +559,24 @@ coverage
 
 ```json
 {
-    "/api/*": {
+    "/api/**": {
         "target": "http://localhost:3000",
-        "secure": true,
+        "secure": false,
         "changeOrigin": true,
-        "logLevel": "debug"
+        "logLevel": "debug",
+        "pathRewrite": {
+            "^/api": ""
+        }
     }
 }
 ```
 
 **Proxy Features**:
 
-- **API Integration**: Seamless development API integration
-- **CORS Handling**: Cross-origin request handling for development
-- **Debug Logging**: Comprehensive proxy request logging
-- **Secure Connections**: HTTPS support for secure development
+- **API Integration**: Proxies `/api/**` routes to the backend service by default
+- **CORS Handling**: Origin rewriting keeps browser requests simple during development
+- **Debug Logging**: Verbose logging assists with backend troubleshooting
+- **Path Rewrite**: Strips the `/api` prefix before forwarding to the API server
 
 ## Asset Management
 
