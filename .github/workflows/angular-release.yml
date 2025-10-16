@@ -228,7 +228,7 @@ jobs:
 
       - name: Calculate next version
         id: version
-        uses: ./angular/.github/actions/calculate-version
+        uses: ./.github/actions/calculate-version
         continue-on-error: true
         with:
           release_type: ${{ needs.validate_inputs.outputs.release_type }}
@@ -404,8 +404,7 @@ jobs:
         id: build
         uses: docker/build-push-action@v6
         with:
-          context: ./angular
-          file: ./angular/Dockerfile
+          context: .
           push: true
           platforms: linux/amd64,linux/arm64
           tags: |
