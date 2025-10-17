@@ -14,17 +14,35 @@ const indexHtml = join(serverDistFolder, 'index.server.html');
 const app = express();
 const commonEngine = new CommonEngine();
 
-/**
- * Example Express Rest API endpoints can be defined here.
- * Uncomment and define endpoints as necessary.
- *
- * Example:
- * ```ts
- * app.get('/api/**', (req, res) => {
- *   // Handle API request
- * });
- * ```
- */
+type RuntimeConfig = {
+    apiUser: string;
+    apiPassword: string;
+};
+
+const computeRuntimeConfig = (): RuntimeConfig => ({
+    apiUser: process.env['API_USER'] ?? '',
+    apiPassword: process.env['API_PASSWORD'] ?? '',
+});
+
+const applyRuntimeConfig = () => {
+    const config = computeRuntimeConfig();
+    (globalThis as { __PGNC_RUNTIME_CONFIG__?: RuntimeConfig }).__PGNC_RUNTIME_CONFIG__ =
+        config;
+    return config;
+};
+
+let runtimeConfig = applyRuntimeConfig();
+
+app.use((_, __, next) => {
+    runtimeConfig = applyRuntimeConfig();
+    next();
+});
+
+app.get('/runtime-config.js', (_req, res) => {
+    res.type('application/javascript');
+    res.setHeader('Cache-Control', 'no-store');
+    res.send(`window.__PGNC_RUNTIME_CONFIG__ = ${JSON.stringify(runtimeConfig)};`);
+});
 
 /**
  * Serve static files from /browser
