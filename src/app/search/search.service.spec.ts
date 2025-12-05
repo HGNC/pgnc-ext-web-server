@@ -191,7 +191,7 @@ describe('SearchService', () => {
             expect(mockHttpClient.get).toHaveBeenCalledWith('/ses/browse', {
                 params: {
                     q: 'test',
-                    start: '25',
+                    start: '1201',
                     rows: '50',
                 },
             });
@@ -509,7 +509,7 @@ describe('SearchService', () => {
             });
         });
 
-        it('should handle zero start parameter', () => {
+        it('should handle zero page parameter by defaulting to first page', () => {
             mockHttpClient.get.mockReturnValue(of(mockSearchResponse));
 
             service.browse('test', 0, 10).subscribe();
@@ -517,7 +517,7 @@ describe('SearchService', () => {
             expect(mockHttpClient.get).toHaveBeenCalledWith('/ses/browse', {
                 params: {
                     q: 'test',
-                    start: '0',
+                    start: '1',
                     rows: '10',
                 },
             });

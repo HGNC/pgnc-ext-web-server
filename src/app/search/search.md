@@ -127,14 +127,17 @@ export class SearchService {
 #### Search API Integration
 
 ```typescript
-browse(q: string, start: number, rows: number): Observable<SearchResponse> {
-    const cacheKey = this.generateCacheKey(q, start, rows);
-    
+browse(q: string, page: number, rows: number): Observable<SearchResponse> {
+    const normalizedPage = page < 1 ? 1 : page;
+    const cacheKey = this.generateCacheKey(q, normalizedPage, rows);
+
     // Return cached data if available
     if (this.cache.has(cacheKey)) {
         return of(this.cache.get(cacheKey));
     }
-    
+
+    const start = rows * normalizedPage - rows + 1;
+
     return this.http.get<SearchResponse>(`/ses/browse`, {
         params: {
             q: decodeURIComponent(q),
@@ -703,16 +706,19 @@ const mockSearchResponse: SearchResponse = {
 private cache = new Map<string, any>();
 private ongoingRequests = new Map<string, Observable<any>>();
 
-browse(q: string, start: number, rows: number): Observable<SearchResponse> {
-    const cacheKey = this.generateCacheKey(q, start, rows);
-    
+browse(q: string, page: number, rows: number): Observable<SearchResponse> {
+    const normalizedPage = page < 1 ? 1 : page;
+    const cacheKey = this.generateCacheKey(q, normalizedPage, rows);
+
     if (this.cache.has(cacheKey)) {
         return of(this.cache.get(cacheKey));
     }
-    
+
     if (this.ongoingRequests.has(cacheKey)) {
         return this.ongoingRequests.get(cacheKey)!;
     }
+
+    // ... create HTTP request, cache and shareReplay as in SearchService
 }
 ```
 
