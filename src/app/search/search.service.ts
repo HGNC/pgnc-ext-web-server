@@ -35,8 +35,8 @@ export class SearchService {
 
     constructor(private http: HttpClient) {}
 
-    private generateCacheKey(q: string, start: number, rows: number): string {
-        return `${q}|${start}|${rows}`;
+    private generateCacheKey(q: string, page: number, rows: number): string {
+        return `${q}|${page}|${rows}`;
     }
 
     private updateLoading(increment: boolean): void {
@@ -44,8 +44,9 @@ export class SearchService {
         this.loadingSubject.next(this.loadingCounter > 0);
     }
 
-    browse(q: string, start: number, rows: number): Observable<SearchResponse> {
-        const cacheKey = this.generateCacheKey(q, start, rows);
+    browse(q: string, page: number, rows: number): Observable<SearchResponse> {
+        const normalizedPage = page < 1 ? 1 : page;
+        const cacheKey = this.generateCacheKey(q, normalizedPage, rows);
 
         // Return cached data if available
         if (this.cache.has(cacheKey)) {
@@ -58,7 +59,7 @@ export class SearchService {
         }
 
         this.updateLoading(true);
-
+        const start: number = rows * normalizedPage - rows + 1;
         const request = this.http
             .get<SearchResponse>(`/ses/browse`, {
                 params: {
